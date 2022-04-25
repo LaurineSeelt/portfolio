@@ -1,0 +1,33 @@
+---
+title: "Opdracht1.2"
+author: "Laurine Seelt"
+date: '2022-04-21'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(readxl)
+```
+
+https://pubmed.ncbi.nlm.nih.gov/29324233/
+
+Study purpose: 1
+Data availability statement: 1
+Data location: 1
+Study location: 1
+Author review: 7
+Ethics statement: 0
+Funding statement: 1
+Code availability: 1 ?
+
+In this study, researchers investigated the heterologous effects of Bacillus Calmette-Guérin (BCG) vaccination against other, non-related virus infections. 
+It has been known for some time that BCG vaccination has positive heterologous effects against some other virusses, but the exact immunological basis for this effect has never been examined in depth. The researchers in this study examined the genome-wide histone modifications that take place as a result of BCG vaccination, and also examined the functional changes in monocytes that take place after BCG vaccination. The effect of BCG vaccination on viral, serological and immunological parameters after administration of the Yellow Fever Vaccine was also examined.
+
+
+```{r}
+
+```
+
