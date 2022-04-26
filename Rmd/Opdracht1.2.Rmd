@@ -33,4 +33,7 @@ It has been known for some time that BCG vaccination has positive heterologous e
 
 __Part 2__
 
-https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0252047
+
+The code tries to achieve ..
+The readibility of the code is very good, 5.
