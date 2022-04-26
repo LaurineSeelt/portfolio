@@ -40,7 +40,19 @@ The readibility of the code is very good, 5.
 
 __Trying to recreate figure 2.__
 
+```{r}
+py_install("numpy")
+py_install("pandas")
+py_install("matplotlib.pyplot")
+py_install("seaborn")
+py_install("scipy.stats")
+```
+
+
 ```{python}
+py_install("numpy")
+py_install("pandas")
+py_install("matplotlib.pyplot")
 #Import the packages needed to make this notebook work
 
 import numpy as np
