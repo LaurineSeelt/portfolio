@@ -50,9 +50,6 @@ py_install("scipy.stats")
 
 
 ```{python}
-py_install("numpy")
-py_install("pandas")
-py_install("matplotlib.pyplot")
 #Import the packages needed to make this notebook work
 
 import numpy as np
