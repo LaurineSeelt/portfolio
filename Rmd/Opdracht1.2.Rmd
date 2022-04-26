@@ -43,9 +43,11 @@ __Trying to recreate figure 2.__
 ```{r}
 py_install("numpy")
 py_install("pandas")
-py_install("matplotlib.pyplot")
+py_install(packages = "matplotlib")
 py_install("seaborn")
-py_install("scipy.stats")
+py_install(packages = "scipy")
+library(tidyverse)
+library(here)
 ```
 
 
@@ -64,6 +66,6 @@ import scipy.stats as stats
 
 #Import the data
 
-df = pd.read_csv(here("Data/Data_raw/Borghi_VanGulick_PsychRDM_Data.csv"))
+df = pd.read_csv("Home/DSFB2/portfolio/Data/Data_raw/Borghi_VanGulick_PsychRDM_Data.csv")
 ```
 
