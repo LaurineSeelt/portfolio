@@ -39,40 +39,22 @@ The code tries to achieve ..
 The readibility of the code is very good, 5.
 
 __Trying to recreate figure 2.__
-```{r}
-library(tidyverse)
-library(here)
-library(reticulate)
 
+```{python}
 #Import the packages needed to make this notebook work
-# install.packages("reticulate")
-# install.packages("numpy")
-# install.packages("pandas")
-# install.packages("matplotlib.pyplot")
 
-# np <- import("numpy")
-# pd <- import("pandas")
-# plt <- import("matplotlib.pyplot")
-# sns <- import("seaborn")
-
-# library(reticulate)
-# os <- import("os") # Setting directory
-# os$getcwd()
-# repl_python()       #used to make it interactive 
-# import numpy as np. # Load numpy  package
-# import pandas as pd # Load pandas package
-
-# import numpy as np
-# import pandas as pd
-# import matplotlib.pyplot as plt
-# import seaborn as sns
-# import scipy.stats as stats
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import scipy.stats as stats
 
 #Make sure the figures appear in the notebook
 
-# %matplotlib inline
+%matplotlib inline
+
 #Import the data
 
-df = read_csv(here("Data/Data_raw/Borghi_VanGulick_PsychRDM_Data.csv"))
+df = pd.read_csv(here("Data/Data_raw/Borghi_VanGulick_PsychRDM_Data.csv"))
 ```
 
