@@ -1,0 +1,9 @@
+---
+title: "Opdracht3.1"
+author: "Laurine Seelt"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+- Python leren?
+- Plan: 
