@@ -12,7 +12,7 @@ link-citations: yes
 
 ## This was assignment 2 for our portfolio.
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(here)
