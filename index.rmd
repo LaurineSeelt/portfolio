@@ -1,0 +1,15 @@
+---
+title: "Portfolio Laurine Seelt"
+author: "Laurine Seelt"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+description: "This is the bookdown for my DSFB2 portfolio"
+---
+
+# Chapter 1
+
+## This is the first chapter
