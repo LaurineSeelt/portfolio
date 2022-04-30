@@ -8,9 +8,9 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Chapter 2
+# Assignment 2
 
-This was assignment 2 for our portfolio.
+_This was assignment 2 for our portfolio._
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
