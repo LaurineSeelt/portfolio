@@ -206,7 +206,7 @@ CompConcentration is een character, wat wel apart is. In die kolom staan de conc
 </div>
 <div id="e" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> E<a href="assignment-1.html#e" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>De getallen worden geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte.Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus ..?</p>
+<p>De getallen worden geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit.</p>
 </div>
 <div id="f" class="section level2 hasAnchor" number="2.6">
 <h2><span class="header-section-number">2.6</span> F<a href="assignment-1.html#f" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -234,7 +234,7 @@ Dus
 1. Aparte tabellen maken met de metingen per stof.
 2. Het gemiddelde en de standaardeviatie berekenen voor elke concentratie van elke stof.
 3. Een ANOVA test uitvoeren voor elke stof om te kijken of er dus inderdaad significante verschillen zijn in effect tussen de concentraties.</p>
-<p>Om te analyseren of de verschillende stoffen een andere curve/IC50 hebben, moet je per stof kijken naar het effect op de hoeveelheid nakomelingen. Daar kan je een grafiek van maken, met op de x-as de concentratie van de stof en op de y-as de hoeveelheid nakomelingen.</p>
+<p>Om te analyseren of de verschillende stoffen een andere curve/IC50 hebben, moet je per stof kijken naar het effect op de hoeveelheid nakomelingen. Daar kan je een grafiek van maken, met op de x-as de concentratie van de stof en op de y-as de hoeveelheid nakomelingen. Deze grafieken zou je bijvoorbeeld in hetzelfde assenstelsel kunnen plotten, om ze met elkaar te kunnen vergelijken.</p>
 </div>
 <div id="j" class="section level2 hasAnchor" number="2.10">
 <h2><span class="header-section-number">2.10</span> J<a href="assignment-1.html#j" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -248,8 +248,6 @@ Dus
 <span id="cb14-8"><a href="assignment-1.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;The effect of different compounds on the amount of offspring&quot;</span>,</span>
 <span id="cb14-9"><a href="assignment-1.html#cb14-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Compound concentration (log10 + 0.001)&quot;</span>,</span>
 <span id="cb14-10"><a href="assignment-1.html#cb14-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Mean offspring, normalised&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 row(s) containing missing values (geom_path).</code></pre>
 <p><img src="_main_files/figure-html/normalising%20the%20data%20for%20the%20negative%20control-1.png" width="672" /></p>
 </div>
 <div id="k" class="section level2 hasAnchor" number="2.11">
