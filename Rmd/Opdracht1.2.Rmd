@@ -45,41 +45,4 @@ Next, this study looked at the difference in immune response to the Yellow Fever
 
 __Part 2__
 
-https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0252047
-
-The code tries to achieve ..
-
-The readibility of the code is very good, 5.
-
-__Trying to recreate figure 2.__
-
-```{r}
-library(tidyverse)
-library(here)
-library(reticulate)
-# py_install("numpy")
-# py_install("pandas")
-# py_install(packages = "matplotlib")
-# py_install("seaborn")
-# py_install(packages = "scipy")
-```
-
-
-```{python, eval = FALSE}
-#Import the packages needed to make this notebook work
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import scipy.stats as stats
-
-#Make sure the figures appear in the notebook
-
-%matplotlib inline
-
-#Import the data
-
-df = pd.read_csv("Data_raw/Borghi_VanGulick_PsychRDM_Data.csv")
-```
 
