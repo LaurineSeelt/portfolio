@@ -21,7 +21,7 @@ library(readxl)
 
 ## Part 1
 
-https://pubmed.ncbi.nlm.nih.gov/29324233/
+Link to the study: https://pubmed.ncbi.nlm.nih.gov/29324233/
 
 Study purpose: 1
 

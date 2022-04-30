@@ -43,7 +43,7 @@ Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, s
 ```
 
 ## E
-De getallen worden geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte.Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus ..?
+De getallen worden geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit.
 
 ## F
 ```{r, correcting the data and making a new scatter plot}
@@ -66,10 +66,10 @@ Dus
 2. Het gemiddelde en de standaardeviatie berekenen voor elke concentratie van elke stof.
 3. Een ANOVA test uitvoeren voor elke stof om te kijken of er dus inderdaad significante verschillen zijn in effect tussen de concentraties.
 
-Om te analyseren of de verschillende stoffen een andere curve/IC50 hebben, moet je per stof kijken naar het effect op de hoeveelheid nakomelingen. Daar kan je een grafiek van maken, met op de x-as de concentratie van de stof en op de y-as de hoeveelheid nakomelingen.
+Om te analyseren of de verschillende stoffen een andere curve/IC50 hebben, moet je per stof kijken naar het effect op de hoeveelheid nakomelingen. Daar kan je een grafiek van maken, met op de x-as de concentratie van de stof en op de y-as de hoeveelheid nakomelingen. Deze grafieken zou je bijvoorbeeld in hetzelfde assenstelsel kunnen plotten, om ze met elkaar te kunnen vergelijken.
 
 ## J
-```{r, normalising the data for the negative control, message=FALSE}
+```{r, normalising the data for the negative control, message=FALSE, warning=FALSE}
 Tidydata$compConcentration <- as.numeric(Tidydata$compConcentration)
 Tibble_mean <- Tidydata %>% group_by(compName, compConcentration) %>% summarize(mean = mean(RawData, na.rm = TRUE))
 # Het gemiddelde van de negatieve controle, S-medium, is 85,9. Dat is dus de waarde waar de andere gemiddelden voor genormaliseerd moeten worden.
