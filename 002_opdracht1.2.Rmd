@@ -40,10 +40,8 @@ Funding statement: 1
 Code availability: 1 ?
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-tibble_1 <- tibble(Study_purpose = "1", Data_availability_statement = "1",
-                      Data_location = "1", Study_location = "1",
-                      Author_review = "7", Ethics_statement = "0",
-                      Funding_statement = "1", Code_availability = "1")
+tibble_1 <- tibble(Study_purpose = "TRUE", Data_availability_statement = "TRUE", Data_location = "TRUE", Study_location = "TRUE",
+Author_review = "7", Ethics_statement = "FALSE", Funding_statement = "TRUE", Code_availability = "TRUE")
 tibble_1 <- tibble_1 %>% pivot_longer(cols = c("Study_purpose", "Data_availability_statement", "Data_location", "Study_location", "Author_review", "Ethics_statement", "Funding_statement", "Code_availability"), names_to = "Category",
                                       values_to = "Score")
 knitr::kable(tibble_1)

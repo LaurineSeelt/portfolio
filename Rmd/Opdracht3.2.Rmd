@@ -6,5 +6,5 @@ output: html_document
 ---
 
 - Uitzoeken welke automatiseringen er op microbiologische labs worden gebruikt.
-- Metagenomics?
+- Metagenomics? --> https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03933-4
 - Python?
