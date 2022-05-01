@@ -132,7 +132,7 @@ Hypothesis_prop3 <- d %>%
 ```
 
 
-The researchers of this paper looked at 159 papers from conservation/applied ecology/wildife journals. This figure displays the amount of papers that had either a clearly stated hypothesis or not.
+The researchers of this paper looked at 159 papers from conservation/applied ecology/wildife journals. They scored all the paperson certain criteria, to see how experiments in ecological research are conducted. This figure displays the amount of papers that had either a clearly stated hypothesis or not.
 
 Reproducibility of the code: 5. It was very easy, I barely needed to change anything before I got the pretty graph :)
 
