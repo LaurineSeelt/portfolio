@@ -1,0 +1,209 @@
+---
+title: "Formatieve opdracht 2"
+author: "Laurine Seelt"
+date: "6-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup2, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(phyloseq)
+library(grid)
+library(png)
+library(gridExtra)
+library(reshape2)
+```
+
+
+_Onderdeel 1_
+FastQC analyse van de data
+```{bash, engine.opts='-i', eval=FALSE}
+# activate environment
+conda activate meta
+
+# perform FastQC analysis
+fastqc -o ~/Daur2/ /home/daur2/metagenomics/formative_data/HU2_MOCK2_L001_R1_001.fastq.gz
+fastqc -o ~/Daur2/ /home/daur2/metagenomics/formative_data/HU2_MOCK2_L001_R2_001.fastq.gz
+
+# deactivate conda virtual environment
+conda deactivate
+```
+
+
+```{r}
+img1 <-  rasterGrob(as.raster(readPNG("fastqc_mock2_R1_per_base_quality.png")))
+img2 <-  rasterGrob(as.raster(readPNG("fastqc_mock2_R2_per_base_quality.png")))
+grid.arrange(img1, img2, ncol=2, top=textGrob("Per base quality distribution of forward (right) and reverse (left) reads", gp=gpar(fontsize=10,font=8)))
+```
+
+_Onderdeel 2.1_
+Soorten identificeren met kraken2
+```{bash running kraken2, engine.opts='-i', eval=FALSE}
+conda activate meta
+
+kraken2 --db /home/daur2/metagenomics/minikraken2_v2_8GB_201904_UPDATE/ --threads 2 --paired --gzip-compressed --output ~/Daur2/mock2.kraken --report ~/Daur2/mock2.report --use-names /home/daur2/metagenomics/formative_data/HU2_MOCK2_L001_R1_001.fastq.gz /home/daur2/metagenomics/formative_data/HU2_MOCK2_L001_R2_001.fastq.gz
+
+conda deactivate
+```
+Ongeveer 90% is geclassificeerd en 10% niet.
+
+_Onderdeel 2.2_
+Abundance herberekenen met bracken
+```{bash running bracken, engine.opts='-i', eval=FALSE}
+conda activate meta
+
+bracken -d /home/daur2/metagenomics/minikraken2_v2_8GB_201904_UPDATE/ -i ~/Daur2/mock2.report -o ~/Daur2/mock2.bracken
+
+conda deactivate
+```
+
+
+_Onderdeel 2.3_
+Output converteren
+```{bash running kraken-biom, engine.opts='-i', eval=FALSE}
+conda activate meta
+
+kraken-biom ~/Daur2/mock2_bracken_species.report --fmt json -o ~/Daur2/mock2_bracken_species.biom
+
+conda deactivate
+```
+
+_Onderdeel 3.1_
+Biom data veranderen voor een plot
+```{r}
+##Data inlezen
+data2 <- "~/Daur2/mock2_bracken_species.biom"
+merged_metagenomes2 <- import_biom(data2)
+#View(merged_metagenomes2@tax_table@.Data)
+##Data opschonen
+merged_metagenomes2@tax_table@.Data <-
+  substring(merged_metagenomes2@tax_table@.Data, 4) ##Taxonomie informatie verwijderen
+colnames(merged_metagenomes2@tax_table@.Data) <- 
+  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species") ##Kolomnamen informatief maken
+```
+
+_Onderdeel 3.2_
+Aangeven welke kingdoms in de data zitten
+```{r}
+unique(merged_metagenomes2@tax_table@.Data[,"Kingdom"]) ##Bekijken welke kingdoms er in de dataset zitten
+##Kingdoms splitsen
+merged_metagenomes_b2 <- subset_taxa(merged_metagenomes2, Kingdom == "Bacteria")
+merged_metagenomes_e2 <- subset_taxa(merged_metagenomes2, Kingdom == "Eukaryota")
+merged_metagenomes_a2 <- subset_taxa(merged_metagenomes2, Kingdom == "Archaea")
+merged_metagenomes_v2 <- subset_taxa(merged_metagenomes2, Kingdom == "Viruses")
+##Namen van de samples veranderen
+sample_names(merged_metagenomes_b2) <- "bacteria"
+sample_names(merged_metagenomes_e2) <- "eukaryote"
+sample_names(merged_metagenomes_a2) <- "archea"
+sample_names(merged_metagenomes_v2) <- "virus"
+##Kingdoms in dataframes verzamelen
+data_b2 <- data.frame(Samples = sample_names(merged_metagenomes_b2),
+                   Reads = sample_sums(merged_metagenomes_b2))
+
+data_e2 <- data.frame(Samples = sample_names(merged_metagenomes_e2),
+                   Reads = sample_sums(merged_metagenomes_e2))
+
+data_a2 <- data.frame(Samples = sample_names(merged_metagenomes_a2),
+                   Reads = sample_sums(merged_metagenomes_a2))
+
+data_v2 <- data.frame(Samples = sample_names(merged_metagenomes_v2),
+                   Reads = sample_sums(merged_metagenomes_v2))
+##Alle kingdoms in 1 dataframe stoppen
+data_t2 <- rbind(data_b2, data_e2, data_a2, data_v2)
+##Plotje maken
+ggplot(data = data_t2, mapping = aes(x = Samples, y = Reads, fill = Samples )) +
+  geom_col() +
+  theme_classic() +
+  ggtitle("Read count per kingdom") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(axis.text.x=element_text(angle=45, hjust=1))
+```
+Dit figuur is anders dan dat van de reader, omdat de dataset anders was. De samenstelling van bacteriën is anders in deze dataset. Er komen ook virussen hier in voor, omdat virussen ook bijvoorbeeld bacteriën kunnen infecteren?
+
+_Onderdeel 3.3_
+Read count normaliseren en plotten
+```{r}
+##Kolom en header namen veranderen
+merged_metagenomes2 <- import_biom(data2)
+merged_metagenomes2@tax_table@.Data <- substring(merged_metagenomes2@tax_table@.Data, 4)
+colnames(merged_metagenomes2@tax_table@.Data)<- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+colnames(merged_metagenomes2@otu_table) <- c("mock2")
+# check empty labels (empty = TRUE)
+summary(merged_metagenomes2@tax_table@.Data== "")
+##Dataframe aanpassen om te kunnen plotten
+glom2 <- tax_glom(merged_metagenomes2, taxrank = "Species")
+mock2_metagenome_species <- psmelt(glom2)
+##Genus en soort naam combineren om de wetenschappelijke naam te krijgen in je plot
+mock2_metagenome_species$Species <- as.character(mock2_metagenome_species$Species)
+mock2_metagenome_species$Species <- paste(mock2_metagenome_species[,]$Genus,mock2_metagenome_species[,]$Species,  sep=" ", collapse=NULL)
+#unique(mock2_metagenome_species$Species)
+##Soorten met een lage readcount combineren
+mock2_metagenome_species$Species[mock2_metagenome_species$Abundance < 160000] <- "Species < 160.000 abund."
+##Plotje
+id_species2 <- ggplot(data=mock2_metagenome_species, aes(x=Sample, y=Abundance, fill=Species))+ 
+  geom_bar(aes(), stat="identity", position="stack")
+id_species2
+##Read counts naar percentages omzetten
+mock2_metagenome_species_percent <- psmelt(glom2)
+mock2_metagenome_species_percent$Abundance <- (mock2_metagenome_species_percent$Abundance*100)/sum(mock2_metagenome_species_percent$Abundance)
+##Genus en soort naam weer combineren
+mock2_metagenome_species_percent$Species <- as.character(mock2_metagenome_species_percent$Species)
+mock2_metagenome_species_percent$Species <- paste(mock2_metagenome_species_percent[,]$Genus,mock2_metagenome_species_percent[,]$Species,  sep=" ", collapse=NULL)
+mock2_metagenome_species_percent$Species[mock2_metagenome_species_percent$Abundance < 0.5] <- "Species < 0.5% abund."
+##Weer een plotje :)
+id_species_percent2 <- ggplot(data=mock2_metagenome_species_percent, aes(x=Sample, y=Abundance, fill=Species))+ 
+  geom_bar(aes(), stat="identity", position="stack") ##nog niet helemaal mooi volgens mij
+grid.arrange(id_species2, id_species_percent2, ncol=2, top=textGrob("Identified species and their corresponding abundance\nread count (right) and percentage (left)\n", gp=gpar(fontsize=15,font=8)))
+```
+
+_Onderdeel 4_
+Mock2 composition file inladen, waarden normaliseren & plotten
+```{r}
+##Inlezen
+mock2_composition <- as.data.frame(read.csv('/home/daur2/metagenomics/formative_data/HU_waternet_MOCK2_composition.csv', row.names=1, sep = ";"))
+##Opschonen
+mock2_composition$amount <- as.numeric(gsub(",", ".", mock2_composition$amount))
+colnames(mock2_composition) <- c( "name","amount", "sample_name","total_volume")
+##Opzoek naar overlap tussen de twee databases
+mock2_and_composition2_intersect <- mock2_metagenome_species_percent[mock2_metagenome_species_percent$Species %in% mock2_composition$name,]
+##Soorten vinden die alleen in de composition aanwezig zijn
+`%!in%` <- Negate(`%in%`) 
+comp_not_in_mock2 <- mock2_composition[mock2_composition$name %!in% mock2_metagenome_species_percent$Species,]
+##Lijst krijgen van de soorten die in de composition en de resultaten voorkwamen
+unique(mock2_and_composition2_intersect$Species)
+##Lijst krijgen van de soorten die alleen in de composition voorkomen
+unique(comp_not_in_mock2$name)
+## Labels tussen de resultaten en composition vergelijken en percentages opslaan als ze gelijk zijn
+mock2_and_composition2_intersect$amount <- NA
+for (m2_label in mock2_and_composition2_intersect$Species){
+  for (m2c_label in mock2_composition$name){
+    if(m2_label == m2c_label){
+      mock2_and_composition2_intersect$amount[mock2_and_composition2_intersect$Species == m2_label] <- mock2_composition$amount[mock2_composition$name == m2c_label]
+    }
+  }
+}
+
+##Plotting info verzamelen
+mock2_and_comp2_plotting_data           <- mock2_and_composition2_intersect[,c(9,3,10)]
+colnames(mock2_and_comp2_plotting_data) <- c("species", "k_abundance", "c_abundance")
+
+mock2_and_comp2_plotting_data       <- melt(mock2_and_comp2_plotting_data, id.var = "species")
+mock2_and_comp2_plotting_data$value <- as.numeric(mock2_and_comp2_plotting_data$value)
+##Plotje :)
+ggplot(mock2_and_comp2_plotting_data, aes(x = species, y = value, fill = variable)) + 
+  geom_bar(aes(), stat="identity", position="dodge") +
+  theme_classic() +
+  ylab("Abundance (%)") +
+  xlab("") +
+  ggtitle("Abundance comparison between Kraken2 results and composition") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  ylim(0,25) +
+  theme(axis.text.x = element_text(angle = -45, hjust = 0, vjust = 1)) +
+  scale_fill_manual(values=c("skyblue", "orangered"))
+```
+

@@ -1,0 +1,343 @@
+---
+title: "Formatieve opdracht 1"
+author: "Laurine Seelt"
+date: "5-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(Rsubread)
+library(DESeq2)
+library(pheatmap)
+library(org.Hs.eg.db)
+library(GOstats)
+```
+
+Opdracht 1a
+Voor dit onderzoek zijn er uit twee proefpersonen fibroblasten gehaald, en deze zijn met behulp van de transcriptiefactoren MYC, OCT3/4, SOX2 en KLF4 omgezet tot induced Pluripotent Stem Cells. In dit onderzoek is er gekeken naar de verschillen in genexpressie tussen iPCS en fibroblasten.
+
+```{bash opdracht 1b, eval=FALSE, message=FALSE}
+for $fastq in *.fastq.gz
+do
+fastq-dump --split-3 --outdir "/home/daur2/rnaseq/rnaseq_ipsc/fastq/." --gzip $fastq
+done
+```
+
+Opdracht 1c
+De basic statistics, Per base sequence quality en Per sequence quality scores zijn alle 3 in elk sample groen. Dus volgens mij is de analyse wel redelijk goed gegaan. Je ziet in veel grafieken van de Per sequence quality scores dat er een duidelijke piek aan het einde zit, dat geeft aan dat de meeste reads in de samples een hoge Phred-score hebben en dus van goede kwaliteit zijn.
+
+```{bash opdracht 1d, eval=FALSE, message=FALSE}
+##Referentie genoom downloaden
+wget -P './hg38_genome/' https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_39/GRCh38.primary_assembly.genome.fa.gz 
+##Referentie genoom unzippen
+gunzip ./hg38_genome/*.fa.gz
+```
+
+```{r opdracht 1d2, eval=FALSE, message=FALSE}
+##Variabele maken met de locatie van het referentiegenoom
+hg38_ref <- "./hg38_genome/GRCh38.primary_assembly.genome.fa"
+##Variabele maken met de namen van de indexfiles
+hg38_index <- "./hg38_index/hg38_index"
+##Index, standaard parameters, maken
+buildindex(basename = hg38_index,
+           reference = hg38_ref,
+           gappedIndex = FALSE,
+           indexSplit = FALSE)
+##Object met de locaties van de fastq bestanden maken
+fastq_dir <- "./rnaseq_ipsc/fastq/"
+##Object met de namen van de indexfiles maken
+hg38_index <- "./hg38_index/hg38_index"
+##Object met de output directories van de bam bestanden maken
+bam_dir <- "./rnaseq_ipsc/bam/"
+##Vector met de sample nummers maken
+samples <- list.files(fastq_dir, pattern = "_[12].fastq.gz") %>% 
+  str_remove(pattern = "_[12].fastq.gz") %>%
+  unique()
+##Fastq files alignen
+alignment_statistics <- align(
+  index = hg38_index,
+  readfile1 = paste0(fastq_dir, samples, "_1.fastq.gz"), 
+  readfile2 = paste0(fastq_dir, samples, "_2.fastq.gz"),
+  type = "rna", input_format = "gzFASTQ", output_format = "BAM",
+  output_file = paste0(bam_dir, samples, ".bam"), 
+  unique = TRUE, ##Alleen unieke reads laten zien
+  nthreads = 10) ##Hoeveelheid CPU threads
+##Statistieken als R object opslaan
+saveRDS(alignment_statistics, file = paste0(bam_dir, "alignment_statistics.rds"))
+```
+
+```{r opdracht 1e, message=FALSE}
+alignment_statistics <- readRDS("/home/daur2/rnaseq/rnaseq_ipsc/bam/alignment_statistics.rds")
+alignment_statistics2 <- alignment_statistics %>% t %>% as_tibble() %>% mutate(bamfile = colnames(alignment_statistics)) %>% 
+  mutate(perc_mapped = Mapped_fragments / Total_fragments * 100,
+         perc_unmapped = Unmapped_fragments / Total_fragments * 100)
+alignment_statistics_tidy <- alignment_statistics2 %>% pivot_longer(cols = c(perc_mapped, perc_unmapped), names_to = "Type_of_percentage", values_to = "Percentage")
+alignment_statistics_tidy %>% ggplot(aes(x = bamfile, y = Percentage, fill = Type_of_percentage))+
+  geom_col()+
+  labs(title = "Percentage mapped and unmapped fragments per sample",
+       x = "RNA-seq sample",
+       y = "Percentage")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+
+```{r opdracht 2a generating a count table, eval=FALSE, message=FALSE}
+##Object maken met de input bam files
+bam_dir <- "./rnaseq_ipsc/bam/"
+##Object maken voor de output van de count table
+counts_dir <- "./rnaseq_ipsc/counts/"
+##Vector maken met de namen van de bam files
+bam_files <- list.files(bam_dir, pattern = ".*\\.bam$", full.names = TRUE)
+##Reads per gen tellen
+read_counts <- featureCounts(
+  files = bam_files,
+  annot.inbuilt = "hg38",
+  useMetaFeatures = TRUE,
+  strandSpecific = 1,
+  isPairedEnd = TRUE, 
+  countReadPairs = TRUE, 
+  nthreads = 10)
+```
+
+```{r opdracht 2b creating a bar graph, message=FALSE}
+##Dataframe met de statistieken verkrijgen
+read_counts_ipsc <- readRDS("/home/daur2/rnaseq/rnaseq_ipsc/counts/read_counts.rds")
+count_stats_ipsc <- read_counts_ipsc$stat
+##Eerste kolom naar namen omzetten
+rownames(count_stats_ipsc) <- count_stats_ipsc$Status
+count_stats_ipsc$Status <- NULL
+##Percentage unieke fragmenten berekenen
+count_stats_ipsc_t <- count_stats_ipsc %>%
+  t() %>% as_tibble() %>%
+  mutate(bamfile = colnames(count_stats_ipsc)) %>%
+  mutate(Total=colSums(count_stats_ipsc)) %>%
+  mutate(perc_assigned = Assigned/Total*100)
+##Percentages in een staafdiagram uitzetten
+count_stats_ipsc_t %>% ggplot(aes(x = bamfile, y = perc_assigned, fill = bamfile))+
+  geom_col()+
+  ggtitle("Percentage of assigned reads per sample")+
+  xlab("Sample")+
+  ylab("Percentage of assigned reads")+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle=90), legend.position = "none")+
+  coord_cartesian(ylim=c(0,70))
+```
+
+De conclusie op basis van deze grafiek is dat voor de meeste genen iig 40% van de reads toegewezen kunnen worden aan een bepaald gen. De rest van de reads zijn afkomstig van andere regio's in het genoom, zoals intronen.
+
+```{r opdracht 2c creating a DESeq2 object, message=FALSE}
+##Een count matrix maken
+count_matrix_ipsc <- read_counts_ipsc$counts
+##Dataframe met de metadata maken
+metadata_ipsc <- read_csv("/home/daur2/rnaseq/rnaseq_ipsc/ipsc_sampledata.csv")
+##metadata omzetten naar een dataframe
+metadata_ipsc <- as.data.frame(metadata_ipsc)
+##Kolomnamen toevoegen
+rownames(metadata_ipsc) <- paste0(metadata_ipsc$Run, ".bam")
+##Kolom met celsoorten toevoegen?
+metadata_ipsc$Cell_type <- metadata_ipsc$Cell_type %>% factor(levels = c("Skin derived fibroblast", "iPSC"))
+##DESeqDataSet object maken
+dds_ipsc <- DESeqDataSetFromMatrix(countData = count_matrix_ipsc,
+                              colData = metadata_ipsc,
+                              design = ~ Cell_type)
+```
+
+```{r opdracht 2d performing a PCA, message=FALSE}
+##Eerst moet de count data genormaliseerd worden
+dds_ipsc_normalised <- rlog(dds_ipsc)
+##PCA
+pca_ipsc <- dds_ipsc_normalised %>% assay() %>% t() %>% prcomp()
+pca_ipsc_summary <- summary(pca_ipsc)$importance
+##PCA plotting
+pca_ipsc_plotting <- cbind(metadata_ipsc, pca_ipsc$x)
+pc1_ipsc_var <- round(pca_ipsc_summary["Proportion of Variance", "PC1"]*100, digits = 1)
+pc2_ipsc_var <- round(pca_ipsc_summary["Proportion of Variance", "PC2"]*100, digits = 1)
+ggplot(pca_ipsc_plotting)+
+  geom_point(aes(x = PC1, y = PC2, colour = Cell_type, shape = Cell_line))+
+  ggtitle("PCA for iPSC study")+
+  xlab(paste0("PC1 (", pc1_ipsc_var, "%)"))+
+  ylab(paste0("PC2 (", pc2_ipsc_var, "%)"))+
+  theme_classic()
+```
+
+Het verschil tussen de 2 cellijnen wordt volgens mij voornamelijk door PC1 veroorzaakt. Horizontaal zie je veel verschil qua waar ze liggen, terwijl de fibroblasten volgens mij qua PC2 allemaal erg met elkaar overeenkomen.
+
+```{r opdracht 2e making a heatmap, message=FALSE}
+##Matrix uit het DESeq object halen
+dds_ipsc_normalised_matrix <- assay(dds_ipsc_normalised)
+##Pairwise correlation values berekenen
+ipsc_corr <- cor(dds_ipsc_normalised_matrix)
+##heatmap maken
+pheatmap(ipsc_corr, annotation = metadata_ipsc["Cell_type"])
+```
+
+De twee verschillende celtypen hebben een vrij hoge correlatie met cellen van hetzelfde type, maar echt wel een duidelijk lagere correlatie met cellen van het andere type.
+
+```{r opdracht 3a performing a DGE analysis, message=FALSE}
+##DGE analyse uitvoeren
+ipsc_dge <- DESeq(dds_ipsc)
+##Resultaten verkrijgen
+ipsc_dge_results <- results(ipsc_dge, alpha = 0.05, lfcThreshold = 1)
+summary(ipsc_dge_results)
+```
+
+```{r opdracht 3b creating a volcano plot, message=FALSE}
+##Dataframe zonder NA maken
+ipsc_dge_plotting <- data.frame(ipsc_dge_results) %>% filter(!is.na(padj))
+##Kolom met genen die significant differentiëel tot expressie komen
+ipsc_dge_plotting <- ipsc_dge_plotting %>% mutate(signif = if_else(padj < 0.05, "padj < 0.05",
+                                                                   "Not significant"))
+##Significante genen verkrijgen
+sign_genes_ipsc <- ipsc_dge_results[which(ipsc_dge_results$padj < 0.05),]
+##Naam van het top gen verkrijgen
+top_Gene_ipsc <- sign_genes_ipsc[which.max(sign_genes_ipsc$log2FoldChange),]
+top_Gene_ipsc_name <- rownames(top_Gene_ipsc)
+##Volcano plot maken
+ipsc_dge_plotting %>% ggplot(aes(x = log2FoldChange, y = -log10(padj), color = signif))+
+  geom_point()+
+  xlab("log2 fold change")+
+  ylab("-log10 adjusted p-value")+
+  theme_bw()+
+  scale_colour_manual(values = c("grey", "darkblue"), name = "Significance")+
+  annotate("text", x = top_Gene_ipsc$log2FoldChange, y = -log10(top_Gene_ipsc$padj)*0.8,
+           label = top_Gene_ipsc_name, colour = "red")
+```
+
+```{r opdracht 3c making a heatmap, message=FALSE}
+##Gene identifiers van de 15 meest significante genen verkrijgen
+top15_genes <- rownames(ipsc_dge_results[order(ipsc_dge_results$padj)[1:15],])
+##Count values verkrijgen
+count_values_ipsc <- assay(dds_ipsc)[top15_genes,]
+##Kolomnamen vervangen voor het type cel
+colnames(count_values_ipsc) <- colData(dds_ipsc)$Cell_type
+##Resultaten weergeven in een heatmap
+pheatmap(count_values_ipsc, scale = "row", show_rownames = TRUE)
+```
+
+
+```{r opdracht 4a making a heatmap, message=FALSE}
+##Dataframe maken met de 15 meest significante DE genen
+top15_genes_ipsc <- ipsc_dge_results[order(ipsc_dge_results$padj)[1:15],] %>% data.frame()
+##Kolom met de entrez-id maken
+top15_genes_ipsc <- top15_genes_ipsc %>% mutate(entrezid = rownames(top15_genes_ipsc))
+##Gensymbolen verkrijgen gebaseerd op de entrez-id
+top15_genes_ipsc$symbol <- mapIds(org.Hs.eg.db,
+                                  keys = top15_genes_ipsc$entrezid,
+                                  column = "SYMBOL",
+                                  keytype = "ENTREZID",
+                                  multiVals = "first")
+##Rijnamen veranderen
+rownames(count_values_ipsc) <- top15_genes_ipsc$symbol
+##Heatmap maken
+pheatmap(count_values_ipsc, scale = "row", show_rownames = TRUE)
+```
+
+
+```{r opdracht 4b making a function for a GO term enrichtment analysis, message=FALSE}
+enrichment_analysis <- function(results, logical, x, y){
+  resultaten <- results
+  drempel_lfc <- x
+  drempel_p <- y
+  
+  ##Lijst met enriched genen maken
+  if (logical == TRUE){
+    enriched_genes <- resultaten %>% data.frame() %>% filter(log2FoldChange > drempel_lfc,
+                                                             padj < drempel_p) %>%
+      rownames()
+  } else{
+    enriched_genes <- resultaten %>% data.frame() %>% filter(log2FoldChange < -drempel_lfc,
+                                                             padj < drempel_p) %>%
+      rownames()
+  }
+  ##Lijst van alle genen creëren
+  all_genes_ipsc <- resultaten %>% data.frame() %>% rownames()
+  ##GO enrichment analyse uitvoeren
+  test_object <- new("GOHyperGParams",
+                     geneIds = enriched_genes,
+                     universeGeneIds = all_genes_ipsc,
+                     annotation = "org.Hs.eg.db",
+                     ontology = "BP",
+                     pvalueCutoff = drempel_p,
+                     testDirection = "over")
+  goterm_analysis <- hyperGTest(test_object)
+  ##Resultaten verkrijgen
+  goterm_analysis_results <- summary(goterm_analysis)
+  return(goterm_analysis_results)
+}
+```
+
+
+```{r opdracht 4c1 performing a GO-term enrichtment analysis for upregulated genes}
+##Lijst met upgereguleerde genen maken
+upregulatedgenes_ipsc <- ipsc_dge_results %>% data.frame() %>% filter(log2FoldChange > 1,
+                                                                      padj < 0.01) %>%
+  rownames()
+##Lijst van alle genen creëren
+all_genes_ipsc <- ipsc_dge_results %>% data.frame() %>% rownames()
+##GO enrichment analyse uitvoeren
+test_object_high <- new("GOHyperGParams",
+                        geneIds = upregulatedgenes_ipsc,
+                        universeGeneIds = all_genes_ipsc,
+                        annotation = "org.Hs.eg.db",
+                        ontology = "BP",
+                        pvalueCutoff = 1,
+                        testDirection = "over")
+goterm_analysis_high <- hyperGTest(test_object_high)
+##Resultaten verkrijgen
+goterm_analysis_high_results <- summary(goterm_analysis_high)
+##P-waarden aanpassen
+goterm_analysis_high_results$padj <- p.adjust(goterm_analysis_high_results$Pvalue, method = "BH")
+##Genen tussen de 5 en 500 selecteren
+goterm_analysis_high_results <- goterm_analysis_high_results %>% filter(Count > 5) %>% filter(Count < 500)
+##Top 20 GO terms selecteren
+goterm_analysis_high_top20 <- goterm_analysis_high_results[order(goterm_analysis_high_results$padj)[1:20],]
+##GO terms plotten
+goterm_analysis_high_top20$Term <- factor(goterm_analysis_high_top20$Term, 
+                                     levels = goterm_analysis_high_top20$Term[
+                                       order(goterm_analysis_high_top20$padj, decreasing = TRUE)])
+goterm_analysis_high_top20 %>% ggplot(aes(x = Term, y = -log10(padj))) +
+  geom_point() +
+  coord_flip() +
+  ylab(expression(-log[10](adjusted~italic(P)~value))) + 
+  xlab("GO terms") +
+  ggtitle("Top 20 enriched GO terms\n for upregulated genes") +
+  theme_bw()
+```
+
+
+```{r opdracht 4c2 performing a GO-term enrichment analysis for downregulated genes}
+##Lijst met downgereguleerde genen maken
+downregulatedgenes_ipsc <- ipsc_dge_results %>% data.frame() %>% filter(log2FoldChange < -1,
+                                                                        padj < 0.01) %>%
+  rownames()
+##Lijst van alle genen creëren, maar is al gedaan bij de upgereguleerde genen
+##GO enrichment analysis uitvoeren
+test_object_low <- new("GOHyperGParams",
+                       geneIds = downregulatedgenes_ipsc,
+                        universeGeneIds = all_genes_ipsc,
+                        annotation = "org.Hs.eg.db",
+                        ontology = "BP",
+                        pvalueCutoff = 1,
+                        testDirection = "over")
+goterm_analysis_low <- hyperGTest(test_object_low)
+##Resultaten verkrijgen
+goterm_analysis_low_results <- summary(goterm_analysis_low)
+##P-waarden aanpassen
+goterm_analysis_low_results$padj <- p.adjust(goterm_analysis_low_results$Pvalue, method = "BH")
+##Genen tussen de 5 en 500 selecteren
+goterm_analysis_low_results <- goterm_analysis_low_results %>% filter(Count > 5) %>% filter(Count < 500)
+##Top 20 GO terms selecteren
+goterm_analysis_low_top20 <- goterm_analysis_low_results[order(goterm_analysis_low_results$padj)[1:20],]
+##GO terms plotten
+goterm_analysis_low_top20$Term <- factor(goterm_analysis_low_top20$Term, 
+                                     levels = goterm_analysis_low_top20$Term[
+                                       order(goterm_analysis_low_top20$padj, decreasing = TRUE)])
+goterm_analysis_low_top20 %>% ggplot(aes(x = Term, y = -log10(padj))) +
+  geom_point() +
+  coord_flip() +
+  ylab(expression(-log[10](adjusted~italic(P)~value))) + 
+  xlab("GO terms") +
+  ggtitle("Top 20 enriched GO terms\n for downregulated genes") +
+  theme_bw()
+```

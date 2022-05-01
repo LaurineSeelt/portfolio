@@ -181,6 +181,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="assignment-3" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Assignment 3<a href="assignment-3.html#assignment-3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><em>This was the third assignment for our portfolio.</em></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="assignment-3.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir_info</span>(<span class="at">recursive =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="assignment-3.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">directory =</span> <span class="fu">path_dir</span>(path)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="assignment-3.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">wt =</span> size, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 18 x 2
+##    directory                                          n
+##    &lt;chr&gt;                                    &lt;fs::bytes&gt;
+##  1 Data/Data_raw                                  2.49M
+##  2 Rmd                                            1.34M
+##  3 _book/libs/gitbook-2.6.7/js                  182.86K
+##  4 _book/libs/gitbook-2.6.7/css/fontawesome     161.67K
+##  5 _book/_main_files/figure-html                141.52K
+##  6 _main_files/figure-html                      141.19K
+##  7 001_opdracht1.1_files/figure-html            103.23K
+##  8 _book                                        103.19K
+##  9 _book/libs/jquery-3.6.0                        87.4K
+## 10 _book/libs/gitbook-2.6.7/css                  80.27K
+## 11 Data                                           47.4K
+## 12 .                                             23.18K
+## 13 _book/libs/anchor-sections-1.1.0                 783
+## 14 _book/_main_files                                  0
+## 15 _book/libs                                         0
+## 16 _book/libs/gitbook-2.6.7                           0
+## 17 _main_files                                        0
+## 18 001_opdracht1.1_files                              0</code></pre>
 
 </div>
             </section>

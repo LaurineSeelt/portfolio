@@ -1,0 +1,72 @@
+---
+title: "Les6"
+author: "Laurine Seelt"
+date: "6-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{bash, engine.opts='-i', echo=TRUE, eval=FALSE}
+echo “y” | conda update -n base conda
+```
+
+
+
+```{bash, engine.opts='-i', echo=TRUE, eval=FALSE}
+conda env list
+cat ~/setup_meta_env.yml
+# create conda virtual environment
+conda env create --file ~/setup_meta_env.yml
+```
+
+
+```{bash, engine.opts='-i', eval=FALSE}
+# activate environment
+conda activate meta
+
+# install fastqc and answer yes for procceed question
+echo "y" | conda install -c bioconda fastqc
+
+# deactivate conda virtual environment
+conda deactivate
+```
+
+
+```{bash afbeelding1, engine.opts='-i', eval=FALSE}
+# activate environment
+conda activate meta
+
+# perform FastQC analysis (change first path to your own folder structure if needed)
+fastqc -o ~/Daur2/ /home/daur2/metagenomics/reader_data/HU1_MOCK1_L001_R1_001.fastq.gz
+
+# deactivate conda virtual environment
+conda deactivate
+```
+
+
+```{bash afbeelding 2, engine.opts='-i', eval=FALSE}
+# activate environment
+conda activate meta
+
+# perform FastQC analysis (change first path to your own folder structure if needed)
+fastqc -o ~/Daur2/ /home/daur2/metagenomics/reader_data/HU1_MOCK1_L001_R2_001.fastq.gz
+
+# deactivate conda virtual environment
+conda deactivate
+```
+
+
+```{r, echo=FALSE, fig.height=3, out.width= '100%', fig.cap="Fig. 1: Quality distribution: Right-side) Foward read quality scores range from 0 to 40 on the Phred scale. All bases for all reads have very high quality (>30), indicating that our reads have an accuracy of >99,9%. Left-side)" }
+library(png)
+library(grid)
+library(gridExtra)
+img1 <-  rasterGrob(as.raster(readPNG("fastqc_mock1_R1_per_base_quality.png")))
+img2 <-  rasterGrob(as.raster(readPNG("fastqc_mock1_R2_per_base_quality.png")))
+grid.arrange(img1, img2, ncol=2, top=textGrob("Per base quality distribution of forward (right) and reverse (left) reads", gp=gpar(fontsize=10,font=8)))
+```
+

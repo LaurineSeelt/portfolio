@@ -1,0 +1,170 @@
+---
+title: "Les4"
+author: "Laurine Seelt"
+date: "4-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(pheatmap)
+library(DESeq2)
+library(Rsubread)
+library("org.Hs.eg.db")
+library(GO.db)
+library(GOstats)
+```
+
+
+```{r }
+# Create a dataframe for the 10 most significantly DE genes
+top10_genes <- airway_dge_results[order(airway_dge_results$padj)[1:10],] %>% data.frame()
+columns(org.Hs.eg.db)
+```
+
+
+```{r Entrez identifiers omzetten naar gene symbol}
+# Create an extra column with the Entrez id (based on rownames)
+top10_genes <- top10_genes %>% mutate(entrezid = rownames(top10_genes))
+
+# Obtain the gene symbols based on the Entrez identifiers
+top10_genes$symbol <- mapIds(org.Hs.eg.db,
+                             keys = top10_genes$entrezid,
+                             column = "SYMBOL",
+                             keytype = "ENTREZID",
+                             multiVals = "first")
+```
+
+
+```{r exercise 4.3}
+# Obtain the cytogenetic mapping based on the Entrez identifiers
+top10_genes$chromosomal_band <- mapIds(org.Hs.eg.db,
+                                       keys = top10_genes$entrezid,
+                                       column = "MAP",
+                                       keytype = "ENTREZID",
+                                       multiVals = "first")
+```
+
+
+```{r obtaining GO terms}
+##Gen vinden dat het meest is opgereguleerd
+top_upregulated <- top10_genes[which.max(top10_genes$log2FoldChange),"entrezid"]
+##GO terms die erbij horen vinden
+top_upregulated_GOterms <- select(org.Hs.eg.db,
+                                  keys = top_upregulated,
+                                  column = c("GO", "ONTOLOGY"),
+                                  keytype = "ENTREZID",
+                                  multiVals = "list")
+##GO terms selecteren die geassocieerd zijn met biologische processen
+top_upregulated_GOterms <- top_upregulated_GOterms %>% filter(ONTOLOGY == "BP")
+unique(top_upregulated_GOterms$GO)
+##Beschrijvingen van de GO terms opzoeken
+GOterms_descriptions1 <- select(GO.db, keys = unique(top_upregulated_GOterms$GO), 
+                               columns = "DEFINITION", keytype = "GOID")
+```
+
+
+```{r exercise 4.5}
+# Find the associated GO terms
+dusp1_GOterms <- select(org.Hs.eg.db,
+                        keys = "1843",
+                        column = c("GO", "ONTOLOGY"),
+                        keytype = "ENTREZID",
+                        multiVals = "list")
+# Select only the GO terms that are associated with biological processes
+dusp1_GOterms <- dusp1_GOterms %>% filter(ONTOLOGY == "BP")
+# Look up the descriptions for the GO terms
+GOterms_descriptions2 <- select(GO.db, keys = unique(dusp1_GOterms$GO), 
+                               columns = "DEFINITION", keytype = "GOID")
+#Remove NA values
+GOterms_descriptions2 <- GOterms_descriptions[!is.na(GOterms_descriptions$DEFINITION),]
+head(GOterms_descriptions$DEFINITION, 10)
+GOterms_descriptions$DEFINITION[str_detect(GOterms_descriptions$DEFINITION, "cortico")]
+```
+
+
+```{r}
+# Create a list of upregulated genes
+upregulated_genes <- airway_dge_results %>% data.frame() %>% 
+  filter(log2FoldChange > 1, padj < 0.01) %>% rownames()
+
+# Create a list of all genes in the dataset
+all_genes <- airway_dge_results %>% data.frame() %>% rownames()
+
+# Perform GO term enrichment analysis
+test_object <- new("GOHyperGParams",
+                   geneIds = upregulated_genes,
+                   universeGeneIds = all_genes, 
+                   annotation = "org.Hs.eg.db", 
+                   ontology = "BP", 
+                   pvalueCutoff = 1,
+                   testDirection = "over")
+goterm_analysis <- hyperGTest(test_object)
+```
+
+
+```{r inspecting the results & plotting them}
+# Obtains dataframe with results of GO term analysis
+goterm_analysis_results <- summary(goterm_analysis)
+# Adjust the p values for multiple testing
+goterm_analysis_results$padj <- p.adjust(goterm_analysis_results$Pvalue, method = "BH")
+
+# Select only gene sets that are larger than 5 but smaller 
+# than 500 (to prevent taking along very small and very large
+# gene sets).
+goterm_analysis_results <- goterm_analysis_results %>% filter(Count > 5) %>% filter(Count < 500)
+
+# Select the top 20 GO terms
+goterm_analysis_top20 <- goterm_analysis_results[order(goterm_analysis_results$padj)[1:20],]
+
+# Plot the p-values of the top 20 GO terms
+goterm_analysis_top20$Term <- factor(goterm_analysis_top20$Term, 
+                                     levels = goterm_analysis_top20$Term[
+                                       order(goterm_analysis_top20$padj, decreasing = TRUE)])
+goterm_analysis_top20 %>% ggplot(aes(x = Term, y = -log10(padj))) +
+  geom_point() +
+  coord_flip() +
+  ylab(expression(-log[10](adjusted~italic(P)~value))) + 
+  xlab("GO terms") +
+  ggtitle("Top 20 enriched GO terms\n for upregulated genes") +
+  theme_bw()
+```
+
+
+```{r exercise 4.6}
+##Lijst van downgereguleerde genen maken
+downregulated_genes <- airway_dge_results %>% data.frame() %>% 
+  filter(log2FoldChange < -1, padj < 0.01) %>% rownames()
+##Lijst van alle genen maken
+all_genes <- airway_dge_results %>% data.frame() %>% rownames()
+##GO enrichment analyse uitvoeren
+test_object2 <- new("GOHyperGParams",
+                    geneIds = downregulated_genes,
+                    universeGeneIds = all_genes,
+                    annotation = "org.Hs.eg.db",
+                    ontology = "BP",
+                    pvalueCutoff = 1,
+                    testDirection = "over")
+goterm_analysis2 <- hyperGTest(test_object2)
+##Dataframe met resultaten maken
+goterm_analysis2_results <- summary(goterm_analysis2)
+##P-waarde aanpassen voor meerdere testen
+goterm_analysis2_results$padj <- p.adjust(goterm_analysis2_results$Pvalue, method = "BH")
+##Alleen genen selecteren die langer zijn dan 5, maar korter dan 500
+goterm_analysis2_results <- goterm_analysis2_results %>% filter(Count > 5) %>% 
+  filter(Count < 500)
+##Top 20 GO terms selecteren
+goterm_analysis2_top20 <- goterm_analysis2_results[order(goterm_analysis2_results$padj)[1:20],]
+##P-values plotten
+goterm_analysis2_top20$Term <- factor(goterm_analysis2_top20$Term, 
+                                     levels = goterm_analysis2_top20$Term[
+                                       order(goterm_analysis2_top20$padj, decreasing = TRUE)])
+goterm_analysis2_top20 %>% ggplot(aes(x = Term, y = -log10(padj))) +
+  geom_point() +
+  coord_flip() +
+  ylab(expression(-log[10](adjusted~italic(P)~value))) + 
+  xlab("GO terms") +
+  ggtitle("Top 20 enriched GO terms\n for upregulated genes") +
+  theme_bw()
+```
+

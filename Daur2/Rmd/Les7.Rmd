@@ -1,0 +1,72 @@
+---
+title: "Les 7"
+author: "Laurine Seelt"
+date: "7-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+
+
+```{bash install kraken2, engine.opts='-i', eval=FALSE}
+# activate environment
+conda activate meta
+
+#install kraken2 and answer y to proceed question
+echo "y" | conda install -c bioconda kraken2
+
+conda deactivate
+```
+
+
+
+```{bash running kraken2, engine.opts='-i', eval=FALSE}
+conda activate meta
+
+kraken2 --db /home/daur2/metagenomics/minikraken2_v2_8GB_201904_UPDATE/ --threads 2 --paired --gzip-compressed --output ~/Daur2/mock1.kraken --report ~/Daur2/mock1.report --use-names /home/daur2/metagenomics/reader_data/HU1_MOCK1_L001_R1_001.fastq.gz /home/daur2/metagenomics/reader_data/HU1_MOCK1_L001_R2_001.fastq.gz
+
+conda deactivate
+```
+
+
+```{bash install bracken, engine.opts='-i', eval=FALSE}
+# activate environment
+conda activate meta
+
+echo "y" | conda install -c bioconda bracken
+
+conda deactivate
+```
+
+
+```{bash running bracken, engine.opts='-i', eval=FALSE}
+conda activate meta
+
+bracken -d /home/daur2/metagenomics/minikraken2_v2_8GB_201904_UPDATE/ -i ~/Daur2/mock1.report -o ~/Daur2/mock1.bracken
+
+conda deactivate
+```
+
+
+```{bash installing kraken-biom, engine.opts='-i', eval=FALSE}
+# activate environment
+conda activate meta
+
+# install kraken-biom and answer y to proceed question
+echo "y" | conda install -c bioconda kraken-biom
+
+conda deactivate
+```
+
+
+```{bash running kraken-biom, engine.opts='-i', eval=FALSE}
+conda activate meta
+
+kraken-biom ~/Daur2/mock1_bracken_species.report --fmt json -o ~/Daur2/mock1_bracken_species.biom
+
+conda deactivate
+```
+

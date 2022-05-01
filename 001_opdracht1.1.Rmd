@@ -12,7 +12,7 @@ link-citations: yes
 
 _This was the first assignment for our portfolio._
 
-```{r setup, include=FALSE}
+```{r setup1, include=FALSE}
 library(tidyverse)
 library(readxl)
 library(here)

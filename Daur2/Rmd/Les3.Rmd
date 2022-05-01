@@ -1,0 +1,136 @@
+---
+title: "Les3"
+author: "Laurine Seelt"
+date: "3-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(DESeq2)
+library(pheatmap)
+```
+
+
+```{r DGE analysis}
+airway_dge <- DESeq(dds)
+airway_dge_results <- results(airway_dge)
+summary(airway_dge_results)
+```
+
+
+```{r exercise 3.2}
+# Obtain the results for the DGE analysis
+airway_dge_results2 <- results(airway_dge, alpha = 0.05, lfcThreshold = 1)
+
+# Obtain the summary of the results
+summary <- summary(airway_dge_results2)
+```
+
+
+```{r generating a count plot}
+# Obtain the genes with a significant p-value
+sign_genes <- airway_dge_results[which(airway_dge_results$padj < 0.05),]
+
+# Obtain the id of the most significantly upregulated gene
+topGene <- sign_genes[which.max(sign_genes$log2FoldChange),]
+topGene_name <- rownames(topGene)
+topGene_name
+
+# Obtain the gene counts using the plotCounts function
+geneCounts <- plotCounts(dds, gene = topGene_name, 
+                         intgroup = c("treatment"), 
+                         returnData = TRUE)
+
+# Create a counts plot using ggplot
+ggplot(geneCounts, aes(x = treatment, y = count)) +
+  scale_y_log10() + 
+  geom_point(position = position_jitter(width = 0.1, height = 0), 
+             size = 3, colour = "darkgreen") +
+  xlab("Dexamethasone treatment") +
+  ylab("Fragment count") + 
+  ggtitle(topGene_name) +
+  theme_bw()
+```
+
+
+```{r exercise 3.3}
+##ID van het laagste gen verkrijgen
+lowGene <- sign_genes[which.min(sign_genes$log2FoldChange),]
+lowGene_name <- rownames(lowGene)
+
+##Gene counts verkrijgen
+geneCounts_low <- plotCounts(dds, gene = lowGene_name,
+                             intgroup = c("treatment"),
+                             returnData = TRUE)
+
+##Count plot maken
+ggplot(geneCounts_low, aes(x = treatment, y = count))+
+  scale_y_log10()+
+  geom_point(position = position_jitter(width = 0.1, height = 0),
+                                        size = 3, colour = "darkgreen")+
+  xlab("Dexamethansone treatment")+
+  ylab("Fragment count")+
+  ggtitle(lowGene_name)+
+  theme_bw()
+```
+
+
+```{r making a volcano plot}
+# Create a dataframe for plotting without genes with padj = NA
+airway_dge_plotting <- data.frame(airway_dge_results) %>% filter(!is.na(padj))
+
+# Create column specifying if gene is significantly differentially expressed
+airway_dge_plotting <- airway_dge_plotting %>% 
+  mutate(signif = if_else(padj < 0.05, "padj < 0.05", "Not significant"))
+
+# Create a volcano plot
+airway_dge_plotting %>% 
+  ggplot(aes(x = log2FoldChange, y = -log10(padj), color = signif)) +
+  geom_point() + 
+  xlab("log2 fold change") +
+  ylab("-log10 adjusted p-value") + 
+  theme_bw() +
+  
+  # Change the legend text and the colours
+  scale_colour_manual(values = c("grey", "darkgreen"), name = "Significance") +
+  
+  # Annotate the most significantly upregulated gene
+  annotate("text", x = topGene$log2FoldChange, y = -log10(topGene$padj)*0.8, 
+           label = topGene_name, colour = "blue")
+```
+
+
+```{r exercise 3.4}
+##Dataframe voor plotting maken zonder NA
+airway_dge_plotting <- data.frame(airway_dge_results) %>% filter(!is.na(padj))
+
+##Kolom maken die aangeeft of het gen significant differentiëel tot expressie komt
+airway_dge_plotting <- airway_dge_plotting %>% mutate(signif = if_else(padj < 0.01 & abs(log2FoldChange) > 1,
+                                        "Significant", "Not Significant"))
+##Volcano plot maken
+airway_dge_plotting %>% ggplot(aes(x = log2FoldChange, y = -log10(padj), color = signif))+
+  geom_point()+
+  xlab("Log2 fold change")+
+  ylab("-log10 adjusted p-value")+
+  theme_bw()+
+  scale_colour_manual(values = c("grey", "darkred"), name = "Significance")+
+  geom_hline(yintercept = -log10(0.01), linetype = "dashed")+
+  geom_vline(xintercept = 1, linetype = "dashed")+
+  geom_vline(xintercept = -1, linetype = "dashed")
+```
+
+
+```{r creating a heatmap}
+##Gene identifiers van de 10 significanste genen verkrijgen
+top10_genes <- rownames(airway_dge_results[order(airway_dge_results$padj)[1:10],])
+##Count values verkrijgen van die 10 genen
+count_values <- assay(dds)[top10_genes,]
+##Kolomnamen vervangen voor de condities
+colnames(count_values) <- colData(dds)$treatment
+##Resultaten visualiseren in een heatmap
+pheatmap(count_values, show_rownames = TRUE)
+##Heatmap met scaling maken
+pheatmap(count_values, scale = "row", show_rownames = TRUE)
+```
+

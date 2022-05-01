@@ -1,0 +1,143 @@
+---
+title: "Les2"
+author: "Laurine Seelt"
+date: "1-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(Rsubread)
+library(DESeq2)
+```
+
+
+
+```{r making a count table, eval=FALSE}
+# Create object with input dir for bam files
+bam_dir <- "./rnaseq_airway/bam/"
+
+# Create object with output dir for count tables
+counts_dir <- "./rnaseq_airway/counts/"
+
+# Create vector with names of bam files
+bam_files <- list.files(bam_dir, pattern = ".*\\.bam$", full.names = TRUE)
+
+# Count the reads per gene using the in-built NCBI RefSeq annotations
+read_counts <- featureCounts(
+  files = bam_files,
+  annot.inbuilt = "hg38",
+  useMetaFeatures = TRUE,
+  strandSpecific = 0,
+  isPairedEnd = TRUE, 
+  countReadPairs = TRUE, 
+  nthreads = 10)
+```
+
+
+```{r opdracht 2.3}
+read_counts <- readRDS("/home/daur2/rnaseq/rnaseq_airway/counts/read_counts.rds")
+count_stats <- read_counts$stat
+rownames(count_stats) <- count_stats$Status
+count_stats$Status <- NULL
+count_stats_t <- count_stats %>% 
+  t %>% 
+  as_tibble() %>% 
+  mutate(bamfile=colnames(count_stats)) %>%
+  mutate(Total=colSums(count_stats)) %>%
+  mutate(perc_assigned = Assigned/Total*100)
+count_stats_t %>% ggplot(aes(x = bamfile, y = perc_assigned))+
+  geom_col()+
+  theme_classic()+
+  labs(title = "Percentage of assigned fragments per sample",
+       x = "RNA-seq sample",
+       y = "Percentage assigned fragments (%)")+
+  theme(axis.text.x = element_text(angle=90))+
+  coord_cartesian(ylim=c(0,100))
+```
+
+
+```{r count table to DEseq object}
+# Obtain the count matrix
+count_matrix <- read_counts$counts
+# Import the sample data
+metadata <- read_csv("/home/daur2/rnaseq/rnaseq_airway/airway_sampledata.csv")
+# Convert the metadata to dataframe object
+metadata <- as.data.frame(metadata)
+# Add rownames to the metadata dataframe
+rownames(metadata) <- paste0(metadata$Run, ".bam")
+# Check if column names of count table are the same as row names of metadata object
+colnames(count_matrix) == rownames(metadata)
+# Create a column specifying the test condition
+metadata <- metadata %>% mutate(treatment = str_replace(dex, "trt", "treated"))
+metadata$treatment <- metadata$treatment %>% factor(levels = c("untreated", "treated"))
+# Create the DESeqDataSet object
+dds <- DESeqDataSetFromMatrix(
+  countData = count_matrix,
+  colData = metadata, 
+  design = ~ treatment)
+```
+
+
+```{r opdracht 2.4}
+quantile(count_matrix[,"SRR1039509.bam"])
+```
+
+
+```{r count values normaliseren met log2}
+dds_normalized <- rlog(dds)
+```
+
+
+```{r PCA}
+# PCA with the normalised dataset
+pca <- dds_normalized %>% assay() %>% t() %>% prcomp()
+# Find the proportion of variance covered by each PC
+pca_summary <- summary(pca)$importance
+pca_summary
+# Create data frame with metadata and the PCA values for plotting
+pca_plotting <- cbind(metadata, pca$x)
+# Obtain the percentages of variation covered by PC1 and PC2
+PC1_var <- round(pca_summary["Proportion of Variance", "PC1"]*100, digits = 1)
+PC2_var <- round(pca_summary["Proportion of Variance", "PC2"]*100, digits = 1)
+# Plot PC1 vs PC2
+ggplot(pca_plotting) + 
+  geom_point(aes(x=PC1, y=PC2, color = treatment, shape = cell_line), size = 5) +
+  ggtitle("PCA for airway study") +
+  xlab(paste0("PC1 (", PC1_var, "%)")) +
+  ylab(paste0("PC2 (", PC2_var, "%)")) +
+  theme_bw()
+```
+
+
+```{r exercise 2.6}
+PC3_var <- round(pca_summary["Proportion of Variance", "PC3"]*100, digits = 1)
+PC4_var <- round(pca_summary["Proportion of Variance", "PC4"]*100, digits = 1)
+# Plot PC3 vs PC4
+ggplot(pca_plotting)+
+  geom_point(aes(x=PC3, y = PC4, colour = treatment, shape = cell_line), size=5)+
+  ggtitle("PCA for airway study")+
+  xlab(paste0("PC3 (", PC3_var, "%)"))+
+  ylab(paste0("PC4 (", PC4_var, "%)"))+
+  theme_classic()
+```
+
+
+```{r creating a heatmap}
+# Extract the matrix from the normalized DESeq object
+dds_normalized_matrix <- assay(dds_normalized)  
+# Compute pairwise correlation values
+airway_cor <- cor(dds_normalized_matrix)
+airway_cor
+# Load pheatmap package
+library(pheatmap)
+# Plot heatmap using the correlation; annotate the heatmap based on the treatment
+pheatmap(airway_cor, annotation = metadata["treatment"])
+```
+
+
+```{r exercise 2.8}
+pheatmap(airway_cor, annotation = metadata["treatment"], cluster_rows = FALSE,
+         cluster_cols = FALSE)
+```
+

@@ -1,0 +1,201 @@
+---
+title: "Les 8"
+author: "Laurine Seelt"
+date: "7-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(phyloseq)
+library(grid)
+library(gridExtra)
+library(reshape2)
+```
+
+
+
+```{r }
+##Data inlezen
+data <- "~/Daur2/mock1_bracken_species.biom"
+merged_metagenomes <- import_biom(data)
+
+# remove taxonomy information from values/ remove first four characters
+merged_metagenomes@tax_table@.Data <-
+  substring(merged_metagenomes@tax_table@.Data, 4)
+
+# rename column header to informative format
+colnames(merged_metagenomes@tax_table@.Data) <- 
+  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+```
+
+
+
+```{r exercise 8.1}
+unique(merged_metagenomes@tax_table@.Data[,"Kingdom"])
+```
+
+
+```{r }
+##storing the bacteria in a separate variable
+merged_metagenomes_b <- subset_taxa(merged_metagenomes, Kingdom == "Bacteria")
+##Tellen hoeveel reads er als bacterie geclassificeerd zijn
+sample_sums(merged_metagenomes_b)
+##Informatieve headers toevoegen
+sample_names(merged_metagenomes_b) <- "bacteria"
+```
+
+
+```{r exercise 8.2}
+##Eukaryoten
+merged_metagenomes_e <- subset_taxa(merged_metagenomes, Kingdom == "Eukaryota")
+sample_sums(merged_metagenomes_e) ##14673
+##Archaea
+merged_metagenomes_a <- subset_taxa(merged_metagenomes, Kingdom == "Archaea")
+sample_sums(merged_metagenomes_a) ##327
+##Viruses
+merged_metagenomes_v <- subset_taxa(merged_metagenomes, Kingdom == "Viruses")
+sample_sums(merged_metagenomes_v) ##15873
+##Renaming samples
+sample_names(merged_metagenomes_b) <- "bacteria"
+sample_names(merged_metagenomes_e) <- "eukaryote"
+sample_names(merged_metagenomes_a) <- "archea"
+sample_names(merged_metagenomes_v) <- "virus"
+```
+
+
+```{r}
+# collect kingdoms separately in data frames
+data_b <- data.frame(Samples = sample_names(merged_metagenomes_b),
+                   Reads = sample_sums(merged_metagenomes_b))
+
+data_e <- data.frame(Samples = sample_names(merged_metagenomes_e),
+                   Reads = sample_sums(merged_metagenomes_e))
+
+data_a <- data.frame(Samples = sample_names(merged_metagenomes_a),
+                   Reads = sample_sums(merged_metagenomes_a))
+
+data_v <- data.frame(Samples = sample_names(merged_metagenomes_v),
+                   Reads = sample_sums(merged_metagenomes_v))
+
+# merge kingdom data in to one data frame
+data_t <- rbind(data_b, data_e, data_a, data_v)
+```
+
+
+```{r}
+# plot number of reads per kingdom
+ggplot(data = data_t, mapping = aes(x = Samples, y = Reads, fill = Samples )) +
+  geom_col() +
+  theme_classic() +
+  ggtitle("Read count per kingdom") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(axis.text.x=element_text(angle=45, hjust=1))
+```
+
+
+```{r}
+# reload the biom data, edit column headers and sample name
+merged_metagenomes <- import_biom(data)
+merged_metagenomes@tax_table@.Data <- substring(merged_metagenomes@tax_table@.Data, 4)
+colnames(merged_metagenomes@tax_table@.Data)<- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+colnames(merged_metagenomes@otu_table) <- c("mock1")
+
+# check empty labels (empty = TRUE)
+summary(merged_metagenomes@tax_table@.Data== "")
+```
+
+
+```{r}
+# transform data frame for plotting
+glom <- tax_glom(merged_metagenomes, taxrank = "Species")
+mock1_metagenome_species <- psmelt(glom)
+
+# combine genus and species label for scientific naming in plot
+mock1_metagenome_species$Species <- as.character(mock1_metagenome_species$Species)
+mock1_metagenome_species$Species <- paste(mock1_metagenome_species[,]$Genus,mock1_metagenome_species[,]$Species,  sep=" ", collapse=NULL)
+# check label manipulation
+#unique(mock1_metagenome_species$Species)
+##Plotting the species
+id_species <- ggplot(data=mock1_metagenome_species, aes(x=Sample, y=Abundance, fill=Species))+ 
+  geom_bar(aes(), stat="identity", position="stack")
+id_species
+##Soorten met een lage readcount bij elkaar groepen
+mock1_metagenome_species$Species[mock1_metagenome_species$Abundance < 160000] <- "Species < 160.000 abund."
+#Nieuw plotje
+id_species <- ggplot(data=mock1_metagenome_species, aes(x=Sample, y=Abundance, fill=Species))+ 
+  geom_bar(aes(), stat="identity", position="stack")
+id_species
+```
+
+
+```{r }
+# transform read count to percentages
+glom <- tax_glom(merged_metagenomes, taxrank = "Species")
+mock1_metagenome_species_percent <- psmelt(glom)
+# normalize read counts to percentages
+mock1_metagenome_species_percent$Abundance <- (mock1_metagenome_species_percent$Abundance*100)/sum(mock1_metagenome_species_percent$Abundance)
+
+# combine genus and species label for scientific naming in plot
+mock1_metagenome_species_percent$Species <- as.character(mock1_metagenome_species_percent$Species)
+mock1_metagenome_species_percent$Species <- paste(mock1_metagenome_species_percent[,]$Genus,mock1_metagenome_species_percent[,]$Species,  sep=" ", collapse=NULL)
+mock1_metagenome_species_percent$Species[mock1_metagenome_species_percent$Abundance < 0.5] <- "Species < 0.5% abund."
+#unique(mock1_metagenome_species_percent$Species)
+##Nieuw plotje
+id_species_percent <- ggplot(data=mock1_metagenome_species_percent, aes(x=Sample, y=Abundance, fill=Species))+ 
+  geom_bar(aes(), stat="identity", position="stack")
+# plot species identification
+grid.arrange(id_species, id_species_percent, ncol=2, top=textGrob("Identified species and their corresponding abundance\nread count (right) and percentage (left)\n", gp=gpar(fontsize=15,font=8)))
+```
+
+
+```{r}
+# collect composition information
+mock1_composition <- as.data.frame(read.csv('/home/daur2/metagenomics/reader_data/HU_waternet_MOCK1_composition.csv', row.names=1, sep = ";"))
+mock1_composition$amount.. <- as.numeric(gsub(",", ".", mock1_composition$amount..))
+colnames(mock1_composition) <- c( "name","amount","amountP","sample_name","total_volume")
+# intersect data bases to collect overlap between composition and `kraken2` results
+mock1_and_composition_intersect <- mock1_metagenome_species_percent[mock1_metagenome_species_percent$Species %in% mock1_composition$name,]
+
+# collect species that are in composition and not in `kraken2` results
+`%!in%` <- Negate(`%in%`) # allow not in = !in
+comp_not_in_mock1 <- mock1_composition[mock1_composition$name %!in% mock1_metagenome_species_percent$Species,]
+
+# generate a list of species overlap between mock1 and composition
+unique(mock1_and_composition_intersect$Species)
+
+# generate a list of species that are from composition and not in mock1
+unique(comp_not_in_mock1$name)
+
+# compare labels between `kraken2` subset and composition and store percent values when labels are identical
+mock1_and_composition_intersect$amountP <- NA
+for (m1_label in mock1_and_composition_intersect$Species){
+  for (m1c_label in mock1_composition$name){
+    if(m1_label == m1c_label){
+      mock1_and_composition_intersect$amountP[mock1_and_composition_intersect$Species == m1_label] <- mock1_composition$amountP[mock1_composition$name == m1c_label]
+    }
+  }
+}
+
+# collect plotting info and pretify layout format
+#colnames(mock1_and_composition_intersect)
+mock1_and_comp_plotting_data           <- mock1_and_composition_intersect[,c(10,3,11)]
+colnames(mock1_and_comp_plotting_data) <- c("species", "k_abundance", "c_abundance")
+
+mock1_and_comp_plotting_data       <- melt(mock1_and_comp_plotting_data, id.var = "species")
+mock1_and_comp_plotting_data$value <- as.numeric(mock1_and_comp_plotting_data$value)
+
+##Laatste plot
+ggplot(mock1_and_comp_plotting_data, aes(x = species, y = value, fill = variable)) + 
+  geom_bar(aes(), stat="identity", position="dodge") +
+  theme_classic() +
+  ylab("Abundance (%)") +
+  xlab("") +
+  ggtitle("Abundance comparison between Kraken2 results and composition") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  ylim(0,25) +
+  theme(axis.text.x = element_text(angle = -45, hjust = 0, vjust = 1)) +
+  scale_fill_manual(values=c("skyblue", "orangered"))
+```
+

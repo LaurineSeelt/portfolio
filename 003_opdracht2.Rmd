@@ -12,3 +12,21 @@ link-citations: yes
 
 _This was the third assignment for our portfolio._
 
+```{r setup3, include=FALSE}
+library(tidyverse)
+library(fs)
+```
+
+```{r, include=FALSE}
+dir_info(recursive = TRUE) %>%
+  filter(type == "file", permissions == "u+r", size > "10KB") %>%
+  arrange(desc(size)) %>%
+  select(path, permissions, size, modification_time)
+```
+
+```{r, message=FALSE, warning=FALSE}
+dir_info(recursive = TRUE) %>%
+  group_by(directory = path_dir(path)) %>%
+  tally(wt = size, sort = TRUE)
+```
+

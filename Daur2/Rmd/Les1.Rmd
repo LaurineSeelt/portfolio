@@ -1,0 +1,34 @@
+---
+title: "Les1"
+author: "Laurine Seelt"
+date: "31-3-2022"
+output: html_document
+---
+
+```{bash opdracht 1.4}
+for id in $(cat sraid.txt)
+do
+fastq-dump --split-3 --outdir '/home/daur2/rnaseq_airway/fastq/.' --gzip $id
+done
+```
+
+
+
+```{r set up, include=FALSE}
+library(tidyverse)
+```
+
+
+```{r opdracht 1.8}
+alignment <- readRDS("/home/daur2/rnaseq/rnaseq_airway/bam/alignment_statistics.rds")
+alignment_2 <- alignment %>% t %>% as_tibble() %>% mutate(bamfile = colnames(alignment)) %>%
+  mutate(perc_unique_mapped = Uniquely_mapped_fragments / Total_fragments * 100)
+alignment_2 %>% ggplot(aes(x = bamfile, y = perc_unique_mapped))+
+  geom_col()+
+  ggtitle("Proportion of uniquely mapped fragments for each samples")+
+  xlab("RNA-seq sample")+
+  ylab("Percentage of uniquely mapped fragments")+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle=90))+
+  coord_cartesian(ylim=c(0,100))
+```

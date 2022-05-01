@@ -1,0 +1,238 @@
+---
+title: "Eindopdracht"
+author: "Laurine Seelt"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(Rsubread)
+library(DESeq2)
+library(pheatmap)
+library(org.Hs.eg.db)
+library(GOstats)
+```
+
+_Introductie_
+In dit onderzoek zijn er fibroblasten, oftewel huidcellen, uit één proefpersoon gehaald. Een deel van deze fibroblasten is behandeld met een controle transcriptiefactor, BCLXL. Het andere deel is behandeld met de transcriptiefactor ONECUT3, waarvan men vermoedt dat het ervoor zorgt dat fibroblasten worden omgezet in hersencellen. Na behandeling met een van deze transcriptiefactoren is er naar de genexpressie van de cellen gekeken. Om dit te bekijken, zijn van beide groepen RNA-sequencing datasets gegenereerd.
+
+_FastQC bestanden_
+! screenshot(s) !
+Bij alle 4 de samples is te zien dat de meeste basen bij de per base sequence quality in het groene of gele gebied zitten. Dat betekent dat deze reads van (vrij) hoge kwaliteit zijn, en dus betrouwbaar genoeg zijn om verder te analyseren. Bij sommige samples zitten er wat meer reads in het gele of zelfs rode gebied, maar ook bij die samples is de per sequence quality score nog erg hoog, boven de 30, dus deze samples zijn dan nog steeds van hoog genoege kwaliteit om te kunnen analyseren.
+Voor alle 4 de samples is ook te zien dat bij de per sequence quality scores er een vrij duidelijke piek is aan de rechter kant. Dat betekent dat de meeste samples een hoge phred score hebben, en dus van hoge kwaliteit zijn en dat ze dus geschikt zijn om verder te analyseren.
+
+_Count table_
+```{r, eval=FALSE}
+##Input directory maken voor de bam files
+bam_directory <- "/home/daur2/rnaseq/rnaseq_onecut/bam/"
+##Output directory maken voor de count tables
+counts_directory <- "/home/daur2/rnaseq/rnaseq_onecut/counts/"
+##Vector met de namen van de bam files maken
+bam_names <- list.files(bam_directory, pattern = ".*[9056]\\.bam$", full.names = TRUE)
+##Reads per gen tellen met de NCBI ref-seq annotations
+read_counts_OC3 <- featureCounts(
+  files = bam_names,
+  annot.inbuilt = "hg38",
+  useMetaFeatures = TRUE, ##fragmenten per gen tellen en niet per transcript
+  strandSpecific = 1, ##stranded protocol
+  isPairedEnd = TRUE, 
+  countReadPairs = TRUE, ##fragmenten tellen ipv reads
+  nthreads = 10)
+```
+
+
+_DESeq object_
+```{r, message=FALSE, warning=FALSE}
+##Eerst een count matrix maken
+read_counts_OC3 <- readRDS("/home/daur2/rnaseq/rnaseq_onecut/counts/read_counts_OC3.rds")
+count_matrix_OC3 <- read_counts_OC3$counts
+##Sample data inlezen
+metadata_OC3 <- read_csv("/home/daur2/rnaseq/rnaseq_onecut/onecut_sampledata_OC3.csv")
+##Metadata omzetten naar een dataframe
+metadata_OC3 <- as.data.frame(metadata_OC3)
+##Rij namen veranderen
+rownames(metadata_OC3) <- paste0(metadata_OC3$Run, ".bam")
+##Controleren of de kolomnamen hetzelfde zijn in de count matrix als de rijnamen bij de metadata
+colnames(count_matrix_OC3) == rownames(metadata_OC3)
+##Kolom omzetten naar factor omdat dat nodig is om een DESeq object te maken
+metadata_OC3$Cell_type <- metadata_OC3$Cell_type %>% factor(levels = c("Skin derived fibroblast overexpressing Bclxl", "2 days after induction of OC3 in skin derived fibroblasts"))
+##DESeqDataSet object maken
+dds_OC3 <- DESeqDataSetFromMatrix(
+  countData = count_matrix_OC3,
+  colData = metadata_OC3, 
+  design = ~ Cell_type)
+```
+
+
+_Staafdiagram met de percentages variatie per Principal Component_
+```{r, message=FALSE, warning=FALSE}
+##Eerst de read counts normaliseren om de verschillen kleiner te maken
+dds_OC3_normalized <- rlog(dds_OC3)
+##PCA
+pca_OC3 <- dds_OC3_normalized %>% assay() %>% t() %>% prcomp()
+##Bekijken welk deel van de variatie door elke PC wordt verklaard
+pca_OC3_summary <- summary(pca_OC3)$importance
+pca_OC3_summary
+##Dataframe maken met de metadata en de PCA waarden
+pca_OC3_plotting <- cbind(metadata_OC3, pca_OC3$x)
+##Percentages variatie per PC verkrijgen
+PC1_OC3_var <- round(pca_OC3_summary["Proportion of Variance", "PC1"]*100, digits = 1)
+PC2_OC3_var <- round(pca_OC3_summary["Proportion of Variance", "PC2"]*100, digits = 1)
+PC3_OC3_var <- round(pca_OC3_summary["Proportion of Variance", "PC3"]*100, digits = 1)
+PC4_OC3_var <- round(pca_OC3_summary["Proportion of Variance", "PC4"]*100, digits = 1)
+##Tibble maken met de percentages
+percentages <- tibble(pc = c("PC1", "PC2", "PC3", "PC4"), percentage = c(PC1_OC3_var, PC2_OC3_var, PC3_OC3_var, PC4_OC3_var))
+##Staafdiagram maken met de percentages
+percentages %>% ggplot(aes(x=pc, y = percentage, fill = pc))+
+  geom_col()+
+  theme_classic()+
+  theme(legend.position = "none")+
+  labs(title = "Percentage variatie per Principal Component",
+       x = "Principal Component",
+       y = "Percentage")
+```
+
+
+_PC1 vs. PC2_
+```{r, message=FALSE, warning=FALSE}
+ggplot(pca_OC3_plotting) + 
+  geom_point(aes(x=PC1, y=PC2, shape = Cell_type, color = Cell_type), size = 5) +
+  ggtitle("PCA for one cut study") +
+  xlab(paste0("PC1 (", PC1_OC3_var, "%)")) +
+  ylab(paste0("PC2 (", PC2_OC3_var, "%)")) +
+  theme_bw()
+```
+
+Bijna alle variatie kan worden samengevat in PC1, ruim 92%. Ook is te zien in de PCA dat de 2 behandelde samples qua variatie erg dicht bij elkaar liggen, terwijl de 2 onbehandelde samples ver(der) uit elkaar liggen. Ook is er in de PCA te zien dat er horizontaal erg veel afstand is tussen de 2 behandelde en onbehandelde samples. PC1 zit op de horizontale as, dus dit geeft aan dat er een (erg) groot verschil is tussen de samples als je iig kijkt naar PC1.
+
+_DGE analyse_
+```{r, message=FALSE, warning=FALSE}
+OC3_dge <- DESeq(dds_OC3)
+OC3_dge_results <- results(OC3_dge, alpha = 0.05, lfcThreshold = 1) ##alleen genen die 2 of meer keer upgereguleerd of downgereguleerd zijn
+summary(OC3_dge_results)
+```
+
+_Volcano plot_
+```{r, message=FALSE, warning=FALSE}
+##NA-waarden eruit halen
+OC3_dge_plotting <- data.frame(OC3_dge_results) %>% filter(!is.na(padj))
+##Kolom maken die aangeeft of het gen differentiëel tot expressie komt
+OC3_dge_plotting <- OC3_dge_plotting %>% mutate(signif = if_else((padj < 0.01 & log2FoldChange > 1|padj < 0.01 & log2FoldChange<as.numeric(-1)), "Significant", "Not significant"))
+##Volcano plot maken
+OC3_dge_plotting %>%  ggplot(aes(x = log2FoldChange, y = -log10(padj), color = signif)) +
+  geom_point() + 
+  xlab("log2 fold change") +
+  ylab("-log10 adjusted p-value") + 
+  theme_bw() +
+  scale_colour_manual(values = c("grey", "darkorange"), name = "Significance") +
+   geom_hline(yintercept = -log10(0.01), linetype = "dashed") +
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  geom_vline(xintercept = -1, linetype = "dashed") +
+  annotate("text", x=10, y=275, label="841 genen\nupgereguleerd", color="darkorange", size=3)+
+  annotate("text", x=-7, y=275, label="758 genen \ndowngereguleerd", color="darkorange", size=3)
+```
+
+
+_Heatmap_
+```{r, message=FALSE, warning=FALSE}
+##Resultaten filteren op p-waarde van 0.01
+OC3_dge_results_0.01 <- OC3_dge_results %>% data.frame() %>% filter(padj<0.01)
+##5 meest upgereguleerde en downgereguleerde genen verkrijgen
+up_down_regulated_5 <- c(rownames(OC3_dge_results_0.01[order(OC3_dge_results_0.01$log2FoldChange, decreasing = TRUE)[1:5],]),rownames(OC3_dge_results_0.01[order(OC3_dge_results_0.01$log2FoldChange)[1:5],]))
+count_values_OC3 <- assay(dds_OC3)[up_down_regulated_5,]
+##Kolomnamen veranderen
+colnames(count_values_OC3) <- c("BCLXL", "BCLXL", "ONECUT3", "ONECUT3")
+#Rijnamen veranderen naar de symbolen
+rownames(count_values_OC3) <- mapIds(org.Hs.eg.db, 
+                                     keys = up_down_regulated_5, 
+                                     keytype = "ENTREZID",
+                                     column = "SYMBOL",
+                                     multiVals = "first")
+pheatmap(count_values_OC3, scale = "row", show_rownames = TRUE, cluster_cols = FALSE)
+```
+
+
+_Functie_
+```{r, message=FALSE, warning=FALSE}
+GOidToSymbol <- function(GOid){
+  IDs <- as.vector(mapIds(org.Hs.eg.db, keys = GOid, keytype = "GO", column = "SYMBOL", multiVals = "CharacterList"))
+  return(IDs)
+}
+```
+
+
+_GO term enrichment analyse upgereguleerde genen_
+```{r, message=FALSE, warning=FALSE}
+##Lijst maken met upgereguleerde genen
+upregulated_genes_OC3 <- OC3_dge_results %>% data.frame() %>% 
+  filter(log2FoldChange > 1, padj < 0.01) %>% rownames()
+##Lijst van alle genen in de dataset maken
+all_genes_OC3 <- OC3_dge_results %>% data.frame() %>% rownames()
+##GO term enrichment analysis uitvoeren
+test_object_high <- new("GOHyperGParams",
+                   geneIds = upregulated_genes_OC3,
+                   universeGeneIds = all_genes_OC3, 
+                   annotation = "org.Hs.eg.db", 
+                   ontology = "BP", 
+                   pvalueCutoff = 1,
+                   testDirection = "over")
+goterm_analysis_high <- hyperGTest(test_object_high)
+##Dataframe met de resultaten maken
+goterm_analysis_high_results <- summary(goterm_analysis_high)
+##P-waarde aanpassen voor meerdere testen
+goterm_analysis_high_results$padj <- p.adjust(goterm_analysis_high_results$Pvalue, method = "BH")
+##Genen selecteren die langer zijn dan 5 en korter dan 500
+goterm_analysis_high_results <- goterm_analysis_high_results %>% filter(Count > 5) %>% filter(Count < 500)
+##Top 20 genen verkrijgen
+goterm_analysis_high_top20 <- goterm_analysis_high_results[order(goterm_analysis_high_results$padj)[1:20],]
+##Plotje maken
+goterm_analysis_high_top20$Term <- factor(goterm_analysis_high_top20$Term, 
+                                     levels = goterm_analysis_high_top20$Term[
+                                       order(goterm_analysis_high_top20$padj, decreasing = TRUE)])
+goterm_analysis_high_top20 %>% ggplot(aes(x = Term, y = -log10(padj))) +
+  geom_point() +
+  coord_flip() +
+  ylab(expression(-log[10](adjusted~italic(P)~value))) + 
+  xlab("GO terms") +
+  ggtitle("Top 20 enriched GO terms\n for upregulated genes") +
+  theme_bw()
+```
+
+
+_GO term enrichment analyse voor downgereguleerde genen_
+```{r, message=FALSE, warning=FALSE}
+##Lijst maken met downgereguleerde genen
+downregulated_genes_OC3 <- OC3_dge_results %>% data.frame() %>% filter(log2FoldChange < -1, padj < 0.01) %>% row.names()
+##Lijst van alle genen in de dataset maken
+all_genes_OC3 <- OC3_dge_results %>% data.frame() %>% rownames()
+##GO term enrichment analyse uitvoeren
+test_object_low <- new("GOHyperGParams",
+                   geneIds = downregulated_genes_OC3,
+                   universeGeneIds = all_genes_OC3, 
+                   annotation = "org.Hs.eg.db", 
+                   ontology = "BP", 
+                   pvalueCutoff = 1,
+                   testDirection = "over")
+goterm_analysis_low <- hyperGTest(test_object_low)
+##Dataframe met de resultaten verkrijgen
+goterm_analysis_low_results <- summary(goterm_analysis_low)
+##P-waarde aanpassen voor meerdere testen
+goterm_analysis_low_results$padj <- p.adjust(goterm_analysis_low_results$Pvalue, method = "BH")
+##Genen selecteren die langer zijn dan 5 en korter dan 500
+goterm_analysis_low_results <- goterm_analysis_low_results %>% filter(Count > 5) %>% filter(Count < 500)
+##Top 20 GO terms selecteren
+goterm_analysis_low_top20 <- goterm_analysis_low_results[order(goterm_analysis_low_results$padj)[1:20],]
+##Plotje :)
+goterm_analysis_low_top20$Term <- factor(goterm_analysis_low_top20$Term, 
+                                     levels = goterm_analysis_low_top20$Term[
+                                       order(goterm_analysis_low_top20$padj, decreasing = TRUE)])
+goterm_analysis_low_top20 %>% ggplot(aes(x = Term, y = -log10(padj))) +
+  geom_point() +
+  coord_flip() +
+  ylab(expression(-log[10](adjusted~italic(P)~value))) + 
+  xlab("GO terms") +
+  ggtitle("Top 20 enriched GO terms\n for downregulated genes") +
+  theme_bw()
+```
+
