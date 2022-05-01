@@ -56,6 +56,8 @@ Link naar mogelijk artikel: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7526661
 
 Link naar ander mogelijk artikel: https://osf.io/9b8hv/ https://osf.io/pzbgy/ https://osf.io/aqycd/ 
 
+The code is very readable, 4.
+
 __Recreating figure 1A__
 ```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -132,5 +134,5 @@ Hypothesis_prop3 <- d %>%
 
 The researchers of this paper looked at 159 papers from conservation/applied ecology/wildife journals. This figure displays the amount of papers that had either a clearly stated hypothesis or not.
 
-The code was very easy to reproduce, 5.
+Reproducibility of the code: 5. It was very easy, I barely needed to change anything before I got the pretty graph :)
 
