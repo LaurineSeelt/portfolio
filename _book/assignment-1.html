@@ -182,18 +182,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>This was the first assignment for our portfolio.</em></p>
 <div id="a" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> A<a href="assignment-1.html#a" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="assignment-1.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(<span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span></code></pre></div>
 </div>
 <div id="b" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> B<a href="assignment-1.html#b" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="assignment-1.html#cb1-1" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="assignment-1.html#cb2-1" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span></code></pre></div>
 </div>
 <div id="c" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> C<a href="assignment-1.html#c" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="assignment-1.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Tidydata<span class="sc">$</span>RawData)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="assignment-1.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Tidydata<span class="sc">$</span>RawData)</span></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="assignment-1.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Tidydata<span class="sc">$</span>compName)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="assignment-1.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Tidydata<span class="sc">$</span>compName)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="assignment-1.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Tidydata<span class="sc">$</span>compConcentration)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="assignment-1.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Tidydata<span class="sc">$</span>compConcentration)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>RawData is double, dat is te begrijpen, het zijn getallen.
 CompName is een character, dat is ook te begrijpen. In die kolom staan de namen van de stofjes die zijn gebruikt.
@@ -201,8 +202,8 @@ CompConcentration is een character, wat wel apart is. In die kolom staan de conc
 </div>
 <div id="d" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> D<a href="assignment-1.html#d" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="assignment-1.html#cb8-1" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> compConcentration, <span class="at">y =</span> RawData, <span class="at">colour =</span> compName, <span class="at">shape =</span> expType)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="assignment-1.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="assignment-1.html#cb9-1" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> compConcentration, <span class="at">y =</span> RawData, <span class="at">colour =</span> compName, <span class="at">shape =</span> expType)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="assignment-1.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/creating%20a%20scatter%20plot-1.png" width="672" /></p>
 </div>
 <div id="e" class="section level2 hasAnchor" number="2.5">
@@ -211,13 +212,10 @@ CompConcentration is een character, wat wel apart is. In die kolom staan de conc
 </div>
 <div id="f" class="section level2 hasAnchor" number="2.6">
 <h2><span class="header-section-number">2.6</span> F<a href="assignment-1.html#f" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="assignment-1.html#cb9-1" aria-hidden="true" tabindex="-1"></a>Tidydata<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Tidydata<span class="sc">$</span>compConcentration)</span></code></pre></div>
-<pre><code>## Warning: NAs introduced by coercion</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="assignment-1.html#cb11-1" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> (<span class="fu">log10</span>(compConcentration <span class="sc">+</span> <span class="fl">0.001</span>)), <span class="at">y =</span> RawData, <span class="at">colour =</span> compName, <span class="at">shape =</span> expType)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="assignment-1.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb11-3"><a href="assignment-1.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="fl">0.2</span>))</span></code></pre></div>
-<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="assignment-1.html#cb10-1" aria-hidden="true" tabindex="-1"></a>Tidydata<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Tidydata<span class="sc">$</span>compConcentration)</span>
+<span id="cb10-2"><a href="assignment-1.html#cb10-2" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> (<span class="fu">log10</span>(compConcentration <span class="sc">+</span> <span class="fl">0.001</span>)), <span class="at">y =</span> RawData, <span class="at">colour =</span> compName, <span class="at">shape =</span> expType)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="assignment-1.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-4"><a href="assignment-1.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="fl">0.2</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/correcting%20the%20data%20and%20making%20a%20new%20scatter%20plot-1.png" width="672" /></p>
 </div>
 <div id="g" class="section level2 hasAnchor" number="2.7">
@@ -239,16 +237,16 @@ Dus
 </div>
 <div id="j" class="section level2 hasAnchor" number="2.10">
 <h2><span class="header-section-number">2.10</span> J<a href="assignment-1.html#j" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="assignment-1.html#cb14-1" aria-hidden="true" tabindex="-1"></a>Tidydata<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Tidydata<span class="sc">$</span>compConcentration)</span>
-<span id="cb14-2"><a href="assignment-1.html#cb14-2" aria-hidden="true" tabindex="-1"></a>Tibble_mean <span class="ot">&lt;-</span> Tidydata <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(compName, compConcentration) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(RawData, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb14-3"><a href="assignment-1.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Het gemiddelde van de negatieve controle, S-medium, is 85,9. Dat is dus de waarde waar de andere gemiddelden voor genormaliseerd moeten worden.</span></span>
-<span id="cb14-4"><a href="assignment-1.html#cb14-4" aria-hidden="true" tabindex="-1"></a>Tibble_mean <span class="ot">&lt;-</span> Tibble_mean <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">mean_norm =</span> mean <span class="sc">/</span> <span class="fl">85.9</span>)</span>
-<span id="cb14-5"><a href="assignment-1.html#cb14-5" aria-hidden="true" tabindex="-1"></a>Tibble_mean <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> (<span class="fu">log10</span>(compConcentration <span class="sc">+</span> <span class="fl">0.001</span>)), <span class="at">y =</span> mean_norm, <span class="at">colour =</span> compName, <span class="at">shape =</span> compName)) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="assignment-1.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb14-7"><a href="assignment-1.html#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb14-8"><a href="assignment-1.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;The effect of different compounds on the amount of offspring&quot;</span>,</span>
-<span id="cb14-9"><a href="assignment-1.html#cb14-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Compound concentration (log10 + 0.001)&quot;</span>,</span>
-<span id="cb14-10"><a href="assignment-1.html#cb14-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Mean offspring, normalised&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="assignment-1.html#cb11-1" aria-hidden="true" tabindex="-1"></a>Tidydata<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Tidydata<span class="sc">$</span>compConcentration)</span>
+<span id="cb11-2"><a href="assignment-1.html#cb11-2" aria-hidden="true" tabindex="-1"></a>Tibble_mean <span class="ot">&lt;-</span> Tidydata <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(compName, compConcentration) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(RawData, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb11-3"><a href="assignment-1.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Het gemiddelde van de negatieve controle, S-medium, is 85,9. Dat is dus de waarde waar de andere gemiddelden voor genormaliseerd moeten worden.</span></span>
+<span id="cb11-4"><a href="assignment-1.html#cb11-4" aria-hidden="true" tabindex="-1"></a>Tibble_mean <span class="ot">&lt;-</span> Tibble_mean <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">mean_norm =</span> mean <span class="sc">/</span> <span class="fl">85.9</span>)</span>
+<span id="cb11-5"><a href="assignment-1.html#cb11-5" aria-hidden="true" tabindex="-1"></a>Tibble_mean <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> (<span class="fu">log10</span>(compConcentration <span class="sc">+</span> <span class="fl">0.001</span>)), <span class="at">y =</span> mean_norm, <span class="at">colour =</span> compName, <span class="at">shape =</span> compName)) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="assignment-1.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-7"><a href="assignment-1.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb11-8"><a href="assignment-1.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;The effect of different compounds on the amount of offspring&quot;</span>,</span>
+<span id="cb11-9"><a href="assignment-1.html#cb11-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Compound concentration (log10 + 0.001)&quot;</span>,</span>
+<span id="cb11-10"><a href="assignment-1.html#cb11-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Mean offspring, normalised&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/normalising%20the%20data%20for%20the%20negative%20control-1.png" width="672" /></p>
 </div>
 <div id="k" class="section level2 hasAnchor" number="2.11">

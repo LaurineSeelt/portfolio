@@ -19,6 +19,9 @@ library(here)
 ```
 
 ## A
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+View(here("Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx"))
+```
 
 ## B
 ```{r, importing an excel file}
@@ -37,7 +40,7 @@ CompName is een character, dat is ook te begrijpen. In die kolom staan de namen 
 CompConcentration is een character, wat wel apart is. In die kolom staan de concentraties van de gebruikte stofjes, dus je zou verwachten dat dit een numerieke kolom zou zijn.
 
 ## D
-```{r, creating a scatter plot, warning=FALSE}
+```{r, creating a scatter plot, warning=FALSE, message=FALSE}
 Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, shape = expType)) +
   geom_point()
 ```
@@ -46,7 +49,7 @@ Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, s
 De getallen worden geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit.
 
 ## F
-```{r, correcting the data and making a new scatter plot}
+```{r, correcting the data and making a new scatter plot, message=FALSE, warning=FALSE}
 Tidydata$compConcentration <- as.numeric(Tidydata$compConcentration)
 Tidydata %>% ggplot(aes(x = (log10(compConcentration + 0.001)), y = RawData, colour = compName, shape = expType)) +
   geom_point() +

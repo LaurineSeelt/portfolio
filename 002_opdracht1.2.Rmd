@@ -52,7 +52,7 @@ Next, this study looked at the difference in immune response to the Yellow Fever
 
 ## Part 2
 
-Link naar artikel: https://osf.io/aqycd/ 
+Link to the study: https://osf.io/aqycd/ 
 
 The code is very readable, 4.
 
