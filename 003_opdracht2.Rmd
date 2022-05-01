@@ -25,8 +25,8 @@ dir_info(recurse = TRUE) %>%
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-dir_info(recurse = TRUE) %>%
+dir_ls(regexp = "Daur2") %>% dir_info(recurse = TRUE) %>%
   group_by(directory = path_dir(path)) %>%
-  tally(wt = size, sort = TRUE)
+  tally(wt = NULL, sort = TRUE) ##wt kan ook size zijn, maar nog niet uit.
 ```
 

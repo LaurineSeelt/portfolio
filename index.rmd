@@ -13,8 +13,8 @@ description: "This is the bookdown for my DSFB2 portfolio"
 
 # Introduction
 
-## This is the introduction to the portfolio of Laurine Seelt
+This is the introduction to the portfolio of Laurine Seelt.
 
-### She worked really hard on this
+She worked really hard on this.
 
-### Please be kind to them :')
+Please be kind to them :')
