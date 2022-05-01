@@ -10,22 +10,22 @@ link-citations: yes
 
 # Assignment 3
 
-_This was the third assignment for our portfolio._
+## This was the third assignment for our portfolio.
 
 ```{r setup3, include=FALSE}
 library(tidyverse)
 library(fs)
 ```
 
-```{r, include=FALSE}
-dir_info(recursive = TRUE) %>%
-  filter(type == "file", permissions == "u+r", size > "10KB") %>%
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+dir_info(recurse = TRUE) %>%
+  filter(type == "file", permissions == "u+r", size > "100KB") %>% ##not sure abt size
   arrange(desc(size)) %>%
   select(path, permissions, size, modification_time)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-dir_info(recursive = TRUE) %>%
+dir_info(recurse = TRUE) %>%
   group_by(directory = path_dir(path)) %>%
   tally(wt = size, sort = TRUE)
 ```

@@ -10,7 +10,7 @@ link-citations: yes
 
 # Assignment 1
 
-_This was the first assignment for our portfolio._
+## This was the first assignment for our portfolio.
 
 ```{r setup1, include=FALSE}
 library(tidyverse)
@@ -18,17 +18,17 @@ library(readxl)
 library(here)
 ```
 
-## A
+### A
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 View(here("Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 ```
 
-## B
+### B
 ```{r, importing an excel file}
 Tidydata <- read_excel(here("Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 ```
 
-## C
+### C
 ```{r, inspecting columns}
 typeof(Tidydata$RawData)
 typeof(Tidydata$compName)
@@ -39,16 +39,16 @@ RawData is double, dat is te begrijpen, het zijn getallen.
 CompName is een character, dat is ook te begrijpen. In die kolom staan de namen van de stofjes die zijn gebruikt.
 CompConcentration is een character, wat wel apart is. In die kolom staan de concentraties van de gebruikte stofjes, dus je zou verwachten dat dit een numerieke kolom zou zijn.
 
-## D
+### D
 ```{r, creating a scatter plot, warning=FALSE, message=FALSE}
 Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, shape = expType)) +
   geom_point()
 ```
 
-## E
+### E
 De getallen worden geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit.
 
-## F
+### F
 ```{r, correcting the data and making a new scatter plot, message=FALSE, warning=FALSE}
 Tidydata$compConcentration <- as.numeric(Tidydata$compConcentration)
 Tidydata %>% ggplot(aes(x = (log10(compConcentration + 0.001)), y = RawData, colour = compName, shape = expType)) +
@@ -56,13 +56,13 @@ Tidydata %>% ggplot(aes(x = (log10(compConcentration + 0.001)), y = RawData, col
   geom_jitter(position = position_jitter(0.2))
 ```
 
-## G
-_C. Elegans_ die met Ethanol zijn behandeld.
+### G
+De positieve controle waren _C. Elegans_ die met Ethanol zijn behandeld.
 
-## H
-_C. Elegans_ die met S-medium zijn behandeld.
+### H
+De negatieve controle waren _C. Elegans_ die met S-medium zijn behandeld.
 
-## I
+### I
 Om te analyseren of verschillende concentraties effect hebben op de hoeveelheid nakomelingen, zou ik aparte tabellen maken per stof (en per concentratie?). Dan kan je het gemiddelde en de standaard deviatie per stof en per concentratie berekenen. Ook kan je dan per stof een ANOVA test uitvoeren, om te kijken of het effect significant is.
 Dus
 1. Aparte tabellen maken met de metingen per stof.
@@ -71,7 +71,7 @@ Dus
 
 Om te analyseren of de verschillende stoffen een andere curve/IC50 hebben, moet je per stof kijken naar het effect op de hoeveelheid nakomelingen. Daar kan je een grafiek van maken, met op de x-as de concentratie van de stof en op de y-as de hoeveelheid nakomelingen. Deze grafieken zou je bijvoorbeeld in hetzelfde assenstelsel kunnen plotten, om ze met elkaar te kunnen vergelijken.
 
-## J
+### J
 ```{r, normalising the data for the negative control, message=FALSE, warning=FALSE}
 Tidydata$compConcentration <- as.numeric(Tidydata$compConcentration)
 Tibble_mean <- Tidydata %>% group_by(compName, compConcentration) %>% summarize(mean = mean(RawData, na.rm = TRUE))
@@ -85,5 +85,5 @@ Tibble_mean %>% ggplot(aes(x = (log10(compConcentration + 0.001)), y = mean_norm
        y = "Mean offspring, normalised")
 ```
 
-## K
+### K
 Omdat je dan duidelijker het effect kan zien van de verschillende stoffen en verschillende concentraties. De grafiek is veel overzichtelijker op deze manier. Ook kan je duidelijk per stof en per concentratie het verschil zien met de negatieve controle.

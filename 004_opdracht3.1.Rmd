@@ -10,4 +10,4 @@ link-citations: yes
 
 # Assignment 4
 
-_This was the fourth assignment for our portfolio._
+## This was the fourth assignment for our portfolio.

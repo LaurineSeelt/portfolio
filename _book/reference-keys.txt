@@ -3,6 +3,7 @@ this-is-the-introduction-to-the-portfolio-of-laurine-seelt
 she-worked-really-hard-on-this
 please-be-kind-to-them
 assignment-1
+this-was-the-first-assignment-for-our-portfolio.
 a
 b
 c
@@ -15,7 +16,10 @@ i
 j
 k
 assignment-2
+this-was-the-second-assignment-for-our-portfolio.
 part-1
 part-2
 assignment-3
+this-was-the-third-assignment-for-our-portfolio.
 assignment-4
+this-was-the-fourth-assignment-for-our-portfolio.
