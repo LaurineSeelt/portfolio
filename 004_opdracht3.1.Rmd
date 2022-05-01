@@ -1,0 +1,13 @@
+---
+author: "Laurine Seelt"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+---
+
+# Assignment 4
+
+_This was the fourth assignment for our portfolio._
