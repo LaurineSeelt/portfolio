@@ -1,0 +1,17 @@
+---
+author: "Laurine Seelt"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+---
+
+# Assignment 5
+
+## This was the fifth assignment for our portfolio.
+
+- Uitzoeken welke automatiseringen er op microbiologische labs worden gebruikt.
+- Metagenomics? --> https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03933-4
+- Python?
