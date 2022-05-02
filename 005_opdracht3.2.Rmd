@@ -13,9 +13,17 @@ link-citations: yes
 ## This was the fifth assignment for our portfolio.
 
 - Uitzoeken welke automatiseringen er op microbiologische labs worden gebruikt.
-- Metagenomics? --> https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03933-4
-http://web.evolbio.mpg.de/~wang/Site/R_tutorial_files/16S%20Metagenomic%20Analysis%20Tutorial.pdf
-https://www.mcs.anl.gov/~braithwaite/matR/docs-and-pubs/matR-user-manual.pdf
+- Metagenomics? 
+https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03933-4 (megaR package)
+http://web.evolbio.mpg.de/~wang/Site/R_tutorial_files/16S%20Metagenomic%20Analysis%20Tutorial.pdf (random tutorial)
+https://www.mcs.anl.gov/~braithwaite/matR/docs-and-pubs/matR-user-manual.pdf (matR package)
+https://rpubs.com/jrandall7/EICC16s (phyloseq)
+https://cran.r-project.org/web/packages/microbial/microbial.pdf (microbial package)
+https://bioconductor.org/help/course-materials/2017/BioC2017/Day1/Workshops/Microbiome/MicrobiomeWorkflowII.html (aritkel over microbioom analyse workflow)
+
+https://www.nicholas-ollberding.com/post/introduction-to-the-statistical-analysis-of-microbiome-data-in-r/ (soort course over de analyse van microbioom data)
+https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html (ook een course over de analyse van microbiota data)
+https://grunwaldlab.github.io/analysis_of_microbiome_community_data_in_r/04--manipulating.html (nog een course)
 - Python?
 
 ```{r}
