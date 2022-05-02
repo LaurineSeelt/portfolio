@@ -14,4 +14,11 @@ link-citations: yes
 
 - Uitzoeken welke automatiseringen er op microbiologische labs worden gebruikt.
 - Metagenomics? --> https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03933-4
+http://web.evolbio.mpg.de/~wang/Site/R_tutorial_files/16S%20Metagenomic%20Analysis%20Tutorial.pdf
+https://www.mcs.anl.gov/~braithwaite/matR/docs-and-pubs/matR-user-manual.pdf
 - Python?
+
+```{r}
+
+```
+
