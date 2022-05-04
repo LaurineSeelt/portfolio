@@ -12,6 +12,10 @@ link-citations: yes
 
 ## This was the fifth assignment for our portfolio.
 
+We had/have to fill 32 hours learning something new that'll be useful for our internship next year and possibly our job.
+
+
+
 - Uitzoeken welke automatiseringen er op microbiologische labs worden gebruikt.
 - Metagenomics? 
 https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03933-4 (megaR package)
