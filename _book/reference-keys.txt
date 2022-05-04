@@ -22,3 +22,7 @@ assignment-4
 this-was-the-fourth-assignment-for-our-portfolio.
 assignment-5
 this-was-the-fifth-assignment-for-our-portfolio.
+assignment-6
+this-was-the-sixth-assignment-for-our-portfolio.
+assignment-7
+this-was-the-seventh-assignment-for-our-portfolio.

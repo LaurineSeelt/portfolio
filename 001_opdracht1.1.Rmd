@@ -35,8 +35,10 @@ typeof(Tidydata$compName)
 typeof(Tidydata$compConcentration)
 ```
 
-RawData is double, dat is te begrijpen, het zijn getallen.
+RawData is double, dat is te begrijpen, het zijn getallen. 
+<br>
 CompName is een character, dat is ook te begrijpen. In die kolom staan de namen van de stofjes die zijn gebruikt.
+<br>
 CompConcentration is een character, wat wel apart is. In die kolom staan de concentraties van de gebruikte stofjes, dus je zou verwachten dat dit een numerieke kolom zou zijn.
 
 ### D
@@ -64,9 +66,9 @@ De negatieve controle waren _C. Elegans_ die met S-medium zijn behandeld.
 
 ### I
 Om te analyseren of verschillende concentraties effect hebben op de hoeveelheid nakomelingen, zou ik aparte tabellen maken per stof (en per concentratie?). Dan kan je het gemiddelde en de standaard deviatie per stof en per concentratie berekenen. Ook kan je dan per stof een ANOVA test uitvoeren, om te kijken of het effect significant is.
-Dus
-1. Aparte tabellen maken met de metingen per stof.
-2. Het gemiddelde en de standaardeviatie berekenen voor elke concentratie van elke stof.
+Dus <br>
+1. Aparte tabellen maken met de metingen per stof. <br>
+2. Het gemiddelde en de standaardeviatie berekenen voor elke concentratie van elke stof. <br>
 3. Een ANOVA test uitvoeren voor elke stof om te kijken of er dus inderdaad significante verschillen zijn in effect tussen de concentraties.
 
 Om te analyseren of de verschillende stoffen een andere curve/IC50 hebben, moet je per stof kijken naar het effect op de hoeveelheid nakomelingen. Daar kan je een grafiek van maken, met op de x-as de concentratie van de stof en op de y-as de hoeveelheid nakomelingen. Deze grafieken zou je bijvoorbeeld in hetzelfde assenstelsel kunnen plotten, om ze met elkaar te kunnen vergelijken.
@@ -82,7 +84,7 @@ Tibble_mean %>% ggplot(aes(x = (log10(compConcentration + 0.001)), y = mean_norm
   geom_line()+
   labs(title = "The effect of different compounds on the amount of offspring",
        x = "Compound concentration (log10 + 0.001)",
-       y = "Mean offspring, normalised")
+       y = "Mean offspring, normalised for S-medium")
 ```
 
 ### K
