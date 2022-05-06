@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-04" />
+<meta name="date" content="2022-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -216,7 +216,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="assignment-1.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Tidydata<span class="sc">$</span>compConcentration)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>RawData is double, dat is te begrijpen, het zijn getallen.
+<br>
 CompName is een character, dat is ook te begrijpen. In die kolom staan de namen van de stofjes die zijn gebruikt.
+<br>
 CompConcentration is een character, wat wel apart is. In die kolom staan de concentraties van de gebruikte stofjes, dus je zou verwachten dat dit een numerieke kolom zou zijn.</p>
 </div>
 <div id="d" class="section level3 hasAnchor" number="2.1.4">
@@ -248,9 +250,9 @@ CompConcentration is een character, wat wel apart is. In die kolom staan de conc
 <div id="i" class="section level3 hasAnchor" number="2.1.9">
 <h3><span class="header-section-number">2.1.9</span> I<a href="assignment-1.html#i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Om te analyseren of verschillende concentraties effect hebben op de hoeveelheid nakomelingen, zou ik aparte tabellen maken per stof (en per concentratie?). Dan kan je het gemiddelde en de standaard deviatie per stof en per concentratie berekenen. Ook kan je dan per stof een ANOVA test uitvoeren, om te kijken of het effect significant is.
-Dus
-1. Aparte tabellen maken met de metingen per stof.
-2. Het gemiddelde en de standaardeviatie berekenen voor elke concentratie van elke stof.
+Dus <br>
+1. Aparte tabellen maken met de metingen per stof. <br>
+2. Het gemiddelde en de standaardeviatie berekenen voor elke concentratie van elke stof. <br>
 3. Een ANOVA test uitvoeren voor elke stof om te kijken of er dus inderdaad significante verschillen zijn in effect tussen de concentraties.</p>
 <p>Om te analyseren of de verschillende stoffen een andere curve/IC50 hebben, moet je per stof kijken naar het effect op de hoeveelheid nakomelingen. Daar kan je een grafiek van maken, met op de x-as de concentratie van de stof en op de y-as de hoeveelheid nakomelingen. Deze grafieken zou je bijvoorbeeld in hetzelfde assenstelsel kunnen plotten, om ze met elkaar te kunnen vergelijken.</p>
 </div>
@@ -265,7 +267,7 @@ Dus
 <span id="cb11-7"><a href="assignment-1.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
 <span id="cb11-8"><a href="assignment-1.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;The effect of different compounds on the amount of offspring&quot;</span>,</span>
 <span id="cb11-9"><a href="assignment-1.html#cb11-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Compound concentration (log10 + 0.001)&quot;</span>,</span>
-<span id="cb11-10"><a href="assignment-1.html#cb11-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Mean offspring, normalised&quot;</span>)</span></code></pre></div>
+<span id="cb11-10"><a href="assignment-1.html#cb11-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Mean offspring, normalised for S-medium&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/normalising%20the%20data%20for%20the%20negative%20control-1.png" width="672" /></p>
 </div>
 <div id="k" class="section level3 hasAnchor" number="2.1.11">
