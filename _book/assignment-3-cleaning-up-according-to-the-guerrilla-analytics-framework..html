@@ -180,19 +180,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework." class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Assignment 3: Cleaning up according to the Guerrilla analytics framework.<a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework..html#assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework." class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This was the third assignment for our portfolio. We had to apply the Guerrilla analytics framework to our DAUR2 folder.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework..html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir_ls</span>(<span class="at">regexp =</span> <span class="st">&quot;Daur2&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">dir_info</span>(<span class="at">recurse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework..html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">directory =</span> <span class="fu">path_dir</span>(path)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework..html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">wt =</span> <span class="cn">NULL</span>, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="do">##wt kan ook size zijn, maar nog niet uit.</span></span></code></pre></div>
-<pre><code>## # A tibble: 7 x 2
-##   directory                              n
-##   &lt;chr&gt;                              &lt;int&gt;
-## 1 Daur2/Data/Metagenomics               17
-## 2 Daur2/Rmd                             15
-## 3 Daur2                                  5
-## 4 Daur2/Data/Metagenomics/Supporting     4
-## 5 Daur2/Data                             2
-## 6 Daur2/Data/RNA_seq                     1
-## 7 Daur2/Data/RNA_seq/Data_raw            1</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework..html#cb13-1" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="at">path =</span> <span class="fu">here</span>(<span class="st">&quot;Daur2&quot;</span>), <span class="at">type =</span> <span class="st">&quot;directory&quot;</span>)</span></code></pre></div>
+<pre><code>## C:/Users/lautj/Documents/DSFB2/portfolio/Daur2
+## +-- Code
+## +-- Data
+## |   +-- Metagenomics
+## |   |   +-- Data_raw
+## |   |   \-- Supporting
+## |   \-- RNA_seq
+## |       \-- Data_raw
+## +-- R
+## \-- Rmd</code></pre>
 
 </div>
             </section>
