@@ -16,18 +16,10 @@ This was the third assignment for our portfolio. We had to apply the Guerrilla a
 library(tidyverse)
 # Install.packages("fs")
 library(fs)
+library(here)
 ```
 
-```{r, message=FALSE, warning=FALSE, include=FALSE}
-dir_info(recurse = TRUE) %>%
-  filter(type == "file", permissions == "u+r", size > "100KB") %>% ##not sure abt size
-  arrange(desc(size)) %>%
-  select(path, permissions, size, modification_time)
-```
-
-```{r, message=FALSE, warning=FALSE}
-dir_ls(regexp = "Daur2") %>% dir_info(recurse = TRUE) %>%
-  group_by(directory = path_dir(path)) %>%
-  tally(wt = NULL, sort = TRUE) ##wt kan ook size zijn, maar nog niet uit.
+```{r}
+fs::dir_tree(path = here("Daur2"), type = "directory")
 ```
 
