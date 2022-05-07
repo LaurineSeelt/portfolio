@@ -83,3 +83,36 @@ phyloseq::sample_data(ps)$Status <- factor(phyloseq::sample_data(ps)$Status, lev
 ps %>% sample_data %>% dplyr::count(Status)
 ```
 
+```{r}
+# Counting all the phyla in the dataset
+table(phyloseq::tax_table(ps)[, "Phylum"])
+# Convert the samples to relative abundances
+ps_rel_abund = phyloseq::transform_sample_counts(ps, function(x){x / sum(x)})
+phyloseq::otu_table(ps)[1:5, 1:5] # Before we converted it to relative abundances
+phyloseq::otu_table(ps_rel_abund)[1:5, 1:5] # After we calculated the relative abundances
+
+# Plotting the relative abundances, devided by the two groups
+phyloseq::plot_bar(ps_rel_abund, fill = "Phylum")+
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")+
+  labs(x = "", y = "Relative Abundance\n")+
+  facet_wrap(~ Status, scales = "free")+
+  theme(panel.background = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+```
+
+```{r extra, message=FALSE, warning=FALSE, eval=FALSE}
+# Sorting the taxa by their relative abundance
+sort(ps_rel_abund@tax_table[["Phylum"]], decreasing = TRUE) %>%  phyloseq::plot_bar(fill = "Phylum")+
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")+
+  labs(x = "", y = "Relative Abundance\n")+
+  facet_wrap(~ Status, scales = "free")+
+  theme(panel.background = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+```
+
+```{r}
+
+```
+
