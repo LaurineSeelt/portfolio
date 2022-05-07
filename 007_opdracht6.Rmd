@@ -10,5 +10,5 @@ link-citations: yes
 
 # Assignment 7
 
-This was the seventh assignment for our portfolio.
+This was the seventh assignment for our portfolio. We had to copy all our HTML's to a new repository and make it into pretty website.
 
