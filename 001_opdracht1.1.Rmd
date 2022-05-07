@@ -16,6 +16,7 @@ link-citations: yes
 library(tidyverse)
 library(readxl)
 library(here)
+library(timetk)
 ```
 
 ### A
@@ -43,12 +44,12 @@ CompConcentration is een character, wat wel apart is. In die kolom staan de conc
 
 ### D
 ```{r, creating a scatter plot, warning=FALSE, message=FALSE}
-Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, shape = expType)) +
+Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, shape = expType))+
   geom_point()
 ```
 
 ### E
-De getallen worden geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit.
+De getallen worden geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit. Er wordt niet 'rekening gehouden' met de machten.
 
 ### F
 ```{r, correcting the data and making a new scatter plot, message=FALSE, warning=FALSE}
