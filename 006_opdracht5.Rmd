@@ -10,5 +10,5 @@ link-citations: yes
 
 # Assignment 6
 
-## This was the sixth assignment for our portfolio.
+This was the sixth assignment for our portfolio.
 

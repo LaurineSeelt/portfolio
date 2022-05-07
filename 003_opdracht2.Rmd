@@ -8,9 +8,9 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 3
+# Assignment 3: Cleaning up according to the Guerrilla analytics framework.
 
-## This was the third assignment for our portfolio.
+This was the third assignment for our portfolio. We had to apply the Guerrilla analytics framework to our DAUR2 folder.
 
 ```{r setup3, include=FALSE}
 library(tidyverse)

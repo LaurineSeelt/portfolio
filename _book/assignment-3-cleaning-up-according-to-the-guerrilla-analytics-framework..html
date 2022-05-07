@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Assignment 6 | Portfolio Laurine Seelt</title>
+  <title>4 Assignment 3: Cleaning up according to the Guerrilla analytics framework. | Portfolio Laurine Seelt</title>
   <meta name="description" content="This is the bookdown for my DSFB2 portfolio" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Assignment 6 | Portfolio Laurine Seelt" />
+  <meta property="og:title" content="4 Assignment 3: Cleaning up according to the Guerrilla analytics framework. | Portfolio Laurine Seelt" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the bookdown for my DSFB2 portfolio" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Assignment 6 | Portfolio Laurine Seelt" />
+  <meta name="twitter:title" content="4 Assignment 3: Cleaning up according to the Guerrilla analytics framework. | Portfolio Laurine Seelt" />
   
   <meta name="twitter:description" content="This is the bookdown for my DSFB2 portfolio" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="assignment-5-free-space..html"/>
-<link rel="next" href="assignment-7.html"/>
+<link rel="prev" href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code..html"/>
+<link rel="next" href="assignment-4-cv..html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -177,9 +177,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="assignment-6" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">7</span> Assignment 6<a href="assignment-6.html#assignment-6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This was the sixth assignment for our portfolio.</p>
+<div id="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework." class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Assignment 3: Cleaning up according to the Guerrilla analytics framework.<a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework..html#assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework." class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This was the third assignment for our portfolio. We had to apply the Guerrilla analytics framework to our DAUR2 folder.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework..html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir_ls</span>(<span class="at">regexp =</span> <span class="st">&quot;Daur2&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">dir_info</span>(<span class="at">recurse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework..html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">directory =</span> <span class="fu">path_dir</span>(path)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework..html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">wt =</span> <span class="cn">NULL</span>, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="do">##wt kan ook size zijn, maar nog niet uit.</span></span></code></pre></div>
+<pre><code>## # A tibble: 7 x 2
+##   directory                              n
+##   &lt;chr&gt;                              &lt;int&gt;
+## 1 Daur2/Data/Metagenomics               17
+## 2 Daur2/Rmd                             15
+## 3 Daur2                                  5
+## 4 Daur2/Data/Metagenomics/Supporting     4
+## 5 Daur2/Data                             2
+## 6 Daur2/Data/RNA_seq                     1
+## 7 Daur2/Data/RNA_seq/Data_raw            1</code></pre>
 
 </div>
             </section>
@@ -187,8 +200,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="assignment-5-free-space..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="assignment-7.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assignment-4-cv..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

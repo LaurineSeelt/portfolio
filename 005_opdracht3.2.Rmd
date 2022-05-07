@@ -8,11 +8,9 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 5
+# Assignment 5: Free space.
 
-## This was the fifth assignment for our portfolio.
-
-We had/have to fill 32 hours learning something new that'll be useful for our internship next year and possibly our job.
+This was the fifth assignment for our portfolio. We had/have to fill 32 hours learning something new that'll be useful for our internship next year and possibly our job.
 
 
 
@@ -30,7 +28,58 @@ https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c48
 https://grunwaldlab.github.io/analysis_of_microbiome_community_data_in_r/04--manipulating.html (nog een course)
 - Python?
 
-```{r}
+## Course: Introduction to the statistical analysis of microbiome data in R
+In this course, we examined the differences in microbiota between patients with and without chronic fatigue syndrome.
+The aspects that were looked at were: <br>
+Taxonomic relative abundance <br>
+Hierarchal clustering <br>
+Alpha-diversity (microbiome diversity in just one sample) <br>
+Beta-divesity (microbiome diversity in two or more samples) <br>
+Diffrential abundance testing <br>
+Predicting class labels <br>
 
+```{r installing all the required packages, include=TRUE, message=FALSE, warning=FALSE, eval=FALSE}
+.cran_packages <- c("tidyverse", "cowplot", "picante", "vegan", "HMP", "dendextend", "rms", "devtools")
+.bioc_packages <- c("phyloseq", "DESeq2", "microbiome", "metagenomeSeq", "ALDEx2")
+.inst <- .cran_packages %in% installed.packages()
+if(any(!.inst)) {
+  install.packages(.cran_packages[!.inst])
+}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install(.bioc_packages, version = "3.14") #Changed 3.9 to 3.14
+devtools::install_github("adw96/breakaway")
+devtools::install_github(repo = "malucalle/selbal") #changed UVic-omics to malucalle
+```
+
+```{r loading the required packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(phyloseq)
+library(DESeq2)
+library(microbiome)
+library(vegan)
+library(picante)
+library(ALDEx2)
+library(metagenomeSeq)
+library(HMP)
+library(dendextend)
+library(selbal)
+library(rms)
+library(breakaway)
+```
+
+```{r, message=FALSE, warning=FALSE}
+# Reading in the data
+ps <- readRDS("Data/Data_raw/ps_giloteaux_2016.rds")
+# Sorting the samples on total read count
+sort(phyloseq::sample_sums(ps))
+# Removing (samples with?) less than 5000 reads
+(ps <- phyloseq::subset_samples(ps, phyloseq::sample_sums(ps) > 5000))
+# Removing the OTU's that were only present in the removed samples
+(ps <- phyloseq::prune_taxa(phyloseq::taxa_sums(ps) > 0, ps))
+# Assigning a new metadata field
+phyloseq::sample_data(ps)$Status <- ifelse(phyloseq::sample_data(ps)$Subject == "Patient", "Chronic Fatique", "Control")
+phyloseq::sample_data(ps)$Status <- factor(phyloseq::sample_data(ps)$Status, levels = c("Control", "Chronic Fatique"))
+ps %>% sample_data %>% dplyr::count(Status)
 ```
 

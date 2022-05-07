@@ -8,9 +8,9 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 2
+# Assignment 2: Reading two different studies and recreating some of the code.
 
-## This was the second assignment for our portfolio.
+This was the second assignment for our portfolio. We had to look up two different articles, answer some questions about it and recreate some of the code from one of the articles.
 
 ```{r setup2, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -19,7 +19,7 @@ library(here)
 library(readxl)
 ```
 
-### Part 1
+## Part 1
 
 Link to the study: https://pubmed.ncbi.nlm.nih.gov/29324233/
 
@@ -43,7 +43,7 @@ The researchers also showed that the cytokine response to unrelated pathogens wa
 Next, this study looked at the difference in immune response to the Yellow Fever Vaccine between people who had had the BCG vaccination, and people who hadn't. People who had had the vaccine had a significantly lower viremia compared to people who had had the placebo vaccine. It was seen that mainly increased IL1-B and IL-10 production predicted a lower viremia in subjects who had had the BCG vaccine.
 
 
-### Part 2
+## Part 2
 
 Link to the study: https://osf.io/aqycd/ 
 

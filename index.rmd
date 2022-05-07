@@ -15,6 +15,4 @@ description: "This is the bookdown for my DSFB2 portfolio"
 
 This is the introduction to the portfolio of Laurine Seelt.
 
-She worked really hard on this.
-
-Please be kind to them :')
+She worked really hard on this. Please be kind to them.
