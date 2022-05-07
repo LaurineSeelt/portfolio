@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Assignment 2: Reading two different studies and recreating some of the code | Portfolio Laurine Seelt</title>
+  <meta name="description" content="This is the bookdown for my DSFB2 portfolio" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Assignment 2: Reading two different studies and recreating some of the code | Portfolio Laurine Seelt" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is the bookdown for my DSFB2 portfolio" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Assignment 2: Reading two different studies and recreating some of the code | Portfolio Laurine Seelt" />
+  
+  <meta name="twitter:description" content="This is the bookdown for my DSFB2 portfolio" />
+  
+
+<meta name="author" content="Laurine Seelt" />
+
+
+<meta name="date" content="2022-05-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="assignment-1-investigating-a-c.-elegans-plate-experiment.html"/>
+<link rel="next" href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><i class="fa fa-check"></i><b>2</b> Assignment 1: Investigating a <em>C. Elegans</em> plate experiment</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#a"><i class="fa fa-check"></i><b>2.0.1</b> A</a></li>
+<li class="chapter" data-level="2.0.2" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#b"><i class="fa fa-check"></i><b>2.0.2</b> B</a></li>
+<li class="chapter" data-level="2.0.3" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#c"><i class="fa fa-check"></i><b>2.0.3</b> C</a></li>
+<li class="chapter" data-level="2.0.4" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#d"><i class="fa fa-check"></i><b>2.0.4</b> D</a></li>
+<li class="chapter" data-level="2.0.5" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#e"><i class="fa fa-check"></i><b>2.0.5</b> E</a></li>
+<li class="chapter" data-level="2.0.6" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#f"><i class="fa fa-check"></i><b>2.0.6</b> F</a></li>
+<li class="chapter" data-level="2.0.7" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#g"><i class="fa fa-check"></i><b>2.0.7</b> G</a></li>
+<li class="chapter" data-level="2.0.8" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#h"><i class="fa fa-check"></i><b>2.0.8</b> H</a></li>
+<li class="chapter" data-level="2.0.9" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#i"><i class="fa fa-check"></i><b>2.0.9</b> I</a></li>
+<li class="chapter" data-level="2.0.10" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#j"><i class="fa fa-check"></i><b>2.0.10</b> J</a></li>
+<li class="chapter" data-level="2.0.11" data-path="assignment-1-investigating-a-c.-elegans-plate-experiment.html"><a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html#k"><i class="fa fa-check"></i><b>2.0.11</b> K</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html"><i class="fa fa-check"></i><b>3</b> Assignment 2: Reading two different studies and recreating some of the code</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#part-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a></li>
+<li class="chapter" data-level="3.2" data-path="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#part-2"><i class="fa fa-check"></i><b>3.2</b> Part 2</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework.html"><a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework.html"><i class="fa fa-check"></i><b>4</b> Assignment 3: Cleaning up according to the Guerrilla analytics framework</a></li>
+<li class="chapter" data-level="5" data-path="assignment-4-cv.html"><a href="assignment-4-cv.html"><i class="fa fa-check"></i><b>5</b> Assignment 4: CV</a></li>
+<li class="chapter" data-level="6" data-path="assignment-5-free-space.html"><a href="assignment-5-free-space.html"><i class="fa fa-check"></i><b>6</b> Assignment 5: Free space</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="assignment-5-free-space.html"><a href="assignment-5-free-space.html#course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r"><i class="fa fa-check"></i><b>6.1</b> Course: Introduction to the statistical analysis of microbiome data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="assignment-6.html"><a href="assignment-6.html"><i class="fa fa-check"></i><b>7</b> Assignment 6:</a></li>
+<li class="chapter" data-level="8" data-path="assignment-7.html"><a href="assignment-7.html"><i class="fa fa-check"></i><b>8</b> Assignment 7:</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Portfolio Laurine Seelt</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Assignment 2: Reading two different studies and recreating some of the code<a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#assignment-2-reading-two-different-studies-and-recreating-some-of-the-code" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This was the second assignment for our portfolio. We had to look up two different articles, answer some questions about it and recreate some of the code from one of the articles.</p>
+<div id="part-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Part 1<a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#part-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Link to the study: <a href="https://pubmed.ncbi.nlm.nih.gov/29324233/" class="uri">https://pubmed.ncbi.nlm.nih.gov/29324233/</a></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Category</th>
+<th align="left">Score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Study_purpose</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Data_availability_statement</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Data_location</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Study_location</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Author_review</td>
+<td align="left">7</td>
+</tr>
+<tr class="even">
+<td align="left">Ethics_statement</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Funding_statement</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Code_availability</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+<p>In this study, researchers investigated the heterologous effects of Bacillus Calmette-Guérin (BCG) vaccination against other, non-related virus infections.
+It has been known for some time that BCG vaccination has positive heterologous effects against other virusses, but the exact immunological basis for this effect has never been examined in depth. The researchers in this study examined the genome-wide histone modifications that take place as a result of BCG vaccination, and also examined the functional changes in monocytes that take place after BCG vaccination. The effect of BCG vaccination on viral, serological and immunological parameters after administration of the Yellow Fever Vaccine was also examined.</p>
+<p>The method used for this study was ChIP-sequencing, to look at genome-wide changes in the distribution of H3K27ac. H3K27ac is a marker of active promoters and enhancers. This was done before BCG vaccination and one month after BCG vaccination. Correlation plots showed a clear distinction between the two kinds of samples. Most changes between the two kinds of samples were related to G-protein coupled receptors and protein kinases, which shows that BCG vaccination has a substantial effect on remodeling signal transduction molecules.</p>
+<p>The researchers also showed that the cytokine response to unrelated pathogens was enhanced one month after BCG vaccination. The heterologous T-cell response was also moderately enhanced after BCG vaccination.</p>
+<p>Next, this study looked at the difference in immune response to the Yellow Fever Vaccine between people who had had the BCG vaccination, and people who hadn’t. People who had had the vaccine had a significantly lower viremia compared to people who had had the placebo vaccine. It was seen that mainly increased IL1-B and IL-10 production predicted a lower viremia in subjects who had had the BCG vaccine.</p>
+</div>
+<div id="part-2" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Part 2<a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Link to the study: <a href="https://osf.io/aqycd/" class="uri">https://osf.io/aqycd/</a></p>
+<p>The code is very readable, 4.</p>
+<p><strong>Recreating figure 1A</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb12-2"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-3"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb12-4"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb12-5"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">##################################################################################################</span></span>
+<span id="cb12-7"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">##### Descriptives; </span></span>
+<span id="cb12-8"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-9" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">read.csv2</span>(<span class="fu">here</span>(<span class="st">&quot;Data/Data_LittSurvey_Box1.csv&quot;</span>)))</span>
+<span id="cb12-10"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-12" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Hypo=</span><span class="fu">ifelse</span>(Clearly.stated.hypothesis<span class="sc">&gt;</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-13"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Experiment=</span><span class="fu">ifelse</span>(Study.design<span class="sc">==</span><span class="st">&quot;Experimental&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-14"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">YearLaps=</span><span class="fu">abs</span>(Year<span class="dv">-2016</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-15"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Scope2=</span><span class="fu">ifelse</span>(Scope<span class="sc">==</span><span class="st">&quot;Methods&quot;</span>, <span class="st">&quot;Methods&quot;</span>, <span class="st">&quot;Biodiversity response&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-16"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Hypothesis2=</span>Clearly.stated.hypothesis) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-17"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Hypothesis2=</span><span class="fu">ifelse</span>(Hypothesis2<span class="sc">==</span><span class="dv">0</span>, <span class="st">&quot;No&quot;</span>, </span>
+<span id="cb12-18"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-18" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ifelse</span>(Hypothesis2<span class="sc">==</span><span class="dv">1</span>, <span class="st">&quot;Partly&quot;</span>, </span>
+<span id="cb12-19"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-19" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ifelse</span>(Hypothesis2<span class="sc">==</span><span class="dv">2</span>, <span class="st">&quot;Implied&quot;</span>, <span class="st">&quot;Clearly stated&quot;</span>))))</span>
+<span id="cb12-20"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">###############################################</span></span>
+<span id="cb12-22"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">##### cleary stated hypotheis; </span></span>
+<span id="cb12-23"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Plotting results; </span></span>
+<span id="cb12-25"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Clearly stated hypothesis; </span></span>
+<span id="cb12-26"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Figure 1a</span></span>
+<span id="cb12-27"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-28" aria-hidden="true" tabindex="-1"></a>Hypothesis_prop <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Hypothesis2, Scope2) <span class="sc">%&gt;%</span></span>
+<span id="cb12-29"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Clearly.stated.hypothesis) <span class="sc">%&gt;%</span></span>
+<span id="cb12-30"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop=</span><span class="fu">prop.table</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-31"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Hypothesis3=</span> <span class="fu">factor</span>(Hypothesis2, </span>
+<span id="cb12-32"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Implied&quot;</span>, <span class="st">&quot;Partly&quot;</span>, <span class="st">&quot;Clearly stated&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-33"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">Scope3=</span> <span class="fu">factor</span>(Scope2, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Methods&quot;</span>, <span class="st">&quot;Biodiversity response&quot;</span>)))</span>
+<span id="cb12-34"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-36" aria-hidden="true" tabindex="-1"></a>Hypothesis_prop2 <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb12-37"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Scope<span class="sc">==</span><span class="st">&quot;Ecological processes&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-38"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Clearly.stated.hypothesis) <span class="sc">%&gt;%</span></span>
+<span id="cb12-39"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop=</span><span class="fu">prop.table</span>(n))</span>
+<span id="cb12-40"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-41"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-41" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>Hypothesis_prop, <span class="fu">aes</span>(<span class="at">x=</span>Hypothesis3, <span class="at">y=</span>n, <span class="at">fill=</span>Scope3)) <span class="sc">+</span></span>
+<span id="cb12-42"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">width=</span><span class="fl">0.7</span>, ) <span class="sc">+</span></span>
+<span id="cb12-43"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb12-44"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">15</span>), <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">legend.title =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb12-45"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-45" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">17</span>)) <span class="sc">+</span></span>
+<span id="cb12-46"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">100</span>)<span class="sc">+</span></span>
+<span id="cb12-47"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;Number of articles&quot;</span>, <span class="at">title=</span><span class="st">&quot;&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb12-48"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Blues&quot;</span>)</span>
+<span id="cb12-49"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-50"><a href="assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.html#cb12-50" aria-hidden="true" tabindex="-1"></a>p<span class="sc">+</span><span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>In the field of applied ecological research, the lines between exploratory research and confirmatory research are becoming more and more blurred. A lot of researchers in the field of applied ecology do not follow the <strong>strong inference paradigm</strong>. This means that a lot of researchers in this field often don’t devise an alternative hypothesis when they’re conducting their research. What’s more, they often don’t even devise <em>a</em> hypothesis before conducting their research. This is dangerous, and could, for example, lead to more confirmation bias in this field.
+The researchers of this paper looked at 159 papers from conservation/applied ecology/wildife journals. They scored all the papers on certain criteria, to see how the experiments were conducted. This figure displays the amount of papers that had either a clearly stated hypothesis or not, divided by what the research focussed on: methods or biodiversity response.</p>
+<p>Reproducibility of the code: 5. It was very easy, I barely needed to change anything before I got the pretty graph :)</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="assignment-1-investigating-a-c.-elegans-plate-experiment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

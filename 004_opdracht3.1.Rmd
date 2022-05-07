@@ -8,6 +8,6 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 4: CV.
+# Assignment 4: CV
 
 This was the fourth assignment for our portfolio. We had to put our CV in a markdown.

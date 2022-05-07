@@ -1,5 +1,5 @@
 introduction
-assignment-1-investigating-a-c.-elegans-plate-experiment.
+assignment-1-investigating-a-c.-elegans-plate-experiment
 a
 b
 c
@@ -11,12 +11,12 @@ h
 i
 j
 k
-assignment-2-reading-two-different-studies-and-recreating-some-of-the-code.
+assignment-2-reading-two-different-studies-and-recreating-some-of-the-code
 part-1
 part-2
-assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework.
-assignment-4-cv.
-assignment-5-free-space.
+assignment-3-cleaning-up-according-to-the-guerrilla-analytics-framework
+assignment-4-cv
+assignment-5-free-space
 course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r
 assignment-6
 assignment-7

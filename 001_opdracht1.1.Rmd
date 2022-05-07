@@ -8,7 +8,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 1: Investigating a _C. Elegans_ plate experiment.
+# Assignment 1: Investigating a _C. Elegans_ plate experiment
 
 This was the first assignment for our portfolio. We had to look at the data of a _C. Elegans_ plate experiment, plot some of the data and wrangle some of the data to get a clearer plot.
 

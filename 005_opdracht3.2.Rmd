@@ -8,7 +8,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 5: Free space.
+# Assignment 5: Free space
 
 This was the fifth assignment for our portfolio. We had/have to fill 32 hours learning something new that'll be useful for our internship next year and possibly our job.
 
