@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-07" />
+<meta name="date" content="2022-05-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -293,6 +293,93 @@ Predicting class labels <br></p>
 ## [1] &quot;phyloseq&quot;
 ## attr(,&quot;.S3Class&quot;)
 ## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="assignment-5-free-space.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Counting all the phyla in the dataset</span></span>
+<span id="cb25-2"><a href="assignment-5-free-space.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps)[, <span class="st">&quot;Phylum&quot;</span>])</span></code></pre></div>
+<pre><code>## 
+##  Actinobacteria   Bacteroidetes   Cyanobacteria   Euryarchaeota      Firmicutes 
+##               7              11               2               1             105 
+##    Fusobacteria  Proteobacteria     Tenericutes Verrucomicrobia 
+##               1               7               2               1</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="assignment-5-free-space.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the samples to relative abundances</span></span>
+<span id="cb27-2"><a href="assignment-5-free-space.html#cb27-2" aria-hidden="true" tabindex="-1"></a>ps_rel_abund <span class="ot">=</span> phyloseq<span class="sc">::</span><span class="fu">transform_sample_counts</span>(ps, <span class="cf">function</span>(x){x <span class="sc">/</span> <span class="fu">sum</span>(x)})</span>
+<span id="cb27-3"><a href="assignment-5-free-space.html#cb27-3" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co"># Before we converted it to relative abundances</span></span></code></pre></div>
+<pre><code>## OTU Table:          [5 taxa and 5 samples]
+##                      taxa are rows
+##      ERR1331793 ERR1331872 ERR1331819 ERR1331794 ERR1331851
+## OTU1          2        581        347        916      10498
+## OTU2        371         46          0        233        301
+## OTU3       1189         81        637        199          0
+## OTU4          0        172        246          0        372
+## OTU5        308         44        143        155        221</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="assignment-5-free-space.html#cb29-1" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps_rel_abund)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co"># After we calculated the relative abundances</span></span></code></pre></div>
+<pre><code>## OTU Table:          [5 taxa and 5 samples]
+##                      taxa are rows
+##        ERR1331793  ERR1331872 ERR1331819  ERR1331794 ERR1331851
+## OTU1 0.0003020236 0.026008326 0.05028986 0.013891206 0.73080404
+## OTU2 0.0560253700 0.002059179 0.00000000 0.003533462 0.02095371
+## OTU3 0.1795530051 0.003625946 0.09231884 0.003017849 0.00000000
+## OTU4 0.0000000000 0.007699539 0.03565217 0.000000000 0.02589628
+## OTU5 0.0465116279 0.001969649 0.02072464 0.002350586 0.01538462</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="assignment-5-free-space.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the relative abundances, devided by the two groups</span></span>
+<span id="cb31-2"><a href="assignment-5-free-space.html#cb31-2" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">plot_bar</span>(ps_rel_abund, <span class="at">fill =</span> <span class="st">&quot;Phylum&quot;</span>)<span class="sc">+</span></span>
+<span id="cb31-3"><a href="assignment-5-free-space.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">color =</span> Phylum, <span class="at">fill =</span> Phylum), <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="st">&quot;stack&quot;</span>)<span class="sc">+</span></span>
+<span id="cb31-4"><a href="assignment-5-free-space.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Relative Abundance</span><span class="sc">\n</span><span class="st">&quot;</span>)<span class="sc">+</span></span>
+<span id="cb31-5"><a href="assignment-5-free-space.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Status, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="sc">+</span></span>
+<span id="cb31-6"><a href="assignment-5-free-space.html#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb31-7"><a href="assignment-5-free-space.html#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb31-8"><a href="assignment-5-free-space.html#cb31-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="assignment-5-free-space.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorting the taxa by their relative abundance</span></span>
+<span id="cb32-2"><a href="assignment-5-free-space.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(ps_rel_abund<span class="sc">@</span>tax_table[[<span class="st">&quot;Phylum&quot;</span>]], <span class="at">decreasing =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>  phyloseq<span class="sc">::</span><span class="fu">plot_bar</span>(<span class="at">fill =</span> <span class="st">&quot;Phylum&quot;</span>)<span class="sc">+</span></span>
+<span id="cb32-3"><a href="assignment-5-free-space.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">color =</span> Phylum, <span class="at">fill =</span> Phylum), <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="st">&quot;stack&quot;</span>)<span class="sc">+</span></span>
+<span id="cb32-4"><a href="assignment-5-free-space.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Relative Abundance</span><span class="sc">\n</span><span class="st">&quot;</span>)<span class="sc">+</span></span>
+<span id="cb32-5"><a href="assignment-5-free-space.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Status, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="sc">+</span></span>
+<span id="cb32-6"><a href="assignment-5-free-space.html#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb32-7"><a href="assignment-5-free-space.html#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb32-8"><a href="assignment-5-free-space.html#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="assignment-5-free-space.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grouping the taxa according to phylum and renaming the groups</span></span>
+<span id="cb33-2"><a href="assignment-5-free-space.html#cb33-2" aria-hidden="true" tabindex="-1"></a>ps_phylum <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">tax_glom</span>(ps, <span class="st">&quot;Phylum&quot;</span>)</span>
+<span id="cb33-3"><a href="assignment-5-free-space.html#cb33-3" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">taxa_names</span>(ps_phylum) <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">tax_table</span>(ps_phylum)[, <span class="st">&quot;Phylum&quot;</span>]</span>
+<span id="cb33-4"><a href="assignment-5-free-space.html#cb33-4" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps_phylum)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## OTU Table:          [5 taxa and 5 samples]
+##                      taxa are rows
+##                ERR1331793 ERR1331872 ERR1331819 ERR1331794 ERR1331851
+## Bacteroidetes        1903        878       1837       1969      11776
+## Proteobacteria        119       3315        468      62358        319
+## Firmicutes           4319      14429       3548       1609       2207
+## Actinobacteria         30        976         17          0         58
+## Cyanobacteria         246          0          0          0          0</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="assignment-5-free-space.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Melting the data and making the boxplots</span></span>
+<span id="cb35-2"><a href="assignment-5-free-space.html#cb35-2" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">psmelt</span>(ps_phylum) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="assignment-5-free-space.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> ., <span class="fu">aes</span>(<span class="at">x =</span> Status, <span class="at">y =</span> Abundance))<span class="sc">+</span></span>
+<span id="cb35-4"><a href="assignment-5-free-space.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb35-5"><a href="assignment-5-free-space.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">colour =</span> OTU), <span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> <span class="fl">0.2</span>)<span class="sc">+</span></span>
+<span id="cb35-6"><a href="assignment-5-free-space.html#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Abundance</span><span class="sc">\n</span><span class="st">&quot;</span>)<span class="sc">+</span></span>
+<span id="cb35-7"><a href="assignment-5-free-space.html#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> OTU, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/generating%20boxplots%20according%20to%20the%20groups-1.png" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="assignment-5-free-space.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Making two subsets</span></span>
+<span id="cb36-2"><a href="assignment-5-free-space.html#cb36-2" aria-hidden="true" tabindex="-1"></a>controls <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">subset_samples</span>(ps_phylum, Status <span class="sc">==</span> <span class="st">&quot;Control&quot;</span>)</span>
+<span id="cb36-3"><a href="assignment-5-free-space.html#cb36-3" aria-hidden="true" tabindex="-1"></a>cf <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">subset_samples</span>(ps_phylum, <span class="at">Status =</span> <span class="st">&quot;Chronic Fatigue&quot;</span>)</span>
+<span id="cb36-4"><a href="assignment-5-free-space.html#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="assignment-5-free-space.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Looking at the OTU tables</span></span>
+<span id="cb36-6"><a href="assignment-5-free-space.html#cb36-6" aria-hidden="true" tabindex="-1"></a>control_otu <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(controls))</span>
+<span id="cb36-7"><a href="assignment-5-free-space.html#cb36-7" aria-hidden="true" tabindex="-1"></a>cf_otu <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(cf))</span>
+<span id="cb36-8"><a href="assignment-5-free-space.html#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="assignment-5-free-space.html#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Grouping the rare phyla to improve testing</span></span>
+<span id="cb36-10"><a href="assignment-5-free-space.html#cb36-10" aria-hidden="true" tabindex="-1"></a>control_otu <span class="ot">&lt;-</span> control_otu <span class="sc">%&gt;%</span> <span class="fu">t</span>(.) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>(.) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Other =</span> Cyanobacteria <span class="sc">+</span> Euryarchaeota <span class="sc">+</span> Tenericutes <span class="sc">+</span> Verrucomicrobia <span class="sc">+</span> Fusobacteria) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Cyanobacteria, <span class="sc">-</span>Euryarchaeota, <span class="sc">-</span>Tenericutes, <span class="sc">-</span>Verrucomicrobia, <span class="sc">-</span>Fusobacteria)</span>
+<span id="cb36-11"><a href="assignment-5-free-space.html#cb36-11" aria-hidden="true" tabindex="-1"></a>cf_otu <span class="ot">&lt;-</span> cf_otu <span class="sc">%&gt;%</span> <span class="fu">t</span>(.) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>(.) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Other =</span> Cyanobacteria <span class="sc">+</span> Euryarchaeota <span class="sc">+</span> Tenericutes <span class="sc">+</span> Verrucomicrobia <span class="sc">+</span> Fusobacteria) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Cyanobacteria, <span class="sc">-</span>Euryarchaeota, <span class="sc">-</span>Tenericutes, <span class="sc">-</span>Verrucomicrobia, <span class="sc">-</span>Fusobacteria)</span>
+<span id="cb36-12"><a href="assignment-5-free-space.html#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="assignment-5-free-space.html#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Performing the HMP test</span></span>
+<span id="cb36-14"><a href="assignment-5-free-space.html#cb36-14" aria-hidden="true" tabindex="-1"></a>group_data <span class="ot">&lt;-</span> <span class="fu">list</span>(control_otu, cf_otu)</span>
+<span id="cb36-15"><a href="assignment-5-free-space.html#cb36-15" aria-hidden="true" tabindex="-1"></a>(xdc <span class="ot">&lt;-</span> HMP<span class="sc">::</span><span class="fu">Xdc.sevsample</span>(group_data))</span></code></pre></div>
+<pre><code>## $`Xdc statistics`
+## [1] -0.3510664
+## 
+## $`p value`
+## [1] 1</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="assignment-5-free-space.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="fl">0.2769004</span>, <span class="dv">5</span>) <span class="co"># Looking at the Chi-Squared distribution</span></span></code></pre></div>
+<pre><code>## [1] 0.9980551</code></pre>
+<p>Since the P-value of the HMP test is nearly 1, we cannot reject the null hypothesis that there is no statistical significant distribution of phyla between the two groups.</p>
 
 </div>
 </div>

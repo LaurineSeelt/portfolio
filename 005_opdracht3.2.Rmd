@@ -83,7 +83,7 @@ phyloseq::sample_data(ps)$Status <- factor(phyloseq::sample_data(ps)$Status, lev
 ps %>% sample_data %>% dplyr::count(Status)
 ```
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Counting all the phyla in the dataset
 table(phyloseq::tax_table(ps)[, "Phylum"])
 # Convert the samples to relative abundances
@@ -112,7 +112,39 @@ sort(ps_rel_abund@tax_table[["Phylum"]], decreasing = TRUE) %>%  phyloseq::plot_
         axis.ticks.x = element_blank())
 ```
 
-```{r}
+```{r generating boxplots according to the groups, message=FALSE, warning=FALSE}
+# Grouping the taxa according to phylum and renaming the groups
+ps_phylum <- phyloseq::tax_glom(ps, "Phylum")
+phyloseq::taxa_names(ps_phylum) <- phyloseq::tax_table(ps_phylum)[, "Phylum"]
+phyloseq::otu_table(ps_phylum)[1:5, 1:5]
 
+# Melting the data and making the boxplots
+phyloseq::psmelt(ps_phylum) %>%
+  ggplot(data = ., aes(x = Status, y = Abundance))+
+  geom_boxplot(outlier.shape = NA)+
+  geom_jitter(aes(colour = OTU), height = 0, width = 0.2)+
+  labs(x = "", y = "Abundance\n")+
+  facet_wrap(~ OTU, scales = "free")
 ```
 
+```{r looking at the frequencies of the taxa in both groups, message=FALSE, warning=FALSE}
+# Making two subsets
+controls <- phyloseq::subset_samples(ps_phylum, Status == "Control")
+cf <- phyloseq::subset_samples(ps_phylum, Status = "Chronic Fatigue")
+
+# Looking at the OTU tables
+control_otu <- data.frame(phyloseq::otu_table(controls))
+cf_otu <- data.frame(phyloseq::otu_table(cf))
+
+# Grouping the rare phyla to improve testing
+control_otu <- control_otu %>% t(.) %>% as.data.frame(.) %>% mutate(Other = Cyanobacteria + Euryarchaeota + Tenericutes + Verrucomicrobia + Fusobacteria) %>% dplyr::select(-Cyanobacteria, -Euryarchaeota, -Tenericutes, -Verrucomicrobia, -Fusobacteria)
+cf_otu <- cf_otu %>% t(.) %>% as.data.frame(.) %>% mutate(Other = Cyanobacteria + Euryarchaeota + Tenericutes + Verrucomicrobia + Fusobacteria) %>% dplyr::select(-Cyanobacteria, -Euryarchaeota, -Tenericutes, -Verrucomicrobia, -Fusobacteria)
+
+# Performing the HMP test
+group_data <- list(control_otu, cf_otu)
+(xdc <- HMP::Xdc.sevsample(group_data))
+
+1 - pchisq(0.2769004, 5) # Looking at the Chi-Squared distribution
+```
+
+Since the P-value of the HMP test is nearly 1, we cannot reject the null hypothesis that there is no statistical significant distribution of phyla between the two groups.
