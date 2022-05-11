@@ -8,6 +8,28 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 4: CV
+# CV
 
 This was the fourth assignment for our portfolio. We had to put our CV in a markdown.
+
+_Persoonlijke informatie_
+Naam: Laurine Seelt
+Emailadres: -
+Telefoonnummer: -
+Adres: -
+Postcode: -
+Woonplaats: -
+
+_Opleiding_
+2019 - heden
+Bachelor Life Sciences, Hogeschool Utrecht
+
+2012 - 2018
+VWO, Erfgooiers College te Huizen
+
+_Ervaring/skills_
+(q)PCR, Western Blot, ELISA, MALDI-TOF, Bash, R, SQL, 
+
+_Talen_
+Nederlands, moedertaal.
+Engels, vloeiend.

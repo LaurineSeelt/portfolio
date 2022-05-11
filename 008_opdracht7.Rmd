@@ -1,0 +1,34 @@
+---
+author: "Laurine Seelt"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+---
+
+# Working with DBeaver and SQL
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readxl)
+library(dslabs)
+library(here)
+```
+
+First, I read in the flu, dengue and gapminder data.
+<br>
+```{r, message=FALSE, warning=FALSE}
+flu <- read_csv(here("data/flu_data.csv"), skip = 11)
+dengue <- read_csv(here("data/dengue_data.csv"), skip = 11)
+gapminder <- read_builtin("gapminder")
+```
+
+The flu and dengue data wasn't tidy yet, so I solved that by ..
+The gapminder data was tidy already, so I didn't change anything about that.
+<br>
+```{r}
+
+```
+

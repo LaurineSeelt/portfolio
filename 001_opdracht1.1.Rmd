@@ -23,6 +23,7 @@ library(ggplot2)
 First I took a look at the data and read it in RStudio.
 <br>
 ```{r, message=FALSE, warning=FALSE}
+# View(here("Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 Tidydata <- read_excel(here("Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 Tidydata <- as.data.frame(Tidydata)
 ```

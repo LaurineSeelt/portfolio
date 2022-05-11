@@ -8,7 +8,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 2: Reading two different studies and recreating some of the code
+# Reading two different studies and recreating some of the code
 
 This was the second assignment for our portfolio. We had to look up two different articles, answer some questions about it and recreate some of the code from one of the articles.
 

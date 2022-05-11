@@ -8,9 +8,9 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 5: Free space
+# Free space
 
-This was the fifth assignment for our portfolio. We had/have to fill 32 hours learning something new that'll be useful for our internship next year and possibly our job.
+This was the fifth assignment for our portfolio. We had/have to fill 32 hours learning something new that will be useful for our internship next year and possibly our job.
 
 
 
@@ -148,3 +148,34 @@ group_data <- list(control_otu, cf_otu)
 ```
 
 Since the P-value of the HMP test is nearly 1, we cannot reject the null hypothesis that there is no statistical significant distribution of phyla between the two groups.
+
+```{r looking at hierarchical clustering, message=FALSE, warning=FALSE}
+# Extracting the OTU table
+ps_rel_otu <- data.frame(phyloseq::otu_table(ps_rel_abund))
+ps_rel_otu <- t(ps_rel_otu)
+# Computing the Bray-Curtis dissimilarity
+bc_dist <- vegan::vegdist(ps_rel_otu, method = "bray")
+# Generating a matrix with the dissimilarities
+as.matrix(bc_dist)[1:5, 1:5]
+# Saving it as a dendrogram
+ward <- as.dendrogram(hclust(bc_dist, method = "ward.D2"))
+# Adding color coding
+meta <- data.frame(phyloseq::sample_data(ps_rel_abund))
+colorCode <- c(Control = "red", `Chronic Fatigue` = "blue")
+labels_colors(ward) <- colorCode[meta$Status][order.dendrogram(ward)]
+# Plotting the dendrogram
+plot(ward)
+```
+
+```{r extra trying to create heatmaps for the two different groups, message=FALSE, warning=FALSE, eval=FALSE}
+plot_heatmap(cf)
+plot_heatmap(controls)
+```
+
+__Looking at the alpha diversity__
+<br>
+Alpha diversity looks at the diversity _within_ a sample and how the observed OTU's are distributed.
+```{r}
+
+```
+

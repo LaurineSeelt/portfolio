@@ -8,7 +8,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Assignment 6: 
+# Using GitHub and Zotero
 
 This was the sixth assignment for our portfolio.
 

@@ -1,0 +1,12 @@
+introduction
+investigating-a-c.-elegans-plate-experiment
+reading-two-different-studies-and-recreating-some-of-the-code
+part-1
+part-2
+cleaning-up-according-to-the-guerrilla-analytics-framework
+cv
+free-space
+course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r
+using-github-and-zotero
+making-a-website-on-github
+working-with-dbeaver-and-sql
