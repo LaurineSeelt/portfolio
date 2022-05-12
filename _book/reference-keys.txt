@@ -5,8 +5,13 @@ part-1
 part-2
 cleaning-up-according-to-the-guerrilla-analytics-framework
 cv
+persoonlijke-informatie
+opleiding
+ervaringskills
+talen
 free-space
 course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r
+course-microbiota-analysis-in-r
 using-github-and-zotero
 making-a-website-on-github
 working-with-dbeaver-and-sql

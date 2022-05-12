@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-11" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,10 +140,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="reading-two-different-studies-and-recreating-some-of-the-code.html"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#part-2"><i class="fa fa-check"></i><b>3.2</b> Part 2</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="cleaning-up-according-to-the-guerrilla-analytics-framework.html"><a href="cleaning-up-according-to-the-guerrilla-analytics-framework.html"><i class="fa fa-check"></i><b>4</b> Cleaning up according to the Guerrilla analytics framework</a></li>
-<li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> CV</a></li>
+<li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> CV</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="cv.html"><a href="cv.html#persoonlijke-informatie"><i class="fa fa-check"></i><b>5.1</b> <strong>Persoonlijke informatie</strong></a></li>
+<li class="chapter" data-level="5.2" data-path="cv.html"><a href="cv.html#opleiding"><i class="fa fa-check"></i><b>5.2</b> <strong>Opleiding</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="cv.html"><a href="cv.html#ervaringskills"><i class="fa fa-check"></i><b>5.3</b> <strong>Ervaring/skills</strong></a></li>
+<li class="chapter" data-level="5.4" data-path="cv.html"><a href="cv.html#talen"><i class="fa fa-check"></i><b>5.4</b> <strong>Talen</strong></a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="free-space.html"><a href="free-space.html"><i class="fa fa-check"></i><b>6</b> Free space</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="free-space.html"><a href="free-space.html#course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r"><i class="fa fa-check"></i><b>6.1</b> Course: Introduction to the statistical analysis of microbiome data in R</a></li>
+<li class="chapter" data-level="6.2" data-path="free-space.html"><a href="free-space.html#course-microbiota-analysis-in-r"><i class="fa fa-check"></i><b>6.2</b> Course: Microbiota analysis in R</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="using-github-and-zotero.html"><a href="using-github-and-zotero.html"><i class="fa fa-check"></i><b>7</b> Using GitHub and Zotero</a></li>
 <li class="chapter" data-level="8" data-path="making-a-website-on-github.html"><a href="making-a-website-on-github.html"><i class="fa fa-check"></i><b>8</b> Making a website on GitHub</a></li>
@@ -184,6 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 - Python?</p>
 <div id="course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Course: Introduction to the statistical analysis of microbiome data in R<a href="free-space.html#course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Link to the course: <a href="https://www.nicholas-ollberding.com/post/introduction-to-the-statistical-analysis-of-microbiome-data-in-r/" class="uri">https://www.nicholas-ollberding.com/post/introduction-to-the-statistical-analysis-of-microbiome-data-in-r/</a></p>
 <p>In this course, we examined the differences in microbiota between patients with and without chronic fatigue syndrome.
 The aspects that were looked at were: <br>
 Taxonomic relative abundance <br>
@@ -200,7 +208,7 @@ Predicting class labels <br></p>
 <span id="cb14-6"><a href="free-space.html#cb14-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb14-7"><a href="free-space.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb14-8"><a href="free-space.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb14-9"><a href="free-space.html#cb14-9" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(.bioc_packages, <span class="at">version =</span> <span class="st">&quot;3.14&quot;</span>) <span class="co">#Changed 3.9 to 3.14</span></span>
+<span id="cb14-9"><a href="free-space.html#cb14-9" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(.bioc_packages, <span class="at">version =</span> <span class="st">&quot;3.15&quot;</span>) <span class="co">#Changed 3.9 to 3.15</span></span>
 <span id="cb14-10"><a href="free-space.html#cb14-10" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;adw96/breakaway&quot;</span>)</span>
 <span id="cb14-11"><a href="free-space.html#cb14-11" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="at">repo =</span> <span class="st">&quot;malucalle/selbal&quot;</span>) <span class="co">#changed UVic-omics to malucalle</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="free-space.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -368,6 +376,8 @@ Predicting class labels <br></p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="free-space.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="fl">0.2769004</span>, <span class="dv">5</span>) <span class="co"># Looking at the Chi-Squared distribution</span></span></code></pre></div>
 <pre><code>## [1] 0.9980551</code></pre>
 <p>Since the P-value of the HMP test is nearly 1, we cannot reject the null hypothesis that there is no statistical significant distribution of phyla between the two groups.</p>
+<p><strong>Looking at the hierarchical clustering in the samples</strong>
+<br></p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="free-space.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting the OTU table</span></span>
 <span id="cb39-2"><a href="free-space.html#cb39-2" aria-hidden="true" tabindex="-1"></a>ps_rel_otu <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps_rel_abund))</span>
 <span id="cb39-3"><a href="free-space.html#cb39-3" aria-hidden="true" tabindex="-1"></a>ps_rel_otu <span class="ot">&lt;-</span> <span class="fu">t</span>(ps_rel_otu)</span>
@@ -395,6 +405,304 @@ Predicting class labels <br></p>
 <p><strong>Looking at the alpha diversity</strong>
 <br>
 Alpha diversity looks at the diversity <em>within</em> a sample and how the observed OTU’s are distributed.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="free-space.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the observed richness</span></span>
+<span id="cb43-2"><a href="free-space.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="st">&quot;total_reads&quot;</span> <span class="ot">=</span> phyloseq<span class="sc">::</span><span class="fu">sample_sums</span>(ps),</span>
+<span id="cb43-3"><a href="free-space.html#cb43-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;observed&quot;</span> <span class="ot">=</span> phyloseq<span class="sc">::</span><span class="fu">estimate_richness</span>(ps, <span class="at">measures =</span> <span class="st">&quot;Observed&quot;</span>)[, <span class="dv">1</span>]),</span>
+<span id="cb43-4"><a href="free-space.html#cb43-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total_reads, <span class="at">y =</span> observed)) <span class="sc">+</span></span>
+<span id="cb43-5"><a href="free-space.html#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb43-6"><a href="free-space.html#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb43-7"><a href="free-space.html#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Total Reads&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Observed richness</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Now we’re going to subsample the reads, plot them and test for group differences
+<br></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="free-space.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsample reads</span></span>
+<span id="cb44-2"><a href="free-space.html#cb44-2" aria-hidden="true" tabindex="-1"></a>(ps_rare <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">rarefy_even_depth</span>(ps, <span class="at">rngseed =</span> <span class="dv">123</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 138 taxa and 84 samples ]
+## sample_data() Sample Data:       [ 84 samples by 23 sample variables ]
+## tax_table()   Taxonomy Table:    [ 138 taxa by 7 taxonomic ranks ]
+## phy_tree()    Phylogenetic Tree: [ 138 tips and 136 internal nodes ]
+## refseq()      DNAStringSet:      [ 138 reference sequences ]</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="free-space.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(phyloseq<span class="sc">::</span><span class="fu">sample_sums</span>(ps_rare))</span></code></pre></div>
+<pre><code>## ERR1331793 ERR1331872 ERR1331819 ERR1331794 ERR1331851 ERR1331834 
+##       5083       5083       5083       5083       5083       5083</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="free-space.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Making a dataframe with the adiv measures, another package to analyse and measure biodiversity</span></span>
+<span id="cb48-2"><a href="free-space.html#cb48-2" aria-hidden="true" tabindex="-1"></a>adiv <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;Observed&quot;</span> <span class="ot">=</span> phyloseq<span class="sc">::</span><span class="fu">estimate_richness</span>(ps_rare, <span class="at">measures =</span> <span class="st">&quot;Observed&quot;</span>),</span>
+<span id="cb48-3"><a href="free-space.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Shannon&quot;</span> <span class="ot">=</span> phyloseq<span class="sc">::</span><span class="fu">estimate_richness</span>(ps_rare, <span class="at">measures =</span> <span class="st">&quot;Shannon&quot;</span>),</span>
+<span id="cb48-4"><a href="free-space.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;PD&quot;</span> <span class="ot">=</span> picante<span class="sc">::</span><span class="fu">pd</span>(<span class="at">samp =</span> <span class="fu">data.frame</span>(<span class="fu">t</span>(<span class="fu">data.frame</span>(phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps_rare)))), <span class="at">include.root =</span> <span class="cn">FALSE</span>, <span class="at">tree=</span>phyloseq<span class="sc">::</span><span class="fu">phy_tree</span>(ps_rare))[, <span class="dv">1</span>],</span>
+<span id="cb48-5"><a href="free-space.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Status&quot;</span> <span class="ot">=</span> phyloseq<span class="sc">::</span><span class="fu">sample_data</span>(ps_rare)<span class="sc">$</span>Status) <span class="co"># Zelf &quot;include.root = FALSE&quot; toegevoegd, anders kreeg ik steeds een error</span></span>
+<span id="cb48-6"><a href="free-space.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(adiv)</span></code></pre></div>
+<pre><code>##            Observed   Shannon        PD          Status
+## ERR1331793       53 2.7462377 20.566952 Chronic Fatique
+## ERR1331872       52 2.7527053 21.258691         Control
+## ERR1331819       70 3.2378006 21.640313         Control
+## ERR1331794       27 0.3761523  8.275154 Chronic Fatique
+## ERR1331851       45 1.3387308 14.649204 Chronic Fatique
+## ERR1331834       54 2.8883445 20.957612         Control</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="free-space.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the adiv measures</span></span>
+<span id="cb50-2"><a href="free-space.html#cb50-2" aria-hidden="true" tabindex="-1"></a>adiv <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> metric, <span class="at">value =</span> value, <span class="fu">c</span>(<span class="st">&quot;Observed&quot;</span>, <span class="st">&quot;Shannon&quot;</span>, <span class="st">&quot;PD&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="free-space.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">metric =</span> <span class="fu">factor</span>(metric, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Observed&quot;</span>, <span class="st">&quot;Shannon&quot;</span>, <span class="st">&quot;PD&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb50-4"><a href="free-space.html#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Status, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb50-5"><a href="free-space.html#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb50-6"><a href="free-space.html#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">color =</span> Status), <span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb50-7"><a href="free-space.html#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-8"><a href="free-space.html#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>metric, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-9"><a href="free-space.html#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="free-space.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarising the data</span></span>
+<span id="cb51-2"><a href="free-space.html#cb51-2" aria-hidden="true" tabindex="-1"></a>adiv <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Status) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-3"><a href="free-space.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">median_observed =</span> <span class="fu">median</span>(Observed),</span>
+<span id="cb51-4"><a href="free-space.html#cb51-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">median_shannon =</span> <span class="fu">median</span>(Shannon),</span>
+<span id="cb51-5"><a href="free-space.html#cb51-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">median_pd =</span> <span class="fu">median</span>(PD))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 4
+##   Status          median_observed median_shannon median_pd
+##   &lt;fct&gt;                     &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Control                      49           2.40      18.1
+## 2 Chronic Fatique              46           2.30      17.0</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="free-space.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performing the Wilcoxon tests for the three estimates</span></span>
+<span id="cb53-2"><a href="free-space.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Observed <span class="sc">~</span> Status, <span class="at">data =</span> adiv, <span class="at">exact =</span> <span class="cn">FALSE</span>, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  Observed by Status
+## W = 1007.5, p-value = 0.2146
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -1.000059  5.000002
+## sample estimates:
+## difference in location 
+##               2.000087</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="free-space.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Shannon <span class="sc">~</span> Status, <span class="at">data =</span> adiv, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum exact test
+## 
+## data:  Shannon by Status
+## W = 1037, p-value = 0.1329
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -0.04346366  0.39218192
+## sample estimates:
+## difference in location 
+##              0.1421467</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="free-space.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(PD <span class="sc">~</span> Status, <span class="at">data =</span> adiv, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum exact test
+## 
+## data:  PD by Status
+## W = 998, p-value = 0.2503
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -0.7340479  2.1737379
+## sample estimates:
+## difference in location 
+##              0.7063854</code></pre>
+<p><strong>Looking at the beta diversity</strong>
+<br>
+Beta diversity looks at the diversity <em>between</em> samples and how it’s similar or dissimilar.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="free-space.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transforming the Total Read Counts according to the Centered Log Ratio method</span></span>
+<span id="cb59-2"><a href="free-space.html#cb59-2" aria-hidden="true" tabindex="-1"></a>(ps_clr <span class="ot">&lt;-</span> microbiome<span class="sc">::</span><span class="fu">transform</span>(ps, <span class="st">&quot;clr&quot;</span>))</span></code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 138 taxa and 84 samples ]
+## sample_data() Sample Data:       [ 84 samples by 23 sample variables ]
+## tax_table()   Taxonomy Table:    [ 138 taxa by 7 taxonomic ranks ]
+## phy_tree()    Phylogenetic Tree: [ 138 tips and 136 internal nodes ]
+## refseq()      DNAStringSet:      [ 138 reference sequences ]</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="free-space.html#cb61-1" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co"># Old OTU table</span></span></code></pre></div>
+<pre><code>## OTU Table:          [5 taxa and 5 samples]
+##                      taxa are rows
+##      ERR1331793 ERR1331872 ERR1331819 ERR1331794 ERR1331851
+## OTU1          2        581        347        916      10498
+## OTU2        371         46          0        233        301
+## OTU3       1189         81        637        199          0
+## OTU4          0        172        246          0        372
+## OTU5        308         44        143        155        221</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="free-space.html#cb63-1" aria-hidden="true" tabindex="-1"></a>phyloseq<span class="sc">::</span><span class="fu">otu_table</span>(ps_clr)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co"># New OTU table</span></span></code></pre></div>
+<pre><code>## OTU Table:          [5 taxa and 5 samples]
+##                      taxa are rows
+##      ERR1331793 ERR1331872 ERR1331819 ERR1331794 ERR1331851
+## OTU1   1.289544   5.812706   5.615063   6.230204   9.467837
+## OTU2   6.485240   3.280355  -3.079591   4.863001   5.916398
+## OTU3   7.649802   3.844401   6.222432   4.705673  -1.903003
+## OTU4  -2.317399   4.596219   5.271139  -1.178342   6.128105
+## OTU5   6.299168   3.236089   4.728822   4.456584   5.607596</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="free-space.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The value are now the dominance for each taxa relative to the geometric mean of all taxa on the logarithmic scale</span></span></code></pre></div>
+<p><br>
+<br></p>
+</div>
+<div id="course-microbiota-analysis-in-r" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Course: Microbiota analysis in R<a href="free-space.html#course-microbiota-analysis-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Link to the course: <a href="https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html</a>
+<br>
+<br>
+In this course, we will be looking at the fecal bacterial microbiota of 8 calves at ages 2 weeks, 8 weeks and 1 year old and correlating them with variables such as weight gain and gastrointestinal short chain fatty acids, SCFA.
+<br></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="free-space.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;ape&quot;)</span></span>
+<span id="cb66-2"><a href="free-space.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb66-3"><a href="free-space.html#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb66-4"><a href="free-space.html#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb66-5"><a href="free-space.html#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gplots)</span>
+<span id="cb66-6"><a href="free-space.html#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb66-7"><a href="free-space.html#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phangorn)</span>
+<span id="cb66-8"><a href="free-space.html#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb66-9"><a href="free-space.html#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb66-10"><a href="free-space.html#cb66-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb66-11"><a href="free-space.html#cb66-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb66-12"><a href="free-space.html#cb66-12" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;VennDiagram&quot;)</span></span>
+<span id="cb66-13"><a href="free-space.html#cb66-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VennDiagram)</span>
+<span id="cb66-14"><a href="free-space.html#cb66-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Installed Java from: https://www.java.com/en/download/manual.jsp</span></span>
+<span id="cb66-15"><a href="free-space.html#cb66-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Installed Java JDk from: https://www.oracle.com/java/technologies/downloads/#jdk18-windows</span></span>
+<span id="cb66-16"><a href="free-space.html#cb66-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;rJava&quot;)</span></span>
+<span id="cb66-17"><a href="free-space.html#cb66-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rJava)</span>
+<span id="cb66-18"><a href="free-space.html#cb66-18" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;venneuler&quot;)</span></span>
+<span id="cb66-19"><a href="free-space.html#cb66-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(venneuler)</span>
+<span id="cb66-20"><a href="free-space.html#cb66-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb66-21"><a href="free-space.html#cb66-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb66-22"><a href="free-space.html#cb66-22" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(version = &quot;3.15&quot;) # Instead of source(&quot;https://bioconductor.org/biocLite.R&quot;)</span></span>
+<span id="cb66-23"><a href="free-space.html#cb66-23" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(&quot;phyloseq&quot;) # Instead of biocLite(&quot;phyloseq&quot;) ?</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="free-space.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Downloaded the data from: https://github.com/kdillmcfarland/workshops_UW_Madison/tree/master/Microbiota_analysis_R/Data</span></span>
+<span id="cb67-2"><a href="free-space.html#cb67-2" aria-hidden="true" tabindex="-1"></a>OTU <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">&quot;Data/example.final.an.unique_list.0.03.norm.shared.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb67-3"><a href="free-space.html#cb67-3" aria-hidden="true" tabindex="-1"></a>tax <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">&quot;Data/example.final.an.unique_list.0.03.cons.taxonomy.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb67-4"><a href="free-space.html#cb67-4" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">&quot;Data/example.metadata.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb67-5"><a href="free-space.html#cb67-5" aria-hidden="true" tabindex="-1"></a>SCFA <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">&quot;Data/example.SCFA.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="free-space.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting the &quot;Group&quot; column as row names in the OTU dataset</span></span>
+<span id="cb68-2"><a href="free-space.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(OTU) <span class="ot">=</span> OTU<span class="sc">$</span>Group</span>
+<span id="cb68-3"><a href="free-space.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing the columns that are not OTU counts</span></span>
+<span id="cb68-4"><a href="free-space.html#cb68-4" aria-hidden="true" tabindex="-1"></a>OTU.clean <span class="ot">=</span> OTU[,<span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(OTU) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;label&quot;</span>, <span class="st">&quot;numOtus&quot;</span>, <span class="st">&quot;Group&quot;</span>))]</span>
+<span id="cb68-5"><a href="free-space.html#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting the &quot;OTU&quot; column as row names in the taxonomy table</span></span>
+<span id="cb68-6"><a href="free-space.html#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(tax) <span class="ot">=</span> tax<span class="sc">$</span>OTU</span>
+<span id="cb68-7"><a href="free-space.html#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing the OTU&#39;s that aren&#39;t present in the OTU.clean dataset</span></span>
+<span id="cb68-8"><a href="free-space.html#cb68-8" aria-hidden="true" tabindex="-1"></a>tax.clean <span class="ot">=</span> tax[<span class="fu">row.names</span>(tax) <span class="sc">%in%</span> <span class="fu">colnames</span>(OTU.clean),]</span>
+<span id="cb68-9"><a href="free-space.html#cb68-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Separating the taxonomy table so each level has its own column</span></span>
+<span id="cb68-10"><a href="free-space.html#cb68-10" aria-hidden="true" tabindex="-1"></a>tax.clean <span class="ot">=</span> <span class="fu">separate</span>(tax.clean, Taxonomy, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;Domain&quot;</span>, <span class="st">&quot;Phylum&quot;</span>, <span class="st">&quot;Class&quot;</span>, <span class="st">&quot;Order&quot;</span>, <span class="st">&quot;Family&quot;</span>, <span class="st">&quot;Genus&quot;</span>, <span class="st">&quot;Species&quot;</span>, <span class="st">&quot;Strain&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>)</span>
+<span id="cb68-11"><a href="free-space.html#cb68-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing the &quot;Size&quot;, &quot;Strain&quot; and &quot;OTU&quot; columns because these are now row names</span></span>
+<span id="cb68-12"><a href="free-space.html#cb68-12" aria-hidden="true" tabindex="-1"></a>tax.clean <span class="ot">=</span> tax.clean[,<span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(tax.clean) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;Strain&quot;</span>, <span class="st">&quot;OTU&quot;</span>))]</span>
+<span id="cb68-13"><a href="free-space.html#cb68-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Making sure the three datasets have samples in the same order</span></span>
+<span id="cb68-14"><a href="free-space.html#cb68-14" aria-hidden="true" tabindex="-1"></a>OTU.clean <span class="ot">=</span> OTU.clean[<span class="fu">order</span>(<span class="fu">row.names</span>(OTU.clean)),]</span>
+<span id="cb68-15"><a href="free-space.html#cb68-15" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">=</span> meta[<span class="fu">order</span>(<span class="fu">row.names</span>(meta)),]</span>
+<span id="cb68-16"><a href="free-space.html#cb68-16" aria-hidden="true" tabindex="-1"></a>SCFA <span class="ot">=</span> SCFA[<span class="fu">order</span>(<span class="fu">row.names</span>(SCFA)),]</span>
+<span id="cb68-17"><a href="free-space.html#cb68-17" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed to make the analysis reproducible</span></span>
+<span id="cb68-18"><a href="free-space.html#cb68-18" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8765</span>)</span></code></pre></div>
+<p><strong>Looking at the alpha diversity</strong> <br>
+Alpha diversity is the diversity <em>within</em> a sample. It looks at richness, which is the <em>amount</em> of OTU’s in each sample, and at evenness, which is how evenly the different OTU’s are distributed within the sample. <br></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="free-space.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a 2x2 plot environment so we can see all 4 metrics at once</span></span>
+<span id="cb69-2"><a href="free-space.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb69-3"><a href="free-space.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the four metrics</span></span>
+<span id="cb69-4"><a href="free-space.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meta<span class="sc">$</span>shannon, <span class="at">main =</span> <span class="st">&quot;Shannon diversity&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb69-5"><a href="free-space.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meta<span class="sc">$</span>simpson, <span class="at">main =</span> <span class="st">&quot;Simpson diversity&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb69-6"><a href="free-space.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meta<span class="sc">$</span>chao, <span class="at">main =</span> <span class="st">&quot;Chao richness&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">breaks =</span> <span class="dv">15</span>)</span>
+<span id="cb69-7"><a href="free-space.html#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meta<span class="sc">$</span>ace, <span class="at">main =</span> <span class="st">&quot;ACE richness&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">breaks =</span> <span class="dv">15</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/looking%20at%20the%20alpha%20diversity-1.png" width="672" />
+<br>
+None of the data are normally distributed. Simpson diversity is very often skewed as seen in this histogram, so we’ll calculate 1/Simpson and plot the metrics again.
+<br></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="free-space.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a 2x2 environment</span></span>
+<span id="cb70-2"><a href="free-space.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb70-3"><a href="free-space.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the four metrics again</span></span>
+<span id="cb70-4"><a href="free-space.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meta<span class="sc">$</span>shannon, <span class="at">main =</span> <span class="st">&quot;Shannon diversity&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb70-5"><a href="free-space.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="dv">1</span><span class="sc">/</span>meta<span class="sc">$</span>simpson, <span class="at">main =</span> <span class="st">&quot;Inverse Simpson diversity&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb70-6"><a href="free-space.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meta<span class="sc">$</span>chao, <span class="at">main =</span> <span class="st">&quot;Chao richness&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">breaks =</span> <span class="dv">15</span>)</span>
+<span id="cb70-7"><a href="free-space.html#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meta<span class="sc">$</span>ace, <span class="at">main =</span> <span class="st">&quot;ACE richness&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">breaks =</span> <span class="dv">15</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<br>
+Now the Simpson diversity is distributed similarly to the other richness metrics.
+<br>
+Next, we’ll test the four metrics for normal distribution.
+<br></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="free-space.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(meta<span class="sc">$</span>shannon)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  meta$shannon
+## W = 0.91511, p-value = 0.0456</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="free-space.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="dv">1</span><span class="sc">/</span>meta<span class="sc">$</span>simpson)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  1/meta$simpson
+## W = 0.74821, p-value = 4.69e-05</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="free-space.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(meta<span class="sc">$</span>chao)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  meta$chao
+## W = 0.80636, p-value = 0.0003749</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="free-space.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(meta<span class="sc">$</span>ace)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  meta$ace
+## W = 0.83017, p-value = 0.0009573</code></pre>
+<p><br>
+None of the richness metrics are normally distributed, which was to be expected from the graphs we’ve seen. So we cannot run any tests that assume the data is normally distributed.
+<br>
+For illustration purposes, we’ll run the ANOVA test with the Shannon’s diversity because that’s the closest to normally distributed. We’ll look at if age impacts the Shannon diversity of the fecal microbiota.
+<br></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="free-space.html#cb79-1" aria-hidden="true" tabindex="-1"></a>aov.shannon.age <span class="ot">=</span> <span class="fu">aov</span>(shannon <span class="sc">~</span> AgeGroup, <span class="at">data =</span> meta)</span>
+<span id="cb79-2"><a href="free-space.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov.shannon.age)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## AgeGroup     2  42.98  21.489   103.4 1.35e-11 ***
+## Residuals   21   4.36   0.208                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><br>
+We’ll run Tukey’s honest significance test to do pairwise comparisons between groups and correct for multiple comparisons.
+<br></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="free-space.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov.shannon.age)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = shannon ~ AgeGroup, data = meta)
+## 
+## $AgeGroup
+##             diff        lwr       upr   p adj
+## 2w-1yr -3.270063 -3.8446230 -2.695503 0.0e+00
+## 8w-1yr -1.830903 -2.4054628 -1.256342 2.0e-07
+## 8w-2w   1.439160  0.8646001  2.013720 8.5e-06</code></pre>
+<p><br>
+It’s clear that all age groups have significantly different diversity. In a plot, we can clearly see that <em>diversity</em> increases with ages.
+<br></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="free-space.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-ordering the groups</span></span>
+<span id="cb83-2"><a href="free-space.html#cb83-2" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>AgeGroup.ord <span class="ot">=</span> <span class="fu">factor</span>(meta<span class="sc">$</span>AgeGroup, <span class="fu">c</span>(<span class="st">&quot;2w&quot;</span>, <span class="st">&quot;8w&quot;</span>, <span class="st">&quot;1yr&quot;</span>))</span>
+<span id="cb83-3"><a href="free-space.html#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Returning the plot area to 1x1</span></span>
+<span id="cb83-4"><a href="free-space.html#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb83-5"><a href="free-space.html#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the diversity</span></span>
+<span id="cb83-6"><a href="free-space.html#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(shannon <span class="sc">~</span> AgeGroup.ord, <span class="at">data =</span> meta, </span>
+<span id="cb83-7"><a href="free-space.html#cb83-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Shannon&#39;s diversity&quot;</span>,</span>
+<span id="cb83-8"><a href="free-space.html#cb83-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Age group&quot;</span>) <span class="co"># Added the xlab myself because it looks better :)</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/plotting%20the%20diversity-1.png" width="672" />
+<br>
+To illustrate some non-parametric tests, we’ll use Chao’s richness estimate. Age is categorical, so we’ll use Kruskal-Wallis.
+<br></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="free-space.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(chao <span class="sc">~</span> AgeGroup, <span class="at">data =</span> meta)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  chao by AgeGroup
+## Kruskal-Wallis chi-squared = 19.28, df = 2, p-value = 6.507e-05</code></pre>
+<p><br>
+We can also test pairwise within age groups with Wilcoxon Rank Sum Tests.
+<br></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="free-space.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.wilcox.test</span>(meta<span class="sc">$</span>chao, meta<span class="sc">$</span>AgeGroup, <span class="at">p.adjust.method =</span> <span class="st">&quot;fdr&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using Wilcoxon rank sum exact test 
+## 
+## data:  meta$chao and meta$AgeGroup 
+## 
+##    1yr     2w     
+## 2w 0.00023 -      
+## 8w 0.00023 0.00186
+## 
+## P value adjustment method: fdr</code></pre>
+<p><br>
+Just like the diversity, <strong>richness</strong> also increases with age.
+<br></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="free-space.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a 1x1 plot environment</span></span>
+<span id="cb88-2"><a href="free-space.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb88-3"><a href="free-space.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the richness</span></span>
+<span id="cb88-4"><a href="free-space.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(chao <span class="sc">~</span> AgeGroup.ord, <span class="at">data =</span> meta,</span>
+<span id="cb88-5"><a href="free-space.html#cb88-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Chao richness&quot;</span>,</span>
+<span id="cb88-6"><a href="free-space.html#cb88-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Age group&quot;</span>) <span class="co"># Again, added the xlab myself for aesthetics :)</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/plotting%20the%20richness-1.png" width="672" /></p>
 
 </div>
 </div>

@@ -14,7 +14,7 @@ This was the third assignment for our portfolio. We had to apply the Guerrilla a
 
 ```{r setup3, include=FALSE}
 library(tidyverse)
-# Install.packages("fs")
+# install.packages("fs")
 library(fs)
 library(here)
 ```

@@ -29,6 +29,8 @@ https://grunwaldlab.github.io/analysis_of_microbiome_community_data_in_r/04--man
 - Python?
 
 ## Course: Introduction to the statistical analysis of microbiome data in R
+Link to the course: https://www.nicholas-ollberding.com/post/introduction-to-the-statistical-analysis-of-microbiome-data-in-r/
+
 In this course, we examined the differences in microbiota between patients with and without chronic fatigue syndrome.
 The aspects that were looked at were: <br>
 Taxonomic relative abundance <br>
@@ -47,7 +49,7 @@ if(any(!.inst)) {
 }
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
-BiocManager::install(.bioc_packages, version = "3.14") #Changed 3.9 to 3.14
+BiocManager::install(.bioc_packages, version = "3.15") #Changed 3.9 to 3.15
 devtools::install_github("adw96/breakaway")
 devtools::install_github(repo = "malucalle/selbal") #changed UVic-omics to malucalle
 ```
@@ -149,6 +151,8 @@ group_data <- list(control_otu, cf_otu)
 
 Since the P-value of the HMP test is nearly 1, we cannot reject the null hypothesis that there is no statistical significant distribution of phyla between the two groups.
 
+__Looking at the hierarchical clustering in the samples__
+<br>
 ```{r looking at hierarchical clustering, message=FALSE, warning=FALSE}
 # Extracting the OTU table
 ps_rel_otu <- data.frame(phyloseq::otu_table(ps_rel_abund))
@@ -175,7 +179,205 @@ plot_heatmap(controls)
 __Looking at the alpha diversity__
 <br>
 Alpha diversity looks at the diversity _within_ a sample and how the observed OTU's are distributed.
-```{r}
+```{r, message=FALSE, warning=FALSE}
+# Plotting the observed richness
+ggplot(data = data.frame("total_reads" = phyloseq::sample_sums(ps),
+                         "observed" = phyloseq::estimate_richness(ps, measures = "Observed")[, 1]),
+       aes(x = total_reads, y = observed)) +
+  geom_point() +
+  geom_smooth(method="lm", se = FALSE) +
+  labs(x = "\nTotal Reads", y = "Observed richness\n")
+```
 
+Now we're going to subsample the reads, plot them and test for group differences
+<br>
+```{r, message=FALSE, warning=FALSE}
+# Subsample reads
+(ps_rare <- phyloseq::rarefy_even_depth(ps, rngseed = 123, replace = FALSE))
+head(phyloseq::sample_sums(ps_rare))
+# Making a dataframe with the adiv measures, another package to analyse and measure biodiversity
+adiv <- data.frame("Observed" = phyloseq::estimate_richness(ps_rare, measures = "Observed"),
+"Shannon" = phyloseq::estimate_richness(ps_rare, measures = "Shannon"),
+"PD" = picante::pd(samp = data.frame(t(data.frame(phyloseq::otu_table(ps_rare)))), include.root = FALSE, tree=phyloseq::phy_tree(ps_rare))[, 1],
+"Status" = phyloseq::sample_data(ps_rare)$Status) # Zelf "include.root = FALSE" toegevoegd, anders kreeg ik steeds een error
+head(adiv)
+# Plotting the adiv measures
+adiv %>% gather(key = metric, value = value, c("Observed", "Shannon", "PD")) %>%
+  mutate(metric = factor(metric, levels = c("Observed", "Shannon", "PD"))) %>%
+  ggplot(aes(x = Status, y = value)) +
+  geom_boxplot(outlier.color = NA) +
+  geom_jitter(aes(color = Status), height = 0, width = 0.2) +
+  labs(x = "", y = "") +
+  facet_wrap(~metric, scales = "free") +
+  theme(legend.position = "none")
+# Summarising the data
+adiv %>% group_by(Status) %>% 
+  dplyr::summarise(median_observed = median(Observed),
+                   median_shannon = median(Shannon),
+                   median_pd = median(PD))
+# Performing the Wilcoxon tests for the three estimates
+wilcox.test(Observed ~ Status, data = adiv, exact = FALSE, conf.int = TRUE)
+wilcox.test(Shannon ~ Status, data = adiv, conf.int = TRUE)
+wilcox.test(PD ~ Status, data = adiv, conf.int = TRUE)
+```
+
+__Looking at the beta diversity__
+<br>
+Beta diversity looks at the diversity _between_ samples and how it's similar or dissimilar.
+```{r,message=FALSE, warning=FALSE}
+# Transforming the Total Read Counts according to the Centered Log Ratio method
+(ps_clr <- microbiome::transform(ps, "clr"))
+phyloseq::otu_table(ps)[1:5, 1:5] # Old OTU table
+phyloseq::otu_table(ps_clr)[1:5, 1:5] # New OTU table
+# The value are now the dominance for each taxa relative to the geometric mean of all taxa on the logarithmic scale
+```
+<br>
+<br>
+
+## Course: Microbiota analysis in R
+Link to the course: https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html
+<br>
+<br>
+In this course, we will be looking at the fecal bacterial microbiota of 8 calves at ages 2 weeks, 8 weeks and 1 year old and correlating them with variables such as weight gain and gastrointestinal short chain fatty acids, SCFA.
+<br>
+```{r downloading and loading the packages, message=FALSE, warning=FALSE}
+# install.packages("ape")
+library(ape)
+library(dplyr)
+library(ggplot2)
+library(gplots)
+library(lme4)
+library(phangorn)
+library(plotly)
+library(tidyr)
+library(here)
+library(vegan)
+# install.packages("VennDiagram")
+library(VennDiagram)
+# Installed Java from: https://www.java.com/en/download/manual.jsp
+# Installed Java JDk from: https://www.oracle.com/java/technologies/downloads/#jdk18-windows
+# install.packages("rJava")
+library(rJava)
+# install.packages("venneuler")
+library(venneuler)
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+# BiocManager::install(version = "3.15") # Instead of source("https://bioconductor.org/biocLite.R")
+# BiocManager::install("phyloseq") # Instead of biocLite("phyloseq") ?
+```
+
+```{r reading in the data, message=FALSE, warning=FALSE}
+# Downloaded the data from: https://github.com/kdillmcfarland/workshops_UW_Madison/tree/master/Microbiota_analysis_R/Data
+OTU = read.table("Data/example.final.an.unique_list.0.03.norm.shared.txt", header = TRUE, sep = "\t")
+tax = read.table("Data/example.final.an.unique_list.0.03.cons.taxonomy.txt", header = TRUE, sep = "\t")
+meta = read.table("Data/example.metadata.txt", header = TRUE, row.names = 1, sep = "\t")
+SCFA = read.table("Data/example.SCFA.txt", header = TRUE, row.names = 1, sep = "\t")
+```
+
+```{r data wrangling, message=FALSE, warning=FALSE}
+# Setting the "Group" column as row names in the OTU dataset
+row.names(OTU) = OTU$Group
+# Removing the columns that are not OTU counts
+OTU.clean = OTU[,-which(names(OTU) %in% c("label", "numOtus", "Group"))]
+# Setting the "OTU" column as row names in the taxonomy table
+row.names(tax) = tax$OTU
+# Removing the OTU's that aren't present in the OTU.clean dataset
+tax.clean = tax[row.names(tax) %in% colnames(OTU.clean),]
+# Separating the taxonomy table so each level has its own column
+tax.clean = separate(tax.clean, Taxonomy, into = c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species", "Strain"), sep = ";")
+# Removing the "Size", "Strain" and "OTU" columns because these are now row names
+tax.clean = tax.clean[,-which(names(tax.clean) %in% c("Size", "Strain", "OTU"))]
+# Making sure the three datasets have samples in the same order
+OTU.clean = OTU.clean[order(row.names(OTU.clean)),]
+meta = meta[order(row.names(meta)),]
+SCFA = SCFA[order(row.names(SCFA)),]
+# set.seed to make the analysis reproducible
+set.seed(8765)
+```
+
+__Looking at the alpha diversity__ <br>
+Alpha diversity is the diversity _within_ a sample. It looks at richness, which is the _amount_ of OTU's in each sample, and at evenness, which is how evenly the different OTU's are distributed within the sample. <br>
+```{r looking at the alpha diversity, message=FALSE, warning=FALSE}
+# Creating a 2x2 plot environment so we can see all 4 metrics at once
+par(mfrow = c(2,2))
+# Plotting the four metrics
+hist(meta$shannon, main = "Shannon diversity", xlab = "", breaks = 10)
+hist(meta$simpson, main = "Simpson diversity", xlab = "", breaks = 10)
+hist(meta$chao, main = "Chao richness", xlab = "", breaks = 15)
+hist(meta$ace, main = "ACE richness", xlab = "", breaks = 15)
+```
+<br>
+None of the data are normally distributed. Simpson diversity is very often skewed as seen in this histogram, so we'll calculate 1/Simpson and plot the metrics again.
+<br>
+```{r, message=FALSE, warning=FALSE}
+# Creating a 2x2 environment
+par(mfrow = c(2,2))
+# Plotting the four metrics again
+hist(meta$shannon, main = "Shannon diversity", xlab = "", breaks = 10)
+hist(1/meta$simpson, main = "Inverse Simpson diversity", xlab = "", breaks = 10)
+hist(meta$chao, main = "Chao richness", xlab = "", breaks = 15)
+hist(meta$ace, main = "ACE richness", xlab = "", breaks = 15)
+```
+<br>
+Now the Simpson diversity is distributed similarly to the other richness metrics.
+<br>
+Next, we'll test the four metrics for normal distribution.
+<br>
+```{r normality tests, message=FALSE, warning=FALSE}
+shapiro.test(meta$shannon)
+shapiro.test(1/meta$simpson)
+shapiro.test(meta$chao)
+shapiro.test(meta$ace)
+```
+<br>
+None of the richness metrics are normally distributed, which was to be expected from the graphs we've seen. So we cannot run any tests that assume the data is normally distributed.
+<br>
+For illustration purposes, we'll run the ANOVA test with the Shannon's diversity because that's the closest to normally distributed. We'll look at if age impacts the Shannon diversity of the fecal microbiota.
+<br>
+```{r Anova, message=FALSE, warning=FALSE}
+aov.shannon.age = aov(shannon ~ AgeGroup, data = meta)
+summary(aov.shannon.age)
+```
+<br>
+We'll run Tukey's honest significance test to do pairwise comparisons between groups and correct for multiple comparisons.
+<br>
+```{r TukeyHSD, message=FALSE, warning=FALSE}
+TukeyHSD(aov.shannon.age)
+```
+<br>
+It's clear that all age groups have significantly different diversity. In a plot, we can clearly see that _diversity_ increases with ages.
+<br>
+```{r plotting the diversity, message=FALSE, warning=FALSE}
+# Re-ordering the groups
+meta$AgeGroup.ord = factor(meta$AgeGroup, c("2w", "8w", "1yr"))
+# Returning the plot area to 1x1
+par(mfrow = c(1,1))
+# Plotting the diversity
+boxplot(shannon ~ AgeGroup.ord, data = meta, 
+        ylab = "Shannon's diversity",
+        xlab = "Age group") # Added the xlab myself because it looks better :)
+```
+<br>
+To illustrate some non-parametric tests, we'll use Chao's richness estimate. Age is categorical, so we'll use Kruskal-Wallis.
+<br>
+```{r Kruskal-Wallis, message=FALSE, warning=FALSE}
+kruskal.test(chao ~ AgeGroup, data = meta)
+```
+<br>
+We can also test pairwise within age groups with Wilcoxon Rank Sum Tests.
+<br>
+```{r Wilcoxon Rank Sum Tests, message=FALSE, warning=FALSE}
+pairwise.wilcox.test(meta$chao, meta$AgeGroup, p.adjust.method = "fdr")
+```
+<br>
+Just like the diversity, __richness__ also increases with age.
+<br>
+```{r plotting the richness, message=FALSE, warning=FALSE}
+# Creating a 1x1 plot environment
+par(mfrow = c(1,1))
+# Plotting the richness
+boxplot(chao ~ AgeGroup.ord, data = meta,
+        ylab = "Chao richness",
+        xlab = "Age group") # Again, added the xlab myself for aesthetics :)
 ```
 
