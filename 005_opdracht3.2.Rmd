@@ -238,7 +238,7 @@ phyloseq::otu_table(ps_clr)[1:5, 1:5] # New OTU table
 Link to the course: https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html
 <br>
 <br>
-In this course, we will be looking at the fecal bacterial microbiota of 8 calves at ages 2 weeks, 8 weeks and 1 year old and correlating them with variables such as weight gain and gastrointestinal short chain fatty acids, SCFA.
+In this course, we will be looking at the fecal bacterial microbiota of 8 calves at ages 2 weeks, 8 weeks and 1 year old and correlating them with variables such as weight gain, expressed as Average Daily Gain in Kilograms(ADGKG), and gastrointestinal short chain fatty acids, SCFA.
 <br>
 ```{r downloading and loading the packages, message=FALSE, warning=FALSE}
 # install.packages("ape")
@@ -260,8 +260,8 @@ library(VennDiagram)
 library(rJava)
 # install.packages("venneuler")
 library(venneuler)
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
+# if (!require("BiocManager", quietly = TRUE))
+    # install.packages("BiocManager")
 # BiocManager::install(version = "3.15") # Instead of source("https://bioconductor.org/biocLite.R")
 # BiocManager::install("phyloseq") # Instead of biocLite("phyloseq") ?
 ```
@@ -380,4 +380,53 @@ boxplot(chao ~ AgeGroup.ord, data = meta,
         ylab = "Chao richness",
         xlab = "Age group") # Again, added the xlab myself for aesthetics :)
 ```
-
+<br>
+Average Daily Gain is a continuous variable, so we'll use a linear model to visualise it.
+<br>
+We'll use Shannon's diversity again to run some tests that are meant for normally distributed data. We'll take a look at if the ADG impacts the Shannon diversity of the fecal microbiota.
+<br>
+```{r glm and lm, message=FALSE, warning=FALSE}
+glm.shannon.ADG = glm(shannon ~ ADGKG, data = meta)
+summary(glm.shannon.ADG)
+```
+<br>
+This shows that the intercept of our model is signficantly different from 0, bu the slope is not, and the slope is our variable of interest.
+<br>
+Next, let's plot the glm.
+<br>
+```{r plotting the glm, message=FALSE, warning=FALSE}
+plot(shannon ~ ADGKG, data = meta)
+abline(glm.shannon.ADG)
+```
+<br>
+To illustrate non-normally distributed data, we'll use Chao's richness estimate again. We'll first use the Gaussian distribution, but we already know this isn't a good fit.
+<br>
+```{r plotting Gaussian, message=FALSE, warning=FALSE}
+gaussian.chao.adg = glm(chao ~ADGKG, data = meta, family = "gaussian")
+par(mfrow = c(1,2))
+plot(gaussian.chao.adg, which = c(1,2))
+```
+<br>
+Next, we'll plot the quasipoisson distribuiton.
+<br>
+```{r plotting quasipoisson, message=FALSE, warning=FALSE}
+qp.chao.ADG = glm(chao ~ ADGKG, data = meta, family = "quasipoisson")
+par(mfrow = c(1,2))
+plot(qp.chao.ADG, which = c(1,2))
+```
+<br>
+The quasipoisson distribution fits much better than the Gaussian distribution, so we'll use quasipoisson for further calculations.
+<br>
+```{r, message=FALSE, warning=FALSE}
+summary(qp.chao.ADG)
+```
+<br>
+We'll plot Chao and ADGKG again, to look at the correlation.
+<br>
+```{r plotting Chao and ADGKG, message=FALSE, warning=FALSE}
+par(mfrow = c(1,1))
+plot(log(chao) ~ ADGKG, data = meta, ylab = "ln(Chao's richness)")
+abline(qp.chao.ADG)
+```
+<br>
+Looking at the graph, there is nog significant correlation between Chao's richness and the Average Daily Gain.

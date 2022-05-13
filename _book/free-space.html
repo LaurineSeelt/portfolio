@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-12" />
+<meta name="date" content="2022-05-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -534,7 +534,7 @@ Beta diversity looks at the diversity <em>between</em> samples and how it’s si
 <p>Link to the course: <a href="https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html</a>
 <br>
 <br>
-In this course, we will be looking at the fecal bacterial microbiota of 8 calves at ages 2 weeks, 8 weeks and 1 year old and correlating them with variables such as weight gain and gastrointestinal short chain fatty acids, SCFA.
+In this course, we will be looking at the fecal bacterial microbiota of 8 calves at ages 2 weeks, 8 weeks and 1 year old and correlating them with variables such as weight gain, expressed as Average Daily Gain in Kilograms(ADGKG), and gastrointestinal short chain fatty acids, SCFA.
 <br></p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="free-space.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;ape&quot;)</span></span>
 <span id="cb66-2"><a href="free-space.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
@@ -555,8 +555,8 @@ In this course, we will be looking at the fecal bacterial microbiota of 8 calves
 <span id="cb66-17"><a href="free-space.html#cb66-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rJava)</span>
 <span id="cb66-18"><a href="free-space.html#cb66-18" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;venneuler&quot;)</span></span>
 <span id="cb66-19"><a href="free-space.html#cb66-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(venneuler)</span>
-<span id="cb66-20"><a href="free-space.html#cb66-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb66-21"><a href="free-space.html#cb66-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb66-20"><a href="free-space.html#cb66-20" aria-hidden="true" tabindex="-1"></a><span class="co"># if (!require(&quot;BiocManager&quot;, quietly = TRUE))</span></span>
+<span id="cb66-21"><a href="free-space.html#cb66-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># install.packages(&quot;BiocManager&quot;)</span></span>
 <span id="cb66-22"><a href="free-space.html#cb66-22" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(version = &quot;3.15&quot;) # Instead of source(&quot;https://bioconductor.org/biocLite.R&quot;)</span></span>
 <span id="cb66-23"><a href="free-space.html#cb66-23" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(&quot;phyloseq&quot;) # Instead of biocLite(&quot;phyloseq&quot;) ?</span></span></code></pre></div>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="free-space.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Downloaded the data from: https://github.com/kdillmcfarland/workshops_UW_Madison/tree/master/Microbiota_analysis_R/Data</span></span>
@@ -702,7 +702,93 @@ Just like the diversity, <strong>richness</strong> also increases with age.
 <span id="cb88-4"><a href="free-space.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(chao <span class="sc">~</span> AgeGroup.ord, <span class="at">data =</span> meta,</span>
 <span id="cb88-5"><a href="free-space.html#cb88-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Chao richness&quot;</span>,</span>
 <span id="cb88-6"><a href="free-space.html#cb88-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Age group&quot;</span>) <span class="co"># Again, added the xlab myself for aesthetics :)</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/plotting%20the%20richness-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/plotting%20the%20richness-1.png" width="672" />
+<br>
+Average Daily Gain is a continuous variable, so we’ll use a linear model to visualise it.
+<br>
+We’ll use Shannon’s diversity again to run some tests that are meant for normally distributed data. We’ll take a look at if the ADG impacts the Shannon diversity of the fecal microbiota.
+<br></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="free-space.html#cb89-1" aria-hidden="true" tabindex="-1"></a>glm.shannon.ADG <span class="ot">=</span> <span class="fu">glm</span>(shannon <span class="sc">~</span> ADGKG, <span class="at">data =</span> meta)</span>
+<span id="cb89-2"><a href="free-space.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm.shannon.ADG)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = shannon ~ ADGKG, data = meta)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.49110  -1.11216  -0.01749   1.53658   1.84728  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  3.62565    1.01390   3.576  0.00169 **
+## ADGKG       -0.03407    0.97805  -0.035  0.97253   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 2.151815)
+## 
+##     Null deviance: 47.343  on 23  degrees of freedom
+## Residual deviance: 47.340  on 22  degrees of freedom
+## AIC: 90.412
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p><br>
+This shows that the intercept of our model is signficantly different from 0, bu the slope is not, and the slope is our variable of interest.
+<br>
+Next, let’s plot the glm.
+<br></p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="free-space.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(shannon <span class="sc">~</span> ADGKG, <span class="at">data =</span> meta)</span>
+<span id="cb91-2"><a href="free-space.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(glm.shannon.ADG)</span></code></pre></div>
+<p><img src="_main_files/figure-html/plotting%20the%20glm-1.png" width="672" />
+<br>
+To illustrate non-normally distributed data, we’ll use Chao’s richness estimate again. We’ll first use the Gaussian distribution, but we already know this isn’t a good fit.
+<br></p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="free-space.html#cb92-1" aria-hidden="true" tabindex="-1"></a>gaussian.chao.adg <span class="ot">=</span> <span class="fu">glm</span>(chao <span class="sc">~</span>ADGKG, <span class="at">data =</span> meta, <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span>)</span>
+<span id="cb92-2"><a href="free-space.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb92-3"><a href="free-space.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gaussian.chao.adg, <span class="at">which =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/plotting%20Gaussian-1.png" width="672" />
+<br>
+Next, we’ll plot the quasipoisson distribuiton.
+<br></p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="free-space.html#cb93-1" aria-hidden="true" tabindex="-1"></a>qp.chao.ADG <span class="ot">=</span> <span class="fu">glm</span>(chao <span class="sc">~</span> ADGKG, <span class="at">data =</span> meta, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>)</span>
+<span id="cb93-2"><a href="free-space.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb93-3"><a href="free-space.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(qp.chao.ADG, <span class="at">which =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/plotting%20quasipoisson-1.png" width="672" />
+<br>
+The quasipoisson distribution fits much better than the Gaussian distribution, so we’ll use quasipoisson for further calculations.
+<br></p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="free-space.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(qp.chao.ADG)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = chao ~ ADGKG, family = &quot;quasipoisson&quot;, data = meta)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -24.36  -17.05  -10.66   18.81   26.91  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   6.4528     0.5561  11.605 7.54e-11 ***
+## ADGKG        -0.1859     0.5438  -0.342    0.736    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for quasipoisson family taken to be 374.2485)
+## 
+##     Null deviance: 8117.2  on 23  degrees of freedom
+## Residual deviance: 8074.4  on 22  degrees of freedom
+## AIC: NA
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p><br>
+We’ll plot Chao and ADGKG again, to look at the correlation.
+<br></p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="free-space.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb96-2"><a href="free-space.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(chao) <span class="sc">~</span> ADGKG, <span class="at">data =</span> meta, <span class="at">ylab =</span> <span class="st">&quot;ln(Chao&#39;s richness)&quot;</span>)</span>
+<span id="cb96-3"><a href="free-space.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(qp.chao.ADG)</span></code></pre></div>
+<p><img src="_main_files/figure-html/plotting%20Chao%20and%20ADGKG-1.png" width="672" />
+<br>
+Looking at the graph, there is nog significant correlation between Chao’s richness and the Average Daily Gain.</p>
 
 </div>
 </div>
