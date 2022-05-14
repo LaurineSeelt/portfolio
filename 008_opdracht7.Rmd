@@ -25,10 +25,31 @@ dengue <- read_csv(here("data/dengue_data.csv"), skip = 11)
 gapminder <- read_builtin("gapminder")
 ```
 
-The flu and dengue data wasn't tidy yet, so I solved that by ..
+The flu and dengue data wasn't tidy yet, so I solved that by using the pivot_longer command to create the column "country" and "cases" in each of the datasets. That way, each country, date and number of cases had its own column. <br>
 The gapminder data was tidy already, so I didn't change anything about that.
 <br>
-```{r}
+```{r making the data tidy, message=FALSE, warning=FALSE}
+dengue_tidy <- pivot_longer(data = dengue, cols = c("Argentina", "Bolivia", "Brazil", "India", "Indonesia", "Mexico", "Philippines", "Singapore", "Thailand", "Venezuela"), names_to = "country", values_to = "dengue_cases")
+flu_tidy <- pivot_longer(data = flu, cols = c("Argentina", "Australia", "Austria", "Belgium", "Bolivia", "Brazil", "Bulgaria", "Canada", "Chile", "France", "Germany", "Hungary", "Japan", "Mexico", "Netherlands", "New Zealand", "Norway", "Paraguay", "Peru", "Poland", "Romania", "Russia", "South Africa", "Spain", "Sweden", "Switzerland", "Ukraine", "United States", "Uruguay"), names_to = "country", values_to = "flu_cases")
+```
+<br>
+Next, I changed the flu and dengue data some more. I separated the Data column into the three columns "Year", "Month" and "Day".
+<br>
+```{r some data wrangling, message=FALSE, warning=FALSE}
+flu_tidy <- separate(flu_tidy, Date, into = c("year", "month", "day"), sep = "-")
+dengue_tidy<- separate(dengue_tidy, Date, into = c("year", "month", "day"), sep = "-")
+flu_tidy$country <- as.factor(flu_tidy$country)
+flu_tidy$year <- as.numeric(flu_tidy$year)
+dengue_tidy$country <- as.factor(dengue_tidy$country)
+dengue_tidy$year <- as.numeric(dengue_tidy$year)
+gapminder$country <- as.factor(gapminder$country)
+dengue_tidy <- as.data.frame(dengue_tidy)
+# dengue_tidy <- dengue_tidy %>% group_by(year, country) %>% summarise(mean_dengue_cases = mean(dengue_cases))
+# flu_tidy <- flu_tidy %>% group_by(country, year) %>% summarise(mean_flu_cases = mean(flu_cases))
+# dengue_tidy %>% group_by(country, year) %>% sum(dengue_tidy$dengue_cases)
+dengue_tidy <- dengue_tidy %>% group_by(country, year) %>% summarise_each(funs(sum), dengue_cases)
+flu_tidy <- flu_tidy %>% group_by(country, year) %>% summarise_each(funs(sum), flu_cases)
+# Thanks to https://stackoverflow.com/questions/25089665/error-only-defined-on-a-data-frame-with-all-numeric-variables-with-ddply-on-lar for the summarise_each command :)
 
 ```
 

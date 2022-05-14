@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-13" />
+<meta name="date" content="2022-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,13 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="reading-two-different-studies-and-recreating-some-of-the-code.html"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#part-2"><i class="fa fa-check"></i><b>3.2</b> Part 2</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="cleaning-up-according-to-the-guerrilla-analytics-framework.html"><a href="cleaning-up-according-to-the-guerrilla-analytics-framework.html"><i class="fa fa-check"></i><b>4</b> Cleaning up according to the Guerrilla analytics framework</a></li>
-<li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> CV</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="cv.html"><a href="cv.html#persoonlijke-informatie"><i class="fa fa-check"></i><b>5.1</b> <strong>Persoonlijke informatie</strong></a></li>
-<li class="chapter" data-level="5.2" data-path="cv.html"><a href="cv.html#opleiding"><i class="fa fa-check"></i><b>5.2</b> <strong>Opleiding</strong></a></li>
-<li class="chapter" data-level="5.3" data-path="cv.html"><a href="cv.html#ervaringskills"><i class="fa fa-check"></i><b>5.3</b> <strong>Ervaring/skills</strong></a></li>
-<li class="chapter" data-level="5.4" data-path="cv.html"><a href="cv.html#talen"><i class="fa fa-check"></i><b>5.4</b> <strong>Talen</strong></a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> CV</a></li>
 <li class="chapter" data-level="6" data-path="free-space.html"><a href="free-space.html"><i class="fa fa-check"></i><b>6</b> Free space</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="free-space.html"><a href="free-space.html#course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r"><i class="fa fa-check"></i><b>6.1</b> Course: Introduction to the statistical analysis of microbiome data in R</a></li>
@@ -174,18 +168,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="working-with-dbeaver-and-sql" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">9</span> Working with DBeaver and SQL<a href="working-with-dbeaver-and-sql.html#working-with-dbeaver-and-sql" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="working-with-dbeaver-and-sql.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb97-2"><a href="working-with-dbeaver-and-sql.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb97-3"><a href="working-with-dbeaver-and-sql.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
-<span id="cb97-4"><a href="working-with-dbeaver-and-sql.html#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="working-with-dbeaver-and-sql.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="working-with-dbeaver-and-sql.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb3-3"><a href="working-with-dbeaver-and-sql.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb3-4"><a href="working-with-dbeaver-and-sql.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code></pre></div>
 <p>First, I read in the flu, dengue and gapminder data.
 <br></p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="working-with-dbeaver-and-sql.html#cb98-1" aria-hidden="true" tabindex="-1"></a>flu <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/flu_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
-<span id="cb98-2"><a href="working-with-dbeaver-and-sql.html#cb98-2" aria-hidden="true" tabindex="-1"></a>dengue <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/dengue_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
-<span id="cb98-3"><a href="working-with-dbeaver-and-sql.html#cb98-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_builtin</span>(<span class="st">&quot;gapminder&quot;</span>)</span></code></pre></div>
-<p>The flu and dengue data wasn’t tidy yet, so I solved that by ..
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="working-with-dbeaver-and-sql.html#cb4-1" aria-hidden="true" tabindex="-1"></a>flu <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/flu_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
+<span id="cb4-2"><a href="working-with-dbeaver-and-sql.html#cb4-2" aria-hidden="true" tabindex="-1"></a>dengue <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/dengue_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
+<span id="cb4-3"><a href="working-with-dbeaver-and-sql.html#cb4-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_builtin</span>(<span class="st">&quot;gapminder&quot;</span>)</span></code></pre></div>
+<p>The flu and dengue data wasn’t tidy yet, so I solved that by using the pivot_longer command to create the column “country” and “cases” in each of the datasets. That way, each country, date and number of cases had its own column.
 The gapminder data was tidy already, so I didn’t change anything about that.
 <br></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="working-with-dbeaver-and-sql.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> dengue, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Indonesia&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Philippines&quot;</span>, <span class="st">&quot;Singapore&quot;</span>, <span class="st">&quot;Thailand&quot;</span>, <span class="st">&quot;Venezuela&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;country&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;dengue_cases&quot;</span>)</span>
+<span id="cb5-2"><a href="working-with-dbeaver-and-sql.html#cb5-2" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> flu, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Australia&quot;</span>, <span class="st">&quot;Austria&quot;</span>, <span class="st">&quot;Belgium&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;Bulgaria&quot;</span>, <span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Chile&quot;</span>, <span class="st">&quot;France&quot;</span>, <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Hungary&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Netherlands&quot;</span>, <span class="st">&quot;New Zealand&quot;</span>, <span class="st">&quot;Norway&quot;</span>, <span class="st">&quot;Paraguay&quot;</span>, <span class="st">&quot;Peru&quot;</span>, <span class="st">&quot;Poland&quot;</span>, <span class="st">&quot;Romania&quot;</span>, <span class="st">&quot;Russia&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Spain&quot;</span>, <span class="st">&quot;Sweden&quot;</span>, <span class="st">&quot;Switzerland&quot;</span>, <span class="st">&quot;Ukraine&quot;</span>, <span class="st">&quot;United States&quot;</span>, <span class="st">&quot;Uruguay&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;country&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;flu_cases&quot;</span>)</span></code></pre></div>
+<p><br>
+Next, I changed the flu and dengue data some more. I separated the Dat column into the three columns “Year”, “Month” and “Day”.
+<br></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="working-with-dbeaver-and-sql.html#cb6-1" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">separate</span>(flu_tidy, Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb6-2"><a href="working-with-dbeaver-and-sql.html#cb6-2" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="ot">&lt;-</span> <span class="fu">separate</span>(dengue_tidy, Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb6-3"><a href="working-with-dbeaver-and-sql.html#cb6-3" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(flu_tidy<span class="sc">$</span>country)</span>
+<span id="cb6-4"><a href="working-with-dbeaver-and-sql.html#cb6-4" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(flu_tidy<span class="sc">$</span>year)</span>
+<span id="cb6-5"><a href="working-with-dbeaver-and-sql.html#cb6-5" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dengue_tidy<span class="sc">$</span>country)</span>
+<span id="cb6-6"><a href="working-with-dbeaver-and-sql.html#cb6-6" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>year)</span>
+<span id="cb6-7"><a href="working-with-dbeaver-and-sql.html#cb6-7" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>month)</span>
+<span id="cb6-8"><a href="working-with-dbeaver-and-sql.html#cb6-8" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>day)</span>
+<span id="cb6-9"><a href="working-with-dbeaver-and-sql.html#cb6-9" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(gapminder<span class="sc">$</span>country)</span>
+<span id="cb6-10"><a href="working-with-dbeaver-and-sql.html#cb6-10" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dengue_tidy)</span>
+<span id="cb6-11"><a href="working-with-dbeaver-and-sql.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># dengue_tidy &lt;- dengue_tidy %&gt;% group_by(year, country) %&gt;% summarise(mean_dengue_cases = mean(dengue_cases))</span></span>
+<span id="cb6-12"><a href="working-with-dbeaver-and-sql.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># flu_tidy &lt;- flu_tidy %&gt;% group_by(country, year) %&gt;% summarise(mean_flu_cases = mean(flu_cases))</span></span>
+<span id="cb6-13"><a href="working-with-dbeaver-and-sql.html#cb6-13" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country, year)</span></code></pre></div>
+<pre><code>## # A tibble: 6,590 × 5
+## # Groups:   country, year [140]
+##     year month   day country     dengue_cases
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;
+##  1  2002    12    29 Argentina         NA    
+##  2  2002    12    29 Bolivia            0.101
+##  3  2002    12    29 Brazil             0.073
+##  4  2002    12    29 India              0.062
+##  5  2002    12    29 Indonesia          0.101
+##  6  2002    12    29 Mexico            NA    
+##  7  2002    12    29 Philippines       NA    
+##  8  2002    12    29 Singapore          0.059
+##  9  2002    12    29 Thailand          NA    
+## 10  2002    12    29 Venezuela         NA    
+## # … with 6,580 more rows</code></pre>
 
 </div>
             </section>

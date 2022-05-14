@@ -243,6 +243,7 @@ In this course, we will be looking at the fecal bacterial microbiota of 8 calves
 ```{r downloading and loading the packages, message=FALSE, warning=FALSE}
 # install.packages("ape")
 library(ape)
+library(tidyverse)
 library(dplyr)
 library(ggplot2)
 library(gplots)
@@ -259,7 +260,7 @@ library(VennDiagram)
 # install.packages("rJava")
 library(rJava)
 # install.packages("venneuler")
-library(venneuler)
+# library(venneuler) # R kapt er steeds mee als ik deze wil laden
 # if (!require("BiocManager", quietly = TRUE))
     # install.packages("BiocManager")
 # BiocManager::install(version = "3.15") # Instead of source("https://bioconductor.org/biocLite.R")
@@ -430,3 +431,71 @@ abline(qp.chao.ADG)
 ```
 <br>
 Looking at the graph, there is nog significant correlation between Chao's richness and the Average Daily Gain.
+<br>
+To test if age and ADG impacts diversity, we'll conduct an ANOVA test.
+<br>
+```{r, message=FALSE, warning=FALSE}
+aov.shannon.all = aov(shannon ~ AgeGroup*ADGKG, data = meta)
+summary(aov.shannon.all)
+```
+<br>
+We can see that the interaction between age and ADG does not significantly impact Shannon's diversity, so we'll remove that variable and run the test again.
+<br>
+```{r, message=FALSE, warning=FALSE}
+aov.shannon.all2 = aov(shannon ~ AgeGroup+ADGKG, data = meta)
+summary(aov.shannon.all2)
+```
+<br>
+This test tells us that only age impacts Shannon's diversity significantly, but we do not know which age groups differ significantly from eachother. To test this, we can run TukeyHSD with just age.
+<br>
+```{r TukeyHSD2, message=FALSE, warning=FALSE}
+TukeyHSD(aov.shannon.all)
+```
+<br>
+With this test, however, ADGKG is ignored because it's continuous. <br>
+We'll run the glm instead.
+<br>
+```{r glm1, message=FALSE, warning=FALSE}
+glm.shannon.all = glm(shannon ~ AgeGroup*ADGKG, data = meta)
+summary(glm.shannon.all)
+```
+<br>
+We can see that none of the interaction terms, which are AgeGroup2w:ADGKG and AgeGroup8w:ADGKG, are significant. So we'll remove these, by changing AgeGroup*ADGKG to AgeGroup+ADGKG, and run the glm again.
+<br>
+```{r glm2, message=FALSE, warning=FALSE}
+glm.shannon.all2 = glm(shannon ~ AgeGroup+ADGKG, data = meta)
+summary(glm.shannon.all2)
+```
+<br>
+Now that we've removed the interaction terms, the glm model shows age as significant.
+<br>
+This can also be done with non-normally distributed data, like Chao's richness.
+<br>
+```{r glm3, message=FALSE, warning=FALSE}
+qp.chao.all = glm(chao ~ AgeGroup*ADGKG, data = meta, family = "quasipoisson")
+summary(qp.chao.all)
+```
+<br>
+Just like the Shannon's diversity, the interaction terms are not significant, so we'll remove those and run the glm again.
+<br>
+```{r glm4, message=FALSE, warning=FALSE}
+qp.chao.all2 = glm(chao ~ AgeGroup+ADGKG, data = meta, family = "quasipoisson")
+summary(qp.chao.all2)
+```
+<br>
+As we can see, age is now significant for richness aswell.
+<br>
+We sampled the same animals over time, so this is a repeated measures design. We can add this component with (1|animal) in the lmer function.
+<br>
+```{r, message=FALSE, warning=FALSE}
+rm.shannon.all = lmer(shannon ~ AgeGroup+ADGKG + (1|Animal), data = meta)
+summary(rm.shannon.all)
+```
+<br>
+Very little, 0.0379, of the variance is explained by the animal random effect. This means that we don't have to include the repeated measures in our final model, but it did need to be checked!
+<br>
+In conclusion on the alpha diversity: The diversity and richness of the fecal microbiota increases as the dairy cows age. Animal growth, measured by ADG, does not correlate with the diversity or richness of the fecal community.
+<br>
+<br>
+__Looking at the beta diversity__ <br>
+Beta diversity looks at the similarity or dissimilarity _between_ samples.
