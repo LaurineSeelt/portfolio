@@ -265,6 +265,7 @@ library(rJava)
     # install.packages("BiocManager")
 # BiocManager::install(version = "3.15") # Instead of source("https://bioconductor.org/biocLite.R")
 # BiocManager::install("phyloseq") # Instead of biocLite("phyloseq") ?
+library(phyloseq)
 ```
 
 ```{r reading in the data, message=FALSE, warning=FALSE}
@@ -498,4 +499,158 @@ In conclusion on the alpha diversity: The diversity and richness of the fecal mi
 <br>
 <br>
 __Looking at the beta diversity__ <br>
-Beta diversity looks at the similarity or dissimilarity _between_ samples.
+Beta diversity looks at the dissimilarity _between_ samples, instead of within a sample, like the alpha diversity.
+<br>
+First, we'll calculate the non-metric multidimensional scaling using the Bray-Curtis metric. This metric takes into account the presence or absence of OTU's and the abundance of the OTU's that are present in the samples. So, this metric looks at richness and diversity.
+<br>
+```{r, message=FALSE, warning=FALSE}
+BC.nmds = metaMDS(OTU.clean, distance = "bray", k=2, trymax = 1000)
+```
+<br>
+We've reached a convergent solution at around 20 iterations, and the stress is very low, 0.06. That means that 2 axis are sufficient to plot our data.
+<br>
+We'll plot our data with different colors for each age group.
+<br>
+```{r, message=FALSE, warning=FALSE}
+par(mfrow = c(1,1))
+# Creating a blank plot for the nmds
+plot(BC.nmds, type = "n", main = "Bray-Curtis")
+# Adding the points
+points(BC.nmds, display = "sites", pch = 20, col=c("blue", "green", "red"))[meta$AgeGroup] # [Meta$AgeGroup] buiten haakjes gehaald
+# Adding a legend
+legend(-5.5, 2.5, legend = c("2w", "8w", "1yr"), col=c("green", "red", "blue"), pch = 20)
+```
+<br>
+We can also calculate the nMDS for the Jaccard metric. This metric only looks at the presence or absence of OTU's, so it only looks at richness.
+<br>
+```{r, message=FALSE, warning=FALSE}
+J.nmds = metaMDS(OTU.clean, distance = "jaccard", k=2, trymax = 1000)
+```
+<br>
+With this metric, we've also reached a convergent solution after 20 iterations. The stress is also very low for this metric, 0.06. So, we'll plot this metric with 2 axis aswell.
+<br>
+```{r}
+plot(J.nmds, type = "n", main = "Jaccard")
+points(J.nmds, display = "sites", pch = 20, col=c("blue", "green", "red"))[meta$AgeGroup]
+legend(-3, 1.5, legend=c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+```
+<br>
+The values in the plot are somewhat different, but the distributions are very similar. That's because Jaccard = 2xBray-Curtis/(1+Bray-Curtis).
+<br>
+We can also plot the standard error ellipses of the nMDS data. We'll plot the 99% confidence interval of the Bray-Curtis metric.
+<br>
+```{r, message=FALSE, warning=FALSE}
+plot(BC.nmds, type = "n", main = "Bray-Curtis")
+legend(-5.5, 2.5, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+# Ellipse for 2 weeks
+ordiellipse(BC.nmds, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "green", draw = "polygon", alpha = 200, show.groups = c("2w"), border = FALSE)
+# Ellipse for 8 weeks
+ordiellipse(BC.nmds, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "red", draw = "polygon", alpha = 200, show.groups = c("8w"), border = FALSE)
+# ELLipse for 1 year
+ordiellipse(BC.nmds, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "blue", draw = "polygon", alpha = 200, show.groups = c("1yr"), border = FALSE)
+```
+<br>
+If the stress is high, over 0.3, it's better to increase to 3 axes.
+<br>
+We'll first calculate the Bray-Curtis nMDS for a 3-axis plot.
+<br>
+```{r, message=FALSE, warning=FALSE}
+BC.nmds.3D = metaMDS(OTU.clean, distance = "bray", k=3, trymax=1000)
+```
+<br>
+We'll extract the x, y and z for the nMDS, and then plot them.
+<br>
+```{r, message=FALSE, warning=FALSE}
+BCxyz = scores(BC.nmds.3D, display = "sites")
+BCxyz
+plot_ly(x=BCxyz[,1], y=BCxyz[,2], z=BCxyz[,3], type = "scatter3d", mode = "markers", color = meta$AgeGroup, colors = c("blue", "green", "red"))
+```
+<br>
+3D plots are difficult to interpret in articles, so many authors choose to create two 2D plots instead.
+<br>
+```{r, message=FALSE, warning=FALSE}
+par(mfrow = c(1,2))
+# Plotting axis 1 and 2, which are x and y
+plot(BCxyz[,1], BCxyz[,2], main = "Bray-Curtis 1:2", pch = 20, col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-5.4, 3, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+# Plotting axis 1 and 3, which are x and z
+plot(BCxyz[,1], BCxyz[,3], main = "Bray-Curtis 1:3", pch = 20, col = c("blue", "green", "red"))[meta$AgeGroup]
+```
+<br>
+The most common type of beta-diversity metric is UniFrac distances. This metric takes phylogenetic relationships into account, as opposed to Bray-Curtis and Jaccard. So, with UniFrac, samples with different OTU's from the same genus will be more similar than samples with OTU's from different genera. The drawback of UniFrac is that it's sensitive to low abundance OTU's.
+<br>
+To plot UniFrac, we first have to make a phyloseq object. That means we need OTU.clean, meta and tax.clean data. After we've created the three separate objects, we'll merge them into one.
+<br>
+```{r making a phyloseq object, message=FALSE, warning=FALSE}
+OTU.UF = otu_table(as.matrix(OTU.clean), taxa_are_rows = FALSE)
+tax.UF = tax_table(as.matrix(tax.clean))
+meta.UF = sample_data(meta)
+# Merging them into an object of class phyloseq
+physeq = phyloseq(OTU.UF, tax.UF, meta.UF)
+```
+<br>
+To add the phylogenetic component to UniFrac, we need a rooted phylogenetic tree of the OTU's. In this workshop, it had already been calculated and stored in the dataset 'NJ.tree.Rdata'. So, we'll load this data and add it to the physeq object. Then, we'll look at the tree and its components.
+<br>
+```{r loading and adding the tree, message=FALSE, warning=FALSE}
+load("Data/NJ.tree.Rdata") # Downloaded it from GitHub and stored it in the folder "Data"
+physeq.tree = merge_phyloseq(physeq, NJ.tree)
+physeq.tree
+```
+<br>
+Next, we'll calculate the _weighted_ UniFrac and ordinate it into nMDS.
+<br>
+```{r, message=FALSE, warning=FALSE}
+wUF.ordu = ordinate(physeq.tree, method = "NMDS", distance = "unifrac", weighted = TRUE)
+```
+<br>
+Let's plot the UniFrac nMDS.
+<br>
+```{r, message=FALSE, warning=FALSE}
+par(mfrow = c(1,1))
+plot(wUF.ordu, type = "n", main = "Weighted UniFrac")
+points(wUF.ordu, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(0.3, 0.15, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+```
+<br>
+We can also plot it with ggplot2.
+<br>
+```{r, message=FALSE, warning=FALSE}
+plot_ordination(physeq.tree, wUF.ordu, type = "sites", color = "AgeGroup")+
+  scale_colour_manual(values = c("2w"="green", "8w"="red", "1yr"="blue"))+
+  theme_bw()+
+  ggtitle("Weighted UniFrac")
+```
+<br>
+The Unweighted UniFrac can also be calculated and plotted.
+<br>
+```{r, message=FALSE, warning=FALSE}
+uwUF.ordu = ordinate(physeq.tree, method = "NMDS", distance = "unifrac", weighted = FALSE)
+plot_ordination(physeq.tree, uwUF.ordu, type = "sites", color = "AgeGroup")+
+  scale_colour_manual(values = c("2w" = "green", "8w" = "red", "1yr" = "blue"))+
+  theme_bw()+
+  ggtitle("Unweighted UniFrac")
+```
+<br>
+We can also plot the ellipses of the Weighted UniFrac distances.
+<br>
+```{r, message=FALSE, warning=FALSE}
+plot(wUF.ordu, type = "n", main = "Weighted UniFrac")
+legend(0.3, 0.15, legend = c("2w","8w","1yr"), col = c("pink", "purple", "blue"), pch = 20)
+# Ellipse for 2 weeks
+ordiellipse(wUF.ordu, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "pink", draw = "polygon", alpha = 200, show.groups = c("2w"), border = FALSE)
+# Ellipse for 8 weeks
+ordiellipse(wUF.ordu, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "purple", draw = "polygon", alpha = 200, show.groups = c("8w"), border = FALSE)
+# Ellipse for 1 year
+ordiellipse(wUF.ordu, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "blue", draw = "polygon", alpha = 200, show.groups = c("1yr"), border = FALSE)
+```
+<br>
+Ellipses can also be plotted with ggplot2, although they look a bit different.
+<br>
+```{r, message=FALSE, warning=FALSE}
+plot_ordination(physeq.tree, wUF.ordu, type = "sites", color = "AgeGroup")+
+  scale_colour_manual(values = c("2w" = "pink", "8w" = "purple", "1yr" = "blue"))+
+  theme_bw()+
+  stat_ellipse()+
+  ggtitle("Weighted UniFrac")
+```
+
