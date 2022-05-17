@@ -15,47 +15,89 @@ library(tidyverse)
 library(readxl)
 library(dslabs)
 library(here)
+library(DBI)
+# install.packages("RPostgres")
+library(RPostgres)
 ```
 
 First, I read in the flu, dengue and gapminder data.
 <br>
 ```{r, message=FALSE, warning=FALSE}
-flu <- read_csv(here("data/flu_data.csv"), skip = 11)
-dengue <- read_csv(here("data/dengue_data.csv"), skip = 11)
+flu <- read_csv(here("data/data_raw/flu_data.csv"), skip = 11)
+dengue <- read_csv(here("data/data_raw/dengue_data.csv"), skip = 11)
 gapminder <- read_builtin("gapminder")
 ```
 
 The flu and dengue data wasn't tidy yet, so I solved that by using the pivot_longer command to create the column "country" and "cases" in each of the datasets. That way, each country, date and number of cases had its own column. <br>
-The gapminder data was tidy already, so I didn't change anything about that.
+The gapminder dataset was already tidy.
 <br>
 ```{r making the data tidy, message=FALSE, warning=FALSE}
-dengue_tidy <- pivot_longer(data = dengue, cols = c("Argentina", "Bolivia", "Brazil", "India", "Indonesia", "Mexico", "Philippines", "Singapore", "Thailand", "Venezuela"), names_to = "country", values_to = "dengue_cases")
-flu_tidy <- pivot_longer(data = flu, cols = c("Argentina", "Australia", "Austria", "Belgium", "Bolivia", "Brazil", "Bulgaria", "Canada", "Chile", "France", "Germany", "Hungary", "Japan", "Mexico", "Netherlands", "New Zealand", "Norway", "Paraguay", "Peru", "Poland", "Romania", "Russia", "South Africa", "Spain", "Sweden", "Switzerland", "Ukraine", "United States", "Uruguay"), names_to = "country", values_to = "flu_cases")
+dengue_tidy <- pivot_longer(data = dengue, cols = c("Argentina", "Bolivia", "Brazil", "India", "Indonesia", "Mexico", "Philippines", "Singapore", "Thailand", "Venezuela"), names_to = "country_d", values_to = "dengue_cases")
+flu_tidy <- pivot_longer(data = flu, cols = c("Argentina", "Australia", "Austria", "Belgium", "Bolivia", "Brazil", "Bulgaria", "Canada", "Chile", "France", "Germany", "Hungary", "Japan", "Mexico", "Netherlands", "New Zealand", "Norway", "Paraguay", "Peru", "Poland", "Romania", "Russia", "South Africa", "Spain", "Sweden", "Switzerland", "Ukraine", "United States", "Uruguay"), names_to = "country_f", values_to = "flu_cases")
 ```
 <br>
-Next, I changed the flu and dengue data some more. I separated the Data column into the three columns "Year", "Month" and "Day".
+Next, I changed the flu and dengue data some more. I separated the Data column into the three columns "Year", "Month" and "Day". I also added a d or f after the column name "year", so joining of the datasets in DBeaver will be possible later on.
+In the gapminder dataset, I changed the column "year" to "year_g" to also make joining more easy later on in DBeaver.
 <br>
 ```{r some data wrangling, message=FALSE, warning=FALSE}
-flu_tidy <- separate(flu_tidy, Date, into = c("year", "month", "day"), sep = "-")
-dengue_tidy<- separate(dengue_tidy, Date, into = c("year", "month", "day"), sep = "-")
-flu_tidy$country <- as.factor(flu_tidy$country)
-flu_tidy$year <- as.numeric(flu_tidy$year)
-dengue_tidy$country <- as.factor(dengue_tidy$country)
-dengue_tidy$year <- as.numeric(dengue_tidy$year)
+flu_tidy <- separate(flu_tidy, Date, into = c("year_f", "month", "day"), sep = "-")
+dengue_tidy<- separate(dengue_tidy, Date, into = c("year_d", "month", "day"), sep = "-")
+flu_tidy$country_flu <- as.factor(flu_tidy$country_f)
+flu_tidy$year <- as.numeric(flu_tidy$year_f)
+dengue_tidy$country_dengue <- as.factor(dengue_tidy$country_d)
+dengue_tidy$year <- as.numeric(dengue_tidy$year_d)
 gapminder$country <- as.factor(gapminder$country)
 dengue_tidy <- as.data.frame(dengue_tidy)
-# dengue_tidy <- dengue_tidy %>% group_by(year, country) %>% summarise(mean_dengue_cases = mean(dengue_cases))
-# flu_tidy <- flu_tidy %>% group_by(country, year) %>% summarise(mean_flu_cases = mean(flu_cases))
-# dengue_tidy %>% group_by(country, year) %>% sum(dengue_tidy$dengue_cases)
-dengue_tidy <- dengue_tidy %>% group_by(country, year) %>% summarise_each(funs(sum), dengue_cases)
-flu_tidy <- flu_tidy %>% group_by(country, year) %>% summarise_each(funs(sum), flu_cases)
+flu_tidy <- as.data.frame(flu_tidy)
+dengue_tidy <- dengue_tidy %>% group_by(country_d, year_d) %>% summarise_each(funs(sum), dengue_cases)
+flu_tidy <- flu_tidy %>% group_by(country_f, year_f) %>% summarise_each(funs(sum), flu_cases)
 # Thanks to https://stackoverflow.com/questions/25089665/error-only-defined-on-a-data-frame-with-all-numeric-variables-with-ddply-on-lar for the summarise_each command :)
-
+gapminder <- gapminder %>% rename(year_g = "year")
 ```
 <br>
 Then I saved the three datasets as both .csv files and .rds files.
 <br>
-```{r saving .csv and .rds, message=FALSE, warning=FALSE}
+```{r saving .csv and .rds files, message=FALSE, warning=FALSE}
 write.csv(flu_tidy, "Data//flu_data_tidy.csv", row.names = TRUE)
+write.csv(dengue_tidy, "Data//dengue_data_tidy.csv", row.names = TRUE)
+write.csv(gapminder, "Data//gapminder.csv", row.names = TRUE)
+saveRDS(flu_tidy, file = "flu_data_tidy.rds")
+saveRDS(dengue_tidy, file = "dengue_data_tidy.rds")
+saveRDS(gapminder, file = "gapminder.rds")
 ```
-
+<br>
+Next, I inserted the tables into the "workflowsdb" database in DBeaver.
+<br>
+```{r exporting the files, message=FALSE, warning=FALSE, eval=FALSE}
+con <- dbConnect(RPostgres::Postgres(),
+                 dbname = "workflowsdb",
+                 host = "localhost",
+                 port = "5432",
+                 user = "postgres",
+                 password = "SQL22")
+dbWriteTable(con, "flu_tidy", flu_tidy)
+dbWriteTable(con, "dengue_tidy", dengue_tidy)
+dbWriteTable(con, "gapminder", gapminder)
+dbDisconnect(con)
+```
+<br>
+Then I inspected the contents of the datasets in DBeaver and in R.
+<br>
+```{r inspecting the contents in R, message=FALSE, warning=FALSE}
+# Inspecting the flu_tidy dataset
+flu_tidy %>% arrange(desc(flu_cases))
+flu_tidy$flu_cases %>% min(flu_tidy$flu_cases, na.rm = TRUE)
+flu_tidy$flu_cases %>% max(flu_tidy$flu_cases, na.rm = TRUE)
+# Inspecting the dengue_tidy dataset
+dengue_tidy %>% arrange(desc(dengue_cases))
+dengue_tidy$dengue_cases %>% min(dengue_tidy$dengue_cases, na.rm = TRUE)
+dengue_tidy$dengue_cases %>% max(dengue_tidy$dengue_cases, na.rm = TRUE)
+# Inspecting the gapminder dataset
+gapminder$infant_mortality %>% min(gapminder$infant_mortality, na.rm = TRUE)
+gapminder$infant_mortality %>% max(gapminder$infant_mortality, na.rm = TRUE)
+gapminder$life_expectancy %>% min(gapminder$life_expectancy, na.rm = TRUE)
+gapminder$life_expectancy %>% max(gapminder$life_expectancy, na.rm = TRUE)
+gapminder %>% select(country, year_g, life_expectancy) %>% arrange(desc(life_expectancy))
+gapminder %>% select( country, year_g, infant_mortality) %>% arrange(desc(infant_mortality))
+```
+<br>

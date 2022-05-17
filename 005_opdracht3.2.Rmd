@@ -54,7 +54,7 @@ devtools::install_github("adw96/breakaway")
 devtools::install_github(repo = "malucalle/selbal") #changed UVic-omics to malucalle
 ```
 
-```{r loading the required packages, message=FALSE, warning=FALSE}
+```{r loading the required packages, message=FALSE, warning=FALSE, eval=FALSE}
 library(tidyverse)
 library(phyloseq)
 library(DESeq2)
@@ -70,7 +70,7 @@ library(rms)
 library(breakaway)
 ```
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Reading in the data
 ps <- readRDS("Data/Data_raw/ps_giloteaux_2016.rds")
 # Sorting the samples on total read count
@@ -85,7 +85,7 @@ phyloseq::sample_data(ps)$Status <- factor(phyloseq::sample_data(ps)$Status, lev
 ps %>% sample_data %>% dplyr::count(Status)
 ```
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Counting all the phyla in the dataset
 table(phyloseq::tax_table(ps)[, "Phylum"])
 # Convert the samples to relative abundances
@@ -114,7 +114,7 @@ sort(ps_rel_abund@tax_table[["Phylum"]], decreasing = TRUE) %>%  phyloseq::plot_
         axis.ticks.x = element_blank())
 ```
 
-```{r generating boxplots according to the groups, message=FALSE, warning=FALSE}
+```{r generating boxplots according to the groups, message=FALSE, warning=FALSE, eval=FALSE}
 # Grouping the taxa according to phylum and renaming the groups
 ps_phylum <- phyloseq::tax_glom(ps, "Phylum")
 phyloseq::taxa_names(ps_phylum) <- phyloseq::tax_table(ps_phylum)[, "Phylum"]
@@ -129,7 +129,7 @@ phyloseq::psmelt(ps_phylum) %>%
   facet_wrap(~ OTU, scales = "free")
 ```
 
-```{r looking at the frequencies of the taxa in both groups, message=FALSE, warning=FALSE}
+```{r looking at the frequencies of the taxa in both groups, message=FALSE, warning=FALSE, eval=FALSE}
 # Making two subsets
 controls <- phyloseq::subset_samples(ps_phylum, Status == "Control")
 cf <- phyloseq::subset_samples(ps_phylum, Status = "Chronic Fatigue")
@@ -153,7 +153,7 @@ Since the P-value of the HMP test is nearly 1, we cannot reject the null hypothe
 
 __Looking at the hierarchical clustering in the samples__
 <br>
-```{r looking at hierarchical clustering, message=FALSE, warning=FALSE}
+```{r looking at hierarchical clustering, message=FALSE, warning=FALSE, eval=FALSE}
 # Extracting the OTU table
 ps_rel_otu <- data.frame(phyloseq::otu_table(ps_rel_abund))
 ps_rel_otu <- t(ps_rel_otu)
@@ -179,7 +179,7 @@ plot_heatmap(controls)
 __Looking at the alpha diversity__
 <br>
 Alpha diversity looks at the diversity _within_ a sample and how the observed OTU's are distributed.
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Plotting the observed richness
 ggplot(data = data.frame("total_reads" = phyloseq::sample_sums(ps),
                          "observed" = phyloseq::estimate_richness(ps, measures = "Observed")[, 1]),
@@ -191,7 +191,7 @@ ggplot(data = data.frame("total_reads" = phyloseq::sample_sums(ps),
 
 Now we're going to subsample the reads, plot them and test for group differences
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Subsample reads
 (ps_rare <- phyloseq::rarefy_even_depth(ps, rngseed = 123, replace = FALSE))
 head(phyloseq::sample_sums(ps_rare))
@@ -224,7 +224,7 @@ wilcox.test(PD ~ Status, data = adiv, conf.int = TRUE)
 __Looking at the beta diversity__
 <br>
 Beta diversity looks at the diversity _between_ samples and how it's similar or dissimilar.
-```{r,message=FALSE, warning=FALSE}
+```{r,message=FALSE, warning=FALSE, eval=FALSE}
 # Transforming the Total Read Counts according to the Centered Log Ratio method
 (ps_clr <- microbiome::transform(ps, "clr"))
 phyloseq::otu_table(ps)[1:5, 1:5] # Old OTU table
@@ -674,7 +674,7 @@ It is harder to visualize continuous variables in the way we've just visualized 
 <br>
 To do that, we'll first fit the variables to our distances. We'll use Bray-Curtis and weighted UniFrac for this, but you can do this with Jaccard aswell and you could also use unweighted UniFrac.
 <br>
-```{r}
+```{r, message=FALSE, warning=FALSE}
 fit.BC = envfit(BC.nmds, meta)
 fit.BC
 ```
@@ -682,15 +682,75 @@ fit.BC
 R has automatically fit every variable into the meta table.
 If we don't want that, we can tell envfit to only run the variables we want.
 <br>
-```{r}
+```{r, message=FALSE, warning=FALSE}
 fit.BC = envfit(BC.nmds, meta[,c("AgeGroup", "ADGKG")])
 fit.BC
 ```
 <br>
 We'll repeat this for the weighted UniFrac.
 <br>
-```{r}
+```{r, message=FALSE, warning=FALSE}
 fit.wUF = envfit(wUF.ordu, meta[,c("AgeGroup", "ADGKG")])
 fit.wUF
+```
+<br>
+We can plot the 2D nMDS with an arrow for the ADG, eventho the ADG isn't a significant variable. Thus, you wouldn't use this figure in a publication or such. We'll do this with the Bray-Curtis dissimilarity.
+<br>
+```{r, message=FALSE, warning=FALSE}
+plot(BC.nmds, type = "n", main = "Bray-Curtis")
+points(BC.nmds, pch = 20, display = "sites", col = c("pink", "purple", "blue"))[meta$AgeGroup]
+legend(-6, 2, legend = c("2w", "8w", "1yr"), col = c("purple", "blue", "pink"), pch = 20)
+plot(fit.BC, col = "black") # Adding the fitted variables
+```
+<br>
+We can also only plot variables with p < 0.05. That'd mean we'd only see the centroids.
+<br>
+```{r, message=FALSE, warning=FALSE}
+plot(BC.nmds, type = "n", main = "Bray-Curtis")
+points(BC.nmds, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-6, 2, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(fit.BC, col = "black", p.max = 0.05)
+```
+<br>
+We can also plot the weighted UniFrac.
+<br>
+```{r, message=FALSE, warning=FALSE}
+plot(wUF.ordu, type = "n", main = "Weighted UniFrac")
+points(wUF.ordu, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(.3, .15, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(fit.wUF, col = "black")
+```
+<br>
+If we fit the OTU.clean data frame to the nMDS, we can add arrows for specific OTU's in the plot. <br>
+If an OTU arrow goes in the same direction as an age group centroid, that OTU tends to increase in abundance in that age group. <br>
+Conversely, if an OTU arrow moves in the opposite direction of an age group centroid, that OTU probably decreases in abundance in that age group. <br>
+We'll only fit the first 10 OTU's from our table, because it takes a long time. <br>
+Then, we'll only plot the significant arrows.
+<br>
+```{r, message=FALSE, warning=FALSE}
+fit.BC.OTU = envfit(BC.nmds, OTU.clean[,1:10])
+fit.BC.OTU
+plot(BC.nmds, type = "n", main = "Bray-Curtis")
+points(BC.nmds, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-6, -1.1, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(fit.BC.OTU, col = "black", p.max = 0.05)
+```
+<br>
+We can also plot summed genera or family groups of OTU's.
+<br>
+```{r, message=FALSE, warning=FALSE}
+# Extracting all the OTU's within the Ruminococcus genus
+OTU.rumino = OTU.clean[,tax.clean$Genus == "g__Ruminococcus"]
+# Summing the abundances of the OTU's into one variable/column
+OTU.rumino$Rumino.sum = rowSums(OTU.rumino)
+# Fitting the Ruminococceae group
+fit.BC.rumino = envfit(BC.nmds, OTU.rumino$Rumino.sum)
+fit.BC.rumino
+# Plotting it
+plot(BC.nmds, type = "n", main = "Bray-Curtis")
+points(BC.nmds, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-6, -1.1, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+# Adding the fitted variables
+plot(fit.BC.rumino, col = "black", labels = c("Ruminococcus"))
 ```
 

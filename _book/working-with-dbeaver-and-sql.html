@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-14" />
+<meta name="date" content="2022-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -140,7 +147,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="reading-two-different-studies-and-recreating-some-of-the-code.html"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#part-2"><i class="fa fa-check"></i><b>3.2</b> Part 2</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="cleaning-up-according-to-the-guerrilla-analytics-framework.html"><a href="cleaning-up-according-to-the-guerrilla-analytics-framework.html"><i class="fa fa-check"></i><b>4</b> Cleaning up according to the Guerrilla analytics framework</a></li>
-<li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> CV</a></li>
+<li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> CV</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="cv.html"><a href="cv.html#persoonlijke-informatie"><i class="fa fa-check"></i><b>5.1</b> <strong>Persoonlijke informatie</strong></a></li>
+<li class="chapter" data-level="5.2" data-path="cv.html"><a href="cv.html#opleiding"><i class="fa fa-check"></i><b>5.2</b> <strong>Opleiding</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="cv.html"><a href="cv.html#ervaringskills"><i class="fa fa-check"></i><b>5.3</b> <strong>Ervaring/skills</strong></a></li>
+<li class="chapter" data-level="5.4" data-path="cv.html"><a href="cv.html#talen"><i class="fa fa-check"></i><b>5.4</b> <strong>Talen</strong></a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="free-space.html"><a href="free-space.html"><i class="fa fa-check"></i><b>6</b> Free space</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="free-space.html"><a href="free-space.html#course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r"><i class="fa fa-check"></i><b>6.1</b> Course: Introduction to the statistical analysis of microbiome data in R</a></li>
@@ -168,51 +181,789 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="working-with-dbeaver-and-sql" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">9</span> Working with DBeaver and SQL<a href="working-with-dbeaver-and-sql.html#working-with-dbeaver-and-sql" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="working-with-dbeaver-and-sql.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-2"><a href="working-with-dbeaver-and-sql.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb3-3"><a href="working-with-dbeaver-and-sql.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
-<span id="cb3-4"><a href="working-with-dbeaver-and-sql.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="working-with-dbeaver-and-sql.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb137-2"><a href="working-with-dbeaver-and-sql.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb137-3"><a href="working-with-dbeaver-and-sql.html#cb137-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb137-4"><a href="working-with-dbeaver-and-sql.html#cb137-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb137-5"><a href="working-with-dbeaver-and-sql.html#cb137-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb137-6"><a href="working-with-dbeaver-and-sql.html#cb137-6" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;RPostgres&quot;)</span></span>
+<span id="cb137-7"><a href="working-with-dbeaver-and-sql.html#cb137-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RPostgres)</span></code></pre></div>
 <p>First, I read in the flu, dengue and gapminder data.
 <br></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="working-with-dbeaver-and-sql.html#cb4-1" aria-hidden="true" tabindex="-1"></a>flu <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/flu_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
-<span id="cb4-2"><a href="working-with-dbeaver-and-sql.html#cb4-2" aria-hidden="true" tabindex="-1"></a>dengue <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/dengue_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
-<span id="cb4-3"><a href="working-with-dbeaver-and-sql.html#cb4-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_builtin</span>(<span class="st">&quot;gapminder&quot;</span>)</span></code></pre></div>
-<p>The flu and dengue data wasn’t tidy yet, so I solved that by using the pivot_longer command to create the column “country” and “cases” in each of the datasets. That way, each country, date and number of cases had its own column.
-The gapminder data was tidy already, so I didn’t change anything about that.
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="working-with-dbeaver-and-sql.html#cb138-1" aria-hidden="true" tabindex="-1"></a>flu <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/data_raw/flu_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
+<span id="cb138-2"><a href="working-with-dbeaver-and-sql.html#cb138-2" aria-hidden="true" tabindex="-1"></a>dengue <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/data_raw/dengue_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
+<span id="cb138-3"><a href="working-with-dbeaver-and-sql.html#cb138-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_builtin</span>(<span class="st">&quot;gapminder&quot;</span>)</span></code></pre></div>
+<p>The flu and dengue data wasn’t tidy yet, so I solved that by using the pivot_longer command to create the column “country” and “cases” in each of the datasets. That way, each country, date and number of cases had its own column. <br>
+The gapminder dataset was already tidy.
 <br></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="working-with-dbeaver-and-sql.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> dengue, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Indonesia&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Philippines&quot;</span>, <span class="st">&quot;Singapore&quot;</span>, <span class="st">&quot;Thailand&quot;</span>, <span class="st">&quot;Venezuela&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;country&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;dengue_cases&quot;</span>)</span>
-<span id="cb5-2"><a href="working-with-dbeaver-and-sql.html#cb5-2" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> flu, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Australia&quot;</span>, <span class="st">&quot;Austria&quot;</span>, <span class="st">&quot;Belgium&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;Bulgaria&quot;</span>, <span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Chile&quot;</span>, <span class="st">&quot;France&quot;</span>, <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Hungary&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Netherlands&quot;</span>, <span class="st">&quot;New Zealand&quot;</span>, <span class="st">&quot;Norway&quot;</span>, <span class="st">&quot;Paraguay&quot;</span>, <span class="st">&quot;Peru&quot;</span>, <span class="st">&quot;Poland&quot;</span>, <span class="st">&quot;Romania&quot;</span>, <span class="st">&quot;Russia&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Spain&quot;</span>, <span class="st">&quot;Sweden&quot;</span>, <span class="st">&quot;Switzerland&quot;</span>, <span class="st">&quot;Ukraine&quot;</span>, <span class="st">&quot;United States&quot;</span>, <span class="st">&quot;Uruguay&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;country&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;flu_cases&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="working-with-dbeaver-and-sql.html#cb139-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> dengue, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Indonesia&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Philippines&quot;</span>, <span class="st">&quot;Singapore&quot;</span>, <span class="st">&quot;Thailand&quot;</span>, <span class="st">&quot;Venezuela&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;country_d&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;dengue_cases&quot;</span>)</span>
+<span id="cb139-2"><a href="working-with-dbeaver-and-sql.html#cb139-2" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> flu, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Australia&quot;</span>, <span class="st">&quot;Austria&quot;</span>, <span class="st">&quot;Belgium&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;Bulgaria&quot;</span>, <span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Chile&quot;</span>, <span class="st">&quot;France&quot;</span>, <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Hungary&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Netherlands&quot;</span>, <span class="st">&quot;New Zealand&quot;</span>, <span class="st">&quot;Norway&quot;</span>, <span class="st">&quot;Paraguay&quot;</span>, <span class="st">&quot;Peru&quot;</span>, <span class="st">&quot;Poland&quot;</span>, <span class="st">&quot;Romania&quot;</span>, <span class="st">&quot;Russia&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Spain&quot;</span>, <span class="st">&quot;Sweden&quot;</span>, <span class="st">&quot;Switzerland&quot;</span>, <span class="st">&quot;Ukraine&quot;</span>, <span class="st">&quot;United States&quot;</span>, <span class="st">&quot;Uruguay&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;country_f&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;flu_cases&quot;</span>)</span></code></pre></div>
 <p><br>
-Next, I changed the flu and dengue data some more. I separated the Dat column into the three columns “Year”, “Month” and “Day”.
+Next, I changed the flu and dengue data some more. I separated the Data column into the three columns “Year”, “Month” and “Day”. I also added a d or f after the column name “year”, so joining of the datasets in DBeaver will be possible later on.
+In the gapminder dataset, I changed the column “year” to “year_g” to also make joining more easy later on in DBeaver.
 <br></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="working-with-dbeaver-and-sql.html#cb6-1" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">separate</span>(flu_tidy, Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span>
-<span id="cb6-2"><a href="working-with-dbeaver-and-sql.html#cb6-2" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="ot">&lt;-</span> <span class="fu">separate</span>(dengue_tidy, Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span>
-<span id="cb6-3"><a href="working-with-dbeaver-and-sql.html#cb6-3" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(flu_tidy<span class="sc">$</span>country)</span>
-<span id="cb6-4"><a href="working-with-dbeaver-and-sql.html#cb6-4" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(flu_tidy<span class="sc">$</span>year)</span>
-<span id="cb6-5"><a href="working-with-dbeaver-and-sql.html#cb6-5" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dengue_tidy<span class="sc">$</span>country)</span>
-<span id="cb6-6"><a href="working-with-dbeaver-and-sql.html#cb6-6" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>year)</span>
-<span id="cb6-7"><a href="working-with-dbeaver-and-sql.html#cb6-7" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>month)</span>
-<span id="cb6-8"><a href="working-with-dbeaver-and-sql.html#cb6-8" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>day)</span>
-<span id="cb6-9"><a href="working-with-dbeaver-and-sql.html#cb6-9" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(gapminder<span class="sc">$</span>country)</span>
-<span id="cb6-10"><a href="working-with-dbeaver-and-sql.html#cb6-10" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dengue_tidy)</span>
-<span id="cb6-11"><a href="working-with-dbeaver-and-sql.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># dengue_tidy &lt;- dengue_tidy %&gt;% group_by(year, country) %&gt;% summarise(mean_dengue_cases = mean(dengue_cases))</span></span>
-<span id="cb6-12"><a href="working-with-dbeaver-and-sql.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># flu_tidy &lt;- flu_tidy %&gt;% group_by(country, year) %&gt;% summarise(mean_flu_cases = mean(flu_cases))</span></span>
-<span id="cb6-13"><a href="working-with-dbeaver-and-sql.html#cb6-13" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country, year)</span></code></pre></div>
-<pre><code>## # A tibble: 6,590 × 5
-## # Groups:   country, year [140]
-##     year month   day country     dengue_cases
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;
-##  1  2002    12    29 Argentina         NA    
-##  2  2002    12    29 Bolivia            0.101
-##  3  2002    12    29 Brazil             0.073
-##  4  2002    12    29 India              0.062
-##  5  2002    12    29 Indonesia          0.101
-##  6  2002    12    29 Mexico            NA    
-##  7  2002    12    29 Philippines       NA    
-##  8  2002    12    29 Singapore          0.059
-##  9  2002    12    29 Thailand          NA    
-## 10  2002    12    29 Venezuela         NA    
-## # … with 6,580 more rows</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="working-with-dbeaver-and-sql.html#cb140-1" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">separate</span>(flu_tidy, Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;year_f&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb140-2"><a href="working-with-dbeaver-and-sql.html#cb140-2" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="ot">&lt;-</span> <span class="fu">separate</span>(dengue_tidy, Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;year_d&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb140-3"><a href="working-with-dbeaver-and-sql.html#cb140-3" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>country_flu <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(flu_tidy<span class="sc">$</span>country_f)</span>
+<span id="cb140-4"><a href="working-with-dbeaver-and-sql.html#cb140-4" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(flu_tidy<span class="sc">$</span>year_f)</span>
+<span id="cb140-5"><a href="working-with-dbeaver-and-sql.html#cb140-5" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>country_dengue <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dengue_tidy<span class="sc">$</span>country_d)</span>
+<span id="cb140-6"><a href="working-with-dbeaver-and-sql.html#cb140-6" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>year_d)</span>
+<span id="cb140-7"><a href="working-with-dbeaver-and-sql.html#cb140-7" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(gapminder<span class="sc">$</span>country)</span>
+<span id="cb140-8"><a href="working-with-dbeaver-and-sql.html#cb140-8" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dengue_tidy)</span>
+<span id="cb140-9"><a href="working-with-dbeaver-and-sql.html#cb140-9" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(flu_tidy)</span>
+<span id="cb140-10"><a href="working-with-dbeaver-and-sql.html#cb140-10" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> dengue_tidy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country_d, year_d) <span class="sc">%&gt;%</span> <span class="fu">summarise_each</span>(<span class="fu">funs</span>(sum), dengue_cases)</span>
+<span id="cb140-11"><a href="working-with-dbeaver-and-sql.html#cb140-11" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> flu_tidy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country_f, year_f) <span class="sc">%&gt;%</span> <span class="fu">summarise_each</span>(<span class="fu">funs</span>(sum), flu_cases)</span>
+<span id="cb140-12"><a href="working-with-dbeaver-and-sql.html#cb140-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Thanks to https://stackoverflow.com/questions/25089665/error-only-defined-on-a-data-frame-with-all-numeric-variables-with-ddply-on-lar for the summarise_each command :)</span></span>
+<span id="cb140-13"><a href="working-with-dbeaver-and-sql.html#cb140-13" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">year_g =</span> <span class="st">&quot;year&quot;</span>)</span></code></pre></div>
+<p><br>
+Then I saved the three datasets as both .csv files and .rds files.
+<br></p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="working-with-dbeaver-and-sql.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(flu_tidy, <span class="st">&quot;Data//flu_data_tidy.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb141-2"><a href="working-with-dbeaver-and-sql.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dengue_tidy, <span class="st">&quot;Data//dengue_data_tidy.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb141-3"><a href="working-with-dbeaver-and-sql.html#cb141-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(gapminder, <span class="st">&quot;Data//gapminder.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb141-4"><a href="working-with-dbeaver-and-sql.html#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(flu_tidy, <span class="at">file =</span> <span class="st">&quot;flu_data_tidy.rds&quot;</span>)</span>
+<span id="cb141-5"><a href="working-with-dbeaver-and-sql.html#cb141-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(dengue_tidy, <span class="at">file =</span> <span class="st">&quot;dengue_data_tidy.rds&quot;</span>)</span>
+<span id="cb141-6"><a href="working-with-dbeaver-and-sql.html#cb141-6" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(gapminder, <span class="at">file =</span> <span class="st">&quot;gapminder.rds&quot;</span>)</span></code></pre></div>
+<p><br>
+Next, I inserted the tables into the “workflowsdb” database in DBeaver.
+<br></p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="working-with-dbeaver-and-sql.html#cb142-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
+<span id="cb142-2"><a href="working-with-dbeaver-and-sql.html#cb142-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dbname =</span> <span class="st">&quot;workflowsdb&quot;</span>,</span>
+<span id="cb142-3"><a href="working-with-dbeaver-and-sql.html#cb142-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>,</span>
+<span id="cb142-4"><a href="working-with-dbeaver-and-sql.html#cb142-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">port =</span> <span class="st">&quot;5432&quot;</span>,</span>
+<span id="cb142-5"><a href="working-with-dbeaver-and-sql.html#cb142-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">user =</span> <span class="st">&quot;postgres&quot;</span>,</span>
+<span id="cb142-6"><a href="working-with-dbeaver-and-sql.html#cb142-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">password =</span> <span class="st">&quot;SQL22&quot;</span>)</span>
+<span id="cb142-7"><a href="working-with-dbeaver-and-sql.html#cb142-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;flu_tidy&quot;</span>, flu_tidy)</span>
+<span id="cb142-8"><a href="working-with-dbeaver-and-sql.html#cb142-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;dengue_tidy&quot;</span>, dengue_tidy)</span>
+<span id="cb142-9"><a href="working-with-dbeaver-and-sql.html#cb142-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;gapminder&quot;</span>, gapminder)</span>
+<span id="cb142-10"><a href="working-with-dbeaver-and-sql.html#cb142-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con)</span></code></pre></div>
+<p><br>
+Then I inspected the contents of the datasets in DBeaver and in R.
+<br></p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="working-with-dbeaver-and-sql.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspecting the flu_tidy dataset</span></span>
+<span id="cb143-2"><a href="working-with-dbeaver-and-sql.html#cb143-2" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(flu_cases))</span></code></pre></div>
+<pre><code>## # A tibble: 406 × 3
+## # Groups:   country_f [29]
+##    country_f     year_f flu_cases
+##    &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 South Africa  2014      155577
+##  2 South Africa  2009      150344
+##  3 Canada        2009      141118
+##  4 South Africa  2013      140671
+##  5 United States 2009      139394
+##  6 South Africa  2012      136519
+##  7 South Africa  2007      135522
+##  8 South Africa  2008      135377
+##  9 United States 2013      130196
+## 10 South Africa  2010      129539
+## # … with 396 more rows</code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="working-with-dbeaver-and-sql.html#cb145-1" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>flu_cases <span class="sc">%&gt;%</span> <span class="fu">min</span>(flu_tidy<span class="sc">$</span>flu_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 106</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="working-with-dbeaver-and-sql.html#cb147-1" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>flu_cases <span class="sc">%&gt;%</span> <span class="fu">max</span>(flu_tidy<span class="sc">$</span>flu_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 155577</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="working-with-dbeaver-and-sql.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspecting the dengue_tidy dataset</span></span>
+<span id="cb149-2"><a href="working-with-dbeaver-and-sql.html#cb149-2" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(dengue_cases))</span></code></pre></div>
+<pre><code>## # A tibble: 140 × 3
+## # Groups:   country_d [10]
+##    country_d   year_d dengue_cases
+##    &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;
+##  1 Venezuela   2010           27.8
+##  2 Venezuela   2014           22.8
+##  3 Thailand    2013           17.3
+##  4 Argentina   2009           16.7
+##  5 Venezuela   2009           15.8
+##  6 Venezuela   2013           15.7
+##  7 Venezuela   2008           15.6
+##  8 Venezuela   2007           15.3
+##  9 Indonesia   2007           15.0
+## 10 Philippines 2010           14.5
+## # … with 130 more rows</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="working-with-dbeaver-and-sql.html#cb151-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>dengue_cases <span class="sc">%&gt;%</span> <span class="fu">min</span>(dengue_tidy<span class="sc">$</span>dengue_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 0.059</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="working-with-dbeaver-and-sql.html#cb153-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>dengue_cases <span class="sc">%&gt;%</span> <span class="fu">max</span>(dengue_tidy<span class="sc">$</span>dengue_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 27.847</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="working-with-dbeaver-and-sql.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspecting the gapminder dataset</span></span>
+<span id="cb155-2"><a href="working-with-dbeaver-and-sql.html#cb155-2" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>infant_mortality <span class="sc">%&gt;%</span> <span class="fu">min</span>(gapminder<span class="sc">$</span>infant_mortality, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 1.5</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="working-with-dbeaver-and-sql.html#cb157-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>infant_mortality <span class="sc">%&gt;%</span> <span class="fu">max</span>(gapminder<span class="sc">$</span>infant_mortality, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 276.9</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="working-with-dbeaver-and-sql.html#cb159-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>life_expectancy <span class="sc">%&gt;%</span> <span class="fu">min</span>(gapminder<span class="sc">$</span>life_expectancy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 13.2</code></pre>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="working-with-dbeaver-and-sql.html#cb161-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>life_expectancy <span class="sc">%&gt;%</span> <span class="fu">max</span>(gapminder<span class="sc">$</span>life_expectancy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 83.9</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="working-with-dbeaver-and-sql.html#cb163-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> <span class="fu">select</span>(country, year_g, life_expectancy) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(life_expectancy))</span></code></pre></div>
+<pre><code>##              country year_g life_expectancy
+## 1   Hong Kong, China   2016           83.90
+## 2   Hong Kong, China   2015           83.73
+## 3   Hong Kong, China   2014           83.56
+## 4   Hong Kong, China   2013           83.38
+## 5            Iceland   2014           83.30
+## 6            Iceland   2015           83.30
+## 7            Iceland   2016           83.30
+## 8              Japan   2016           83.30
+## 9   Hong Kong, China   2012           83.20
+## 10           Iceland   2013           83.20
+## 11             Japan   2015           83.20
+## 12           Iceland   2012           83.10
+## 13             Japan   2014           83.10
+## 14       Switzerland   2016           83.10
+## 15  Hong Kong, China   2011           83.02
+## 16             Japan   2013           83.00
+## 17       Switzerland   2015           83.00
+## 18            Israel   2016           82.91
+## 19           Iceland   2011           82.90
+## 20             Japan   2012           82.90
+## 21       Switzerland   2014           82.90
+## 22  Hong Kong, China   2010           82.84
+## 23           Iceland   2010           82.80
+## 24       Switzerland   2013           82.80
+## 25             Japan   2009           82.70
+## 26             Japan   2010           82.70
+## 27       Switzerland   2012           82.70
+## 28             Spain   2016           82.70
+## 29  Hong Kong, China   2009           82.66
+## 30             Japan   2011           82.60
+## 31       Switzerland   2011           82.60
+## 32             Spain   2015           82.60
+## 33             Japan   2008           82.50
+## 34           Iceland   2009           82.50
+## 35             Spain   2013           82.50
+## 36             Spain   2014           82.50
+## 37  Hong Kong, China   2008           82.49
+## 38             Japan   2007           82.40
+## 39           Iceland   2008           82.40
+## 40         Australia   2012           82.40
+## 41         Australia   2013           82.40
+## 42  Hong Kong, China   2007           82.31
+## 43       Switzerland   2010           82.30
+## 44         Australia   2014           82.30
+## 45         Australia   2015           82.30
+## 46         Australia   2016           82.30
+## 47             Italy   2016           82.30
+## 48        Luxembourg   2016           82.30
+## 49             Japan   2006           82.20
+## 50         Australia   2011           82.20
+## 51             Spain   2012           82.20
+## 52             Italy   2015           82.20
+## 53        Luxembourg   2015           82.20
+## 54             Malta   2016           82.20
+## 55  Hong Kong, China   2006           82.12
+## 56           Iceland   2007           82.10
+## 57            Israel   2012           82.10
+## 58             Italy   2013           82.10
+## 59             Italy   2014           82.10
+## 60        Luxembourg   2014           82.10
+## 61            Sweden   2014           82.10
+## 62            Israel   2015           82.10
+## 63             Malta   2015           82.10
+## 64            Sweden   2015           82.10
+## 65         Singapore   2016           82.10
+## 66            Sweden   2016           82.10
+## 67             Japan   2005           82.00
+## 68       Switzerland   2008           82.00
+## 69       Switzerland   2009           82.00
+## 70         Australia   2010           82.00
+## 71             Italy   2011           82.00
+## 72             Spain   2011           82.00
+## 73             Italy   2012           82.00
+## 74            Israel   2013           82.00
+## 75             Malta   2014           82.00
+## 76            Norway   2014           82.00
+## 77            Norway   2015           82.00
+## 78         Singapore   2015           82.00
+## 79            Norway   2016           82.00
+## 80  Hong Kong, China   2005           81.92
+## 81             Japan   2004           81.90
+## 82             Italy   2010           81.90
+## 83        Luxembourg   2013           81.90
+## 84            Sweden   2013           81.90
+## 85         Singapore   2014           81.90
+## 86            Cyprus   2016           81.90
+## 87            France   2016           81.90
+## 88           Iceland   2006           81.80
+## 89         Australia   2009           81.80
+## 90             Spain   2010           81.80
+## 91            Sweden   2012           81.80
+## 92            Cyprus   2015           81.80
+## 93            France   2015           81.80
+## 94           Ireland   2016           81.80
+## 95             Japan   2003           81.70
+## 96           Iceland   2005           81.70
+## 97       Switzerland   2007           81.70
+## 98            Sweden   2011           81.70
+## 99        Luxembourg   2012           81.70
+## 100           Cyprus   2013           81.70
+## 101           France   2013           81.70
+## 102            Malta   2013           81.70
+## 103        Singapore   2013           81.70
+## 104           Canada   2014           81.70
+## 105           Cyprus   2014           81.70
+## 106           France   2014           81.70
+## 107           Canada   2015           81.70
+## 108          Ireland   2015           81.70
+## 109           Canada   2016           81.70
+## 110 Hong Kong, China   2004           81.68
+## 111            Japan   2002           81.60
+## 112        Australia   2008           81.60
+## 113            Italy   2009           81.60
+## 114           Israel   2010           81.60
+## 115           Sweden   2010           81.60
+## 116           Canada   2011           81.60
+## 117           France   2011           81.60
+## 118           Israel   2011           81.60
+## 119           Canada   2012           81.60
+## 120           France   2012           81.60
+## 121            Malta   2012           81.60
+## 122           Norway   2012           81.60
+## 123        Singapore   2012           81.60
+## 124           Canada   2013           81.60
+## 125           Norway   2013           81.60
+## 126          Ireland   2014           81.60
+## 127          Iceland   2004           81.50
+## 128      Switzerland   2006           81.50
+## 129        Australia   2007           81.50
+## 130            Italy   2008           81.50
+## 131            Spain   2009           81.50
+## 132       Luxembourg   2011           81.50
+## 133        Singapore   2011           81.50
+## 134           Cyprus   2012           81.50
+## 135          Ireland   2013           81.50
+## 136 Hong Kong, China   2003           81.40
+## 137        Australia   2006           81.40
+## 138           France   2010           81.40
+## 139      New Zealand   2013           81.40
+## 140      New Zealand   2014           81.40
+## 141      New Zealand   2015           81.40
+## 142          Austria   2016           81.40
+## 143      New Zealand   2016           81.40
+## 144            Japan   2001           81.30
+## 145          Iceland   2003           81.30
+## 146      Switzerland   2005           81.30
+## 147            Italy   2007           81.30
+## 148           Canada   2010           81.30
+## 149       Luxembourg   2010           81.30
+## 150            Malta   2010           81.30
+## 151        Singapore   2010           81.30
+## 152            Malta   2011           81.30
+## 153           Israel   2014           81.30
+## 154      Netherlands   2014           81.30
+## 155          Austria   2015           81.30
+## 156      Netherlands   2015           81.30
+## 157      Netherlands   2016           81.30
+## 158        Australia   2005           81.20
+## 159            Italy   2006           81.20
+## 160           France   2009           81.20
+## 161       Luxembourg   2009           81.20
+## 162            Malta   2009           81.20
+## 163           Sweden   2009           81.20
+## 164      Netherlands   2013           81.20
+## 165          Austria   2014           81.20
+## 166            Italy   2005           81.10
+## 167           France   2008           81.10
+## 168            Spain   2008           81.10
+## 169           Sweden   2008           81.10
+## 170           Canada   2009           81.10
+## 171           Norway   2010           81.10
+## 172           Cyprus   2011           81.10
+## 173           Norway   2011           81.10
+## 174          Ireland   2012           81.10
+## 175      New Zealand   2012           81.10
+## 176          Austria   2013           81.10
+## 177      South Korea   2016           81.10
+## 178   United Kingdom   2016           81.10
+## 179 Hong Kong, China   2002           81.08
+## 180     Macao, China   2016           81.03
+## 181            Japan   2000           81.00
+## 182          Iceland   2002           81.00
+## 183      Switzerland   2004           81.00
+## 184            Malta   2006           81.00
+## 185           France   2007           81.00
+## 186       Luxembourg   2008           81.00
+## 187           Israel   2009           81.00
+## 188        Singapore   2009           81.00
+## 189          Ireland   2010           81.00
+## 190      Netherlands   2012           81.00
+## 191           Greece   2013           81.00
+## 192           Greece   2014           81.00
+## 193           Greece   2015           81.00
+## 194      South Korea   2015           81.00
+## 195   United Kingdom   2015           81.00
+## 196           Greece   2016           81.00
+## 197         Slovenia   2016           81.00
+## 198        Australia   2004           80.90
+## 199            Italy   2004           80.90
+## 200            Malta   2007           80.90
+## 201           Sweden   2007           80.90
+## 202      Netherlands   2011           80.90
+## 203          Austria   2012           80.90
+## 204      South Korea   2013           80.90
+## 205          Finland   2014           80.90
+## 206      South Korea   2014           80.90
+## 207   United Kingdom   2014           80.90
+## 208          Finland   2015           80.90
+## 209         Slovenia   2015           80.90
+## 210          Finland   2016           80.90
+## 211          Germany   2016           80.90
+## 212         Portugal   2016           80.90
+## 213     Macao, China   2015           80.82
+## 214          Iceland   2001           80.80
+## 215           Sweden   2006           80.80
+## 216            Spain   2007           80.80
+## 217           Canada   2008           80.80
+## 218           Norway   2008           80.80
+## 219           Norway   2009           80.80
+## 220      Netherlands   2010           80.80
+## 221      New Zealand   2010           80.80
+## 222      New Zealand   2011           80.80
+## 223          Finland   2013           80.80
+## 224   United Kingdom   2013           80.80
+## 225         Slovenia   2014           80.80
+## 226          Germany   2015           80.80
+## 227         Portugal   2015           80.80
+## 228 Hong Kong, China   2001           80.73
+## 229            Malta   2005           80.70
+## 230           France   2006           80.70
+## 231            Spain   2006           80.70
+## 232            Malta   2008           80.70
+## 233          Austria   2011           80.70
+## 234      South Korea   2012           80.70
+## 235   United Kingdom   2012           80.70
+## 236          Germany   2013           80.70
+## 237         Portugal   2013           80.70
+## 238          Germany   2014           80.70
+## 239         Portugal   2014           80.70
+## 240     Macao, China   2014           80.61
+## 241            Japan   1999           80.60
+## 242        Australia   2003           80.60
+## 243      Switzerland   2003           80.60
+## 244           Sweden   2005           80.60
+## 245           Canada   2007           80.60
+## 246       Luxembourg   2007           80.60
+## 247           Norway   2007           80.60
+## 248           Israel   2008           80.60
+## 249        Singapore   2008           80.60
+## 250      Netherlands   2009           80.60
+## 251           Cyprus   2010           80.60
+## 252          Ireland   2011           80.60
+## 253      South Korea   2011           80.60
+## 254          Germany   2012           80.60
+## 255           Greece   2012           80.60
+## 256            Japan   1998           80.50
+## 257          Iceland   2000           80.50
+## 258           Canada   2006           80.50
+## 259      New Zealand   2009           80.50
+## 260          Austria   2010           80.50
+## 261          Germany   2011           80.50
+## 262           Greece   2011           80.50
+## 263   United Kingdom   2011           80.50
+## 264          Finland   2012           80.50
+## 265          Belgium   2014           80.50
+## 266          Belgium   2015           80.50
+## 267          Belgium   2016           80.50
+## 268          Denmark   2016           80.50
+## 269            Japan   1997           80.40
+## 270      Switzerland   2002           80.40
+## 271           France   2005           80.40
+## 272           Norway   2006           80.40
+## 273        Singapore   2007           80.40
+## 274          Austria   2008           80.40
+## 275           Greece   2010           80.40
+## 276      South Korea   2010           80.40
+## 277         Portugal   2012           80.40
+## 278          Belgium   2013           80.40
+## 279     Macao, China   2013           80.40
+## 280          Denmark   2015           80.40
+## 281       Costa Rica   2016           80.40
+## 282           Kuwait   2016           80.40
+## 283 Hong Kong, China   2000           80.36
+## 284        Australia   2002           80.30
+## 285            Malta   2004           80.30
+## 286            Spain   2005           80.30
+## 287       Luxembourg   2006           80.30
+## 288           Israel   2007           80.30
+## 289      Netherlands   2008           80.30
+## 290      New Zealand   2008           80.30
+## 291          Austria   2009           80.30
+## 292           Cyprus   2009           80.30
+## 293          Ireland   2009           80.30
+## 294          Germany   2010           80.30
+## 295          Finland   2011           80.30
+## 296          Belgium   2012           80.30
+## 297          Denmark   2012           80.30
+## 298          Denmark   2013           80.30
+## 299         Slovenia   2013           80.30
+## 300          Denmark   2014           80.30
+## 301       Costa Rica   2015           80.30
+## 302           Kuwait   2015           80.30
+## 303            Japan   1996           80.20
+## 304          Iceland   1999           80.20
+## 305      Switzerland   2001           80.20
+## 306           Sweden   2003           80.20
+## 307           France   2004           80.20
+## 308           Sweden   2004           80.20
+## 309           Canada   2005           80.20
+## 310           Norway   2005           80.20
+## 311        Singapore   2006           80.20
+## 312      Netherlands   2007           80.20
+## 313           Greece   2008           80.20
+## 314           Greece   2009           80.20
+## 315   United Kingdom   2010           80.20
+## 316          Belgium   2011           80.20
+## 317         Portugal   2011           80.20
+## 318       Costa Rica   2014           80.20
+## 319           Kuwait   2014           80.20
+## 320     Macao, China   2012           80.19
+## 321        Australia   2001           80.10
+## 322            Italy   2002           80.10
+## 323            Italy   2003           80.10
+## 324            Malta   2003           80.10
+## 325           Canada   2004           80.10
+## 326          Austria   2007           80.10
+## 327          Ireland   2007           80.10
+## 328      New Zealand   2007           80.10
+## 329          Ireland   2008           80.10
+## 330          Germany   2009           80.10
+## 331      South Korea   2009           80.10
+## 332          Belgium   2010           80.10
+## 333         Slovenia   2012           80.10
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 10212 rows ]</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="working-with-dbeaver-and-sql.html#cb165-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> <span class="fu">select</span>( country, year_g, infant_mortality) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(infant_mortality))</span></code></pre></div>
+<pre><code>##                      country year_g infant_mortality
+## 1                      Yemen   1963           276.90
+## 2                      Yemen   1964           270.70
+## 3                      Yemen   1961           269.20
+## 4                      Yemen   1962           263.70
+## 5                      Yemen   1965           263.60
+## 6                      Yemen   1966           256.00
+## 7                      Yemen   1967           247.80
+## 8                      Yemen   1968           239.20
+## 9                       Mali   1960           237.40
+## 10                      Oman   1961           237.20
+## 11                      Mali   1961           231.50
+## 12                     Yemen   1969           230.00
+## 13                      Oman   1962           226.00
+## 14                      Mali   1962           225.20
+## 15                     Yemen   1960           225.00
+## 16              Sierra Leone   1960           223.60
+## 17                     Yemen   1970           221.10
+## 18              Sierra Leone   1961           220.50
+## 19                     Nepal   1960           219.60
+## 20                      Oman   1963           218.70
+## 21                    Malawi   1960           218.20
+## 22              Sierra Leone   1962           217.50
+## 23                  Maldives   1963           217.10
+## 24                     Nepal   1961           216.70
+## 25                      Mali   1963           216.50
+## 26                    Malawi   1961           216.40
+## 27                    Malawi   1962           214.60
+## 28                    Malawi   1964           214.30
+## 29              Sierra Leone   1963           214.20
+## 30                     Nepal   1962           213.30
+## 31                    Malawi   1965           213.30
+## 32                    Malawi   1963           212.90
+## 33                      Mali   1964           212.80
+## 34                     Yemen   1971           212.50
+## 35                    Malawi   1966           212.30
+## 36                   Liberia   1961           212.10
+## 37                   Liberia   1960           212.00
+## 38                    Malawi   1967           211.50
+## 39                   Liberia   1962           211.40
+## 40                  Maldives   1964           211.10
+## 41              Sierra Leone   1964           211.00
+## 42                    Malawi   1968           210.80
+## 43                    Guinea   1961           210.50
+## 44                   Liberia   1963           210.40
+## 45                     Egypt   1960           209.60
+## 46                    Malawi   1969           209.60
+## 47                     Nepal   1963           209.40
+## 48                      Mali   1965           209.20
+## 49                    Guinea   1962           209.10
+## 50                   Liberia   1964           208.80
+## 51             Cote d&#39;Ivoire   1960           208.40
+## 52                    Angola   1960           208.00
+## 53                      Oman   1964           207.90
+## 54                    Malawi   1970           207.70
+## 55                    Guinea   1963           207.60
+## 56              Sierra Leone   1965           207.60
+## 57                   Liberia   1965           206.80
+## 58                    Guinea   1964           206.10
+## 59                      Mali   1966           206.10
+## 60                  Maldives   1965           205.30
+## 61                     Nepal   1964           205.20
+## 62                    Malawi   1971           204.80
+## 63                   Liberia   1966           204.60
+## 64                    Guinea   1965           204.50
+## 65                     Yemen   1972           204.30
+## 66              Sierra Leone   1966           204.20
+## 67             Cote d&#39;Ivoire   1961           203.00
+## 68                      Mali   1967           203.00
+## 69                     Egypt   1961           202.70
+## 70                    Guinea   1966           202.60
+## 71                   Liberia   1967           201.70
+## 72                    Guinea   1967           200.90
+## 73              Sierra Leone   1967           200.80
+## 74                     Nepal   1965           200.70
+## 75                    Malawi   1972           200.60
+## 76                      Mali   1968           200.30
+## 77                   Comoros   1960           200.00
+## 78                  Maldives   1966           199.20
+## 79                    Guinea   1968           199.00
+## 80                   Liberia   1968           198.50
+## 81                      Mali   1969           197.90
+## 82             Cote d&#39;Ivoire   1962           197.70
+## 83                      Oman   1965           197.60
+## 84              Sierra Leone   1968           197.30
+## 85                    Guinea   1969           197.10
+## 86                     Yemen   1973           196.70
+## 87                     Egypt   1962           195.90
+## 88                     Nepal   1966           195.90
+## 89                      Mali   1970           195.70
+## 90                    Malawi   1973           195.50
+## 91                   Nigeria   1964           195.40
+## 92                    Guinea   1970           195.20
+## 93                   Liberia   1969           194.90
+## 94                     Haiti   1960           194.80
+## 95              Sierra Leone   1969           194.10
+## 96                      Mali   1971           193.50
+## 97                    Guinea   1971           193.20
+## 98                  Maldives   1967           193.10
+## 99             Cote d&#39;Ivoire   1963           192.80
+## 100                   Bhutan   1968           192.10
+## 101                 Pakistan   1960           192.00
+## 102                     Iran   1960           191.61
+## 103                    Haiti   1961           191.50
+## 104                     Iran   1967           191.30
+## 105                    Nepal   1967           191.30
+## 106                  Liberia   1970           191.30
+## 107                   Guinea   1972           191.10
+## 108                     Mali   1972           191.10
+## 109                  Nigeria   1965           191.00
+## 110             Sierra Leone   1970           191.00
+## 111                    China   1960           190.00
+## 112                   Malawi   1974           189.90
+## 113                    Egypt   1963           189.40
+## 114                   Guinea   1973           189.10
+## 115                    Yemen   1974           189.00
+## 116                    Haiti   1962           188.30
+## 117                     Mali   1973           188.20
+## 118            Cote d&#39;Ivoire   1964           188.00
+## 119             Sierra Leone   1971           188.00
+## 120                     Oman   1966           187.80
+## 121                  Liberia   1971           187.80
+## 122                  Tunisia   1961           187.50
+## 123                    Benin   1960           186.90
+## 124                 Maldives   1968           186.90
+## 125                  Nigeria   1966           186.80
+## 126                    Nepal   1968           186.80
+## 127                   Guinea   1974           186.80
+## 128                   Bhutan   1969           186.00
+## 129               Mozambique   1965           185.60
+## 130                    Haiti   1963           185.20
+## 131             Sierra Leone   1972           185.20
+## 132               Mozambique   1966           185.00
+## 133                 Pakistan   1961           184.80
+## 134                     Mali   1974           184.80
+## 135                   Guinea   1975           184.50
+## 136                  Liberia   1972           184.40
+## 137               Mozambique   1967           184.10
+## 138                   Malawi   1975           184.00
+## 139                    Benin   1961           183.90
+## 140                     Iran   1961           183.85
+## 141               Mozambique   1968           183.50
+## 142                    Egypt   1964           183.40
+## 143            Cote d&#39;Ivoire   1965           183.30
+## 144               Mozambique   1960           183.00
+## 145                  Nigeria   1962           182.60
+## 146                  Nigeria   1967           182.60
+## 147               Mozambique   1969           182.60
+## 148                    Nepal   1969           182.60
+## 149             Sierra Leone   1973           182.60
+## 150                    Haiti   1964           182.20
+## 151               Mozambique   1970           181.90
+## 152                   Guinea   1976           181.90
+## 153                  Nigeria   1963           181.40
+## 154                   Bhutan   1970           181.20
+## 155               Mozambique   1971           181.20
+## 156                    Yemen   1975           181.20
+## 157                  Liberia   1973           181.00
+## 158                     Mali   1975           180.90
+## 159                    Benin   1962           180.60
+## 160               Mozambique   1964           180.50
+## 161                 Maldives   1969           180.50
+## 162               Mozambique   1972           180.50
+## 163                   Angola   1970           180.00
+## 164             Sierra Leone   1974           180.00
+## 165               Mozambique   1973           179.80
+## 166                    Haiti   1965           179.10
+## 167                   Guinea   1977           179.10
+## 168               Mozambique   1974           179.00
+## 169                  Tunisia   1962           178.70
+## 170            Cote d&#39;Ivoire   1966           178.70
+## 171                    Nepal   1970           178.60
+## 172                     Oman   1967           178.50
+## 173                  Nigeria   1968           178.20
+## 174                 Cambodia   1975           178.20
+## 175                    Egypt   1965           178.10
+## 176                 Pakistan   1962           178.00
+## 177               Mozambique   1975           178.00
+## 178                  Liberia   1974           177.50
+## 179             Sierra Leone   1975           177.50
+## 180                   Malawi   1976           177.50
+## 181               Mozambique   1976           177.20
+## 182                    Benin   1963           177.10
+## 183                     Mali   1976           176.90
+## 184                     Iran   1968           176.80
+## 185               Mozambique   1977           176.40
+## 186                     Iran   1962           176.37
+## 187               Bangladesh   1960           176.30
+## 188                   Bhutan   1971           176.20
+## 189                   Guinea   1978           176.20
+## 190                    Haiti   1966           176.00
+## 191               Mozambique   1978           175.70
+## 192             Sierra Leone   1976           175.30
+## 193               Mozambique   1979           175.10
+## 194                   Bhutan   1960           175.00
+## 195                    Nepal   1971           174.60
+## 196               Mozambique   1980           174.60
+## 197            Cote d&#39;Ivoire   1967           174.20
+## 198                  Liberia   1975           174.20
+## 199               Mozambique   1981           174.10
+## 200         Congo, Dem. Rep.   1960           174.00
+## 201                 Maldives   1970           174.00
+## 202                  Nigeria   1969           173.70
+## 203                    Benin   1964           173.60
+## 204                    Egypt   1966           173.60
+## 205                  Bolivia   1960           173.40
+## 206                  Tunisia   1960           173.40
+## 207               Mozambique   1982           173.30
+## 208             Sierra Leone   1977           173.20
+## 209                   Guinea   1979           173.20
+## 210                    Yemen   1976           173.10
+## 211                    Haiti   1967           172.90
+## 212                     Mali   1977           172.80
+## 213               Mozambique   1983           172.30
+## 214               Bangladesh   1961           171.70
+## 215                 Pakistan   1963           171.70
+## 216                  Liberia   1976           171.30
+## 217                   Bhutan   1972           171.20
+## 218             Sierra Leone   1978           171.20
+## 219                  Liberia   1991           171.20
+## 220                  Tunisia   1963           170.90
+## 221                    Nepal   1972           170.90
+## 222               Mozambique   1984           170.90
+## 223                   Malawi   1977           170.60
+## 224                  Bolivia   1961           170.50
+## 225                  Liberia   1992           170.30
+## 226                    Benin   1965           170.20
+## 227                   Guinea   1980           170.20
+## 228              Timor-Leste   1983           170.20
+## 229                  Liberia   1990           170.10
+## 230                    Egypt   1967           169.90
+## 231            Cote d&#39;Ivoire   1968           169.90
+## 232                    Haiti   1968           169.80
+## 233                     Oman   1968           169.30
+## 234                     Iran   1963           169.26
+## 235             Sierra Leone   1979           169.20
+## 236               Mozambique   1985           169.20
+## 237                  Nigeria   1970           168.90
+## 238                     Mali   1978           168.70
+## 239                  Liberia   1977           168.30
+## 240                  Liberia   1993           167.80
+## 241                  Bolivia   1962           167.70
+## 242                  Liberia   1989           167.70
+## 243               Bangladesh   1962           167.60
+## 244               Mozambique   1986           167.50
+## 245             Sierra Leone   1980           167.30
+## 246                   Guinea   1981           167.30
+## 247                    Nepal   1973           167.20
+## 248                 Maldives   1971           167.10
+## 249                 Cameroon   1960           166.90
+## 250                    Egypt   1968           166.90
+## 251                    Benin   1966           166.80
+## 252                    Haiti   1969           166.60
+## 253                   Bhutan   1973           166.40
+## 254                 Cambodia   1976           166.40
+## 255                   Turkey   1960           166.00
+## 256                 Pakistan   1964           165.80
+## 257                  Liberia   1978           165.70
+## 258               Mozambique   1987           165.70
+## 259             Sierra Leone   1981           165.60
+## 260 Central African Republic   1960           165.50
+## 261            Cote d&#39;Ivoire   1969           165.40
+## 262                    India   1960           165.10
+## 263                  Nigeria   1960           165.00
+## 264                  Bolivia   1963           165.00
+## 265                     Mali   1979           164.80
+## 266                    Yemen   1977           164.60
+## 267                  Liberia   1988           164.60
+## 268                    Libya   1960           164.50
+## 269                    Egypt   1969           164.30
+## 270                   Guinea   1982           164.30
+## 271                  Nigeria   1971           164.10
+## 272             Sierra Leone   1982           164.10
+## 273                     Oman   1960           164.00
+## 274                    Benin   1967           164.00
+## 275                   Malawi   1978           163.80
+## 276               Mozambique   1988           163.80
+## 277               Bangladesh   1963           163.70
+## 278                  Liberia   1994           163.70
+## 279                    Nepal   1974           163.60
+## 280              Timor-Leste   1984           163.50
+## 281                    Haiti   1970           163.40
+## 282                 Cameroon   1961           163.30
+## 283                  Tunisia   1964           163.20
+## 284                     Iran   1969           163.10
+## 285                  Liberia   1979           163.10
+## 286 Central African Republic   1961           162.90
+## 287             Sierra Leone   1983           162.80
+## 288                    India   1961           162.50
+## 289                     Iran   1964           162.50
+## 290                     Togo   1960           162.40
+## 291                  Bolivia   1964           162.20
+## 292                 Ethiopia   1960           162.00
+## 293                    Egypt   1970           162.00
+## 294               Mozambique   1989           161.80
+## 295                   Turkey   1961           161.60
+## 296                   Bhutan   1974           161.60
+## 297                    Benin   1968           161.50
+## 298             Sierra Leone   1984           161.50
+## 299                  Liberia   1987           161.50
+## 300                   Guinea   1983           161.40
+## 301             Burkina Faso   1960           161.30
+## 302                     Mali   1980           161.20
+## 303                    China   1961           161.00
+## 304            Cote d&#39;Ivoire   1970           161.00
+## 305                  Liberia   1980           160.80
+## 306                 Cameroon   1962           160.50
+## 307                 Pakistan   1965           160.50
+## 308 Central African Republic   1962           160.40
+## 309                     Oman   1969           160.40
+## 310             Sierra Leone   1985           160.40
+## 311               Bangladesh   1964           160.30
+## 312                    India   1962           160.10
+## 313                    Haiti   1971           160.10
+## 314                    Nepal   1975           159.90
+## 315                 Maldives   1972           159.70
+## 316               Mozambique   1990           159.70
+## 317                    Egypt   1971           159.60
+## 318             Burkina Faso   1961           159.40
+## 319                     Togo   1961           159.40
+## 320                  Bolivia   1965           159.40
+## 321             Sierra Leone   1986           159.40
+## 322                    Benin   1969           159.20
+## 323                  Nigeria   1972           159.20
+## 324                  Liberia   1981           158.70
+## 325                  Liberia   1986           158.60
+## 326                   Guinea   1984           158.50
+## 327             Sierra Leone   1987           158.30
+## 328                  Liberia   1995           158.30
+## 329                 Cameroon   1963           158.10
+## 330                     Mali   1981           157.70
+## 331 Central African Republic   1963           157.60
+## 332                    India   1963           157.60
+## 333             Sierra Leone   1988           157.60
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 10212 rows ]</code></pre>
+<p><br></p>
 
 </div>
             </section>
