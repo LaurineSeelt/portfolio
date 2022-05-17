@@ -13,7 +13,7 @@ link-citations: yes
 This was the fourth assignment for our portfolio. We had to put our CV in a markdown.
 
 __Persoonlijke informatie__
----
+----
 Naam: Laurine Seelt <br>
 Emailadres: - <br>
 Telefoonnummer: - <br>
@@ -22,7 +22,7 @@ Postcode: - <br>
 Woonplaats: - <br>
 
 __Opleiding__
----
+----
 2019 - heden
 Bachelor Life Sciences, Hogeschool Utrecht
 
@@ -30,10 +30,10 @@ Bachelor Life Sciences, Hogeschool Utrecht
 VWO, Erfgooiers College te Huizen
 
 __Ervaring/skills__
----
+----
 (q)PCR, Western Blot, ELISA, MALDI-TOF, Bash, R, SQL, 
 
 __Talen__
----
+----
 Nederlands, moedertaal. <br>
 Engels, vloeiend.

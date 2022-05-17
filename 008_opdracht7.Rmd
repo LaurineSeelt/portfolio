@@ -52,4 +52,10 @@ flu_tidy <- flu_tidy %>% group_by(country, year) %>% summarise_each(funs(sum), f
 # Thanks to https://stackoverflow.com/questions/25089665/error-only-defined-on-a-data-frame-with-all-numeric-variables-with-ddply-on-lar for the summarise_each command :)
 
 ```
+<br>
+Then I saved the three datasets as both .csv files and .rds files.
+<br>
+```{r saving .csv and .rds, message=FALSE, warning=FALSE}
+write.csv(flu_tidy, "Data//flu_data_tidy.csv", row.names = TRUE)
+```
 
