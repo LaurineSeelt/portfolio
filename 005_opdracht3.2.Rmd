@@ -297,7 +297,8 @@ SCFA = SCFA[order(row.names(SCFA)),]
 set.seed(8765)
 ```
 
-__Looking at the alpha diversity__ <br>
+## Looking at the alpha diversity
+<br>
 Alpha diversity is the diversity _within_ a sample. It looks at richness, which is the _amount_ of OTU's in each sample, and at evenness, which is how evenly the different OTU's are distributed within the sample. <br>
 ```{r looking at the alpha diversity, message=FALSE, warning=FALSE}
 # Creating a 2x2 plot environment so we can see all 4 metrics at once
@@ -498,12 +499,14 @@ Very little, 0.0379, of the variance is explained by the animal random effect. T
 In conclusion on the alpha diversity: The diversity and richness of the fecal microbiota increases as the dairy cows age. Animal growth, measured by ADG, does not correlate with the diversity or richness of the fecal community.
 <br>
 <br>
-__Looking at the beta diversity__ <br>
+
+## Looking at the beta diversity
+<br>
 Beta diversity looks at the dissimilarity _between_ samples, instead of within a sample, like the alpha diversity.
 <br>
 First, we'll calculate the non-metric multidimensional scaling using the Bray-Curtis metric. This metric takes into account the presence or absence of OTU's and the abundance of the OTU's that are present in the samples. So, this metric looks at richness and diversity.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r nMDS Bray-Curtis, message=FALSE, warning=FALSE}
 BC.nmds = metaMDS(OTU.clean, distance = "bray", k=2, trymax = 1000)
 ```
 <br>
@@ -523,7 +526,7 @@ legend(-5.5, 2.5, legend = c("2w", "8w", "1yr"), col=c("green", "red", "blue"), 
 <br>
 We can also calculate the nMDS for the Jaccard metric. This metric only looks at the presence or absence of OTU's, so it only looks at richness.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r nMDS Jaccard, message=FALSE, warning=FALSE}
 J.nmds = metaMDS(OTU.clean, distance = "jaccard", k=2, trymax = 1000)
 ```
 <br>
@@ -554,7 +557,7 @@ If the stress is high, over 0.3, it's better to increase to 3 axes.
 <br>
 We'll first calculate the Bray-Curtis nMDS for a 3-axis plot.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r 3D nMDS B-C, message=FALSE, warning=FALSE}
 BC.nmds.3D = metaMDS(OTU.clean, distance = "bray", k=3, trymax=1000)
 ```
 <br>
@@ -599,13 +602,13 @@ physeq.tree
 <br>
 Next, we'll calculate the _weighted_ UniFrac and ordinate it into nMDS.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r nMDS wUF, message=FALSE, warning=FALSE}
 wUF.ordu = ordinate(physeq.tree, method = "NMDS", distance = "unifrac", weighted = TRUE)
 ```
 <br>
-Let's plot the UniFrac nMDS.
+Let's plot the weighted UniFrac nMDS.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r plot wUF nMDS, message=FALSE, warning=FALSE}
 par(mfrow = c(1,1))
 plot(wUF.ordu, type = "n", main = "Weighted UniFrac")
 points(wUF.ordu, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
@@ -623,7 +626,7 @@ plot_ordination(physeq.tree, wUF.ordu, type = "sites", color = "AgeGroup")+
 <br>
 The Unweighted UniFrac can also be calculated and plotted.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r uwUF nMDS, message=FALSE, warning=FALSE}
 uwUF.ordu = ordinate(physeq.tree, method = "NMDS", distance = "unifrac", weighted = FALSE)
 plot_ordination(physeq.tree, uwUF.ordu, type = "sites", color = "AgeGroup")+
   scale_colour_manual(values = c("2w" = "green", "8w" = "red", "1yr" = "blue"))+
@@ -656,7 +659,7 @@ plot_ordination(physeq.tree, wUF.ordu, type = "sites", color = "AgeGroup")+
 <br>
 We can calculate UniFrac distances with _UniFrac_ and ordinate it for 3-axes with _metaMDS_.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r UFdist, message=FALSE, warning=FALSE}
 wUF.dist = UniFrac(physeq.tree, weighted = TRUE, normalized = TRUE)
 wUF.nmds.3D = metaMDS(wUF.dist, method = "NMDS", k=3)
 ```
@@ -752,5 +755,53 @@ points(BC.nmds, pch = 20, display = "sites", col = c("blue", "green", "red"))[me
 legend(-6, -1.1, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
 # Adding the fitted variables
 plot(fit.BC.rumino, col = "black", labels = c("Ruminococcus"))
+```
+<br>
+We can test for significant differences between samples with the permutational analysis of variance, PERMANOVA, or analysis of similarity, ANOSIM. Both test if the overall microbial community differs by your variable of interest. <br>
+We can run these tests with Bray-Curtis, Jaccard, unweighted UniFrac and/or weighted UniFrac. <br>
+If the variable is significant for Bray-Curtis/weighted UniFrac but not for Jaccard/unweighted UniFrac, that means the groups tend to have the same OTU's(richness), but different abundances of those OTU's(diversity). <br>
+If the variables are significant for Bray-Curtis/Jaccard but not for unweighted/weighted UniFrac, that means the samples have different specific OTU's but similar taxa. <br>
+For Bray-Curtis and Jaccard, we can calculate the distances and run PERMANOVA.
+<br>
+```{r PERMANOVA Bray-Curtis, message=FALSE, warning=FALSE}
+BC.dist = vegdist(OTU.clean, distance = "bray")
+adonis(BC.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
+```
+
+```{r PERMANOVA Jaccard, message=FALSE, warning=FALSE}
+J.dist = vegdist(OTU.clean, distance = "jaccard")
+adonis(J.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
+```
+<br>
+For both Bray-Curtis and Jaccard, the interaction isn't significant. So we'll run PERMANOVA again, without the interaction component.
+<br>
+```{r PERMANOVA Bray-Curtis 2, message=FALSE, warning=FALSE}
+adonis(BC.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
+```
+<br>
+```{r PERMANOVA Jaccard 2, message=FALSE, warning=FALSE}
+adonis(J.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
+```
+<br>
+We'll also calculate the distances for weighted and unweighted UniFrac and then run PERMANOVA.
+<br>
+```{r PERMANOVA wUF, message=FALSE, warning=FALSE}
+wUF.dist = UniFrac(physeq.tree, weighted = TRUE, normalized = TRUE)
+adonis(wUF.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
+```
+<br>
+```{r PERMANOVA uwUF, message=FALSE, warning=FALSE}
+uwUF.dist = UniFrac(physeq.tree, weighted = FALSE, normalized = TRUE)
+adonis(uwUF.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
+```
+<br>
+We'll remove the non-significant interaction terms for both of these aswel..
+<br>
+```{r PERMANOVA wUF 2, message=FALSE, warning=FALSE}
+adonis(wUF.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
+```
+<br>
+```{r PERMANOVA uwUF 2, message=FALSE, warning=FALSE}
+adonis(uwUF.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
 ```
 

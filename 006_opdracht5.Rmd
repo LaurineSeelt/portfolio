@@ -12,3 +12,7 @@ link-citations: yes
 
 This was the sixth assignment for our portfolio.
 
+__Introduction to our project.__
+For our DSFB2 project, we are going to build an app in Shiny to enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br>
+The zoology students are investigating the effects of different kinds of snake poison on heart muscle. To do this, they're using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery. (https://link.springer.com/protocol/10.1007/978-1-4939-8597-5_8#citeas)
+This technique can be used to study the direct effects of, for example, medication on the heart _ex vivo_. The two most important parameters that can be tracked in this assay are heart rate and contraction force.

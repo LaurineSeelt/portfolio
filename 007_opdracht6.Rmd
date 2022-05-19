@@ -10,5 +10,5 @@ link-citations: yes
 
 # Making a website on GitHub
 
-This was the seventh assignment for our portfolio. We had to copy all our HTML's to a new repository and make it into pretty website.
+This was the seventh assignment for our portfolio. We had to copy all our HTML's to a new repository and render it into pretty website.
 

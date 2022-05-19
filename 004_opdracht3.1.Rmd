@@ -10,30 +10,50 @@ link-citations: yes
 
 # CV
 
-This was the fourth assignment for our portfolio. We had to put our CV in a markdown.
-
+This was the fourth assignment for our portfolio. We had to put our CV in a markdown. <br>
+<br>
 __Persoonlijke informatie__
+
 ----
+
 Naam: Laurine Seelt <br>
+Geboortedatum: 25-02-2000 <br>
 Emailadres: - <br>
 Telefoonnummer: - <br>
 Adres: - <br>
 Postcode: - <br>
 Woonplaats: - <br>
-
+<br>
+<br>
 __Opleiding__
+
 ----
+
 2019 - heden
-Bachelor Life Sciences, Hogeschool Utrecht
+Bachelor Life Sciences, Hogeschool Utrecht.
 
 2012 - 2018
-VWO, Erfgooiers College te Huizen
-
+VWO, Erfgooiers College te Huizen.
+<br>
+<br>
+<br>
 __Ervaring/skills__
-----
-(q)PCR, Western Blot, ELISA, MALDI-TOF, Bash, R, SQL, 
 
-__Talen__
 ----
+
+(q)PCR 
+Western Blot <br>
+ELISA <br>
+MALDI-TOF <br>
+VITEK2 <br>
+Bash <br>
+R <br>
+SQL <br>
+<br>
+<br>
+__Talen__
+
+----
+
 Nederlands, moedertaal. <br>
 Engels, vloeiend.
