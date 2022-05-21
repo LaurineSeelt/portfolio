@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-19" />
+<meta name="date" content="2022-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -150,9 +150,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> CV</a></li>
 <li class="chapter" data-level="6" data-path="free-space.html"><a href="free-space.html"><i class="fa fa-check"></i><b>6</b> Free space</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="free-space.html"><a href="free-space.html#course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r"><i class="fa fa-check"></i><b>6.1</b> Course: Introduction to the statistical analysis of microbiome data in R</a></li>
-<li class="chapter" data-level="6.2" data-path="free-space.html"><a href="free-space.html#course-microbiota-analysis-in-r"><i class="fa fa-check"></i><b>6.2</b> Course: Microbiota analysis in R</a></li>
-<li class="chapter" data-level="6.3" data-path="free-space.html"><a href="free-space.html#looking-at-the-alpha-diversity"><i class="fa fa-check"></i><b>6.3</b> <strong>Looking at the alpha diversity</strong></a></li>
+<li class="chapter" data-level="6.1" data-path="free-space.html"><a href="free-space.html#course-microbiota-analysis-in-r"><i class="fa fa-check"></i><b>6.1</b> Course: Microbiota analysis in R</a></li>
+<li class="chapter" data-level="6.2" data-path="free-space.html"><a href="free-space.html#looking-at-the-alpha-diversity"><i class="fa fa-check"></i><b>6.2</b> Looking at the alpha diversity</a></li>
+<li class="chapter" data-level="6.3" data-path="free-space.html"><a href="free-space.html#looking-at-the-beta-diversity"><i class="fa fa-check"></i><b>6.3</b> Looking at the beta diversity</a></li>
+<li class="chapter" data-level="6.4" data-path="free-space.html"><a href="free-space.html#otus-that-differ-by"><i class="fa fa-check"></i><b>6.4</b> OTU’s that differ by</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="using-github-and-zotero.html"><a href="using-github-and-zotero.html"><i class="fa fa-check"></i><b>7</b> Using GitHub and Zotero</a></li>
 <li class="chapter" data-level="8" data-path="making-a-website-on-github.html"><a href="making-a-website-on-github.html"><i class="fa fa-check"></i><b>8</b> Making a website on GitHub</a></li>
@@ -177,13 +178,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="investigating-a-c.-elegans-plate-experiment" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">2</span> Investigating a <em>C. Elegans</em> plate experiment<a href="investigating-a-c.-elegans-plate-experiment.html#investigating-a-c.-elegans-plate-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This was the first assignment for our portfolio. We had to look at the data of a <em>C. Elegans</em> plate experiment, plot some of the data and normalise the data for the negative control to get a clearer graph.</p>
-<p>First I took a look at the data and read it in RStudio.
+<p>This was the first assignment for our portfolio. We had to look at the data of a <em>C. Elegans</em> plate experiment, plot some of the data and normalize the data for the negative control to get a clearer graph.</p>
+<p><br>
+First I took a look at the data and read it in RStudio.
 <br></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="investigating-a-c.-elegans-plate-experiment.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View(here(&quot;Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;))</span></span>
 <span id="cb1-2"><a href="investigating-a-c.-elegans-plate-experiment.html#cb1-2" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span>
 <span id="cb1-3"><a href="investigating-a-c.-elegans-plate-experiment.html#cb1-3" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(Tidydata)</span></code></pre></div>
-<p>Next, I looked at the columns RawData, compName and compConcentration to see what type they were.
+<p><br>
+Next, I looked at the columns RawData, compName and compConcentration to see what type they were.
 <br></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="investigating-a-c.-elegans-plate-experiment.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Tidydata<span class="sc">$</span>RawData)</span></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
@@ -191,28 +194,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="investigating-a-c.-elegans-plate-experiment.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Tidydata<span class="sc">$</span>compConcentration)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<p>RawData is double, dat is te begrijpen, het zijn getallen.
+<p><br>
+RawData is double, that makes sense because this column contains numbers.
 <br>
-CompName is een character, dat is ook te begrijpen. In die kolom staan de namen van de stofjes die zijn gebruikt.
+CompName is a character, that also makes sense. This column contains the names of the compounds that were use.
 <br>
-CompConcentration is een character, wat wel apart is. In die kolom staan de concentraties van de gebruikte stofjes, dus je zou verwachten dat dit een numerieke kolom zou zijn.</p>
-<p>Then I plotted the data in a scatter plot.
+CompConcentration is een character, wat wel apart is. In die kolom staan de concentraties van de gebruikte stofjes, dus je zou verwachten dat dit een numerieke kolom zou zijn.
+<br>
+Then I plotted the data in a scatter plot.
 <br></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="investigating-a-c.-elegans-plate-experiment.html#cb8-1" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> compConcentration, <span class="at">y =</span> RawData, <span class="at">colour =</span> compName, <span class="at">shape =</span> expType))<span class="sc">+</span></span>
 <span id="cb8-2"><a href="investigating-a-c.-elegans-plate-experiment.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/creating%20a%20scatter%20plot-1.png" width="672" /></p>
-<p>De X-as is niet heel mooi of leesbaar. Volgens mij worden de getallen geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit. Er wordt niet ‘rekening gehouden’ met de machten.</p>
-<p>Om de X-as leesbaarder te maken, heb ik de kolom compConcentration naar numeric veranderd en heb ik de Log10 van de concentratie geplot. Ook heb ik geom_jitter gebruikt om wat afstand te creëren tussen de datapunten, zodat de grafiek nog wat duidelijker wordt.
+<p><img src="_main_files/figure-html/creating%20a%20scatter%20plot-1.png" width="672" />
+<br>
+De X-as is niet heel mooi of leesbaar. Volgens mij worden de getallen geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit. Er wordt niet ‘rekening gehouden’ met de machten.
+<br>
+Om de X-as leesbaarder te maken, heb ik de kolom compConcentration naar numeric veranderd en heb ik de Log10 van de concentratie geplot. Ook heb ik geom_jitter gebruikt om wat afstand te creëren tussen de datapunten, zodat de grafiek nog wat duidelijker wordt.
 <br></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="investigating-a-c.-elegans-plate-experiment.html#cb9-1" aria-hidden="true" tabindex="-1"></a>Tidydata<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Tidydata<span class="sc">$</span>compConcentration)</span>
 <span id="cb9-2"><a href="investigating-a-c.-elegans-plate-experiment.html#cb9-2" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> (<span class="fu">log10</span>(compConcentration <span class="sc">+</span> <span class="fl">0.001</span>)), <span class="at">y =</span> RawData, <span class="at">colour =</span> compName, <span class="at">shape =</span> expType)) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="investigating-a-c.-elegans-plate-experiment.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb9-4"><a href="investigating-a-c.-elegans-plate-experiment.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="fl">0.2</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/correcting%20the%20data%20and%20making%20a%20new%20scatter%20plot-1.png" width="672" /></p>
-<p>De positieve controle waren <em>C. Elegans</em> die met Ethanol zijn behandeld.
+<p><img src="_main_files/figure-html/correcting%20the%20data%20and%20making%20a%20new%20scatter%20plot-1.png" width="672" />
 <br>
-De negatieve controle waren <em>C. Elegans</em> die met S-medium zijn behandeld.</p>
-<p>Om te analyseren of verschillende concentraties effect hebben op de hoeveelheid nakomelingen, zou ik aparte tabellen maken per stof (en per concentratie?). Dan kan je het gemiddelde en de standaard deviatie per stof en per concentratie berekenen. Ook kan je dan per stof een ANOVA test uitvoeren, om te kijken of het effect significant is.
+<br>
+The positive control of this study were <em>C. Elegans</em> treated with Ethanol.
+<br>
+The negative control were <em>C. Elegans</em> treated with S-medium.
+<br>
+<br>
+Om te analyseren of verschillende concentraties effect hebben op de hoeveelheid nakomelingen, zou ik aparte tabellen maken per stof (en per concentratie?). Dan kan je het gemiddelde en de standaard deviatie per stof en per concentratie berekenen. Ook kan je dan per stof een ANOVA test uitvoeren, om te kijken of het effect significant is.
 Dus <br>
 1. Aparte tabellen maken met de metingen per stof. <br>
 2. Het gemiddelde en de standaardeviatie berekenen voor elke concentratie van elke stof. <br>

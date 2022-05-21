@@ -30,14 +30,9 @@ select life_expectancy, country
 from gapminder
 order by life_expectancy asc
 
-select infant_mortality, life_expectancy, flu_cases, dengue_cases, country, year_g, year_f, year_d
-from gapminder
-inner join flu_tidy on year_g = year_f
-inner join dengue_tidy on year_g = year_d
-order by year_g; # werkt niet met joinen op jaar?
-
-select country, country, country_f, year_g, year_f, year_d, country_d, infant_mortality, life_expectancy, flu_cases, dengue_cases
-from gapminder
-inner join flu_tidy on country = country_f
-inner join dengue_tidy on country = country_d
-order by year_g, year_f, year_d;
+select *
+from flu_tidy
+left join dengue_tidy on year_f = year_d
+and country_f = country_d
+left join gapminder on year_f = year_g
+and country_f = country_g

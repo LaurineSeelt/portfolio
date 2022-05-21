@@ -12,231 +12,14 @@ link-citations: yes
 
 This was the fifth assignment for our portfolio. We had/have to fill 32 hours learning something new that will be useful for our internship next year and possibly our job.
 
-
-
-- Uitzoeken welke automatiseringen er op microbiologische labs worden gebruikt.
-- Metagenomics? 
-https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03933-4 (megaR package)
-http://web.evolbio.mpg.de/~wang/Site/R_tutorial_files/16S%20Metagenomic%20Analysis%20Tutorial.pdf (random tutorial)
-https://www.mcs.anl.gov/~braithwaite/matR/docs-and-pubs/matR-user-manual.pdf (matR package)
-https://rpubs.com/jrandall7/EICC16s (phyloseq)
-https://cran.r-project.org/web/packages/microbial/microbial.pdf (microbial package)
-https://bioconductor.org/help/course-materials/2017/BioC2017/Day1/Workshops/Microbiome/MicrobiomeWorkflowII.html (aritkel over microbioom analyse workflow)
-
-https://www.nicholas-ollberding.com/post/introduction-to-the-statistical-analysis-of-microbiome-data-in-r/ (soort course over de analyse van microbioom data)
-https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html (ook een course over de analyse van microbiota data)
-https://grunwaldlab.github.io/analysis_of_microbiome_community_data_in_r/04--manipulating.html (nog een course)
-- Python?
-
-## Course: Introduction to the statistical analysis of microbiome data in R
-Link to the course: https://www.nicholas-ollberding.com/post/introduction-to-the-statistical-analysis-of-microbiome-data-in-r/
-
-In this course, we examined the differences in microbiota between patients with and without chronic fatigue syndrome.
-The aspects that were looked at were: <br>
-Taxonomic relative abundance <br>
-Hierarchal clustering <br>
-Alpha-diversity (microbiome diversity in just one sample) <br>
-Beta-divesity (microbiome diversity in two or more samples) <br>
-Diffrential abundance testing <br>
-Predicting class labels <br>
-
-```{r installing all the required packages, include=TRUE, message=FALSE, warning=FALSE, eval=FALSE}
-.cran_packages <- c("tidyverse", "cowplot", "picante", "vegan", "HMP", "dendextend", "rms", "devtools")
-.bioc_packages <- c("phyloseq", "DESeq2", "microbiome", "metagenomeSeq", "ALDEx2")
-.inst <- .cran_packages %in% installed.packages()
-if(any(!.inst)) {
-  install.packages(.cran_packages[!.inst])
-}
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-BiocManager::install(.bioc_packages, version = "3.15") #Changed 3.9 to 3.15
-devtools::install_github("adw96/breakaway")
-devtools::install_github(repo = "malucalle/selbal") #changed UVic-omics to malucalle
-```
-
-```{r loading the required packages, message=FALSE, warning=FALSE, eval=FALSE}
-library(tidyverse)
-library(phyloseq)
-library(DESeq2)
-library(microbiome)
-library(vegan)
-library(picante)
-library(ALDEx2)
-library(metagenomeSeq)
-library(HMP)
-library(dendextend)
-library(selbal)
-library(rms)
-library(breakaway)
-```
-
-```{r, message=FALSE, warning=FALSE, eval=FALSE}
-# Reading in the data
-ps <- readRDS("Data/Data_raw/ps_giloteaux_2016.rds")
-# Sorting the samples on total read count
-sort(phyloseq::sample_sums(ps))
-# Removing (samples with?) less than 5000 reads
-(ps <- phyloseq::subset_samples(ps, phyloseq::sample_sums(ps) > 5000))
-# Removing the OTU's that were only present in the removed samples
-(ps <- phyloseq::prune_taxa(phyloseq::taxa_sums(ps) > 0, ps))
-# Assigning a new metadata field
-phyloseq::sample_data(ps)$Status <- ifelse(phyloseq::sample_data(ps)$Subject == "Patient", "Chronic Fatique", "Control")
-phyloseq::sample_data(ps)$Status <- factor(phyloseq::sample_data(ps)$Status, levels = c("Control", "Chronic Fatique"))
-ps %>% sample_data %>% dplyr::count(Status)
-```
-
-```{r, message=FALSE, warning=FALSE, eval=FALSE}
-# Counting all the phyla in the dataset
-table(phyloseq::tax_table(ps)[, "Phylum"])
-# Convert the samples to relative abundances
-ps_rel_abund = phyloseq::transform_sample_counts(ps, function(x){x / sum(x)})
-phyloseq::otu_table(ps)[1:5, 1:5] # Before we converted it to relative abundances
-phyloseq::otu_table(ps_rel_abund)[1:5, 1:5] # After we calculated the relative abundances
-
-# Plotting the relative abundances, devided by the two groups
-phyloseq::plot_bar(ps_rel_abund, fill = "Phylum")+
-  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")+
-  labs(x = "", y = "Relative Abundance\n")+
-  facet_wrap(~ Status, scales = "free")+
-  theme(panel.background = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank())
-```
-
-```{r extra, message=FALSE, warning=FALSE, eval=FALSE}
-# Sorting the taxa by their relative abundance
-sort(ps_rel_abund@tax_table[["Phylum"]], decreasing = TRUE) %>%  phyloseq::plot_bar(fill = "Phylum")+
-  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")+
-  labs(x = "", y = "Relative Abundance\n")+
-  facet_wrap(~ Status, scales = "free")+
-  theme(panel.background = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank())
-```
-
-```{r generating boxplots according to the groups, message=FALSE, warning=FALSE, eval=FALSE}
-# Grouping the taxa according to phylum and renaming the groups
-ps_phylum <- phyloseq::tax_glom(ps, "Phylum")
-phyloseq::taxa_names(ps_phylum) <- phyloseq::tax_table(ps_phylum)[, "Phylum"]
-phyloseq::otu_table(ps_phylum)[1:5, 1:5]
-
-# Melting the data and making the boxplots
-phyloseq::psmelt(ps_phylum) %>%
-  ggplot(data = ., aes(x = Status, y = Abundance))+
-  geom_boxplot(outlier.shape = NA)+
-  geom_jitter(aes(colour = OTU), height = 0, width = 0.2)+
-  labs(x = "", y = "Abundance\n")+
-  facet_wrap(~ OTU, scales = "free")
-```
-
-```{r looking at the frequencies of the taxa in both groups, message=FALSE, warning=FALSE, eval=FALSE}
-# Making two subsets
-controls <- phyloseq::subset_samples(ps_phylum, Status == "Control")
-cf <- phyloseq::subset_samples(ps_phylum, Status = "Chronic Fatigue")
-
-# Looking at the OTU tables
-control_otu <- data.frame(phyloseq::otu_table(controls))
-cf_otu <- data.frame(phyloseq::otu_table(cf))
-
-# Grouping the rare phyla to improve testing
-control_otu <- control_otu %>% t(.) %>% as.data.frame(.) %>% mutate(Other = Cyanobacteria + Euryarchaeota + Tenericutes + Verrucomicrobia + Fusobacteria) %>% dplyr::select(-Cyanobacteria, -Euryarchaeota, -Tenericutes, -Verrucomicrobia, -Fusobacteria)
-cf_otu <- cf_otu %>% t(.) %>% as.data.frame(.) %>% mutate(Other = Cyanobacteria + Euryarchaeota + Tenericutes + Verrucomicrobia + Fusobacteria) %>% dplyr::select(-Cyanobacteria, -Euryarchaeota, -Tenericutes, -Verrucomicrobia, -Fusobacteria)
-
-# Performing the HMP test
-group_data <- list(control_otu, cf_otu)
-(xdc <- HMP::Xdc.sevsample(group_data))
-
-1 - pchisq(0.2769004, 5) # Looking at the Chi-Squared distribution
-```
-
-Since the P-value of the HMP test is nearly 1, we cannot reject the null hypothesis that there is no statistical significant distribution of phyla between the two groups.
-
-__Looking at the hierarchical clustering in the samples__
+I decided I wanted to gain more experience in analysing microbiota data, because I'd like to work with bacteria in my job. So, I searched the internet for packages and such, and found a course about microbiota analysis that I decided to follow.
 <br>
-```{r looking at hierarchical clustering, message=FALSE, warning=FALSE, eval=FALSE}
-# Extracting the OTU table
-ps_rel_otu <- data.frame(phyloseq::otu_table(ps_rel_abund))
-ps_rel_otu <- t(ps_rel_otu)
-# Computing the Bray-Curtis dissimilarity
-bc_dist <- vegan::vegdist(ps_rel_otu, method = "bray")
-# Generating a matrix with the dissimilarities
-as.matrix(bc_dist)[1:5, 1:5]
-# Saving it as a dendrogram
-ward <- as.dendrogram(hclust(bc_dist, method = "ward.D2"))
-# Adding color coding
-meta <- data.frame(phyloseq::sample_data(ps_rel_abund))
-colorCode <- c(Control = "red", `Chronic Fatigue` = "blue")
-labels_colors(ward) <- colorCode[meta$Status][order.dendrogram(ward)]
-# Plotting the dendrogram
-plot(ward)
-```
-
-```{r extra trying to create heatmaps for the two different groups, message=FALSE, warning=FALSE, eval=FALSE}
-plot_heatmap(cf)
-plot_heatmap(controls)
-```
-
-__Looking at the alpha diversity__
-<br>
-Alpha diversity looks at the diversity _within_ a sample and how the observed OTU's are distributed.
-```{r, message=FALSE, warning=FALSE, eval=FALSE}
-# Plotting the observed richness
-ggplot(data = data.frame("total_reads" = phyloseq::sample_sums(ps),
-                         "observed" = phyloseq::estimate_richness(ps, measures = "Observed")[, 1]),
-       aes(x = total_reads, y = observed)) +
-  geom_point() +
-  geom_smooth(method="lm", se = FALSE) +
-  labs(x = "\nTotal Reads", y = "Observed richness\n")
-```
-
-Now we're going to subsample the reads, plot them and test for group differences
-<br>
-```{r, message=FALSE, warning=FALSE, eval=FALSE}
-# Subsample reads
-(ps_rare <- phyloseq::rarefy_even_depth(ps, rngseed = 123, replace = FALSE))
-head(phyloseq::sample_sums(ps_rare))
-# Making a dataframe with the adiv measures, another package to analyse and measure biodiversity
-adiv <- data.frame("Observed" = phyloseq::estimate_richness(ps_rare, measures = "Observed"),
-"Shannon" = phyloseq::estimate_richness(ps_rare, measures = "Shannon"),
-"PD" = picante::pd(samp = data.frame(t(data.frame(phyloseq::otu_table(ps_rare)))), include.root = FALSE, tree=phyloseq::phy_tree(ps_rare))[, 1],
-"Status" = phyloseq::sample_data(ps_rare)$Status) # Zelf "include.root = FALSE" toegevoegd, anders kreeg ik steeds een error
-head(adiv)
-# Plotting the adiv measures
-adiv %>% gather(key = metric, value = value, c("Observed", "Shannon", "PD")) %>%
-  mutate(metric = factor(metric, levels = c("Observed", "Shannon", "PD"))) %>%
-  ggplot(aes(x = Status, y = value)) +
-  geom_boxplot(outlier.color = NA) +
-  geom_jitter(aes(color = Status), height = 0, width = 0.2) +
-  labs(x = "", y = "") +
-  facet_wrap(~metric, scales = "free") +
-  theme(legend.position = "none")
-# Summarising the data
-adiv %>% group_by(Status) %>% 
-  dplyr::summarise(median_observed = median(Observed),
-                   median_shannon = median(Shannon),
-                   median_pd = median(PD))
-# Performing the Wilcoxon tests for the three estimates
-wilcox.test(Observed ~ Status, data = adiv, exact = FALSE, conf.int = TRUE)
-wilcox.test(Shannon ~ Status, data = adiv, conf.int = TRUE)
-wilcox.test(PD ~ Status, data = adiv, conf.int = TRUE)
-```
-
-__Looking at the beta diversity__
-<br>
-Beta diversity looks at the diversity _between_ samples and how it's similar or dissimilar.
-```{r,message=FALSE, warning=FALSE, eval=FALSE}
-# Transforming the Total Read Counts according to the Centered Log Ratio method
-(ps_clr <- microbiome::transform(ps, "clr"))
-phyloseq::otu_table(ps)[1:5, 1:5] # Old OTU table
-phyloseq::otu_table(ps_clr)[1:5, 1:5] # New OTU table
-# The value are now the dominance for each taxa relative to the geometric mean of all taxa on the logarithmic scale
-```
+Link to the course: https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html
 <br>
 <br>
 
 ## Course: Microbiota analysis in R
-Link to the course: https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html
-<br>
+
 <br>
 In this course, we will be looking at the fecal bacterial microbiota of 8 calves at ages 2 weeks, 8 weeks and 1 year old and correlating them with variables such as weight gain, expressed as Average Daily Gain in Kilograms(ADGKG), and gastrointestinal short chain fatty acids, SCFA.
 <br>
@@ -514,7 +297,7 @@ We've reached a convergent solution at around 20 iterations, and the stress is v
 <br>
 We'll plot our data with different colors for each age group.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r plotting BC nMDS, message=FALSE, warning=FALSE}
 par(mfrow = c(1,1))
 # Creating a blank plot for the nmds
 plot(BC.nmds, type = "n", main = "Bray-Curtis")
@@ -532,7 +315,7 @@ J.nmds = metaMDS(OTU.clean, distance = "jaccard", k=2, trymax = 1000)
 <br>
 With this metric, we've also reached a convergent solution after 20 iterations. The stress is also very low for this metric, 0.06. So, we'll plot this metric with 2 axis aswell.
 <br>
-```{r}
+```{r plotting Jaccard nMDS, message=FALSE, warning=FALSE}
 plot(J.nmds, type = "n", main = "Jaccard")
 points(J.nmds, display = "sites", pch = 20, col=c("blue", "green", "red"))[meta$AgeGroup]
 legend(-3, 1.5, legend=c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
@@ -542,7 +325,7 @@ The values in the plot are somewhat different, but the distributions are very si
 <br>
 We can also plot the standard error ellipses of the nMDS data. We'll plot the 99% confidence interval of the Bray-Curtis metric.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r plotting ellipses, message=FALSE, warning=FALSE}
 plot(BC.nmds, type = "n", main = "Bray-Curtis")
 legend(-5.5, 2.5, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
 # Ellipse for 2 weeks
@@ -563,7 +346,7 @@ BC.nmds.3D = metaMDS(OTU.clean, distance = "bray", k=3, trymax=1000)
 <br>
 We'll extract the x, y and z for the nMDS, and then plot them.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r BCxyz, message=FALSE, warning=FALSE}
 BCxyz = scores(BC.nmds.3D, display = "sites")
 BCxyz
 plot_ly(x=BCxyz[,1], y=BCxyz[,2], z=BCxyz[,3], type = "scatter3d", mode = "markers", color = meta$AgeGroup, colors = c("blue", "green", "red"))
@@ -571,7 +354,7 @@ plot_ly(x=BCxyz[,1], y=BCxyz[,2], z=BCxyz[,3], type = "scatter3d", mode = "marke
 <br>
 3D plots are difficult to interpret in articles, so many authors choose to create two 2D plots instead.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r two 2D plots, message=FALSE, warning=FALSE}
 par(mfrow = c(1,2))
 # Plotting axis 1 and 2, which are x and y
 plot(BCxyz[,1], BCxyz[,2], main = "Bray-Curtis 1:2", pch = 20, col = c("blue", "green", "red"))[meta$AgeGroup]
@@ -666,7 +449,7 @@ wUF.nmds.3D = metaMDS(wUF.dist, method = "NMDS", k=3)
 <br>
 Then, we'll take out the xyz values and plot them with plotly.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r wUFxyz, message=FALSE, warning=FALSE}
 wUFxyz = scores(wUF.nmds.3D, display = "sites")
 wUFxyz
 plot_ly(x=wUFxyz[,1], y=wUFxyz[,2], z=wUFxyz[,3], type = "scatter3d", mode = "markers", color=meta$AgeGroup, colors=c("pink", "purple", "blue"))
@@ -677,7 +460,7 @@ It is harder to visualize continuous variables in the way we've just visualized 
 <br>
 To do that, we'll first fit the variables to our distances. We'll use Bray-Curtis and weighted UniFrac for this, but you can do this with Jaccard aswell and you could also use unweighted UniFrac.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r fitting BC, message=FALSE, warning=FALSE}
 fit.BC = envfit(BC.nmds, meta)
 fit.BC
 ```
@@ -685,21 +468,21 @@ fit.BC
 R has automatically fit every variable into the meta table.
 If we don't want that, we can tell envfit to only run the variables we want.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r fitting BC 2, message=FALSE, warning=FALSE}
 fit.BC = envfit(BC.nmds, meta[,c("AgeGroup", "ADGKG")])
 fit.BC
 ```
 <br>
 We'll repeat this for the weighted UniFrac.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r fitting wUF, message=FALSE, warning=FALSE}
 fit.wUF = envfit(wUF.ordu, meta[,c("AgeGroup", "ADGKG")])
 fit.wUF
 ```
 <br>
 We can plot the 2D nMDS with an arrow for the ADG, eventho the ADG isn't a significant variable. Thus, you wouldn't use this figure in a publication or such. We'll do this with the Bray-Curtis dissimilarity.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r plotting the fitted BC, message=FALSE, warning=FALSE}
 plot(BC.nmds, type = "n", main = "Bray-Curtis")
 points(BC.nmds, pch = 20, display = "sites", col = c("pink", "purple", "blue"))[meta$AgeGroup]
 legend(-6, 2, legend = c("2w", "8w", "1yr"), col = c("purple", "blue", "pink"), pch = 20)
@@ -708,7 +491,7 @@ plot(fit.BC, col = "black") # Adding the fitted variables
 <br>
 We can also only plot variables with p < 0.05. That'd mean we'd only see the centroids.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r plotting the significant BC, message=FALSE, warning=FALSE}
 plot(BC.nmds, type = "n", main = "Bray-Curtis")
 points(BC.nmds, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
 legend(-6, 2, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
@@ -717,7 +500,7 @@ plot(fit.BC, col = "black", p.max = 0.05)
 <br>
 We can also plot the weighted UniFrac.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r plotting wUF, message=FALSE, warning=FALSE}
 plot(wUF.ordu, type = "n", main = "Weighted UniFrac")
 points(wUF.ordu, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
 legend(.3, .15, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
@@ -730,7 +513,7 @@ Conversely, if an OTU arrow moves in the opposite direction of an age group cent
 We'll only fit the first 10 OTU's from our table, because it takes a long time. <br>
 Then, we'll only plot the significant arrows.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r fitting OTUs, message=FALSE, warning=FALSE}
 fit.BC.OTU = envfit(BC.nmds, OTU.clean[,1:10])
 fit.BC.OTU
 plot(BC.nmds, type = "n", main = "Bray-Curtis")
@@ -741,7 +524,7 @@ plot(fit.BC.OTU, col = "black", p.max = 0.05)
 <br>
 We can also plot summed genera or family groups of OTU's.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r plotting rumino, message=FALSE, warning=FALSE}
 # Extracting all the OTU's within the Ruminococcus genus
 OTU.rumino = OTU.clean[,tax.clean$Genus == "g__Ruminococcus"]
 # Summing the abundances of the OTU's into one variable/column
@@ -795,7 +578,7 @@ uwUF.dist = UniFrac(physeq.tree, weighted = FALSE, normalized = TRUE)
 adonis(uwUF.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
 ```
 <br>
-We'll remove the non-significant interaction terms for both of these aswel..
+We'll remove the non-significant interaction terms for both of these aswell.
 <br>
 ```{r PERMANOVA wUF 2, message=FALSE, warning=FALSE}
 adonis(wUF.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
@@ -804,4 +587,96 @@ adonis(wUF.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
 ```{r PERMANOVA uwUF 2, message=FALSE, warning=FALSE}
 adonis(uwUF.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
 ```
+<br>
+If your group sizes are very different, you can use ANOSIM instead of PERMANOVA. ANOSIM does have quite some limitations; you can only test one variable, so no interaction, and it can only be used for categorical variables. <br>
+We'll run it for Bray-Curtis to demonstrate.
+<br>
+```{r ANOSIM Bray-Curtis, message=FALSE, warning=FALSE}
+anosim(BC.dist, meta$AgeGroup, permutations = 1000)
+```
+<br>
+The Mantel test, tests if two distance matrices co-vary. So, it tests if the data in matrix 1 changes in the same way as the data in matrix 2.
+<br>
+First, we'll subset our OTU table to the samples that we also have SCFA information about.
+<br>
+```{r subsetting the OTU table, message=FALSE, warning=FALSE}
+OTU.SCFA = OTU.clean[row.names(OTU.clean) %in% paste(row.names(SCFA), ".F", sep = ""),]
+```
+<br>
+Then, we'll calculate the distances for each matrix and run the Mantel.
+<br>
+```{r calculating distances & running Mantel, message=FALSE, warning=FALSE}
+dist1 = vegdist(OTU.SCFA)
+dist2 = vegdist(SCFA)
+mantel(dist1, dist2)
+```
+<br>
+We can see that the overall OTU table and SCFA tables do not co-vary.
+<br>
+Sometimes it will be clear from nMDS that one group tends to vary more than other groups. We can test this with multivariate homogeneity of group dispersion. We'll use Bray-Curtis to demonstrate this. <br>
+First we'll calculate the dispersion in each group. Then, we'll perform an ANOVA-like test to determine if the variances differ by groups.
+<br>
+```{r calculating dispersion & running ANOVA, message=FALSE, warning=FALSE}
+disp.age = betadisper(BC.dist, meta$AgeGroup)
+permutest(disp.age, pairwise = TRUE, permutations = 1000)
+```
+<br>
+If we also look at the Bray-Curtis plot we made earlier, we can conclude that 2 and 8 week old calves have a similar variability in their fecal microbiota. They also have more variable fecal microbiotas than 1 year old heifers.
 
+## OTU's that differ by
+<br>
+The SIMPER function gives us a list of the OTU's that cumulatively explain more than 70% of the variation between samples. In our case, we can use this function to see if specific OTU's differ between the three age groups, even if the overall microbiota doesn't differ between the age groups.
+<br>
+```{r Simper, message=FALSE, warning=FALSE}
+simper(OTU.clean, meta$AgeGroup, permutations = 1000)
+```
+<br>
+These OTU's contribute to the Bray-Curtis dissimilarity, but they're not necessarily significantly different. To test if an OTU is significantly different, we can test it with the Kruskal-Wallis test.
+<br>
+```{r K-W OTU00001, message=FALSE, warning=FALSE}
+kruskal.test(OTU.clean$Otu00001 ~ meta$AgeGroup)
+```
+<br>
+The p-value for OTU00001 is much lower than 0.05, so this OTU is significantly different between age groups.
+<br>
+```{r K-W OTU00017, message=FALSE, warning=FALSE}
+kruskal.test(OTU.clean$Otu00017 ~ meta$AgeGroup)
+```
+<br>
+The p-value for OTU 00017 is bigger than 0.05, so this OTU is not significantly different between age groups.
+<br>
+I downloaded the simper_pretty and R_krusk scripts from https://github.com/asteinberger9/seq_scripts and stored them in the folder "R". <br>
+The simper_pretty script performs the SIMPER function for all comparisons of interest in a data set. The output of this script is a .csv document. <br>
+The R_krusk script performs the non-parametric Kruskal-Wallis test on each OTU in the .csv file from the simper_pretty script. 
+<br>
+```{r simper_pretty and R_krusk, message=FALSE, warning=FALSE, eval=FALSE}
+source("R/simper_pretty.R") # deleted the last line of this script because it kept throwing an error otherwise
+source("R/R_krusk.R")
+
+simper.pretty(OTU.clean, meta, c('AgeGroup'), perc_cutoff=1, low_cutoff = 'y', low_val=0.01, 'Age')
+simper.results = data.frame(read.csv("Age_clean_simper.csv"))
+kruskal.pretty(OTU.clean, meta, simper.results, c('AgeGroup'), 'Age', tax)
+
+#Importing the K-W results
+KW.results = data.frame(read.csv("Age_krusk_simper.csv"))
+#Removing non-significant results
+KW.results.signif = KW.results[KW.results$fdr_krusk_p.val < 0.05,]
+#Ordering the results by OTU#
+KW.results.signif = KW.results.signif[with(KW.results.signif, order(OTU)),]
+head(KW.results.signif)
+```
+<br>
+We can see that there are several OTU's that differ significantly by age group. <br>
+We'll look at OTU1 as relative abundance.
+<br>
+```{r OTU1 relative, message=FALSE, warning=FALSE, eval=FALSE}
+# Abundance berekenen
+abund = OTU.clean/rowSums(OTU.clean)*100
+# Plotting the abundances
+boxplot(abund$Otu00001 ~ meta$AgeGroup, ylab = "% Relative abundance", main = "OTU1")
+```
+<br>
+Looking at the graph, together this the results from the Kruskal-Wallis test, we can say that OTU1 is significantly less abundant in 1-year-old animals than in 2- or 8-week-old animals.
+<br>
+<br>
+To investigate continuous variables, like Average Daily Gain in our case, we cannot use SIMPER.

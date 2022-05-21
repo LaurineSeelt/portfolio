@@ -56,4 +56,5 @@ __Talen__
 ----
 
 Nederlands, moedertaal. <br>
-Engels, vloeiend.
+Engels, vloeiend. <br>
+Frans, basis.

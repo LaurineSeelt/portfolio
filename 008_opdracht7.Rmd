@@ -52,7 +52,8 @@ flu_tidy <- as.data.frame(flu_tidy)
 dengue_tidy <- dengue_tidy %>% group_by(country_d, year_d) %>% summarise_each(funs(sum), dengue_cases)
 flu_tidy <- flu_tidy %>% group_by(country_f, year_f) %>% summarise_each(funs(sum), flu_cases)
 # Thanks to https://stackoverflow.com/questions/25089665/error-only-defined-on-a-data-frame-with-all-numeric-variables-with-ddply-on-lar for the summarise_each command :)
-gapminder <- gapminder %>% rename(year_g = "year")
+gapminder <- gapminder %>% rename(year_g = "year", country_g = "country")
+gapminder$year_g <- as.character(gapminder$year_g)
 ```
 <br>
 Then I saved the three datasets as both .csv files and .rds files.
@@ -85,11 +86,11 @@ Then I inspected the contents of the datasets in DBeaver and in R.
 <br>
 ```{r inspecting the contents in R, message=FALSE, warning=FALSE}
 # Inspecting the flu_tidy dataset
-flu_tidy %>% arrange(desc(flu_cases))
+flu_tidy %>% arrange(desc(flu_cases)) %>% head()
 flu_tidy$flu_cases %>% min(flu_tidy$flu_cases, na.rm = TRUE)
 flu_tidy$flu_cases %>% max(flu_tidy$flu_cases, na.rm = TRUE)
 # Inspecting the dengue_tidy dataset
-dengue_tidy %>% arrange(desc(dengue_cases))
+dengue_tidy %>% arrange(desc(dengue_cases)) %>% head()
 dengue_tidy$dengue_cases %>% min(dengue_tidy$dengue_cases, na.rm = TRUE)
 dengue_tidy$dengue_cases %>% max(dengue_tidy$dengue_cases, na.rm = TRUE)
 # Inspecting the gapminder dataset
@@ -97,7 +98,7 @@ gapminder$infant_mortality %>% min(gapminder$infant_mortality, na.rm = TRUE)
 gapminder$infant_mortality %>% max(gapminder$infant_mortality, na.rm = TRUE)
 gapminder$life_expectancy %>% min(gapminder$life_expectancy, na.rm = TRUE)
 gapminder$life_expectancy %>% max(gapminder$life_expectancy, na.rm = TRUE)
-gapminder %>% select(country, year_g, life_expectancy) %>% arrange(desc(life_expectancy))
-gapminder %>% select( country, year_g, infant_mortality) %>% arrange(desc(infant_mortality))
+gapminder %>% select(country_g, year_g, life_expectancy) %>% arrange(desc(life_expectancy)) %>% head
+gapminder %>% select( country_g, year_g, infant_mortality) %>% arrange(desc(infant_mortality)) %>% head()
 ```
 <br>

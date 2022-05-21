@@ -15,4 +15,15 @@ description: "This is the bookdown for my DSFB2 portfolio"
 
 This is the introduction to the portfolio of Laurine Seelt.
 
-She worked really hard on this. Please be kind to them.
+For the DSFB2 course, we had to make our own portfolio. This is the result. <br>
+The topics that I worked on are: <br>
+1. Investigating a _C. Elegans_ experiment and doing some data wrangling. <br>
+2. Reading two different studies and recreating some code from one of the studies <br>
+3. Cleaning up a folder according to the Guerrilla analytics framework <br>
+4. Putting my CV in a markdown <br>
+5. Spending 32 hours learning a new skill <br>
+6. Using GitHub and Zotero <br>
+7. Rendering my markdowns to a website <br>
+8. Using DBeaver and SQL <br>
+9. Creating my own package called .. <br>
+10. TBA

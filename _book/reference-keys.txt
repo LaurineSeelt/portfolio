@@ -6,11 +6,11 @@ part-2
 cleaning-up-according-to-the-guerrilla-analytics-framework
 cv
 free-space
-course-introduction-to-the-statistical-analysis-of-microbiome-data-in-r
 course-microbiota-analysis-in-r
 looking-at-the-alpha-diversity
+looking-at-the-beta-diversity
+otus-that-differ-by
 using-github-and-zotero
 making-a-website-on-github
 working-with-dbeaver-and-sql
 creating-a-package
-looking-at-the-beta-diversity

@@ -10,7 +10,7 @@ link-citations: yes
 
 # Investigating a _C. Elegans_ plate experiment
 
-This was the first assignment for our portfolio. We had to look at the data of a _C. Elegans_ plate experiment, plot some of the data and normalise the data for the negative control to get a clearer graph.
+This was the first assignment for our portfolio. We had to look at the data of a _C. Elegans_ plate experiment, plot some of the data and normalize the data for the negative control to get a clearer graph.
 
 ```{r setup1, include=FALSE, eval=TRUE}
 library(tidyverse)
@@ -19,7 +19,7 @@ library(here)
 library(timetk)
 library(ggplot2)
 ```
-
+<br>
 First I took a look at the data and read it in RStudio.
 <br>
 ```{r, message=FALSE, warning=FALSE}
@@ -27,7 +27,7 @@ First I took a look at the data and read it in RStudio.
 Tidydata <- read_excel(here("Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 Tidydata <- as.data.frame(Tidydata)
 ```
-
+<br>
 Next, I looked at the columns RawData, compName and compConcentration to see what type they were.
 <br>
 ```{r, inspecting columns}
@@ -35,22 +35,22 @@ typeof(Tidydata$RawData)
 typeof(Tidydata$compName)
 typeof(Tidydata$compConcentration)
 ```
-
-RawData is double, dat is te begrijpen, het zijn getallen. 
 <br>
-CompName is een character, dat is ook te begrijpen. In die kolom staan de namen van de stofjes die zijn gebruikt.
+RawData is double, that makes sense because this column contains numbers. 
+<br>
+CompName is a character, that also makes sense. This column contains the names of the compounds that were use.
 <br>
 CompConcentration is een character, wat wel apart is. In die kolom staan de concentraties van de gebruikte stofjes, dus je zou verwachten dat dit een numerieke kolom zou zijn.
-
+<br>
 Then I plotted the data in a scatter plot.
 <br>
 ```{r, creating a scatter plot, warning=FALSE, message=FALSE}
 Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, shape = expType))+
   geom_point()
 ```
-
+<br>
 De X-as is niet heel mooi of leesbaar. Volgens mij worden de getallen geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit. Er wordt niet 'rekening gehouden' met de machten.
-
+<br>
 Om de X-as leesbaarder te maken, heb ik de kolom compConcentration naar numeric veranderd en heb ik de Log10 van de concentratie geplot. Ook heb ik geom_jitter gebruikt om wat afstand te creëren tussen de datapunten, zodat de grafiek nog wat duidelijker wordt.
 <br>
 ```{r, correcting the data and making a new scatter plot, message=FALSE, warning=FALSE}
@@ -59,13 +59,13 @@ Tidydata %>% ggplot(aes(x = (log10(compConcentration + 0.001)), y = RawData, col
   geom_point() +
   geom_jitter(position = position_jitter(0.2))
 ```
-
-
-De positieve controle waren _C. Elegans_ die met Ethanol zijn behandeld.
 <br>
-De negatieve controle waren _C. Elegans_ die met S-medium zijn behandeld.
-
-
+<br>
+The positive control of this study were _C. Elegans_ treated with Ethanol.
+<br>
+The negative control were _C. Elegans_ treated with S-medium.
+<br>
+<br>
 Om te analyseren of verschillende concentraties effect hebben op de hoeveelheid nakomelingen, zou ik aparte tabellen maken per stof (en per concentratie?). Dan kan je het gemiddelde en de standaard deviatie per stof en per concentratie berekenen. Ook kan je dan per stof een ANOVA test uitvoeren, om te kijken of het effect significant is.
 Dus <br>
 1. Aparte tabellen maken met de metingen per stof. <br>
