@@ -19,10 +19,10 @@ library(DBI)
 # install.packages("RPostgres")
 library(RPostgres)
 ```
-
+<br>
 First, I read in the flu, dengue and gapminder data.
 <br>
-```{r, message=FALSE, warning=FALSE}
+```{r reading in the three files, message=FALSE, warning=FALSE}
 flu <- read_csv(here("data/data_raw/flu_data.csv"), skip = 11)
 dengue <- read_csv(here("data/data_raw/dengue_data.csv"), skip = 11)
 gapminder <- read_builtin("gapminder")
@@ -102,3 +102,18 @@ gapminder %>% select(country_g, year_g, life_expectancy) %>% arrange(desc(life_e
 gapminder %>% select( country_g, year_g, infant_mortality) %>% arrange(desc(infant_mortality)) %>% head()
 ```
 <br>
+In DBeaver, I also inspected the data, performed some joins and exported a joined table to R. The table is called "Joined_table.csv".
+<br>
+
+<mark> DBeaver code </mark>
+<br>
+After reading in the data, I removed the rows "year_d", "year_g", "country_d" and "country_g". These rows were redundant, seeing as we already have the rows "year_f" and "country_f" from the flu dataset.
+<br>
+```{r generating a tidy joined table, message=FALSE, warning=FALSE}
+Joined_table <- read.csv(here("Data/Joined_table.csv"))
+
+Joined_table <- Joined_table %>% select(country_f:region, -(country_d:year_d))
+Joined_table <- Joined_table %>% select(country_f:region, -(country_g:year_g))
+Joined_table <- Joined_table %>% rename(country = "country_f", year = "year_f")
+```
+

@@ -1,0 +1,407 @@
+"country_f","year_f","flu_cases","country_d","year_d","dengue_cases","country_g","year_g","infant_mortality","life_expectancy","fertility","population","gdp","continent","region"
+Argentina,"2002",,Argentina,"2002",,Argentina,"2002",17.1,74.3,2.38,37889443,242076212334,Americas,South America
+Argentina,"2003",,Argentina,"2003",,Argentina,"2003",16.6,74.5,2.34,38309475,263468585945,Americas,South America
+Argentina,"2004",8843.0,Argentina,"2004",1.533,Argentina,"2004",16.0,75.0,2.31,38728778,287258675094,Americas,South America
+Argentina,"2005",8627.0,Argentina,"2005",1.035,Argentina,"2005",15.3,75.3,2.29,39145491,313626005874,Americas,South America
+Argentina,"2006",8966.0,Argentina,"2006",1.0070000000000001,Argentina,"2006",14.6,75.3,2.27,39558750,340177780212,Americas,South America
+Argentina,"2007",10267.0,Argentina,"2007",5.569,Argentina,"2007",14.1,75.2,2.25,39969903,369614509411,Americas,South America
+Argentina,"2008",9299.0,Argentina,"2008",1.462,Argentina,"2008",13.7,75.4,2.24,40381860,394594682115,Americas,South America
+Argentina,"2009",7952.0,Argentina,"2009",16.739,Argentina,"2009",13.4,75.6,2.23,40798641,397949689763,Americas,South America
+Argentina,"2010",6946.0,Argentina,"2010",6.6209999999999996,Argentina,"2010",13.0,75.8,2.22,41222875,434405530244,Americas,South America
+Argentina,"2011",5541.0,Argentina,"2011",3.186,Argentina,"2011",12.7,76.0,2.2,41655616,472935255184,Americas,South America
+Argentina,"2012",6155.0,Argentina,"2012",2.082,Argentina,"2012",12.3,76.1,2.19,42095224,,Americas,South America
+Argentina,"2013",6529.0,Argentina,"2013",4.263,Argentina,"2013",11.9,76.2,2.18,42538304,,Americas,South America
+Argentina,"2014",7073.0,Argentina,"2014",2.767,Argentina,"2014",11.5,76.3,2.16,42980026,,Americas,South America
+Argentina,"2015",4841.0,Argentina,"2015",2.118,Argentina,"2015",11.1,76.5,2.15,43416755,,Americas,South America
+Australia,"2002",,,,,Australia,"2002",5.0,80.3,1.76,19514385,442135393399,Oceania,Australia and New Zealand
+Australia,"2003",,,,,Australia,"2003",4.9,80.6,1.75,19735255,456603230864,Oceania,Australia and New Zealand
+Australia,"2004",,,,,Australia,"2004",4.9,80.9,1.76,19985475,475578723953,Oceania,Australia and New Zealand
+Australia,"2005",,,,,Australia,"2005",4.8,81.2,1.79,20274282,489651768692,Oceania,Australia and New Zealand
+Australia,"2006",18263.0,,,,Australia,"2006",4.7,81.4,1.82,20606228,504739869397,Oceania,Australia and New Zealand
+Australia,"2007",29574.0,,,,Australia,"2007",4.5,81.5,1.92,20975949,522729696645,Oceania,Australia and New Zealand
+Australia,"2008",25091.0,,,,Australia,"2008",4.4,81.6,1.96,21370348,542761040949,Oceania,Australia and New Zealand
+Australia,"2009",22796.0,,,,Australia,"2009",4.2,81.8,1.9,21770690,550622241459,Oceania,Australia and New Zealand
+Australia,"2010",12571.0,,,,Australia,"2010",4.1,82.0,1.89,22162863,563049439185,Oceania,Australia and New Zealand
+Australia,"2011",13138.0,,,,Australia,"2011",3.8,82.2,1.88,22542371,573453982173,Oceania,Australia and New Zealand
+Australia,"2012",27452.0,,,,Australia,"2012",3.6,82.4,1.89,22911375,,Oceania,Australia and New Zealand
+Australia,"2013",19071.0,,,,Australia,"2013",3.4,82.4,1.88,23270465,,Oceania,Australia and New Zealand
+Australia,"2014",30705.0,,,,Australia,"2014",3.2,82.3,1.88,23622353,,Oceania,Australia and New Zealand
+Australia,"2015",20355.0,,,,Australia,"2015",3.0,82.3,1.88,23968973,,Oceania,Australia and New Zealand
+Austria,"2002",,,,,Austria,"2002",4.4,78.8,1.39,8114698.0,196998621885,Europe,Western Europe
+Austria,"2003",,,,,Austria,"2003",4.3,79.0,1.38,8155466.0,198704472152,Europe,Western Europe
+Austria,"2004",32820.0,,,,Austria,"2004",4.1,79.4,1.42,8196624.0,203850083132,Europe,Western Europe
+Austria,"2005",41502.0,,,,Austria,"2005",4.0,79.5,1.41,8234858.0,208743854863,Europe,Western Europe
+Austria,"2006",36142.0,,,,Austria,"2006",4.0,80.0,1.41,8269372.0,216404316585,Europe,Western Europe
+Austria,"2007",40517.0,,,,Austria,"2007",3.8,80.1,1.38,8301290.0,224424149682,Europe,Western Europe
+Austria,"2008",43065.0,,,,Austria,"2008",3.8,80.4,1.41,8331465.0,227557455520,Europe,Western Europe
+Austria,"2009",47117.0,,,,Austria,"2009",3.7,80.3,1.39,8361362.0,218887605293,Europe,Western Europe
+Austria,"2010",32008.0,,,,Austria,"2010",3.6,80.5,1.44,8391986.0,223954137424,Europe,Western Europe
+Austria,"2011",34888.0,,,,Austria,"2011",3.4,80.7,1.44,8423559.0,230913313559,Europe,Western Europe
+Austria,"2012",40088.0,,,,Austria,"2012",3.3,80.9,1.46,8455477.0,,Europe,Western Europe
+Austria,"2013",50229.0,,,,Austria,"2013",3.2,81.1,1.47,8486962.0,,Europe,Western Europe
+Austria,"2014",51635.0,,,,Austria,"2014",3.0,81.2,1.48,8516916.0,,Europe,Western Europe
+Austria,"2015",40143.0,,,,Austria,"2015",2.9,81.3,1.5,8544586.0,,Europe,Western Europe
+Belgium,"2002",,,,,Belgium,"2002",4.4,78.2,1.68,10364613,237741668285,Europe,Western Europe
+Belgium,"2003",,,,,Belgium,"2003",4.2,78.5,1.7,10426169,239659286074,Europe,Western Europe
+Belgium,"2004",2876.0,,,,Belgium,"2004",4.2,79.0,1.73,10492643,247490005974,Europe,Western Europe
+Belgium,"2005",6472.0,,,,Belgium,"2005",4.1,79.1,1.75,10561436,251845091555,Europe,Western Europe
+Belgium,"2006",4441.0,,,,Belgium,"2006",4.0,79.5,1.78,10632032,258690550017,Europe,Western Europe
+Belgium,"2007",6305.0,,,,Belgium,"2007",3.9,79.5,1.8,10704830,266243709886,Europe,Western Europe
+Belgium,"2008",4696.0,,,,Belgium,"2008",3.8,79.6,1.82,10779155,268825324878,Europe,Western Europe
+Belgium,"2009",10320.0,,,,Belgium,"2009",3.7,79.8,1.83,10854388,261295933962,Europe,Western Europe
+Belgium,"2010",2733.0,,,,Belgium,"2010",3.6,80.1,1.84,10929978,267143096398,Europe,Western Europe
+Belgium,"2011",4477.0,,,,Belgium,"2011",3.5,80.2,1.85,11005175,272271056321,Europe,Western Europe
+Belgium,"2012",4758.0,,,,Belgium,"2012",3.5,80.3,1.85,11079521,,Europe,Western Europe
+Belgium,"2013",9622.0,,,,Belgium,"2013",3.4,80.4,1.85,11153122,,Europe,Western Europe
+Belgium,"2014",5475.0,,,,Belgium,"2014",3.4,80.5,1.86,11226322,,Europe,Western Europe
+Belgium,"2015",11111.0,,,,Belgium,"2015",3.3,80.5,1.86,11299192,,Europe,Western Europe
+Bolivia,"2002",,Bolivia,"2002",0.101,Bolivia,"2002",53.7,68.7,3.98,8653343.0,8751510220,Americas,South America
+Bolivia,"2003",,Bolivia,"2003",3.945,Bolivia,"2003",51.2,69.3,3.9,8810420.0,8988793402,Americas,South America
+Bolivia,"2004",22110.0,Bolivia,"2004",1.465,Bolivia,"2004",48.8,69.8,3.81,8967740.0,9363922319,Americas,South America
+Bolivia,"2005",20260.0,Bolivia,"2005",1.485,Bolivia,"2005",46.6,70.2,3.72,9125405.0,9777941879,Americas,South America
+Bolivia,"2006",19668.0,Bolivia,"2006",1.068,Bolivia,"2006",44.4,70.6,3.63,9283345.0,10246990606,Americas,South America
+Bolivia,"2007",19312.0,Bolivia,"2007",2.609,Bolivia,"2007",42.2,70.9,3.55,9441482.0,10714702655,Americas,South America
+Bolivia,"2008",16526.0,Bolivia,"2008",1.4929999999999999,Bolivia,"2008",40.2,71.2,3.48,9599916.0,11373495913,Americas,South America
+Bolivia,"2009",14516.0,Bolivia,"2009",10.362,Bolivia,"2009",38.4,71.6,3.41,9758799.0,11755304106,Americas,South America
+Bolivia,"2010",11752.0,Bolivia,"2010",1.335,Bolivia,"2010",36.8,71.8,3.36,9918245.0,12240412986,Americas,South America
+Bolivia,"2011",10859.0,Bolivia,"2011",2.173,Bolivia,"2011",35.3,72.1,3.31,10078238,12863340654,Americas,South America
+Bolivia,"2012",10035.0,Bolivia,"2012",1.513,Bolivia,"2012",34.0,72.4,3.26,10238762,,Americas,South America
+Bolivia,"2013",9129.0,Bolivia,"2013",0.564,Bolivia,"2013",32.8,72.7,3.22,10399931,,Americas,South America
+Bolivia,"2014",9065.0,Bolivia,"2014",0.91,Bolivia,"2014",31.7,72.9,3.18,10561887,,Americas,South America
+Bolivia,"2015",6407.0,Bolivia,"2015",0.427,Bolivia,"2015",30.6,73.2,3.14,10724705,,Americas,South America
+Brazil,"2002",174.0,Brazil,"2002",0.073,Brazil,"2002",24.3,71.4,2.26,181045592,670512665737,Americas,South America
+Brazil,"2003",12386.0,Brazil,"2003",4.344,Brazil,"2003",22.5,71.7,2.2,183627339,678217761979,Americas,South America
+Brazil,"2004",12964.0,Brazil,"2004",2.38,Brazil,"2004",21.0,72.0,2.14,186116363,716959543489,Americas,South America
+Brazil,"2005",13246.0,Brazil,"2005",2.688,Brazil,"2005",19.5,72.4,2.07,188479240,739613124999,Americas,South America
+Brazil,"2006",13964.0,Brazil,"2006",4.648,Brazil,"2006",18.2,72.7,2.0,190698241,768867489436,Americas,South America
+Brazil,"2007",13336.0,Brazil,"2007",7.9430000000000005,Brazil,"2007",17.1,73.0,1.94,192784521,815703390474,Americas,South America
+Brazil,"2008",12637.0,Brazil,"2008",9.653,Brazil,"2008",16.2,73.2,1.9,194769696,857885609996,Americas,South America
+Brazil,"2009",10984.0,Brazil,"2009",8.211,Brazil,"2009",15.4,73.4,1.86,196701298,855069617297,Americas,South America
+Brazil,"2010",8970.0,Brazil,"2010",12.524,Brazil,"2010",14.8,73.6,1.84,198614208,919487274118,Americas,South America
+Brazil,"2011",8345.0,Brazil,"2011",8.807,Brazil,"2011",14.4,73.8,1.82,200517584,944612348874,Americas,South America
+Brazil,"2012",7685.0,Brazil,"2012",5.534,Brazil,"2012",14.3,74.0,1.81,202401584,,Americas,South America
+Brazil,"2013",8676.0,Brazil,"2013",8.31,Brazil,"2013",14.3,74.1,1.8,204259377,,Americas,South America
+Brazil,"2014",8855.0,Brazil,"2014",6.818,Brazil,"2014",14.4,74.3,1.79,206077898,,Americas,South America
+Brazil,"2015",6603.0,Brazil,"2015",11.705,Brazil,"2015",14.6,74.4,1.78,207847528,,Americas,South America
+Bulgaria,"2002",,,,,Bulgaria,"2002",16.3,72.1,1.22,7869124.0,14064179291,Europe,Eastern Europe
+Bulgaria,"2003",,,,,Bulgaria,"2003",15.5,72.3,1.25,7805041.0,14838464302,Europe,Eastern Europe
+Bulgaria,"2004",,,,,Bulgaria,"2004",14.6,72.5,1.29,7742740.0,15839807530,Europe,Eastern Europe
+Bulgaria,"2005",41988.0,,,,Bulgaria,"2005",13.6,72.6,1.33,7682614.0,16846951092,Europe,Eastern Europe
+Bulgaria,"2006",46688.0,,,,Bulgaria,"2006",12.9,72.7,1.37,7624611.0,17952499282,Europe,Eastern Europe
+Bulgaria,"2007",42751.0,,,,Bulgaria,"2007",12.3,72.9,1.4,7568378.0,19101459236,Europe,Eastern Europe
+Bulgaria,"2008",35190.0,,,,Bulgaria,"2008",11.8,73.2,1.43,7513646.0,20285749709,Europe,Eastern Europe
+Bulgaria,"2009",37187.0,,,,Bulgaria,"2009",11.5,73.5,1.46,7460057.0,19170033475,Europe,Eastern Europe
+Bulgaria,"2010",23801.0,,,,Bulgaria,"2010",11.2,73.7,1.49,7407297.0,19246713609,Europe,Eastern Europe
+Bulgaria,"2011",25930.0,,,,Bulgaria,"2011",10.9,74.2,1.51,7355231.0,19573907740,Europe,Eastern Europe
+Bulgaria,"2012",16289.0,,,,Bulgaria,"2012",10.5,74.5,1.52,7303741.0,,Europe,Eastern Europe
+Bulgaria,"2013",17955.0,,,,Bulgaria,"2013",10.1,74.6,1.54,7252539.0,,Europe,Eastern Europe
+Bulgaria,"2014",25346.0,,,,Bulgaria,"2014",9.7,74.7,1.56,7201308.0,,Europe,Eastern Europe
+Bulgaria,"2015",16569.0,,,,Bulgaria,"2015",9.3,74.8,1.57,7149787.0,,Europe,Eastern Europe
+Canada,"2002",,,,,Canada,"2002",5.3,79.6,1.51,31288572,759428612127,Americas,Northern America
+Canada,"2003",,,,,Canada,"2003",5.2,79.8,1.54,31596593,773714028802,Americas,Northern America
+Canada,"2004",77828.0,,,,Canada,"2004",5.2,80.1,1.55,31918582,797853728386,Americas,Northern America
+Canada,"2005",98859.0,,,,Canada,"2005",5.3,80.2,1.57,32256333,821941389978,Americas,Northern America
+Canada,"2006",97598.0,,,,Canada,"2006",5.2,80.5,1.61,32611436,845145064427,Americas,Northern America
+Canada,"2007",85821.0,,,,Canada,"2007",5.1,80.6,1.66,32982275,863738436331,Americas,Northern America
+Canada,"2008",84826.0,,,,Canada,"2008",5.0,80.8,1.68,33363256,869687235058,Americas,Northern America
+Canada,"2009",141118.0,,,,Canada,"2009",5.0,81.1,1.67,33746559,845598914757,Americas,Northern America
+Canada,"2010",67855.0,,,,Canada,"2010",4.9,81.3,1.63,34126173,872784483603,Americas,Northern America
+Canada,"2011",73778.0,,,,Canada,"2011",4.7,81.6,1.61,34499905,894251850391,Americas,Northern America
+Canada,"2012",101581.0,,,,Canada,"2012",4.7,81.6,1.66,34868151,,Americas,Northern America
+Canada,"2013",104231.0,,,,Canada,"2013",4.6,81.6,1.67,35230612,,Americas,Northern America
+Canada,"2014",121388.0,,,,Canada,"2014",4.4,81.7,1.68,35587793,,Americas,Northern America
+Canada,"2015",68006.0,,,,Canada,"2015",4.3,81.7,1.68,35939927,,Americas,Northern America
+Chile,"2002",,,,,Chile,"2002",8.3,77.7,2.01,15544554,79448554863,Americas,South America
+Chile,"2003",,,,,Chile,"2003",8.0,77.8,1.99,15729268,82560485563,Americas,South America
+Chile,"2004",348.0,,,,Chile,"2004",7.9,78.0,1.96,15913119,87548035975,Americas,South America
+Chile,"2005",261.0,,,,Chile,"2005",7.7,78.2,1.94,16096571,91287855656,Americas,South America
+Chile,"2006",260.0,,,,Chile,"2006",7.6,78.2,1.92,16279728,96486092629,Americas,South America
+Chile,"2007",558.0,,,,Chile,"2007",7.6,78.3,1.9,16462701,101465571562,Americas,South America
+Chile,"2008",412.0,,,,Chile,"2008",7.6,78.5,1.89,16645940,104806280194,Americas,South America
+Chile,"2009",1074.0,,,,Chile,"2009",7.5,78.5,1.87,16829957,103720034589,Americas,South America
+Chile,"2010",848.0,,,,Chile,"2010",7.6,78.5,1.86,17015048,110041983987,Americas,South America
+Chile,"2011",315.0,,,,Chile,"2011",7.5,78.9,1.84,17201305,116631547327,Americas,South America
+Chile,"2012",696.0,,,,Chile,"2012",7.4,79.1,1.83,17388437,,Americas,South America
+Chile,"2013",1180.0,,,,Chile,"2013",7.3,79.1,1.82,17575833,,Americas,South America
+Chile,"2014",1075.0,,,,Chile,"2014",7.2,79.2,1.81,17762647,,Americas,South America
+Chile,"2015",431.0,,,,Chile,"2015",7.0,79.4,1.8,17948141,,Americas,South America
+France,"2002",,,,,France,"2002",4.2,79.4,1.87,60075783,1363229017959,Europe,Western Europe
+France,"2003",,,,,France,"2003",4.0,79.6,1.89,60464857,1375491323088,Europe,Western Europe
+France,"2004",1622.0,,,,France,"2004",3.9,80.2,1.92,60858654,1410493938384,Europe,Western Europe
+France,"2005",5658.0,,,,France,"2005",3.8,80.4,1.94,61241700,1436256423650,Europe,Western Europe
+France,"2006",3075.0,,,,France,"2006",3.7,80.7,1.95,61609991,1471687515757,Europe,Western Europe
+France,"2007",4203.0,,,,France,"2007",3.6,81.0,1.96,61966193,1505321677069,Europe,Western Europe
+France,"2008",4853.0,,,,France,"2008",3.5,81.1,1.97,62309529,1504107370104,Europe,Western Europe
+France,"2009",8042.0,,,,France,"2009",3.5,81.2,1.98,62640901,1456772338299,Europe,Western Europe
+France,"2010",1564.0,,,,France,"2010",3.5,81.4,1.98,62961136,1480999829195,Europe,Western Europe
+France,"2011",3089.0,,,,France,"2011",3.5,81.6,1.98,63268405,1506143156817,Europe,Western Europe
+France,"2012",3840.0,,,,France,"2012",3.5,81.6,1.98,63561798,,Europe,Western Europe
+France,"2013",7606.0,,,,France,"2013",3.6,81.7,1.98,63844529,,Europe,Western Europe
+France,"2014",2923.0,,,,France,"2014",3.6,81.7,1.98,64121249,,Europe,Western Europe
+France,"2015",10760.0,,,,France,"2015",3.5,81.8,1.98,64395345,,Europe,Western Europe
+Germany,"2002",,,,,Germany,"2002",4.2,78.6,1.35,81699829,1915162776824,Europe,Western Europe
+Germany,"2003",,,,,Germany,"2003",4.1,78.8,1.35,81569481,1907972414293,Europe,Western Europe
+Germany,"2004",42880.0,,,,Germany,"2004",4.0,79.2,1.35,81417791,1930126504253,Europe,Western Europe
+Germany,"2005",49315.0,,,,Germany,"2005",3.9,79.4,1.35,81246801,1943341224580,Europe,Western Europe
+Germany,"2006",41952.0,,,,Germany,"2006",3.8,79.7,1.36,81055904,2015244849889,Europe,Western Europe
+Germany,"2007",45226.0,,,,Germany,"2007",3.7,79.9,1.36,80854515,2081124117403,Europe,Western Europe
+Germany,"2008",43582.0,,,,Germany,"2008",3.6,80.0,1.37,80665906,2103666875608,Europe,Western Europe
+Germany,"2009",45497.0,,,,Germany,"2009",3.6,80.1,1.38,80519685,1995811437644,Europe,Western Europe
+Germany,"2010",34000.0,,,,Germany,"2010",3.5,80.3,1.39,80435307,2069464070055,Europe,Western Europe
+Germany,"2011",34730.0,,,,Germany,"2011",3.4,80.5,1.4,80424665,2131456655119,Europe,Western Europe
+Germany,"2012",35974.0,,,,Germany,"2012",3.3,80.6,1.41,80477952,,Europe,Western Europe
+Germany,"2013",40928.0,,,,Germany,"2013",3.3,80.7,1.42,80565861,,Europe,Western Europe
+Germany,"2014",38029.0,,,,Germany,"2014",3.2,80.7,1.43,80646262,,Europe,Western Europe
+Germany,"2015",28453.0,,,,Germany,"2015",3.1,80.8,1.44,80688545,,Europe,Western Europe
+Hungary,"2002",,,,,Hungary,"2002",8.6,72.6,1.29,10168101,50275293599,Europe,Eastern Europe
+Hungary,"2003",,,,,Hungary,"2003",8.0,72.7,1.29,10141471,52211105383,Europe,Eastern Europe
+Hungary,"2004",,,,,Hungary,"2004",7.5,72.9,1.29,10117213,54715769280,Europe,Eastern Europe
+Hungary,"2005",4471.0,,,,Hungary,"2005",7.2,73.1,1.3,10095964,56884939841,Europe,Eastern Europe
+Hungary,"2006",3295.0,,,,Hungary,"2006",6.8,73.3,1.31,10078461,59101837692,Europe,Eastern Europe
+Hungary,"2007",4343.0,,,,Hungary,"2007",6.5,73.6,1.32,10064138,59169627001,Europe,Eastern Europe
+Hungary,"2008",5430.0,,,,Hungary,"2008",6.2,73.9,1.33,10050699,59698693168,Europe,Eastern Europe
+Hungary,"2009",7913.0,,,,Hungary,"2009",5.9,74.3,1.35,10034951,55640003180,Europe,Eastern Europe
+Hungary,"2010",2754.0,,,,Hungary,"2010",5.7,74.6,1.36,10014633,56340039480,Europe,Eastern Europe
+Hungary,"2011",4159.0,,,,Hungary,"2011",5.5,75.0,1.38,9988846.0,57293181826,Europe,Eastern Europe
+Hungary,"2012",3532.0,,,,Hungary,"2012",5.4,75.5,1.4,9958334.0,,Europe,Eastern Europe
+Hungary,"2013",4224.0,,,,Hungary,"2013",5.4,76.1,1.41,9924507.0,,Europe,Eastern Europe
+Hungary,"2014",3994.0,,,,Hungary,"2014",5.3,76.5,1.43,9889540.0,,Europe,Eastern Europe
+Hungary,"2015",6098.0,,,,Hungary,"2015",5.3,76.7,1.44,9855023.0,,Europe,Eastern Europe
+Japan,"2002",,,,,Japan,"2002",3.0,81.6,1.3,126249509,4761764168337,Asia,Eastern Asia
+Japan,"2003",,,,,Japan,"2003",2.9,81.7,1.3,126523884,4842005214501,Asia,Eastern Asia
+Japan,"2004",4001.0,,,,Japan,"2004",2.9,81.9,1.3,126773081,4956311889695,Asia,Eastern Asia
+Japan,"2005",9480.0,,,,Japan,"2005",2.7,82.0,1.31,126978754,5020879159600,Asia,Eastern Asia
+Japan,"2006",5924.0,,,,Japan,"2006",2.7,82.2,1.32,127136576,5105877836025,Asia,Eastern Asia
+Japan,"2007",7725.0,,,,Japan,"2007",2.6,82.4,1.33,127250015,5217808186995,Asia,Eastern Asia
+Japan,"2008",4799.0,,,,Japan,"2008",2.5,82.5,1.34,127317900,5163457616712,Asia,Eastern Asia
+Japan,"2009",21061.0,,,,Japan,"2009",2.4,82.7,1.36,127340884,4878074528234,Asia,Eastern Asia
+Japan,"2010",2106.0,,,,Japan,"2010",2.4,82.7,1.37,127319802,5094422657992,Asia,Eastern Asia
+Japan,"2011",7054.0,,,,Japan,"2011",2.3,82.6,1.39,127252900,5058761701478,Asia,Eastern Asia
+Japan,"2012",15759.0,,,,Japan,"2012",2.2,82.9,1.41,127139821,,Asia,Eastern Asia
+Japan,"2013",24627.0,,,,Japan,"2013",2.1,83.0,1.42,126984964,,Asia,Eastern Asia
+Japan,"2014",33764.0,,,,Japan,"2014",2.1,83.1,1.43,126794564,,Asia,Eastern Asia
+Japan,"2015",24139.0,,,,Japan,"2015",2.0,83.2,1.45,126573481,,Asia,Eastern Asia
+Mexico,"2002",,Mexico,"2002",,Mexico,"2002",19.3,74.9,2.57,105578297,585312691416,Americas,Central America
+Mexico,"2003",,Mexico,"2003",,Mexico,"2003",18.2,74.9,2.52,106888418,593223360014,Americas,Central America
+Mexico,"2004",45978.0,Mexico,"2004",3.832,Mexico,"2004",17.4,75.2,2.48,108257822,617269309006,Americas,Central America
+Mexico,"2005",51011.0,Mexico,"2005",4.704,Mexico,"2005",16.7,75.1,2.45,109747906,637055457596,Americas,Central America
+Mexico,"2006",56569.0,Mexico,"2006",4.838,Mexico,"2006",16.2,75.4,2.41,111382857,669864782183,Americas,Central America
+Mexico,"2007",70979.0,Mexico,"2007",7.668,Mexico,"2007",15.8,75.6,2.38,113139374,691704027302,Americas,Central America
+Mexico,"2008",60574.0,Mexico,"2008",5.946,Mexico,"2008",15.4,75.4,2.35,114972821,699939486221,Americas,Central America
+Mexico,"2009",59050.0,Mexico,"2009",14.228,Mexico,"2009",15.0,75.3,2.31,116815612,656259080283,Americas,Central America
+Mexico,"2010",59504.0,Mexico,"2010",7.848,Mexico,"2010",14.4,75.4,2.28,118617542,692479257709,Americas,Central America
+Mexico,"2011",49524.0,Mexico,"2011",4.62,Mexico,"2011",13.8,75.7,2.25,120365271,719742387372,Americas,Central America
+Mexico,"2012",59964.0,Mexico,"2012",8.125,Mexico,"2012",13.1,75.7,2.22,122070963,,Americas,Central America
+Mexico,"2013",63665.0,Mexico,"2013",11.882,Mexico,"2013",12.5,75.4,2.19,123740109,,Americas,Central America
+Mexico,"2014",69945.0,Mexico,"2014",10.057,Mexico,"2014",11.9,75.6,2.16,125385833,,Americas,Central America
+Mexico,"2015",43436.0,Mexico,"2015",4.827,Mexico,"2015",11.3,75.9,2.13,127017224,,Americas,Central America
+Netherlands,"2002",,,,,Netherlands,"2002",4.9,78.5,1.73,16076427,392790134494,Europe,Western Europe
+Netherlands,"2003",,,,,Netherlands,"2003",4.7,78.7,1.75,16167421,394108353879,Europe,Western Europe
+Netherlands,"2004",1014.0,,,,Netherlands,"2004",4.6,79.1,1.73,16253397,402922644615,Europe,Western Europe
+Netherlands,"2005",1779.0,,,,Netherlands,"2005",4.5,79.6,1.71,16331646,411168323101,Europe,Western Europe
+Netherlands,"2006",1497.0,,,,Netherlands,"2006",4.3,79.9,1.72,16401105,425124149957,Europe,Western Europe
+Netherlands,"2007",1607.0,,,,Netherlands,"2007",4.2,80.2,1.72,16463031,441791696641,Europe,Western Europe
+Netherlands,"2008",1801.0,,,,Netherlands,"2008",4.0,80.3,1.77,16519862,449761878488,Europe,Western Europe
+Netherlands,"2009",3062.0,,,,Netherlands,"2009",3.8,80.6,1.79,16575173,433855151011,Europe,Western Europe
+Netherlands,"2010",1145.0,,,,Netherlands,"2010",3.7,80.8,1.8,16631571,441185443862,Europe,Western Europe
+Netherlands,"2011",1627.0,,,,Netherlands,"2011",3.6,80.9,1.76,16689863,446362217923,Europe,Western Europe
+Netherlands,"2012",2023.0,,,,Netherlands,"2012",3.5,81.0,1.76,16749318,,Europe,Western Europe
+Netherlands,"2013",2721.0,,,,Netherlands,"2013",3.3,81.2,1.77,16809157,,Europe,Western Europe
+Netherlands,"2014",1680.0,,,,Netherlands,"2014",3.3,81.3,1.78,16868020,,Europe,Western Europe
+Netherlands,"2015",1666.0,,,,Netherlands,"2015",3.2,81.3,1.78,16924929,,Europe,Western Europe
+New Zealand,"2002",,,,,New Zealand,"2002",5.8,78.9,1.95,3961695.0,56077241190,Oceania,Australia and New Zealand
+New Zealand,"2003",,,,,New Zealand,"2003",5.7,79.1,1.98,4020195.0,58513885619,Oceania,Australia and New Zealand
+New Zealand,"2004",,,,,New Zealand,"2004",5.5,79.4,2.02,4078779.0,60712724763,Oceania,Australia and New Zealand
+New Zealand,"2005",,,,,New Zealand,"2005",5.4,79.8,2.05,4134699.0,62717853637,Oceania,Australia and New Zealand
+New Zealand,"2006",1492.0,,,,New Zealand,"2006",5.3,79.9,2.09,4187584.0,63200977861,Oceania,Australia and New Zealand
+New Zealand,"2007",1398.0,,,,New Zealand,"2007",5.3,80.1,2.11,4238021.0,65084119224,Oceania,Australia and New Zealand
+New Zealand,"2008",1883.0,,,,New Zealand,"2008",5.3,80.3,2.12,4285380.0,64081242758,Oceania,Australia and New Zealand
+New Zealand,"2009",2644.0,,,,New Zealand,"2009",5.2,80.5,2.13,4329124.0,63779599884,Oceania,Australia and New Zealand
+New Zealand,"2010",1742.0,,,,New Zealand,"2010",5.1,80.8,2.12,4369027.0,64991412282,Oceania,Australia and New Zealand
+New Zealand,"2011",1674.0,,,,New Zealand,"2011",5.0,80.8,2.1,4404483.0,,Oceania,Australia and New Zealand
+New Zealand,"2012",2373.0,,,,New Zealand,"2012",4.9,81.1,2.07,4435883.0,,Oceania,Australia and New Zealand
+New Zealand,"2013",2260.0,,,,New Zealand,"2013",4.9,81.4,2.05,4465276.0,,Oceania,Australia and New Zealand
+New Zealand,"2014",3322.0,,,,New Zealand,"2014",4.8,81.4,2.03,4495482.0,,Oceania,Australia and New Zealand
+New Zealand,"2015",807.0,,,,New Zealand,"2015",4.7,81.4,2.02,4528526.0,,Oceania,Australia and New Zealand
+Norway,"2002",,,,,Norway,"2002",3.6,79.1,1.75,4537240.0,174215767564,Europe,Northern Europe
+Norway,"2003",,,,,Norway,"2003",3.5,79.5,1.8,4560947.0,175929063478,Europe,Northern Europe
+Norway,"2004",,,,,Norway,"2004",3.4,79.8,1.83,4589241.0,182897667361,Europe,Northern Europe
+Norway,"2005",1904.0,,,,Norway,"2005",3.2,80.2,1.84,4624388.0,187632770146,Europe,Northern Europe
+Norway,"2006",1474.0,,,,Norway,"2006",3.1,80.4,1.9,4667105.0,192233391607,Europe,Northern Europe
+Norway,"2007",2231.0,,,,Norway,"2007",3.0,80.6,1.9,4716584.0,197333337247,Europe,Northern Europe
+Norway,"2008",2271.0,,,,Norway,"2008",2.9,80.8,1.96,4771633.0,197402589382,Europe,Northern Europe
+Norway,"2009",6877.0,,,,Norway,"2009",2.7,80.8,1.98,4830371.0,194111628292,Europe,Northern Europe
+Norway,"2010",3338.0,,,,Norway,"2010",2.6,81.1,1.95,4891251.0,195424832685,Europe,Northern Europe
+Norway,"2011",4852.0,,,,Norway,"2011",2.5,81.1,1.88,4953945.0,198252580322,Europe,Northern Europe
+Norway,"2012",4606.0,,,,Norway,"2012",2.3,81.6,1.85,5018367.0,,Europe,Northern Europe
+Norway,"2013",4654.0,,,,Norway,"2013",2.3,81.6,1.93,5083450.0,,Europe,Northern Europe
+Norway,"2014",4072.0,,,,Norway,"2014",2.2,82.0,1.93,5147970.0,,Europe,Northern Europe
+Norway,"2015",4094.0,,,,Norway,"2015",2.0,82.0,1.93,5210967.0,,Europe,Northern Europe
+Paraguay,"2002",,,,,Paraguay,"2002",26.1,74.1,3.51,5508615.0,7213731474,Americas,South America
+Paraguay,"2003",,,,,Paraguay,"2003",25.3,74.1,3.43,5607948.0,7490710349,Americas,South America
+Paraguay,"2004",,,,,Paraguay,"2004",24.6,73.8,3.35,5703742.0,7800472023,Americas,South America
+Paraguay,"2005",,,,,Paraguay,"2005",23.8,74.0,3.27,5795493.0,8023446451,Americas,South America
+Paraguay,"2006",16478.0,,,,Paraguay,"2006",23.1,74.0,3.19,5882797.0,8371707752,Americas,South America
+Paraguay,"2007",16369.0,,,,Paraguay,"2007",22.4,74.0,3.12,5966160.0,8937744399,Americas,South America
+Paraguay,"2008",14820.0,,,,Paraguay,"2008",21.7,74.0,3.06,6047131.0,9458532785,Americas,South America
+Paraguay,"2009",13894.0,,,,Paraguay,"2009",21.0,74.0,3.01,6127847.0,9094701457,Americas,South America
+Paraguay,"2010",10017.0,,,,Paraguay,"2010",20.4,74.0,2.97,6209877.0,10463076859,Americas,South America
+Paraguay,"2011",9347.0,,,,Paraguay,"2011",19.8,74.0,2.93,6293763.0,10886238238,Americas,South America
+Paraguay,"2012",9010.0,,,,Paraguay,"2012",19.2,74.1,2.9,6379162.0,,Americas,South America
+Paraguay,"2013",11755.0,,,,Paraguay,"2013",18.6,74.1,2.86,6465669.0,,Americas,South America
+Paraguay,"2014",13242.0,,,,Paraguay,"2014",18.1,74.3,2.83,6552518.0,,Americas,South America
+Paraguay,"2015",9894.0,,,,Paraguay,"2015",17.5,74.4,2.8,6639123.0,,Americas,South America
+Peru,"2002",329.0,,,,Peru,"2002",25.7,75.7,2.82,26601463,56085932802,Americas,South America
+Peru,"2003",20441.0,,,,Peru,"2003",24.1,76.2,2.77,26937737,58347474126,Americas,South America
+Peru,"2004",17143.0,,,,Peru,"2004",22.6,76.7,2.73,27273188,61251271118,Americas,South America
+Peru,"2005",16040.0,,,,Peru,"2005",21.3,77.2,2.69,27610406,65432704696,Americas,South America
+Peru,"2006",14994.0,,,,Peru,"2006",20.1,77.7,2.65,27949958,70497520780,Americas,South America
+Peru,"2007",13770.0,,,,Peru,"2007",19.0,77.9,2.61,28292768,76775759558,Americas,South America
+Peru,"2008",11946.0,,,,Peru,"2008",18.0,78.2,2.58,28642048,84302372402,Americas,South America
+Peru,"2009",10432.0,,,,Peru,"2009",17.1,78.2,2.55,29001563,85006410418,Americas,South America
+Peru,"2010",8541.0,,,,Peru,"2010",16.3,78.4,2.51,29373644,92506872121,Americas,South America
+Peru,"2011",7053.0,,,,Peru,"2011",15.6,78.5,2.48,29759891,98901255440,Americas,South America
+Peru,"2012",6769.0,,,,Peru,"2012",14.9,78.7,2.45,30158768,,Americas,South America
+Peru,"2013",6777.0,,,,Peru,"2013",14.2,79.1,2.42,30565461,,Americas,South America
+Peru,"2014",6555.0,,,,Peru,"2014",13.6,79.3,2.39,30973148,,Americas,South America
+Peru,"2015",4020.0,,,,Peru,"2015",13.1,79.5,2.36,31376670,,Americas,South America
+Poland,"2002",,,,,Poland,"2002",7.3,74.6,1.28,38454823,175842681117,Europe,Eastern Europe
+Poland,"2003",,,,,Poland,"2003",7.0,74.9,1.27,38451227,182642797860,Europe,Eastern Europe
+Poland,"2004",,,,,Poland,"2004",6.7,75.0,1.27,38454520,192404689711,Europe,Eastern Europe
+Poland,"2005",4886.0,,,,Poland,"2005",6.6,75.1,1.28,38463514,199364063181,Europe,Eastern Europe
+Poland,"2006",2521.0,,,,Poland,"2006",6.3,75.2,1.29,38478763,211779433442,Europe,Eastern Europe
+Poland,"2007",2754.0,,,,Poland,"2007",6.0,75.2,1.31,38500356,226149246712,Europe,Eastern Europe
+Poland,"2008",2617.0,,,,Poland,"2008",5.8,75.4,1.33,38525752,237742898868,Europe,Eastern Europe
+Poland,"2009",5521.0,,,,Poland,"2009",5.3,75.7,1.35,38551489,241612593969,Europe,Eastern Europe
+Poland,"2010",1264.0,,,,Poland,"2010",5.0,76.2,1.37,38574682,251030838904,Europe,Eastern Europe
+Poland,"2011",2377.0,,,,Poland,"2011",4.7,76.5,1.39,38594217,261950140322,Europe,Eastern Europe
+Poland,"2012",1670.0,,,,Poland,"2012",4.6,76.7,1.4,38609486,,Europe,Eastern Europe
+Poland,"2013",2702.0,,,,Poland,"2013",4.5,77.3,1.42,38618698,,Europe,Eastern Europe
+Poland,"2014",1536.0,,,,Poland,"2014",4.5,77.4,1.43,38619974,,Europe,Eastern Europe
+Poland,"2015",1956.0,,,,Poland,"2015",4.5,77.6,1.44,38611794,,Europe,Eastern Europe
+Romania,"2002",,,,,Romania,"2002",21.6,71.2,1.27,21851988,41162034208,Europe,Eastern Europe
+Romania,"2003",,,,,Romania,"2003",20.6,71.6,1.28,21722664,43302459253,Europe,Eastern Europe
+Romania,"2004",37393.0,,,,Romania,"2004",19.5,72.0,1.29,21578318,46939862239,Europe,Eastern Europe
+Romania,"2005",40284.0,,,,Romania,"2005",18.2,72.4,1.3,21407619,48898332853,Europe,Eastern Europe
+Romania,"2006",40713.0,,,,Romania,"2006",16.7,72.8,1.31,21205977,52761301149,Europe,Eastern Europe
+Romania,"2007",40248.0,,,,Romania,"2007",15.3,73.3,1.33,20979708,55926979218,Europe,Eastern Europe
+Romania,"2008",39262.0,,,,Romania,"2008",14.0,73.2,1.34,20741669,61198545647,Europe,Eastern Europe
+Romania,"2009",41179.0,,,,Romania,"2009",13.0,73.3,1.36,20510263,55996669267,Europe,Eastern Europe
+Romania,"2010",32246.0,,,,Romania,"2010",12.1,73.7,1.37,20298838,56527456853,Europe,Eastern Europe
+Romania,"2011",34686.0,,,,Romania,"2011",11.5,74.5,1.39,20111664,56320357839,Europe,Eastern Europe
+Romania,"2012",32288.0,,,,Romania,"2012",10.9,74.7,1.4,19944954,,Europe,Eastern Europe
+Romania,"2013",33899.0,,,,Romania,"2013",10.5,74.9,1.42,19794163,,Europe,Eastern Europe
+Romania,"2014",34484.0,,,,Romania,"2014",10.1,75.1,1.43,19651554,,Europe,Eastern Europe
+Romania,"2015",23679.0,,,,Romania,"2015",9.7,75.2,1.45,19511324,,Europe,Eastern Europe
+Russia,"2002",,,,,Russia,"2002",17.7,64.9,1.29,145195521,285879843583,Europe,Eastern Europe
+Russia,"2003",,,,,Russia,"2003",16.6,64.7,1.33,144583147,306737220532,Europe,Eastern Europe
+Russia,"2004",,,,,Russia,"2004",15.4,65.1,1.34,144043914,328748527632,Europe,Eastern Europe
+Russia,"2005",13596.0,,,,Russia,"2005",14.4,65.1,1.29,143622566,349710148603,Europe,Eastern Europe
+Russia,"2006",15693.0,,,,Russia,"2006",13.3,66.7,1.3,143338407,378223527671,Europe,Eastern Europe
+Russia,"2007",16590.0,,,,Russia,"2007",12.4,67.7,1.41,143180249,410505209128,Europe,Eastern Europe
+Russia,"2008",20976.0,,,,Russia,"2008",11.6,67.9,1.49,143123163,432048331750,Europe,Eastern Europe
+Russia,"2009",29361.0,,,,Russia,"2009",10.9,68.8,1.54,143126660,398209755704,Europe,Eastern Europe
+Russia,"2010",23322.0,,,,Russia,"2010",10.3,68.9,1.57,143158099,415332775199,Europe,Eastern Europe
+Russia,"2011",26352.0,,,,Russia,"2011",9.8,69.8,1.58,143211476,433192084533,Europe,Eastern Europe
+Russia,"2012",27213.0,,,,Russia,"2012",9.3,70.4,1.59,143287536,,Europe,Eastern Europe
+Russia,"2013",33134.0,,,,Russia,"2013",8.9,70.8,1.6,143367341,,Europe,Eastern Europe
+Russia,"2014",30966.0,,,,Russia,"2014",8.5,70.9,1.6,143429435,,Europe,Eastern Europe
+Russia,"2015",21447.0,,,,Russia,"2015",8.2,71.0,1.61,143456918,,Europe,Eastern Europe
+South Africa,"2002",,,,,South Africa,"2002",54.7,54.8,2.8,46272223,141519467703,Africa,Southern Africa
+South Africa,"2003",,,,,South Africa,"2003",54.1,53.7,2.76,46971250,145692982131,Africa,Southern Africa
+South Africa,"2004",,,,,South Africa,"2004",52.8,52.8,2.72,47667150,152328632239,Africa,Southern Africa
+South Africa,"2005",,,,,South Africa,"2005",51.5,52.7,2.68,48352951,160367192374,Africa,Southern Africa
+South Africa,"2006",,,,,South Africa,"2006",50.0,52.5,2.63,49027805,169353717106,Africa,Southern Africa
+South Africa,"2007",135522.0,,,,South Africa,"2007",48.6,53.0,2.58,49693580,178749049657,Africa,Southern Africa
+South Africa,"2008",135377.0,,,,South Africa,"2008",46.6,53.4,2.54,50348811,185217195736,Africa,Southern Africa
+South Africa,"2009",150344.0,,,,South Africa,"2009",41.1,53.9,2.5,50992034,182369831416,Africa,Southern Africa
+South Africa,"2010",129539.0,,,,South Africa,"2010",38.2,54.9,2.47,51621594,187639624489,Africa,Southern Africa
+South Africa,"2011",129150.0,,,,South Africa,"2011",37.1,56.6,2.44,52237272,193499101150,Africa,Southern Africa
+South Africa,"2012",136519.0,,,,South Africa,"2012",36.8,59.0,2.41,52837274,,Africa,Southern Africa
+South Africa,"2013",140671.0,,,,South Africa,"2013",35.3,60.7,2.39,53416609,,Africa,Southern Africa
+South Africa,"2014",155577.0,,,,South Africa,"2014",34.4,61.2,2.36,53969054,,Africa,Southern Africa
+South Africa,"2015",98940.0,,,,South Africa,"2015",33.6,61.3,2.34,54490406,,Africa,Southern Africa
+Spain,"2002",,,,,Spain,"2002",5.2,79.6,1.27,41815486,617946434914,Europe,Southern Europe
+Spain,"2003",,,,,Spain,"2003",5.1,79.6,1.3,42475265,637037529120,Europe,Southern Europe
+Spain,"2004",1437.0,,,,Spain,"2004",5.0,80.0,1.33,43167276,657800500119,Europe,Southern Europe
+Spain,"2005",3278.0,,,,Spain,"2005",4.8,80.3,1.35,43854761,681373742384,Europe,Southern Europe
+Spain,"2006",2061.0,,,,Spain,"2006",4.6,80.7,1.38,44537926,709148044936,Europe,Southern Europe
+Spain,"2007",3246.0,,,,Spain,"2007",4.4,80.8,1.4,45209538,733820614902,Europe,Southern Europe
+Spain,"2008",2209.0,,,,Spain,"2008",4.2,81.1,1.42,45817016,740341770865,Europe,Southern Europe
+Spain,"2009",4011.0,,,,Spain,"2009",4.1,81.5,1.44,46295191,712647416141,Europe,Southern Europe
+Spain,"2010",727.0,,,,Spain,"2010",3.9,81.8,1.46,46601492,712152291146,Europe,Southern Europe
+Spain,"2011",1224.0,,,,Spain,"2011",3.8,82.0,1.47,46708366,717193989759,Europe,Southern Europe
+Spain,"2012",1938.0,,,,Spain,"2012",3.7,82.2,1.49,46637082,,Europe,Southern Europe
+Spain,"2013",2769.0,,,,Spain,"2013",3.7,82.5,1.51,46455163,,Europe,Southern Europe
+Spain,"2014",3010.0,,,,Spain,"2014",3.6,82.5,1.52,46259716,,Europe,Southern Europe
+Spain,"2015",4863.0,,,,Spain,"2015",3.5,82.6,1.53,46121699,,Europe,Southern Europe
+Sweden,"2002",,,,,Sweden,"2002",3.3,80.0,1.67,8911899.0,256599359725,Europe,Northern Europe
+Sweden,"2003",,,,,Sweden,"2003",3.2,80.2,1.73,8942926.0,262592755597,Europe,Northern Europe
+Sweden,"2004",,,,,Sweden,"2004",3.1,80.2,1.77,8982282.0,273713195657,Europe,Northern Europe
+Sweden,"2005",,,,,Sweden,"2005",3.0,80.6,1.79,9030163.0,282364681257,Europe,Northern Europe
+Sweden,"2006",153.0,,,,Sweden,"2006",2.8,80.8,1.87,9087251.0,294498396948,Europe,Northern Europe
+Sweden,"2007",179.0,,,,Sweden,"2007",2.7,80.9,1.89,9153316.0,304258796391,Europe,Northern Europe
+Sweden,"2008",169.0,,,,Sweden,"2008",2.6,81.1,1.92,9226333.0,302392423838,Europe,Northern Europe
+Sweden,"2009",474.0,,,,Sweden,"2009",2.5,81.2,1.94,9303432.0,287188905096,Europe,Northern Europe
+Sweden,"2010",106.0,,,,Sweden,"2010",2.5,81.6,1.99,9382297.0,304858727345,Europe,Northern Europe
+Sweden,"2011",201.0,,,,Sweden,"2011",2.4,81.7,1.9,9462352.0,316798617621,Europe,Northern Europe
+Sweden,"2012",368.0,,,,Sweden,"2012",2.4,81.8,1.91,9543457.0,,Europe,Northern Europe
+Sweden,"2013",556.0,,,,Sweden,"2013",2.4,81.9,1.93,9624247.0,,Europe,Northern Europe
+Sweden,"2014",266.0,,,,Sweden,"2014",2.4,82.1,1.93,9703247.0,,Europe,Northern Europe
+Sweden,"2015",328.0,,,,Sweden,"2015",2.4,82.1,1.93,9779426.0,,Europe,Northern Europe
+Switzerland,"2002",,,,,Switzerland,"2002",4.6,80.4,1.42,7242034.0,253918245870,Europe,Western Europe
+Switzerland,"2003",,,,,Switzerland,"2003",4.4,80.6,1.42,7289901.0,253416009483,Europe,Western Europe
+Switzerland,"2004",1600.0,,,,Switzerland,"2004",4.4,81.0,1.42,7345299.0,259834269511,Europe,Western Europe
+Switzerland,"2005",3849.0,,,,Switzerland,"2005",4.3,81.3,1.43,7408608.0,266695570076,Europe,Western Europe
+Switzerland,"2006",1781.0,,,,Switzerland,"2006",4.2,81.5,1.44,7480317.0,276377653102,Europe,Western Europe
+Switzerland,"2007",2999.0,,,,Switzerland,"2007",4.1,81.7,1.46,7560141.0,286450319616,Europe,Western Europe
+Switzerland,"2008",3345.0,,,,Switzerland,"2008",4.0,82.0,1.47,7646542.0,292452808698,Europe,Western Europe
+Switzerland,"2009",5836.0,,,,Switzerland,"2009",3.9,82.0,1.49,7737316.0,286960456156,Europe,Western Europe
+Switzerland,"2010",1044.0,,,,Switzerland,"2010",3.9,82.3,1.5,7830534.0,294748691280,Europe,Western Europe
+Switzerland,"2011",2314.0,,,,Switzerland,"2011",3.8,82.6,1.51,7925813.0,300938413797,Europe,Western Europe
+Switzerland,"2012",2944.0,,,,Switzerland,"2012",3.7,82.7,1.52,8022628.0,,Europe,Western Europe
+Switzerland,"2013",6379.0,,,,Switzerland,"2013",3.6,82.8,1.53,8118719.0,,Europe,Western Europe
+Switzerland,"2014",3870.0,,,,Switzerland,"2014",3.5,82.9,1.54,8211383.0,,Europe,Western Europe
+Switzerland,"2015",6390.0,,,,Switzerland,"2015",3.4,83.0,1.55,8298663.0,,Europe,Western Europe
+Ukraine,"2002",,,,,Ukraine,"2002",14.3,67.5,1.15,47890647,35912742450,Europe,Eastern Europe
+Ukraine,"2003",,,,,Ukraine,"2003",13.6,67.7,1.18,47493771,39288540241,Europe,Eastern Europe
+Ukraine,"2004",,,,,Ukraine,"2004",13.0,67.5,1.21,47127110,44042453610,Europe,Eastern Europe
+Ukraine,"2005",,,,,Ukraine,"2005",12.5,67.1,1.26,46795313,45231599857,Europe,Eastern Europe
+Ukraine,"2006",17646.0,,,,Ukraine,"2006",12.0,67.9,1.3,46502718,48533506647,Europe,Eastern Europe
+Ukraine,"2007",21139.0,,,,Ukraine,"2007",11.6,67.6,1.35,46249196,52367654045,Europe,Eastern Europe
+Ukraine,"2008",20457.0,,,,Ukraine,"2008",11.1,67.8,1.38,46028476,53572110088,Europe,Eastern Europe
+Ukraine,"2009",25627.0,,,,Ukraine,"2009",10.6,69.6,1.41,45830711,45643437795,Europe,Eastern Europe
+Ukraine,"2010",20098.0,,,,Ukraine,"2010",10.1,70.5,1.44,45647497,47514818744,Europe,Eastern Europe
+Ukraine,"2011",19755.0,,,,Ukraine,"2011",9.6,71.1,1.45,45477690,49985589319,Europe,Eastern Europe
+Ukraine,"2012",19375.0,,,,Ukraine,"2012",9.1,71.2,1.46,45319949,,Europe,Eastern Europe
+Ukraine,"2013",21955.0,,,,Ukraine,"2013",8.6,71.3,1.47,45165211,,Europe,Eastern Europe
+Ukraine,"2014",20112.0,,,,Ukraine,"2014",8.1,71.3,1.48,45002497,,Europe,Eastern Europe
+Ukraine,"2015",12101.0,,,,Ukraine,"2015",7.7,71.5,1.49,44823765,,Europe,Eastern Europe
+United States,"2002",,,,,United States,"2002",6.9,77.1,2.02,288470847,10189959441124,Americas,Northern America
+United States,"2003",,,,,United States,"2003",6.8,77.3,2.05,291005482,10450068972316,Americas,Northern America
+United States,"2004",58593.0,,,,United States,"2004",6.9,77.6,2.06,293530886,10813707774621,Americas,Northern America
+United States,"2005",83959.0,,,,United States,"2005",6.8,77.6,2.06,296139635,11146296666995,Americas,Northern America
+United States,"2006",77657.0,,,,United States,"2006",6.7,77.8,2.11,298860519,11442690235793,Americas,Northern America
+United States,"2007",73300.0,,,,United States,"2007",6.6,78.1,2.12,301655953,11660926745593,Americas,Northern America
+United States,"2008",92943.0,,,,United States,"2008",6.5,78.3,2.07,304473143,11619053724200,Americas,Northern America
+United States,"2009",139394.0,,,,United States,"2009",6.4,78.5,2.0,307231961,11209194913112,Americas,Northern America
+United States,"2010",73160.0,,,,United States,"2010",6.3,78.8,1.93,309876170,11547905073444,Americas,Northern America
+United States,"2011",86415.0,,,,United States,"2011",6.1,78.9,1.9,312390368,11744219459693,Americas,Northern America
+United States,"2012",122918.0,,,,United States,"2012",6.1,79.0,1.9,314799465,,Americas,Northern America
+United States,"2013",130196.0,,,,United States,"2013",5.9,79.1,1.98,317135919,,Americas,Northern America
+United States,"2014",99848.0,,,,United States,"2014",5.7,79.1,1.97,319448634,,Americas,Northern America
+United States,"2015",61295.0,,,,United States,"2015",5.6,79.1,1.97,321773631,,Americas,Northern America
+Uruguay,"2002",,,,,Uruguay,"2002",13.7,75.0,2.21,3327770.0,20249041605,Americas,South America
+Uruguay,"2003",,,,,Uruguay,"2003",13.3,75.0,2.19,3325637.0,20412103881,Americas,South America
+Uruguay,"2004",7555.0,,,,Uruguay,"2004",12.8,75.3,2.17,3324096.0,21433558291,Americas,South America
+Uruguay,"2005",6647.0,,,,Uruguay,"2005",12.4,75.5,2.16,3325608.0,23032530046,Americas,South America
+Uruguay,"2006",6776.0,,,,Uruguay,"2006",12.0,75.7,2.14,3331041.0,23976536117,Americas,South America
+Uruguay,"2007",7430.0,,,,Uruguay,"2007",11.5,75.7,2.12,3339750.0,25544963828,Americas,South America
+Uruguay,"2008",6339.0,,,,Uruguay,"2008",11.2,76.0,2.11,3350832.0,27378107386,Americas,South America
+Uruguay,"2009",5770.0,,,,Uruguay,"2009",11.0,76.2,2.09,3362761.0,28040043322,Americas,South America
+Uruguay,"2010",5087.0,,,,Uruguay,"2010",10.6,76.2,2.08,3374414.0,30534154733,Americas,South America
+Uruguay,"2011",4686.0,,,,Uruguay,"2011",10.3,76.3,2.07,3385610.0,32274699322,Americas,South America
+Uruguay,"2012",5070.0,,,,Uruguay,"2012",10.0,76.3,2.06,3396753.0,,Americas,South America
+Uruguay,"2013",5005.0,,,,Uruguay,"2013",9.5,76.4,2.05,3407969.0,,Americas,South America
+Uruguay,"2014",5390.0,,,,Uruguay,"2014",9.1,76.6,2.04,3419516.0,,Americas,South America
+Uruguay,"2015",4195.0,,,,Uruguay,"2015",8.7,76.8,2.03,3431555.0,,Americas,South America
