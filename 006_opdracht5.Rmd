@@ -6,13 +6,24 @@ output: bookdown::gitbook
 documentclass: book
 biblio-style: apalike
 link-citations: yes
+bibliography: portfoliolaurine.bib
 ---
 
 # Using GitHub and Zotero
 
 This was the sixth assignment for our portfolio.
 
-__Introduction to our project.__
-For our DSFB2 project, we are going to build an app in Shiny to enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br>
-The zoology students are investigating the effects of different kinds of snake poison on heart muscle. To do this, they're using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery. (https://link.springer.com/protocol/10.1007/978-1-4939-8597-5_8#citeas)
-This technique can be used to study the direct effects of, for example, medication on the heart _ex vivo_. The two most important parameters that can be tracked in this assay are heart rate and contraction force.
+__Introduction to our project.__ <br>
+For our DSFB2 project, we are going to build a Shiny app to enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br>
+The zoology students are investigating the effects of different kinds of snake venom on heart muscle. To do this, they're using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery. [@WatanabeOkada2018][^smallnote]
+
+[^smallnote]: Link to the study: https://link.springer.com/protocol/10.1007/978-1-4939-8597-5_8#citeas
+
+This technique can be used to study the direct effects of, for example, medication on the heart _ex vivo_. The two most important parameters that can be tracked in this assay are heart rate and contraction force. <br>
+We will write code to enable the zoology students to analyse these two parameters quickly and thoroughly.
+
+```{r library, include=FALSE}
+library(rbbt)
+bbt_update_bib("006_opdracht5.Rmd")
+```
+

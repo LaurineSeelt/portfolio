@@ -10,11 +10,13 @@ link-citations: yes
 
 # Creating a package
 
-Packages can be very useful when working in R. Here, I demonstrate how I've created the package called ...
-
+Packages can be very useful when working in R. Here, I demonstrate how I've created the package called tidyplot. <br>
+This package can be used to ..
+<br>
 ```{r setting up, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(ggplot2)
+library(car)
 ```
 
 
@@ -30,14 +32,18 @@ df %>% filter() %>%
 ```
 
 
-```{r, eval=FALSE}
-hematocrit_paired <-read_csv2(here("lesson4/hematocrit_paired"))
+```{r example, eval=FALSE}
+hematocrit_paired <- read_csv2(here::here("Data/hematocrit_paired"))
+
 hematocrit_tidy <-  pivot_longer(data = hematocrit_paired, cols = c(voor, na),  
                                  names_to = "condition",  values_to = "hematocrit")
-
 hematocrit_tidy_summary <- hematocrit_tidy %>% group_by(condition) %>%
   summarize(mean = mean(hematocrit), stdev = sd(hematocrit))
-hematocrit_tidy_summary %>% ggplot(aes(x = condition, y = mean))+
+
+shapiro.test(voor en na) %>% leveneTest() %>% t.test()
+hematocrit_tidy %>% leveneTest()
+
+hematocrit_tidy_summary %>% ggplot(aes(x = condition, y = mean, fill = condition))+
   geom_bar(stat = "identity")+
   geom_errorbar(aes(ymin = mean - stdev, ymax = mean + stdev), width = 0.2)+
   theme_minimal()+

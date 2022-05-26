@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-21" />
+<meta name="date" content="2022-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -178,7 +178,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="cleaning-up-according-to-the-guerrilla-analytics-framework" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Cleaning up according to the Guerrilla analytics framework<a href="cleaning-up-according-to-the-guerrilla-analytics-framework.html#cleaning-up-according-to-the-guerrilla-analytics-framework" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This was the third assignment for our portfolio. We had to apply the Guerrilla analytics framework to our DAUR2 folder.</p>
+<p>This was the third assignment for our portfolio. We had to apply the Guerrilla analytics framework to our DAUR2 folder.
+<br>
+I decided to: <br>
+1. Make a folder called “Rmd” in which I keep all of my markdowns. <br>
+2. Make a folder called “Data” in which I store all the data I’ve used. This folder is split in “Metagenomics” and “RNA_seq”, to separate the two anlyses I’ve conducted during Daur2. Both those folders contain the sub folder “Data_raw”, which is data I cannot touch. This is the raw data I received from teachers or downloaded from the internet. <br>
+3. Make a folder called “R”. In this folder, I store functions I’ve written. <br>
+4. Make a folder called “Code”. This folder contains the scripts I’ve written, except my Rmarkdowns.
+<br></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="cleaning-up-according-to-the-guerrilla-analytics-framework.html#cb12-1" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="at">path =</span> <span class="fu">here</span>(<span class="st">&quot;Daur2&quot;</span>), <span class="at">type =</span> <span class="st">&quot;directory&quot;</span>)</span></code></pre></div>
 <pre><code>## C:/Users/lautj/Documents/DSFB2/portfolio/Daur2
 ## ├── Code

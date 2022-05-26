@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-21" />
+<meta name="date" content="2022-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -178,9 +178,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="investigating-a-c.-elegans-plate-experiment" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">2</span> Investigating a <em>C. Elegans</em> plate experiment<a href="investigating-a-c.-elegans-plate-experiment.html#investigating-a-c.-elegans-plate-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This was the first assignment for our portfolio. We had to look at the data of a <em>C. Elegans</em> plate experiment, plot some of the data and normalize the data for the negative control to get a clearer graph.</p>
+<p>This was the first assignment for our portfolio. We had to look at the data of a <em>C. Elegans</em> plate experiment, plot some of the data and normalize the data for the negative control to get a clearer graph.
+<br></p>
 <p><br>
-First I took a look at the data and read it in RStudio.
+First I took a look at the data and read it in in RStudio.
 <br></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="investigating-a-c.-elegans-plate-experiment.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View(here(&quot;Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;))</span></span>
 <span id="cb1-2"><a href="investigating-a-c.-elegans-plate-experiment.html#cb1-2" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span>
@@ -199,7 +200,7 @@ RawData is double, that makes sense because this column contains numbers.
 <br>
 CompName is a character, that also makes sense. This column contains the names of the compounds that were use.
 <br>
-CompConcentration is een character, wat wel apart is. In die kolom staan de concentraties van de gebruikte stofjes, dus je zou verwachten dat dit een numerieke kolom zou zijn.
+CompConcentration is een character, which is kind of weird. This column contains the concentrations of the compounds that were used, so you’d expect this column to be double.
 <br>
 Then I plotted the data in a scatter plot.
 <br></p>
@@ -207,9 +208,9 @@ Then I plotted the data in a scatter plot.
 <span id="cb8-2"><a href="investigating-a-c.-elegans-plate-experiment.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/creating%20a%20scatter%20plot-1.png" width="672" />
 <br>
-De X-as is niet heel mooi of leesbaar. Volgens mij worden de getallen geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit. Er wordt niet ‘rekening gehouden’ met de machten.
+The X-axis isn’t very readable. I think the numbers are organised according to the number that they begin with, not the actual size of them. So 4x10-5 is seen as bigger than 0,1 because 4x10-5 start with a 4. The powers aren’t taken into consideration.
 <br>
-Om de X-as leesbaarder te maken, heb ik de kolom compConcentration naar numeric veranderd en heb ik de Log10 van de concentratie geplot. Ook heb ik geom_jitter gebruikt om wat afstand te creëren tussen de datapunten, zodat de grafiek nog wat duidelijker wordt.
+To make the X-axis more redeable, I changed the column compConcentration to numeric and I plotted the Log10 of the concentration. I also used geom_jitter to create some distance between the datapoints. This makes the graph a bit clearer.
 <br></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="investigating-a-c.-elegans-plate-experiment.html#cb9-1" aria-hidden="true" tabindex="-1"></a>Tidydata<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Tidydata<span class="sc">$</span>compConcentration)</span>
 <span id="cb9-2"><a href="investigating-a-c.-elegans-plate-experiment.html#cb9-2" aria-hidden="true" tabindex="-1"></a>Tidydata <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> (<span class="fu">log10</span>(compConcentration <span class="sc">+</span> <span class="fl">0.001</span>)), <span class="at">y =</span> RawData, <span class="at">colour =</span> compName, <span class="at">shape =</span> expType)) <span class="sc">+</span></span>
@@ -223,13 +224,16 @@ The positive control of this study were <em>C. Elegans</em> treated with Ethanol
 The negative control were <em>C. Elegans</em> treated with S-medium.
 <br>
 <br>
-Om te analyseren of verschillende concentraties effect hebben op de hoeveelheid nakomelingen, zou ik aparte tabellen maken per stof (en per concentratie?). Dan kan je het gemiddelde en de standaard deviatie per stof en per concentratie berekenen. Ook kan je dan per stof een ANOVA test uitvoeren, om te kijken of het effect significant is.
-Dus <br>
-1. Aparte tabellen maken met de metingen per stof. <br>
-2. Het gemiddelde en de standaardeviatie berekenen voor elke concentratie van elke stof. <br>
-3. Een ANOVA test uitvoeren voor elke stof om te kijken of er dus inderdaad significante verschillen zijn in effect tussen de concentraties.</p>
-<p>Om te analyseren of de verschillende stoffen een andere curve/IC50 hebben, moet je per stof kijken naar het effect op de hoeveelheid nakomelingen. Daar kan je een grafiek van maken, met op de x-as de concentratie van de stof en op de y-as de hoeveelheid nakomelingen. Deze grafieken zou je bijvoorbeeld in hetzelfde assenstelsel kunnen plotten, om ze met elkaar te kunnen vergelijken.</p>
-<p>Als laatste heb ik de data genormaliseerd voor de negatieve controle en dat weer geplot in een scatter plot.
+To analyse the effects different compound concentrations have on the number of offspring, I’d make separate datasets for each compound, ordered by concentration. Then you can calculate the mean and standard deviation for each compound and each concentration. You can also perform an ANOVA test on each compound, to see if there is a significant difference in effect between the different concentrations.
+So <br>
+1. Generate separate datasets with the measurements per compound. <br>
+2. Calculate the mean and standard deviation for each concentration of each compound. <br>
+3. Perform an ANOVA test for each compound to see if there is a significant difference in effect between the different concentrations.
+<br>
+To see if the different compounds have different curves/IC50’s, you have to look at the number of offspring per compound. You can make a graph with the concentration of the compound on the X-axis and the number of offspring on the Y-axis. You could possibly plot several compounds in one axle system, to compare them.
+<br>
+<br>
+Lastly, I normalised the data for the negative control and made a scatter plot with this data.
 <br></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="investigating-a-c.-elegans-plate-experiment.html#cb10-1" aria-hidden="true" tabindex="-1"></a>Tidydata<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Tidydata<span class="sc">$</span>compConcentration)</span>
 <span id="cb10-2"><a href="investigating-a-c.-elegans-plate-experiment.html#cb10-2" aria-hidden="true" tabindex="-1"></a>Tibble_mean <span class="ot">&lt;-</span> Tidydata <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(compName, compConcentration) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">by =</span> <span class="st">&quot;compName&quot;</span>, <span class="at">mean =</span> <span class="fu">mean</span>(RawData, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
@@ -241,8 +245,9 @@ Dus <br>
 <span id="cb10-8"><a href="investigating-a-c.-elegans-plate-experiment.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;The effect of different compounds on the amount of offspring&quot;</span>,</span>
 <span id="cb10-9"><a href="investigating-a-c.-elegans-plate-experiment.html#cb10-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Compound concentration (log10 + 0.001)&quot;</span>,</span>
 <span id="cb10-10"><a href="investigating-a-c.-elegans-plate-experiment.html#cb10-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Mean offspring, normalised for S-medium&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/normalising%20the%20data%20for%20the%20negative%20control-1.png" width="672" /></p>
-<p>Dit heb ik gedaan omdat je dan duidelijker het effect kan zien van de verschillende stoffen en verschillende concentraties. De grafiek is veel overzichtelijker op deze manier. Ook kan je duidelijk per stof en per concentratie het verschil zien met de negatieve controle.</p>
+<p><img src="_main_files/figure-html/normalising%20the%20data%20for%20the%20negative%20control-1.png" width="672" />
+<br>
+I did this because this way you can see the effect of different compounds and different concentrations more clearly. You can also clearly see the difference in effect between a certain compound concentration and the negative control.</p>
 
 </div>
             </section>

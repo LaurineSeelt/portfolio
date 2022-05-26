@@ -41,7 +41,7 @@ __Ervaring/skills__
 
 ----
 
-(q)PCR 
+(q)PCR <br>
 Western Blot <br>
 ELISA <br>
 MALDI-TOF <br>

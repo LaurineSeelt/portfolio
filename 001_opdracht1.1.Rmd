@@ -11,7 +11,7 @@ link-citations: yes
 # Investigating a _C. Elegans_ plate experiment
 
 This was the first assignment for our portfolio. We had to look at the data of a _C. Elegans_ plate experiment, plot some of the data and normalize the data for the negative control to get a clearer graph.
-
+<br>
 ```{r setup1, include=FALSE, eval=TRUE}
 library(tidyverse)
 library(readxl)
@@ -20,7 +20,7 @@ library(timetk)
 library(ggplot2)
 ```
 <br>
-First I took a look at the data and read it in RStudio.
+First I took a look at the data and read it in in RStudio.
 <br>
 ```{r, message=FALSE, warning=FALSE}
 # View(here("Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx"))
@@ -40,7 +40,7 @@ RawData is double, that makes sense because this column contains numbers.
 <br>
 CompName is a character, that also makes sense. This column contains the names of the compounds that were use.
 <br>
-CompConcentration is een character, wat wel apart is. In die kolom staan de concentraties van de gebruikte stofjes, dus je zou verwachten dat dit een numerieke kolom zou zijn.
+CompConcentration is een character, which is kind of weird. This column contains the concentrations of the compounds that were used, so you'd expect this column to be double.
 <br>
 Then I plotted the data in a scatter plot.
 <br>
@@ -49,9 +49,9 @@ Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, s
   geom_point()
 ```
 <br>
-De X-as is niet heel mooi of leesbaar. Volgens mij worden de getallen geordend op basis van met welk getal ze beginnen, niet de daadwerkelijke grootte. Dus bijvoorbeeld 4,05x10-5 staat verder naar rechts dan 0,1 omdat 4,05x10-5 dus met een 4 begint. CompConcentration is een character kolom, dus daarom gebeurt dit. Er wordt niet 'rekening gehouden' met de machten.
+The X-axis isn't very readable. I think the numbers are organised according to the number that they begin with, not the actual size of them. So 4x10-5 is seen as bigger than 0,1 because 4x10-5 start with a 4. The powers aren't taken into consideration.
 <br>
-Om de X-as leesbaarder te maken, heb ik de kolom compConcentration naar numeric veranderd en heb ik de Log10 van de concentratie geplot. Ook heb ik geom_jitter gebruikt om wat afstand te creëren tussen de datapunten, zodat de grafiek nog wat duidelijker wordt.
+To make the X-axis more redeable, I changed the column compConcentration to numeric and I plotted the Log10 of the concentration. I also used geom_jitter to create some distance between the datapoints. This makes the graph a bit clearer.
 <br>
 ```{r, correcting the data and making a new scatter plot, message=FALSE, warning=FALSE}
 Tidydata$compConcentration <- as.numeric(Tidydata$compConcentration)
@@ -66,15 +66,16 @@ The positive control of this study were _C. Elegans_ treated with Ethanol.
 The negative control were _C. Elegans_ treated with S-medium.
 <br>
 <br>
-Om te analyseren of verschillende concentraties effect hebben op de hoeveelheid nakomelingen, zou ik aparte tabellen maken per stof (en per concentratie?). Dan kan je het gemiddelde en de standaard deviatie per stof en per concentratie berekenen. Ook kan je dan per stof een ANOVA test uitvoeren, om te kijken of het effect significant is.
-Dus <br>
-1. Aparte tabellen maken met de metingen per stof. <br>
-2. Het gemiddelde en de standaardeviatie berekenen voor elke concentratie van elke stof. <br>
-3. Een ANOVA test uitvoeren voor elke stof om te kijken of er dus inderdaad significante verschillen zijn in effect tussen de concentraties.
-
-Om te analyseren of de verschillende stoffen een andere curve/IC50 hebben, moet je per stof kijken naar het effect op de hoeveelheid nakomelingen. Daar kan je een grafiek van maken, met op de x-as de concentratie van de stof en op de y-as de hoeveelheid nakomelingen. Deze grafieken zou je bijvoorbeeld in hetzelfde assenstelsel kunnen plotten, om ze met elkaar te kunnen vergelijken.
-
-Als laatste heb ik de data genormaliseerd voor de negatieve controle en dat weer geplot in een scatter plot.
+To analyse the effects different compound concentrations have on the number of offspring, I'd make separate datasets for each compound, ordered by concentration. Then you can calculate the mean and standard deviation for each compound and each concentration. You can also perform an ANOVA test on each compound, to see if there is a significant difference in effect between the different concentrations.
+So <br>
+1. Generate separate datasets with the measurements per compound. <br>
+2. Calculate the mean and standard deviation for each concentration of each compound. <br>
+3. Perform an ANOVA test for each compound to see if there is a significant difference in effect between the different concentrations.
+<br>
+To see if the different compounds have different curves/IC50's, you have to look at the number of offspring per compound. You can make a graph with the concentration of the compound on the X-axis and the number of offspring on the Y-axis. You could possibly plot several compounds in one axle system, to compare them.
+<br>
+<br>
+Lastly, I normalised the data for the negative control and made a scatter plot with this data.
 <br>
 ```{r, normalising the data for the negative control, message=FALSE, warning=FALSE}
 Tidydata$compConcentration <- as.numeric(Tidydata$compConcentration)
@@ -88,5 +89,5 @@ Tibble_mean %>% ggplot(aes(x = (log10(compConcentration + 0.001)), y = mean_norm
        x = "Compound concentration (log10 + 0.001)",
        y = "Mean offspring, normalised for S-medium")
 ```
-
-Dit heb ik gedaan omdat je dan duidelijker het effect kan zien van de verschillende stoffen en verschillende concentraties. De grafiek is veel overzichtelijker op deze manier. Ook kan je duidelijk per stof en per concentratie het verschil zien met de negatieve controle.
+<br>
+I did this because this way you can see the effect of different compounds and different concentrations more clearly. You can also clearly see the difference in effect between a certain compound concentration and the negative control.

@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-05-21" />
+<meta name="date" content="2022-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -185,7 +185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb156-5"><a href="working-with-dbeaver-and-sql.html#cb156-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
 <span id="cb156-6"><a href="working-with-dbeaver-and-sql.html#cb156-6" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;RPostgres&quot;)</span></span>
 <span id="cb156-7"><a href="working-with-dbeaver-and-sql.html#cb156-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RPostgres)</span></code></pre></div>
-<p>First, I read in the flu, dengue and gapminder data.
+<p><br>
+First, I read in the flu, dengue and gapminder data.
 <br></p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="working-with-dbeaver-and-sql.html#cb157-1" aria-hidden="true" tabindex="-1"></a>flu <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/data_raw/flu_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
 <span id="cb157-2"><a href="working-with-dbeaver-and-sql.html#cb157-2" aria-hidden="true" tabindex="-1"></a>dengue <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/data_raw/dengue_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
@@ -295,7 +296,77 @@ Then I inspected the contents of the datasets in DBeaver and in R.
 ## 4     Yemen   1962            263.7
 ## 5     Yemen   1965            263.6
 ## 6     Yemen   1966            256.0</code></pre>
+<p><br>
+In DBeaver, I also inspected the data, performed some joins and exported a joined table to R. The table is called “Joined_table.csv”.
+<br></p>
+<p><mark> DBeaver code </mark>
+<br>
+After reading in the data, I removed the rows “year_d”, “year_g”, “country_d” and “country_g”. These rows were redundant, seeing as we already have the rows “year_f” and “country_f” from the flu dataset.
+<br></p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="working-with-dbeaver-and-sql.html#cb186-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">&quot;Data/Joined_table.csv&quot;</span>))</span>
+<span id="cb186-2"><a href="working-with-dbeaver-and-sql.html#cb186-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb186-3"><a href="working-with-dbeaver-and-sql.html#cb186-3" aria-hidden="true" tabindex="-1"></a>joined_table <span class="ot">&lt;-</span> joined_table <span class="sc">%&gt;%</span> <span class="fu">select</span>(country_f<span class="sc">:</span>region, <span class="sc">-</span>(country_d<span class="sc">:</span>year_d))</span>
+<span id="cb186-4"><a href="working-with-dbeaver-and-sql.html#cb186-4" aria-hidden="true" tabindex="-1"></a>joined_table <span class="ot">&lt;-</span> joined_table <span class="sc">%&gt;%</span> <span class="fu">select</span>(country_f<span class="sc">:</span>region, <span class="sc">-</span>(country_g<span class="sc">:</span>year_g))</span>
+<span id="cb186-5"><a href="working-with-dbeaver-and-sql.html#cb186-5" aria-hidden="true" tabindex="-1"></a>joined_table <span class="ot">&lt;-</span> joined_table <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">country =</span> <span class="st">&quot;country_f&quot;</span>, <span class="at">year =</span> <span class="st">&quot;year_f&quot;</span>)</span></code></pre></div>
+<p><br>
+Then I performed some desriptive statistics with this dataset and made some visualisations.
+<br></p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="working-with-dbeaver-and-sql.html#cb187-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##    country               year        flu_cases       dengue_cases   
+##  Length:406         Min.   :2002   Min.   :   106   Min.   : 0.073  
+##  Class :character   1st Qu.:2005   1st Qu.:  3302   1st Qu.: 1.508  
+##  Mode  :character   Median :2008   Median :  9214   Median : 4.303  
+##                     Mean   :2008   Mean   : 23372   Mean   : 5.001  
+##                     3rd Qu.:2012   3rd Qu.: 32278   3rd Qu.: 7.872  
+##                     Max.   :2015   Max.   :155577   Max.   :16.739  
+##                                    NA&#39;s   :72       NA&#39;s   :354     
+##  infant_mortality life_expectancy   fertility       population       
+##  Min.   : 2.000   Min.   :52.50   Min.   :1.150   Min.   :  3324096  
+##  1st Qu.: 3.825   1st Qu.:74.10   1st Qu.:1.430   1st Qu.:  8949130  
+##  Median : 6.150   Median :78.30   Median :1.810   Median : 21811339  
+##  Mean   :10.558   Mean   :76.61   Mean   :1.876   Mean   : 50741686  
+##  3rd Qu.:13.600   3rd Qu.:80.70   3rd Qu.:2.090   3rd Qu.: 52687274  
+##  Max.   :54.700   Max.   :83.20   Max.   :3.980   Max.   :321773631  
+##                                                                      
+##       gdp             continent            region         
+##  Min.   :7.214e+09   Length:406         Length:406        
+##  1st Qu.:5.970e+10   Class :character   Class :character  
+##  Median :2.539e+11   Mode  :character   Mode  :character  
+##  Mean   :9.119e+11                                        
+##  3rd Qu.:6.578e+11                                        
+##  Max.   :1.174e+13                                        
+##  NA&#39;s   :117</code></pre>
 <p><br></p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="working-with-dbeaver-and-sql.html#cb189-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb189-2"><a href="working-with-dbeaver-and-sql.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> dengue_cases, <span class="at">colour =</span> country)) <span class="sc">+</span></span>
+<span id="cb189-3"><a href="working-with-dbeaver-and-sql.html#cb189-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb189-4"><a href="working-with-dbeaver-and-sql.html#cb189-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb189-5"><a href="working-with-dbeaver-and-sql.html#cb189-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb189-6"><a href="working-with-dbeaver-and-sql.html#cb189-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2002</span>, <span class="dv">2015</span>, <span class="dv">2</span>))<span class="sc">+</span></span>
+<span id="cb189-7"><a href="working-with-dbeaver-and-sql.html#cb189-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Dengue cases in the years 2002 - 2015&quot;</span>,</span>
+<span id="cb189-8"><a href="working-with-dbeaver-and-sql.html#cb189-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb189-9"><a href="working-with-dbeaver-and-sql.html#cb189-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Dengue cases&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/visualisations-1.png" width="672" /></p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="working-with-dbeaver-and-sql.html#cb190-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(flu_cases <span class="sc">&gt;=</span> <span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb190-2"><a href="working-with-dbeaver-and-sql.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> flu_cases, <span class="at">colour =</span> country)) <span class="sc">+</span></span>
+<span id="cb190-3"><a href="working-with-dbeaver-and-sql.html#cb190-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb190-4"><a href="working-with-dbeaver-and-sql.html#cb190-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb190-5"><a href="working-with-dbeaver-and-sql.html#cb190-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb190-6"><a href="working-with-dbeaver-and-sql.html#cb190-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2002</span>, <span class="dv">2015</span>, <span class="dv">2</span>))<span class="sc">+</span></span>
+<span id="cb190-7"><a href="working-with-dbeaver-and-sql.html#cb190-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Flu cases in the years 2002 - 2015&quot;</span>,</span>
+<span id="cb190-8"><a href="working-with-dbeaver-and-sql.html#cb190-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x  =</span> <span class="st">&quot;Year&quot;</span>, </span>
+<span id="cb190-9"><a href="working-with-dbeaver-and-sql.html#cb190-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Flu cases&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/visualisations-2.png" width="672" /></p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="working-with-dbeaver-and-sql.html#cb191-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(infant_mortality <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb191-2"><a href="working-with-dbeaver-and-sql.html#cb191-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> infant_mortality, <span class="at">colour =</span> country)) <span class="sc">+</span></span>
+<span id="cb191-3"><a href="working-with-dbeaver-and-sql.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb191-4"><a href="working-with-dbeaver-and-sql.html#cb191-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb191-5"><a href="working-with-dbeaver-and-sql.html#cb191-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb191-6"><a href="working-with-dbeaver-and-sql.html#cb191-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2002</span>, <span class="dv">2015</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb191-7"><a href="working-with-dbeaver-and-sql.html#cb191-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Infant mortality in the years 2002 - 2015&quot;</span>,</span>
+<span id="cb191-8"><a href="working-with-dbeaver-and-sql.html#cb191-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb191-9"><a href="working-with-dbeaver-and-sql.html#cb191-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Infant mortality&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/visualisations-3.png" width="672" /></p>
 
 </div>
             </section>

@@ -26,4 +26,4 @@ The topics that I worked on are: <br>
 7. Rendering my markdowns to a website <br>
 8. Using DBeaver and SQL <br>
 9. Creating my own package called .. <br>
-10. TBA
+10. TBA <br>
