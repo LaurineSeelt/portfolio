@@ -31,8 +31,8 @@ tibble_1 <- tibble_1 %>% pivot_longer(cols = c("Study_purpose", "Data_availabili
                                       values_to = "Score")
 knitr::kable(tibble_1)
 ```
-
-
+<br>
+<br>
 In this study, researchers investigated the heterologous effects of Bacillus Calmette-Guérin (BCG) vaccination against other, non-related virus infections. 
 It has been known for some time that BCG vaccination has positive heterologous effects against other virusses, but the exact immunological basis for this effect has never been examined in depth. The researchers in this study examined the genome-wide histone modifications that take place as a result of BCG vaccination, and also examined the functional changes in monocytes that take place after BCG vaccination. The effect of BCG vaccination on viral, serological and immunological parameters after administration of the Yellow Fever Vaccine was also examined.
 <br>

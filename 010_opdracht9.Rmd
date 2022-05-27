@@ -1,0 +1,42 @@
+---
+author: "Laurine Seelt"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+---
+
+To show that I can work with parameterization in my Markdowns, I downloaded the covid-19 data from the ECDC website and made a parameterized Rmardown.
+
+```{r loading the packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(here)
+library(ggplot2)
+```
+
+```{r reading in the covid-19 data, message=FALSE, warning=FALSE}
+covid19_data <- read_csv(here::here("Data/Data_raw/covid19_data.csv"))
+```
+
+```{r visualising the covid-19 cases, message=FALSE, warning=FALSE}
+covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == "Croatia") %>%
+  ggplot(aes(x = month, y = cases)) +
+  geom_point() +
+  scale_x_continuous(breaks = seq(1, 12, 1)) +
+  labs(title = "COVID-19 cases per country",
+       x = "Month",
+       y = "COVID-19 cases")
+```
+
+```{r visualising the covid-19 related deaths, message=FALSE, warning=FALSE}
+covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == "Croatia") %>%
+  ggplot(aes(x = month, y = deaths)) +
+  geom_point() +
+  scale_x_continuous(breaks = seq(1, 12, 1)) +
+  labs(title = "COVID-19 related deaths per country",
+       x = "Month",
+       y = "COVID-19 related deaths")
+```
+
