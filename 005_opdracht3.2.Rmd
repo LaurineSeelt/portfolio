@@ -680,3 +680,4 @@ Looking at the graph, together this the results from the Kruskal-Wallis test, we
 <br>
 <br>
 To investigate continuous variables, like Average Daily Gain in our case, we cannot use SIMPER.
+You could approach the continuous variable as a correlation. In general only strong correlations, with r being greater than 0.5 or smaller than -0.5, should be reported. Here we'll use Kendall-Tau because it doesn't assume linearity or normality.
