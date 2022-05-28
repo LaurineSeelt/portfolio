@@ -22,7 +22,7 @@ The zoology students are investigating the effects of different kinds of snake v
 This technique can be used to study the direct effects of, for example, medication on the heart _ex vivo_. The two most important parameters that can be tracked in this assay are heart rate and contraction force. <br>
 We will write code to enable the zoology students to analyse these two parameters quickly and thoroughly.
 
-```{r library, include=FALSE}
+```{r library, include=FALSE, eval=FALSE}
 library(rbbt)
 bbt_update_bib("006_opdracht5.Rmd")
 ```

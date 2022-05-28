@@ -5,7 +5,7 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Using GitHub and Zotero | Portfolio Laurine Seelt" />
+<meta property="og:title" content="Making a parameterized markdown | Portfolio Laurine Seelt" />
 <meta property="og:type" content="book" />
 
 <meta property="og:description" content="This is the bookdown for my DSFB2 portfolio" />
@@ -18,7 +18,7 @@
 
 <meta name="description" content="This is the bookdown for my DSFB2 portfolio">
 
-<title>Using GitHub and Zotero | Portfolio Laurine Seelt</title>
+<title>Making a parameterized markdown | Portfolio Laurine Seelt</title>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -179,25 +179,37 @@ details > summary {
 </div>
 <div class="row">
 <div class="col-sm-12">
-<div id="using-github-and-zotero" class="section level1">
-<h1>Using GitHub and Zotero</h1>
-<p>This was the sixth assignment for our portfolio.</p>
-<p><strong>Introduction to our project.</strong> <br>
-For our DSFB2 project, we are going to build a Shiny app to enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br>
-The zoology students are investigating the effects of different kinds of snake venom on heart muscle. To do this, they’re using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery. [<span class="citation">@WatanabeOkada2018</span>]<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>This technique can be used to study the direct effects of, for example, medication on the heart <em>ex vivo</em>. The two most important parameters that can be tracked in this assay are heart rate and contraction force. <br>
-We will write code to enable the zoology students to analyse these two parameters quickly and thoroughly.</p>
+<div id="making-a-parameterized-markdown" class="section level1">
+<h1>Making a parameterized markdown</h1>
+<p>To show that I can work with parameterization in my Markdowns, I downloaded the covid-19 data from the ECDC website and made a parameterized Rmardown.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="making-a-parameterized-markdown.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb195-2"><a href="making-a-parameterized-markdown.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb195-3"><a href="making-a-parameterized-markdown.html#cb195-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="making-a-parameterized-markdown.html#cb196-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/covid19_data.csv&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="making-a-parameterized-markdown.html#cb197-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> params<span class="sc">$</span>data) <span class="sc">%&gt;%</span></span>
+<span id="cb197-2"><a href="making-a-parameterized-markdown.html#cb197-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> cases)) <span class="sc">+</span></span>
+<span id="cb197-3"><a href="making-a-parameterized-markdown.html#cb197-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb197-4"><a href="making-a-parameterized-markdown.html#cb197-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb197-5"><a href="making-a-parameterized-markdown.html#cb197-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 cases in &quot;</span>, country),</span>
+<span id="cb197-6"><a href="making-a-parameterized-markdown.html#cb197-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Month&quot;</span>,</span>
+<span id="cb197-7"><a href="making-a-parameterized-markdown.html#cb197-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 cases&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="making-a-parameterized-markdown.html#cb198-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> params<span class="sc">$</span>data) <span class="sc">%&gt;%</span></span>
+<span id="cb198-2"><a href="making-a-parameterized-markdown.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> deaths)) <span class="sc">+</span></span>
+<span id="cb198-3"><a href="making-a-parameterized-markdown.html#cb198-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb198-4"><a href="making-a-parameterized-markdown.html#cb198-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb198-5"><a href="making-a-parameterized-markdown.html#cb198-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 related deaths in &quot;</span>, country),</span>
+<span id="cb198-6"><a href="making-a-parameterized-markdown.html#cb198-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Month&quot;</span>,</span>
+<span id="cb198-7"><a href="making-a-parameterized-markdown.html#cb198-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 related deaths&quot;</span>)</span></code></pre></div>
 
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>Link to the study: <a href="https://link.springer.com/protocol/10.1007/978-1-4939-8597-5_8#citeas" class="uri">https://link.springer.com/protocol/10.1007/978-1-4939-8597-5_8#citeas</a><a href="using-github-and-zotero.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
+
+
+
+
+
+
 <p style="text-align: center;">
-<a href="otus-that-differ-by.html"><button class="btn btn-default">Previous</button></a>
-<a href="making-a-website-on-github.html"><button class="btn btn-default">Next</button></a>
+<a href="creating-a-package.html"><button class="btn btn-default">Previous</button></a>
 </p>
 </div>
 </div>

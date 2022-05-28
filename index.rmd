@@ -3,7 +3,10 @@ title: "Portfolio Laurine Seelt"
 author: "Laurine Seelt"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+  bookdown::html_book:
+    TOC: FALSE
+    number_sections: FALSE
 documentclass: book
 biblio-style: apalike
 link-citations: yes
@@ -26,4 +29,4 @@ The topics that I worked on are: <br>
 7. Rendering my markdowns to a website <br>
 8. Using DBeaver and SQL <br>
 9. Creating my own package called .. <br>
-10. TBA <br>
+10. Making a parameterized markdown <br>
