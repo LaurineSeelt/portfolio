@@ -18,7 +18,7 @@ Link to the course: https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea3793
 <br>
 <br>
 
-## Course: Microbiota analysis in R
+__Course: Microbiota analysis in R__
 
 <br>
 In this course, we will be looking at the fecal bacterial microbiota of 8 calves at ages 2 weeks, 8 weeks and 1 year old and correlating them with variables such as weight gain, expressed as Average Daily Gain in Kilograms(ADGKG), and gastrointestinal short chain fatty acids, SCFA.
@@ -80,7 +80,7 @@ SCFA = SCFA[order(row.names(SCFA)),]
 set.seed(8765)
 ```
 
-## Looking at the alpha diversity
+__Looking at the alpha diversity__
 <br>
 Alpha diversity is the diversity _within_ a sample. It looks at richness, which is the _amount_ of OTU's in each sample, and at evenness, which is how evenly the different OTU's are distributed within the sample. <br>
 ```{r looking at the alpha diversity, message=FALSE, warning=FALSE}
@@ -283,7 +283,7 @@ In conclusion on the alpha diversity: The diversity and richness of the fecal mi
 <br>
 <br>
 
-## Looking at the beta diversity
+__Looking at the beta diversity__
 <br>
 Beta diversity looks at the dissimilarity _between_ samples, instead of within a sample, like the alpha diversity.
 <br>
@@ -623,7 +623,7 @@ permutest(disp.age, pairwise = TRUE, permutations = 1000)
 <br>
 If we also look at the Bray-Curtis plot we made earlier, we can conclude that 2 and 8 week old calves have a similar variability in their fecal microbiota. They also have more variable fecal microbiotas than 1 year old heifers.
 
-## OTU's that differ by
+__OTU's that differ by__
 <br>
 The SIMPER function gives us a list of the OTU's that cumulatively explain more than 70% of the variation between samples. In our case, we can use this function to see if specific OTU's differ between the three age groups, even if the overall microbiota doesn't differ between the age groups.
 <br>

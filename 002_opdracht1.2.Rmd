@@ -19,7 +19,7 @@ library(here)
 library(readxl)
 ```
 
-## Part 1
+__Study 1__
 
 Link to the study: https://pubmed.ncbi.nlm.nih.gov/29324233/
 <br>
@@ -43,11 +43,11 @@ The researchers also showed that the cytokine response to unrelated pathogens wa
 Next, this study looked at the difference in immune response to the Yellow Fever Vaccine between people who had had the BCG vaccination, and people who hadn't. People who had had the vaccine had a significantly lower viremia compared to people who had had the placebo vaccine. It was seen that mainly increased IL1-B and IL-10 production predicted a lower viremia in subjects who had had the BCG vaccine.
 <br>
 
-## Part 2
+__Study 2__
 
 Link to the study: https://osf.io/aqycd/ 
 
-The code is very readable, 4.
+The code was very readable, and I recreated one of the graphs from the study.
 
 __Recreating figure 1A__
 ```{r, message=FALSE, warning=FALSE}
@@ -106,4 +106,4 @@ p+coord_flip()
 In the field of applied ecological research, the lines between exploratory research and confirmatory research are becoming more and more blurred. A lot of researchers in the field of applied ecology do not follow the __strong inference paradigm__. This means that a lot of researchers in this field often don't devise an alternative hypothesis when they're conducting their research. What's more, they often don't even devise _a_ hypothesis before conducting their research. This is dangerous, and could, for example, lead to more confirmation bias in this field.
 The researchers of this paper looked at 159 papers from conservation/applied ecology/wildife journals. They scored all the papers on certain criteria, to see how the experiments were conducted. This figure displays the amount of papers that had either a clearly stated hypothesis or not, divided by what the research focussed on: methods or biodiversity response.
 
-Reproducibility of the code: 5. It was very easy, I barely needed to change anything before I got the pretty graph :)
+It was very easy to reproduce the code, I had to make very few changes before I managed to get the graph.

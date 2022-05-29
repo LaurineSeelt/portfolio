@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurine Seelt" />
 
-<meta name="date" content="2022-05-28" />
+<meta name="date" content="2022-05-29" />
 
 
 <meta name="description" content="This is the bookdown for my DSFB2 portfolio">
@@ -154,20 +154,10 @@ details > summary {
 <ul>
 <li><a href="index.html#introduction">Introduction</a></li>
 <li><a href="investigating-a-c.-elegans-plate-experiment.html#investigating-a-c.-elegans-plate-experiment">Investigating a <em>C. Elegans</em> plate experiment</a></li>
-<li class="has-sub"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#reading-two-different-studies-and-recreating-some-of-the-code">Reading two different studies and recreating some of the code</a>
-<ul>
-<li><a href="part-1.html#part-1">Part 1</a></li>
-<li><a href="part-2.html#part-2">Part 2</a></li>
-</ul></li>
+<li><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#reading-two-different-studies-and-recreating-some-of-the-code">Reading two different studies and recreating some of the code</a></li>
 <li><a href="cleaning-up-according-to-the-guerrilla-analytics-framework.html#cleaning-up-according-to-the-guerrilla-analytics-framework">Cleaning up according to the Guerrilla analytics framework</a></li>
 <li><a href="cv.html#cv">CV</a></li>
-<li class="has-sub"><a href="free-space.html#free-space">Free space</a>
-<ul>
-<li><a href="course-microbiota-analysis-in-r.html#course-microbiota-analysis-in-r">Course: Microbiota analysis in R</a></li>
-<li><a href="looking-at-the-alpha-diversity.html#looking-at-the-alpha-diversity">Looking at the alpha diversity</a></li>
-<li><a href="looking-at-the-beta-diversity.html#looking-at-the-beta-diversity">Looking at the beta diversity</a></li>
-<li><a href="otus-that-differ-by.html#otus-that-differ-by">OTU’s that differ by</a></li>
-</ul></li>
+<li><a href="free-space.html#free-space">Free space</a></li>
 <li><a href="using-github-and-zotero.html#using-github-and-zotero">Using GitHub and Zotero</a></li>
 <li><a href="making-a-website-on-github.html#making-a-website-on-github">Making a website on GitHub</a></li>
 <li><a href="working-with-dbeaver-and-sql.html#working-with-dbeaver-and-sql">Working with DBeaver and SQL</a></li>
@@ -182,10 +172,126 @@ details > summary {
 <div id="reading-two-different-studies-and-recreating-some-of-the-code" class="section level1">
 <h1>Reading two different studies and recreating some of the code</h1>
 <p>This was the second assignment for our portfolio. We had to look up two different articles, answer some questions about it and recreate some of the code from one of the articles.</p>
+<p><strong>Study 1</strong></p>
+<p>Link to the study: <a href="https://pubmed.ncbi.nlm.nih.gov/29324233/" class="uri">https://pubmed.ncbi.nlm.nih.gov/29324233/</a>
+<br>
+<br></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Category</th>
+<th align="left">Score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Study_purpose</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Data_availability_statement</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Data_location</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Study_location</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Author_review</td>
+<td align="left">7</td>
+</tr>
+<tr class="even">
+<td align="left">Ethics_statement</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Funding_statement</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Code_availability</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+In this study, researchers investigated the heterologous effects of Bacillus Calmette-Guérin (BCG) vaccination against other, non-related virus infections.
+It has been known for some time that BCG vaccination has positive heterologous effects against other virusses, but the exact immunological basis for this effect has never been examined in depth. The researchers in this study examined the genome-wide histone modifications that take place as a result of BCG vaccination, and also examined the functional changes in monocytes that take place after BCG vaccination. The effect of BCG vaccination on viral, serological and immunological parameters after administration of the Yellow Fever Vaccine was also examined.
+<br>
+The method used for this study was ChIP-sequencing, to look at genome-wide changes in the distribution of H3K27ac. H3K27ac is a marker of active promoters and enhancers. This was done before BCG vaccination and one month after BCG vaccination. Correlation plots showed a clear distinction between the two kinds of samples. Most changes between the two kinds of samples were related to G-protein coupled receptors and protein kinases, which shows that BCG vaccination has a substantial effect on remodeling signal transduction molecules.
+<br>
+The researchers also showed that the cytokine response to unrelated pathogens was enhanced one month after BCG vaccination. The heterologous T-cell response was also moderately enhanced after BCG vaccination.
+<br>
+Next, this study looked at the difference in immune response to the Yellow Fever Vaccine between people who had had the BCG vaccination, and people who hadn’t. People who had had the vaccine had a significantly lower viremia compared to people who had had the placebo vaccine. It was seen that mainly increased IL1-B and IL-10 production predicted a lower viremia in subjects who had had the BCG vaccine.
+<br></p>
+<p><strong>Study 2</strong></p>
+<p>Link to the study: <a href="https://osf.io/aqycd/" class="uri">https://osf.io/aqycd/</a></p>
+<p>The code was very readable, and I recreated one of the graphs from the study.</p>
+<p><strong>Recreating figure 1A</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb11-2"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-3"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb11-4"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb11-5"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">##################################################################################################</span></span>
+<span id="cb11-7"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="do">##### Descriptives; </span></span>
+<span id="cb11-8"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-9" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">read.csv2</span>(<span class="fu">here</span>(<span class="st">&quot;Data/Data_LittSurvey_Box1.csv&quot;</span>)))</span>
+<span id="cb11-10"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-12" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Hypo=</span><span class="fu">ifelse</span>(Clearly.stated.hypothesis<span class="sc">&gt;</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-13"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Experiment=</span><span class="fu">ifelse</span>(Study.design<span class="sc">==</span><span class="st">&quot;Experimental&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-14"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">YearLaps=</span><span class="fu">abs</span>(Year<span class="dv">-2016</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-15"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Scope2=</span><span class="fu">ifelse</span>(Scope<span class="sc">==</span><span class="st">&quot;Methods&quot;</span>, <span class="st">&quot;Methods&quot;</span>, <span class="st">&quot;Biodiversity response&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-16"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Hypothesis2=</span>Clearly.stated.hypothesis) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-17"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Hypothesis2=</span><span class="fu">ifelse</span>(Hypothesis2<span class="sc">==</span><span class="dv">0</span>, <span class="st">&quot;No&quot;</span>, </span>
+<span id="cb11-18"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-18" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ifelse</span>(Hypothesis2<span class="sc">==</span><span class="dv">1</span>, <span class="st">&quot;Partly&quot;</span>, </span>
+<span id="cb11-19"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-19" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ifelse</span>(Hypothesis2<span class="sc">==</span><span class="dv">2</span>, <span class="st">&quot;Implied&quot;</span>, <span class="st">&quot;Clearly stated&quot;</span>))))</span>
+<span id="cb11-20"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="do">###############################################</span></span>
+<span id="cb11-22"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="do">##### cleary stated hypotheis; </span></span>
+<span id="cb11-23"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Plotting results; </span></span>
+<span id="cb11-25"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Clearly stated hypothesis; </span></span>
+<span id="cb11-26"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Figure 1a</span></span>
+<span id="cb11-27"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-28" aria-hidden="true" tabindex="-1"></a>Hypothesis_prop <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Hypothesis2, Scope2) <span class="sc">%&gt;%</span></span>
+<span id="cb11-29"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Clearly.stated.hypothesis) <span class="sc">%&gt;%</span></span>
+<span id="cb11-30"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop=</span><span class="fu">prop.table</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-31"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Hypothesis3=</span> <span class="fu">factor</span>(Hypothesis2, </span>
+<span id="cb11-32"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Implied&quot;</span>, <span class="st">&quot;Partly&quot;</span>, <span class="st">&quot;Clearly stated&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb11-33"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">Scope3=</span> <span class="fu">factor</span>(Scope2, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Methods&quot;</span>, <span class="st">&quot;Biodiversity response&quot;</span>)))</span>
+<span id="cb11-34"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-35"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-36" aria-hidden="true" tabindex="-1"></a>Hypothesis_prop2 <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb11-37"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Scope<span class="sc">==</span><span class="st">&quot;Ecological processes&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-38"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Clearly.stated.hypothesis) <span class="sc">%&gt;%</span></span>
+<span id="cb11-39"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop=</span><span class="fu">prop.table</span>(n))</span>
+<span id="cb11-40"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-41" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>Hypothesis_prop, <span class="fu">aes</span>(<span class="at">x=</span>Hypothesis3, <span class="at">y=</span>n, <span class="at">fill=</span>Scope3)) <span class="sc">+</span></span>
+<span id="cb11-42"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">width=</span><span class="fl">0.7</span>, ) <span class="sc">+</span></span>
+<span id="cb11-43"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb11-44"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">15</span>), <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">legend.title =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb11-45"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-45" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">17</span>)) <span class="sc">+</span></span>
+<span id="cb11-46"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">100</span>)<span class="sc">+</span></span>
+<span id="cb11-47"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;Number of articles&quot;</span>, <span class="at">title=</span><span class="st">&quot;&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb11-48"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Blues&quot;</span>)</span>
+<span id="cb11-49"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-50"><a href="reading-two-different-studies-and-recreating-some-of-the-code.html#cb11-50" aria-hidden="true" tabindex="-1"></a>p<span class="sc">+</span><span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>In the field of applied ecological research, the lines between exploratory research and confirmatory research are becoming more and more blurred. A lot of researchers in the field of applied ecology do not follow the <strong>strong inference paradigm</strong>. This means that a lot of researchers in this field often don’t devise an alternative hypothesis when they’re conducting their research. What’s more, they often don’t even devise <em>a</em> hypothesis before conducting their research. This is dangerous, and could, for example, lead to more confirmation bias in this field.
+The researchers of this paper looked at 159 papers from conservation/applied ecology/wildife journals. They scored all the papers on certain criteria, to see how the experiments were conducted. This figure displays the amount of papers that had either a clearly stated hypothesis or not, divided by what the research focussed on: methods or biodiversity response.</p>
+<p>It was very easy to reproduce the code, I had to make very few changes before I managed to get the graph.</p>
+
 </div>
 <p style="text-align: center;">
 <a href="investigating-a-c.-elegans-plate-experiment.html"><button class="btn btn-default">Previous</button></a>
-<a href="part-1.html"><button class="btn btn-default">Next</button></a>
+<a href="cleaning-up-according-to-the-guerrilla-analytics-framework.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>

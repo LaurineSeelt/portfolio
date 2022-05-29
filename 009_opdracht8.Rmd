@@ -10,7 +10,7 @@ link-citations: yes
 
 # Creating a package
 
-Packages can be very useful when working in R. Here, I demonstrate how I've created the package called tidyplot. <br>
+Packages can be very useful when working in R. Here, I demonstrate how I've created the package called .. <br>
 This package can be used to ..
 <br>
 ```{r setting up, message=FALSE, warning=FALSE}
