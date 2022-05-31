@@ -1,0 +1,11 @@
+introduction
+data-wrangling
+reproducing-code
+cleaning-up
+cv
+free-space
+zotero
+github
+dbeaver-and-sql
+package
+parameterization
