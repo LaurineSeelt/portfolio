@@ -19,6 +19,7 @@ description: "This is the bookdown for my DSFB2 portfolio"
 This is the introduction to the portfolio of Laurine Seelt.
 
 For the DSFB2 course, we had to make our own portfolio. This is the result. <br>
+<br>
 The topics that I worked on are: <br>
 1. Investigating a _C. Elegans_ experiment and doing some data wrangling. <br>
 2. Reading two different studies and recreating some code from one of the studies <br>

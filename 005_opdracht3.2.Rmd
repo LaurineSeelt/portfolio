@@ -10,7 +10,7 @@ link-citations: yes
 
 # Free space
 
-This was the fifth assignment for our portfolio. We had/have to fill 32 hours learning something new that will be useful for our internship next year and possibly our job.
+I had/have to fill 32 hours learning something new that will be useful for my internship next year and possibly my job.
 
 I decided I wanted to gain more experience in analysing microbiota data, because I'd like to work with bacteria in my job. So, I searched the internet for packages and such, and found a course about microbiota analysis that I decided to follow.
 <br>

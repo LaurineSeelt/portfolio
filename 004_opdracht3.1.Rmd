@@ -10,7 +10,8 @@ link-citations: yes
 
 # CV
 
-This was the fourth assignment for our portfolio. We had to put our CV in a markdown. <br>
+To introduce you to who I am, I put my CV in a markdown.
+<br>
 <br>
 __Persoonlijke informatie__
 

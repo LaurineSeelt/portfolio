@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="DBeaver and SQL | Portfolio Laurine Seelt" />
+<meta property="og:type" content="book" />
+
+<meta property="og:description" content="This is the bookdown for my DSFB2 portfolio" />
+
+
+<meta name="author" content="Laurine Seelt" />
+
+<meta name="date" content="2022-05-31" />
+
+
+<meta name="description" content="This is the bookdown for my DSFB2 portfolio">
+
+<title>DBeaver and SQL | Portfolio Laurine Seelt</title>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#introduction">Introduction</a></li>
+<li><a href="data-wrangling.html#data-wrangling">Data wrangling</a></li>
+<li><a href="reproducing-code.html#reproducing-code">Reproducing code</a></li>
+<li><a href="cleaning-up.html#cleaning-up">Cleaning up</a></li>
+<li><a href="cv.html#cv">CV</a></li>
+<li><a href="free-space.html#free-space">Free space</a></li>
+<li><a href="zotero.html#zotero">Zotero</a></li>
+<li><a href="github.html#github">GitHub</a></li>
+<li><a href="dbeaver-and-sql.html#dbeaver-and-sql">DBeaver and SQL</a></li>
+<li><a href="package.html#package">Package</a></li>
+<li><a href="parameterization.html#parameterization">Parameterization</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="dbeaver-and-sql" class="section level1">
+<h1>DBeaver and SQL</h1>
+<p>To show that I can work with DBeaver and SQL, I worked with three datasets that I inspected, joined and I made some figures with the joined dataset.
+<br></p>
+<p><br>
+First, I read in the flu, dengue and gapminder data.
+<br></p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="dbeaver-and-sql.html#cb156-1" aria-hidden="true" tabindex="-1"></a>flu <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/data_raw/flu_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
+<span id="cb156-2"><a href="dbeaver-and-sql.html#cb156-2" aria-hidden="true" tabindex="-1"></a>dengue <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/data_raw/dengue_data.csv&quot;</span>), <span class="at">skip =</span> <span class="dv">11</span>)</span>
+<span id="cb156-3"><a href="dbeaver-and-sql.html#cb156-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_builtin</span>(<span class="st">&quot;gapminder&quot;</span>)</span></code></pre></div>
+<p>The flu and dengue data wasn’t tidy yet, so I solved that by using the pivot_longer command to create the column “country” and “cases” in each of the datasets. That way, each country, date and number of cases had its own column. <br>
+The gapminder dataset was already tidy.
+<br></p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="dbeaver-and-sql.html#cb157-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> dengue, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Indonesia&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Philippines&quot;</span>, <span class="st">&quot;Singapore&quot;</span>, <span class="st">&quot;Thailand&quot;</span>, <span class="st">&quot;Venezuela&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;country_d&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;dengue_cases&quot;</span>)</span>
+<span id="cb157-2"><a href="dbeaver-and-sql.html#cb157-2" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> flu, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Australia&quot;</span>, <span class="st">&quot;Austria&quot;</span>, <span class="st">&quot;Belgium&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;Bulgaria&quot;</span>, <span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Chile&quot;</span>, <span class="st">&quot;France&quot;</span>, <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Hungary&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Netherlands&quot;</span>, <span class="st">&quot;New Zealand&quot;</span>, <span class="st">&quot;Norway&quot;</span>, <span class="st">&quot;Paraguay&quot;</span>, <span class="st">&quot;Peru&quot;</span>, <span class="st">&quot;Poland&quot;</span>, <span class="st">&quot;Romania&quot;</span>, <span class="st">&quot;Russia&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Spain&quot;</span>, <span class="st">&quot;Sweden&quot;</span>, <span class="st">&quot;Switzerland&quot;</span>, <span class="st">&quot;Ukraine&quot;</span>, <span class="st">&quot;United States&quot;</span>, <span class="st">&quot;Uruguay&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;country_f&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;flu_cases&quot;</span>)</span></code></pre></div>
+<p><br>
+Next, I changed the flu and dengue data some more. I separated the Data column into the three columns “Year”, “Month” and “Day”. I also added a d or f after the column name “year”, so joining of the datasets in DBeaver will be possible later on.
+In the gapminder dataset, I changed the column “year” to “year_g” to also make joining more easy later on in DBeaver.
+<br></p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="dbeaver-and-sql.html#cb158-1" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">separate</span>(flu_tidy, Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;year_f&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb158-2"><a href="dbeaver-and-sql.html#cb158-2" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="ot">&lt;-</span> <span class="fu">separate</span>(dengue_tidy, Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;year_d&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb158-3"><a href="dbeaver-and-sql.html#cb158-3" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>country_flu <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(flu_tidy<span class="sc">$</span>country_f)</span>
+<span id="cb158-4"><a href="dbeaver-and-sql.html#cb158-4" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(flu_tidy<span class="sc">$</span>year_f)</span>
+<span id="cb158-5"><a href="dbeaver-and-sql.html#cb158-5" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>country_dengue <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dengue_tidy<span class="sc">$</span>country_d)</span>
+<span id="cb158-6"><a href="dbeaver-and-sql.html#cb158-6" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>year_d)</span>
+<span id="cb158-7"><a href="dbeaver-and-sql.html#cb158-7" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(gapminder<span class="sc">$</span>country)</span>
+<span id="cb158-8"><a href="dbeaver-and-sql.html#cb158-8" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dengue_tidy)</span>
+<span id="cb158-9"><a href="dbeaver-and-sql.html#cb158-9" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(flu_tidy)</span>
+<span id="cb158-10"><a href="dbeaver-and-sql.html#cb158-10" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> dengue_tidy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country_d, year_d) <span class="sc">%&gt;%</span> <span class="fu">summarise_each</span>(<span class="fu">funs</span>(sum), dengue_cases)</span>
+<span id="cb158-11"><a href="dbeaver-and-sql.html#cb158-11" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> flu_tidy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country_f, year_f) <span class="sc">%&gt;%</span> <span class="fu">summarise_each</span>(<span class="fu">funs</span>(sum), flu_cases)</span>
+<span id="cb158-12"><a href="dbeaver-and-sql.html#cb158-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Thanks to https://stackoverflow.com/questions/25089665/error-only-defined-on-a-data-frame-with-all-numeric-variables-with-ddply-on-lar for the summarise_each command :)</span></span>
+<span id="cb158-13"><a href="dbeaver-and-sql.html#cb158-13" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">year_g =</span> <span class="st">&quot;year&quot;</span>, <span class="at">country_g =</span> <span class="st">&quot;country&quot;</span>)</span>
+<span id="cb158-14"><a href="dbeaver-and-sql.html#cb158-14" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>year_g <span class="ot">&lt;-</span> <span class="fu">as.character</span>(gapminder<span class="sc">$</span>year_g)</span></code></pre></div>
+<p><br>
+Then I saved the three datasets as both .csv files and .rds files.
+<br></p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="dbeaver-and-sql.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(flu_tidy, <span class="st">&quot;Data//flu_data_tidy.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb159-2"><a href="dbeaver-and-sql.html#cb159-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dengue_tidy, <span class="st">&quot;Data//dengue_data_tidy.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb159-3"><a href="dbeaver-and-sql.html#cb159-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(gapminder, <span class="st">&quot;Data//gapminder.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb159-4"><a href="dbeaver-and-sql.html#cb159-4" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(flu_tidy, <span class="at">file =</span> <span class="st">&quot;flu_data_tidy.rds&quot;</span>)</span>
+<span id="cb159-5"><a href="dbeaver-and-sql.html#cb159-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(dengue_tidy, <span class="at">file =</span> <span class="st">&quot;dengue_data_tidy.rds&quot;</span>)</span>
+<span id="cb159-6"><a href="dbeaver-and-sql.html#cb159-6" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(gapminder, <span class="at">file =</span> <span class="st">&quot;gapminder.rds&quot;</span>)</span></code></pre></div>
+<p><br>
+Next, I inserted the tables into the “workflowsdb” database in DBeaver.
+<br></p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="dbeaver-and-sql.html#cb160-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
+<span id="cb160-2"><a href="dbeaver-and-sql.html#cb160-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dbname =</span> <span class="st">&quot;workflowsdb&quot;</span>,</span>
+<span id="cb160-3"><a href="dbeaver-and-sql.html#cb160-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>,</span>
+<span id="cb160-4"><a href="dbeaver-and-sql.html#cb160-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">port =</span> <span class="st">&quot;5432&quot;</span>,</span>
+<span id="cb160-5"><a href="dbeaver-and-sql.html#cb160-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">user =</span> <span class="st">&quot;postgres&quot;</span>,</span>
+<span id="cb160-6"><a href="dbeaver-and-sql.html#cb160-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">password =</span> <span class="st">&quot;SQL22&quot;</span>)</span>
+<span id="cb160-7"><a href="dbeaver-and-sql.html#cb160-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;flu_tidy&quot;</span>, flu_tidy)</span>
+<span id="cb160-8"><a href="dbeaver-and-sql.html#cb160-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;dengue_tidy&quot;</span>, dengue_tidy)</span>
+<span id="cb160-9"><a href="dbeaver-and-sql.html#cb160-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;gapminder&quot;</span>, gapminder)</span>
+<span id="cb160-10"><a href="dbeaver-and-sql.html#cb160-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con)</span></code></pre></div>
+<p><br>
+Then I inspected the contents of the datasets in DBeaver and in R.
+<br></p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="dbeaver-and-sql.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspecting the flu_tidy dataset</span></span>
+<span id="cb161-2"><a href="dbeaver-and-sql.html#cb161-2" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(flu_cases)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+## # Groups:   country_f [3]
+##   country_f     year_f flu_cases
+##   &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+## 1 South Africa  2014      155577
+## 2 South Africa  2009      150344
+## 3 Canada        2009      141118
+## 4 South Africa  2013      140671
+## 5 United States 2009      139394
+## 6 South Africa  2012      136519</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="dbeaver-and-sql.html#cb163-1" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>flu_cases <span class="sc">%&gt;%</span> <span class="fu">min</span>(flu_tidy<span class="sc">$</span>flu_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 106</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="dbeaver-and-sql.html#cb165-1" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>flu_cases <span class="sc">%&gt;%</span> <span class="fu">max</span>(flu_tidy<span class="sc">$</span>flu_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 155577</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="dbeaver-and-sql.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspecting the dengue_tidy dataset</span></span>
+<span id="cb167-2"><a href="dbeaver-and-sql.html#cb167-2" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(dengue_cases)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+## # Groups:   country_d [3]
+##   country_d year_d dengue_cases
+##   &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;
+## 1 Venezuela 2010           27.8
+## 2 Venezuela 2014           22.8
+## 3 Thailand  2013           17.3
+## 4 Argentina 2009           16.7
+## 5 Venezuela 2009           15.8
+## 6 Venezuela 2013           15.7</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="dbeaver-and-sql.html#cb169-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>dengue_cases <span class="sc">%&gt;%</span> <span class="fu">min</span>(dengue_tidy<span class="sc">$</span>dengue_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 0.059</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="dbeaver-and-sql.html#cb171-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>dengue_cases <span class="sc">%&gt;%</span> <span class="fu">max</span>(dengue_tidy<span class="sc">$</span>dengue_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 27.847</code></pre>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="dbeaver-and-sql.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspecting the gapminder dataset</span></span>
+<span id="cb173-2"><a href="dbeaver-and-sql.html#cb173-2" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>infant_mortality <span class="sc">%&gt;%</span> <span class="fu">min</span>(gapminder<span class="sc">$</span>infant_mortality, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 1.5</code></pre>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="dbeaver-and-sql.html#cb175-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>infant_mortality <span class="sc">%&gt;%</span> <span class="fu">max</span>(gapminder<span class="sc">$</span>infant_mortality, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 276.9</code></pre>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="dbeaver-and-sql.html#cb177-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>life_expectancy <span class="sc">%&gt;%</span> <span class="fu">min</span>(gapminder<span class="sc">$</span>life_expectancy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 13.2</code></pre>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="dbeaver-and-sql.html#cb179-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>life_expectancy <span class="sc">%&gt;%</span> <span class="fu">max</span>(gapminder<span class="sc">$</span>life_expectancy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 83.9</code></pre>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="dbeaver-and-sql.html#cb181-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> <span class="fu">select</span>(country_g, year_g, life_expectancy) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(life_expectancy)) <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<pre><code>##          country_g year_g life_expectancy
+## 1 Hong Kong, China   2016           83.90
+## 2 Hong Kong, China   2015           83.73
+## 3 Hong Kong, China   2014           83.56
+## 4 Hong Kong, China   2013           83.38
+## 5          Iceland   2014           83.30
+## 6          Iceland   2015           83.30</code></pre>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="dbeaver-and-sql.html#cb183-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> <span class="fu">select</span>( country_g, year_g, infant_mortality) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(infant_mortality)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##   country_g year_g infant_mortality
+## 1     Yemen   1963            276.9
+## 2     Yemen   1964            270.7
+## 3     Yemen   1961            269.2
+## 4     Yemen   1962            263.7
+## 5     Yemen   1965            263.6
+## 6     Yemen   1966            256.0</code></pre>
+<p><br>
+In DBeaver, I also inspected the data, performed some joins and exported a joined table to R. The table is called “Joined_table.csv”.
+<br></p>
+<p><mark> DBeaver code </mark>
+<br>
+After reading in the data, I removed the rows “year_d”, “year_g”, “country_d” and “country_g”. These rows were redundant, seeing as we already have the rows “year_f” and “country_f” from the flu dataset.
+<br></p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="dbeaver-and-sql.html#cb185-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">&quot;Data/Joined_table.csv&quot;</span>))</span>
+<span id="cb185-2"><a href="dbeaver-and-sql.html#cb185-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-3"><a href="dbeaver-and-sql.html#cb185-3" aria-hidden="true" tabindex="-1"></a>joined_table <span class="ot">&lt;-</span> joined_table <span class="sc">%&gt;%</span> <span class="fu">select</span>(country_f<span class="sc">:</span>region, <span class="sc">-</span>(country_d<span class="sc">:</span>year_d))</span>
+<span id="cb185-4"><a href="dbeaver-and-sql.html#cb185-4" aria-hidden="true" tabindex="-1"></a>joined_table <span class="ot">&lt;-</span> joined_table <span class="sc">%&gt;%</span> <span class="fu">select</span>(country_f<span class="sc">:</span>region, <span class="sc">-</span>(country_g<span class="sc">:</span>year_g))</span>
+<span id="cb185-5"><a href="dbeaver-and-sql.html#cb185-5" aria-hidden="true" tabindex="-1"></a>joined_table <span class="ot">&lt;-</span> joined_table <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">country =</span> <span class="st">&quot;country_f&quot;</span>, <span class="at">year =</span> <span class="st">&quot;year_f&quot;</span>)</span></code></pre></div>
+<p><br>
+Then I performed some desriptive statistics with this dataset and made some visualisations.
+<br></p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="dbeaver-and-sql.html#cb186-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##    country               year        flu_cases       dengue_cases   
+##  Length:406         Min.   :2002   Min.   :   106   Min.   : 0.073  
+##  Class :character   1st Qu.:2005   1st Qu.:  3302   1st Qu.: 1.508  
+##  Mode  :character   Median :2008   Median :  9214   Median : 4.303  
+##                     Mean   :2008   Mean   : 23372   Mean   : 5.001  
+##                     3rd Qu.:2012   3rd Qu.: 32278   3rd Qu.: 7.872  
+##                     Max.   :2015   Max.   :155577   Max.   :16.739  
+##                                    NA&#39;s   :72       NA&#39;s   :354     
+##  infant_mortality life_expectancy   fertility       population       
+##  Min.   : 2.000   Min.   :52.50   Min.   :1.150   Min.   :  3324096  
+##  1st Qu.: 3.825   1st Qu.:74.10   1st Qu.:1.430   1st Qu.:  8949130  
+##  Median : 6.150   Median :78.30   Median :1.810   Median : 21811339  
+##  Mean   :10.558   Mean   :76.61   Mean   :1.876   Mean   : 50741686  
+##  3rd Qu.:13.600   3rd Qu.:80.70   3rd Qu.:2.090   3rd Qu.: 52687274  
+##  Max.   :54.700   Max.   :83.20   Max.   :3.980   Max.   :321773631  
+##                                                                      
+##       gdp             continent            region         
+##  Min.   :7.214e+09   Length:406         Length:406        
+##  1st Qu.:5.970e+10   Class :character   Class :character  
+##  Median :2.539e+11   Mode  :character   Mode  :character  
+##  Mean   :9.119e+11                                        
+##  3rd Qu.:6.578e+11                                        
+##  Max.   :1.174e+13                                        
+##  NA&#39;s   :117</code></pre>
+<p><br></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="dbeaver-and-sql.html#cb188-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb188-2"><a href="dbeaver-and-sql.html#cb188-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> dengue_cases, <span class="at">colour =</span> country)) <span class="sc">+</span></span>
+<span id="cb188-3"><a href="dbeaver-and-sql.html#cb188-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb188-4"><a href="dbeaver-and-sql.html#cb188-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb188-5"><a href="dbeaver-and-sql.html#cb188-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb188-6"><a href="dbeaver-and-sql.html#cb188-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2002</span>, <span class="dv">2015</span>, <span class="dv">2</span>))<span class="sc">+</span></span>
+<span id="cb188-7"><a href="dbeaver-and-sql.html#cb188-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Dengue cases in the years 2002 - 2015&quot;</span>,</span>
+<span id="cb188-8"><a href="dbeaver-and-sql.html#cb188-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb188-9"><a href="dbeaver-and-sql.html#cb188-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Dengue cases&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/visualisations-1.png" width="672" /></p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="dbeaver-and-sql.html#cb189-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(flu_cases <span class="sc">&gt;=</span> <span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb189-2"><a href="dbeaver-and-sql.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> flu_cases, <span class="at">colour =</span> country)) <span class="sc">+</span></span>
+<span id="cb189-3"><a href="dbeaver-and-sql.html#cb189-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb189-4"><a href="dbeaver-and-sql.html#cb189-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb189-5"><a href="dbeaver-and-sql.html#cb189-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb189-6"><a href="dbeaver-and-sql.html#cb189-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2002</span>, <span class="dv">2015</span>, <span class="dv">2</span>))<span class="sc">+</span></span>
+<span id="cb189-7"><a href="dbeaver-and-sql.html#cb189-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Flu cases in the years 2002 - 2015&quot;</span>,</span>
+<span id="cb189-8"><a href="dbeaver-and-sql.html#cb189-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x  =</span> <span class="st">&quot;Year&quot;</span>, </span>
+<span id="cb189-9"><a href="dbeaver-and-sql.html#cb189-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Flu cases&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/visualisations-2.png" width="672" /></p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="dbeaver-and-sql.html#cb190-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(infant_mortality <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb190-2"><a href="dbeaver-and-sql.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> infant_mortality, <span class="at">colour =</span> country)) <span class="sc">+</span></span>
+<span id="cb190-3"><a href="dbeaver-and-sql.html#cb190-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb190-4"><a href="dbeaver-and-sql.html#cb190-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb190-5"><a href="dbeaver-and-sql.html#cb190-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb190-6"><a href="dbeaver-and-sql.html#cb190-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2002</span>, <span class="dv">2015</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb190-7"><a href="dbeaver-and-sql.html#cb190-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Infant mortality in the years 2002 - 2015&quot;</span>,</span>
+<span id="cb190-8"><a href="dbeaver-and-sql.html#cb190-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb190-9"><a href="dbeaver-and-sql.html#cb190-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Infant mortality&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/visualisations-3.png" width="672" /></p>
+
+</div>
+<p style="text-align: center;">
+<a href="github.html"><button class="btn btn-default">Previous</button></a>
+<a href="package.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

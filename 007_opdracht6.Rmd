@@ -8,7 +8,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Making a website on GitHub
+# GitHub
 
-This was the seventh assignment for our portfolio. We had to copy all our HTML's to a new repository and render it into a website. <br>
+To show that I can make a website using Github and CSS, I rendered all of the markdowns from my portfolio into a website. <br>
 The result can be found on https://laurineseelt.github.io/ .

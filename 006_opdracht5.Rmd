@@ -9,9 +9,9 @@ link-citations: yes
 bibliography: portfoliolaurine.bib
 ---
 
-# Using GitHub and Zotero
+# Zotero
 
-This was the sixth assignment for our portfolio.
+To show that I know how to use Zotero and citation in general correctly, I wrote an introduction to the Data Science project I did with two classmates and included some citations using Zotero.
 
 __Introduction to our project.__ <br>
 For our DSFB2 project, we are going to build a Shiny app to enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br>
@@ -22,7 +22,7 @@ The zoology students are investigating the effects of different kinds of snake v
 This technique can be used to study the direct effects of, for example, medication on the heart _ex vivo_. The two most important parameters that can be tracked in this assay are heart rate and contraction force. <br>
 We will write code to enable the zoology students to analyse these two parameters quickly and thoroughly.
 
-```{r library, include=FALSE, eval=FALSE}
+```{r library, warning=FALSE, message=FALSE, include=FALSE}
 library(rbbt)
 bbt_update_bib("006_opdracht5.Rmd")
 ```

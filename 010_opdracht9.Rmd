@@ -4,17 +4,19 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 params:
-  data: "Malta"
+  country: "Spain"
+  year: "2022"
+  month: "9"
 documentclass: book
 biblio-style: apalike
 link-citations: yes
 ---
 
-# Making a parameterized markdown
+# Parameterization
 
-To show that I can work with parameterization in my Markdowns, I downloaded the covid-19 data from the ECDC website and made a parameterized Rmardown.
-
-```{r loading the packages, message=FALSE, warning=FALSE}
+To show that I can work with parameterization in my Markdowns, I downloaded the covid-19 data from the ECDC website and made a parameterized Rmarkdown.
+<br>
+```{r loading the packages, message=FALSE, warning=FALSE, include=FALSE}
 library(tidyverse)
 library(here)
 library(ggplot2)
@@ -25,11 +27,11 @@ covid19_data <- read_csv(here::here("Data/Data_raw/covid19_data.csv"))
 ```
 
 ```{r making an object of the country, message=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
-country <- params$data
+country <- params$country
 ```
 
 ```{r visualising the covid-19 cases, message=FALSE, warning=FALSE, eval=FALSE}
-covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == params$data) %>%
+covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == params$country) %>%
   ggplot(aes(x = month, y = cases)) +
   geom_point() +
   scale_x_continuous(breaks = seq(1, 12, 1)) +
@@ -39,7 +41,7 @@ covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories =
 ```
 
 ```{r visualising the covid-19 related deaths, message=FALSE, warning=FALSE, eval=FALSE}
-covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == params$data) %>%
+covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == params$country) %>%
   ggplot(aes(x = month, y = deaths)) +
   geom_point() +
   scale_x_continuous(breaks = seq(1, 12, 1)) +

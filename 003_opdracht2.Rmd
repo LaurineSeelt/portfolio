@@ -8,9 +8,9 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Cleaning up according to the Guerrilla analytics framework
+# Cleaning up
 
-This was the third assignment for our portfolio. We had to apply the Guerrilla analytics framework to our DAUR2 folder.
+To show that I know how apply the Guerrilla analytics framework, I applied this framwork to my 'DAUR2' folder.
 <br>
 I decided to: <br>
 1. Make a folder called "Rmd" in which I keep all of my markdowns. <br>

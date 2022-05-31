@@ -8,10 +8,11 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Reading two different studies and recreating some of the code
+# Reproducing code
 
-This was the second assignment for our portfolio. We had to look up two different articles, answer some questions about it and recreate some of the code from one of the articles.
-
+To show that I can read and understand a scientific study and recreate some of the code, I looked up two studies. For the first study, I scored it on several aspects and I wrote a short summary about it.
+For the second study I tried to reproduce one figure that is used in the article.
+<br>
 ```{r setup2, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -47,7 +48,7 @@ __Study 2__
 
 Link to the study: https://osf.io/aqycd/ 
 
-The code was very readable, and I recreated one of the graphs from the study.
+The code was very readable, and I recreated one of the figures from the study.
 
 __Recreating figure 1A__
 ```{r, message=FALSE, warning=FALSE}

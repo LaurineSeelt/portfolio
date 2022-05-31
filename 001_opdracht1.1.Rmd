@@ -8,11 +8,11 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Investigating a _C. Elegans_ plate experiment
+# Data wrangling
 
-This was the first assignment for our portfolio. We had to look at the data of a _C. Elegans_ plate experiment, plot some of the data and normalize the data for the negative control to get a clearer graph.
+To show that I can work with large datasets, in this exercise I will inspect, transform and visualize some of the data from a _C. Elegans_ experiment. In this experiment, _C. Elegans_ were exposed to different concentrations of different compounds. Then, after 68 hours, the researchers looked at how much offspring the _C. Elegans_ gave. The positive control of this study were _C. Elegans_ treated with Ethanol and the negative control of this study were _C. Elegans_ treated with S-medium.
 <br>
-```{r setup1, include=FALSE, eval=TRUE}
+```{r setup1, include=FALSE, eval=TRUE, include=FALSE}
 library(tidyverse)
 library(readxl)
 library(here)
@@ -20,7 +20,7 @@ library(timetk)
 library(ggplot2)
 ```
 <br>
-First I took a look at the data and read it in in RStudio.
+First I looked at the data and read it in in RStudio.
 <br>
 ```{r, message=FALSE, warning=FALSE}
 # View(here("Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx"))
@@ -28,7 +28,7 @@ Tidydata <- read_excel(here("Data/Data_raw/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 Tidydata <- as.data.frame(Tidydata)
 ```
 <br>
-Next, I looked at the columns RawData, compName and compConcentration to see what type they were.
+Next, I looked at the columns RawData, compName and compConcentration to see what type they were because these three columns contain the most important information about this experiment.
 <br>
 ```{r, inspecting columns}
 typeof(Tidydata$RawData)
@@ -40,9 +40,10 @@ RawData is double, that makes sense because this column contains numbers.
 <br>
 CompName is a character, that also makes sense. This column contains the names of the compounds that were use.
 <br>
-CompConcentration is een character, which is kind of weird. This column contains the concentrations of the compounds that were used, so you'd expect this column to be double.
+CompConcentration is a character, which is kind of weird. This column contains the concentrations of the compounds that were used, so you'd expect this column to be double, beause it contains numbers. I'll solve this problem later.
 <br>
-Then I plotted the data in a scatter plot.
+<br>
+Then, to get a general overview of the data, I plotted it in a scatter plot.
 <br>
 ```{r, creating a scatter plot, warning=FALSE, message=FALSE}
 Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, shape = expType))+
@@ -51,7 +52,7 @@ Tidydata %>% ggplot(aes(x = compConcentration, y = RawData, colour = compName, s
 <br>
 The X-axis isn't very readable. I think the numbers are organised according to the number that they begin with, not the actual size of them. So 4x10-5 is seen as bigger than 0,1 because 4x10-5 start with a 4. The powers aren't taken into consideration.
 <br>
-To make the X-axis more redeable, I changed the column compConcentration to numeric and I plotted the Log10 of the concentration. I also used geom_jitter to create some distance between the datapoints. This makes the graph a bit clearer.
+To make the X-axis more readable, I changed the column compConcentration to numeric and I plotted the Log10 of compConcentration. I also used geom_jitter to create some distance between the datapoints. This makes the graph a bit clearer.
 <br>
 ```{r, correcting the data and making a new scatter plot, message=FALSE, warning=FALSE}
 Tidydata$compConcentration <- as.numeric(Tidydata$compConcentration)
@@ -59,11 +60,6 @@ Tidydata %>% ggplot(aes(x = (log10(compConcentration + 0.001)), y = RawData, col
   geom_point() +
   geom_jitter(position = position_jitter(0.2))
 ```
-<br>
-<br>
-The positive control of this study were _C. Elegans_ treated with Ethanol.
-<br>
-The negative control were _C. Elegans_ treated with S-medium.
 <br>
 <br>
 To analyse the effects different compound concentrations have on the number of offspring, I'd make separate datasets for each compound, ordered by concentration. Then you can calculate the mean and standard deviation for each compound and each concentration. You can also perform an ANOVA test on each compound, to see if there is a significant difference in effect between the different concentrations.

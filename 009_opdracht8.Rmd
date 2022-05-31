@@ -8,15 +8,13 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Creating a package
+# Package
 
 Packages can be very useful when working in R. Here, I demonstrate how I've created the package called .. <br>
 This package can be used to ..
 <br>
-```{r setting up, message=FALSE, warning=FALSE}
+```{r setting up, message=FALSE, warning=FALSE, include=FALSE}
 library(tidyverse)
-library(ggplot2)
-library(car)
 ```
 
 
@@ -53,4 +51,3 @@ hematocrit_tidy_summary %>% ggplot(aes(x = condition, y = mean, fill = condition
        y = "Hematocrit (%)")+
   theme(legend.position = "none", text = element_text(size=14))
 ```
-

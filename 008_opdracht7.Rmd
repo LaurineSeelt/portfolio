@@ -8,9 +8,11 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Working with DBeaver and SQL
+# DBeaver and SQL
 
-```{r, message=FALSE, warning=FALSE}
+To show that I can work with DBeaver and SQL, I worked with three datasets that I inspected, joined and I made some figures with the joined dataset.
+<br>
+```{r, message=FALSE, warning=FALSE, include=FALSE}
 library(tidyverse)
 library(readxl)
 library(dslabs)
