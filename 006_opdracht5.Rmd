@@ -15,12 +15,14 @@ To show that I know how to use Zotero and citation in general correctly, I wrote
 
 __Introduction to our project.__ <br>
 For our DSFB2 project, we are going to build a Shiny app to enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br>
-The zoology students are investigating the effects of different kinds of snake venom on heart muscle. To do this, they're using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery[@lateefLangendorffIsolatedPerfused2015].
+The zoology students are investigating the effects of different kinds of snake venom on heart muscle. The inspiration for this research came from an accident that happend to one of the Life Sciences students in a jungle in Thailand. A cobra spit venom into his eye, and after his recovery he started wondering about the effect of snake venom on muscle cells. More specifically, he wondered if there was any enzymatic activity in snake vemon and what effect possible enzymes have on muscle cells. [@kazandjianConvergentEvolutionPaininducing2021] <br>
+Then, Ronald Vlasblom started wondering about the effect of snake venom on _heart_ muscle cells. Often, snake venom causes paralysis which means it has an effect on 'normal' muscle cells, but (probably?) not on heart muscle cells. <br>
+To conduct this research, they're using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery. [@lateefLangendorffIsolatedPerfused2015] <br>
+
 This technique can be used to study the direct effects of, for example, medication on the heart _ex vivo_. The two most important parameters that can be tracked in this assay are heart rate and contraction force. <br>
-We will write code to enable the zoology students to analyse these two parameters quickly and thoroughly.
+We will write code to enable the zoology students to analyse these two parameters quickly and thoroughly. <br>
 
 ```{r library, warning=FALSE, message=FALSE, include=FALSE}
 library(rbbt)
 bbt_update_bib("006_opdracht5.Rmd")
 ```
-

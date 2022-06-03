@@ -69,7 +69,7 @@ saveRDS(dengue_tidy, file = "dengue_data_tidy.rds")
 saveRDS(gapminder, file = "gapminder.rds")
 ```
 <br>
-Next, I inserted the tables into the "workflowsdb" database in DBeaver.
+Next, I inserted the tables into the "workflowsdb" database in DBeaver that I had already made.
 <br>
 ```{r exporting the files, message=FALSE, warning=FALSE, eval=FALSE}
 con <- dbConnect(RPostgres::Postgres(),
@@ -84,7 +84,43 @@ dbWriteTable(con, "gapminder", gapminder)
 dbDisconnect(con)
 ```
 <br>
-Then I inspected the contents of the datasets in DBeaver and in R.
+Then I inspected the contents of the datasets in DBeaver, with the following code:
+<br>
+<mark> SQL code </mark>
+select dengue_cases, country 
+from dengue_tidy
+order by dengue_cases asc
+
+select dengue_cases, country
+from dengue_tidy
+order by dengue_cases desc
+
+select flu_cases, country
+from flu_tidy
+order by flu_cases asc
+
+select flu_cases, country
+from flu_tidy
+order by flu_cases desc
+
+select infant_mortality, country
+from gapminder
+order by infant_mortality desc 
+
+select infant_mortality, country
+from gapminder
+order by infant_mortality asc
+
+select life_expectancy, country
+from gapminder
+order by life_expectancy desc
+
+select life_expectancy, country
+from gapminder
+order by life_expectancy asc
+<br>
+<br>
+I also inspected the data in R, with the code below:
 <br>
 ```{r inspecting the contents in R, message=FALSE, warning=FALSE}
 # Inspecting the flu_tidy dataset
@@ -107,9 +143,17 @@ gapminder %>% select( country_g, year_g, infant_mortality) %>% arrange(desc(infa
 In DBeaver, I also inspected the data, performed some joins and exported a joined table to R. The table is called "Joined_table.csv".
 <br>
 
-<mark> DBeaver code </mark>
+The SQL code that I used to create the joined table is as follows:
+
+select *
+from flu_tidy
+left join dengue_tidy on year_f = year_d
+and country_f = country_d
+left join gapminder on year_f = year_g
+and country_f = country_g
+
 <br>
-After reading in the data, I removed the rows "year_d", "year_g", "country_d" and "country_g". These rows were redundant, seeing as we already have the rows "year_f" and "country_f" from the flu dataset.
+After reading in the data from "Joined_table.csv", I removed the rows "year_d", "year_g", "country_d" and "country_g". These rows were redundant, seeing as we already have the rows "year_f" and "country_f" from the flu dataset.
 <br>
 ```{r generating a tidy joined table, message=FALSE, warning=FALSE}
 joined_table <- read.csv(here("Data/Joined_table.csv"))
