@@ -123,24 +123,29 @@ order by life_expectancy asc
 I also inspected the data in R, with the code below:
 <br>
 ```{r inspecting the contents in R, message=FALSE, warning=FALSE}
-# Inspecting the flu_tidy dataset
+## Inspecting the flu_tidy dataset
 flu_tidy %>% arrange(desc(flu_cases)) %>% head()
 flu_tidy$flu_cases %>% min(flu_tidy$flu_cases, na.rm = TRUE)
 flu_tidy$flu_cases %>% max(flu_tidy$flu_cases, na.rm = TRUE)
-# Inspecting the dengue_tidy dataset
+flu_tidy$country_f %>% unique()
+
+## Inspecting the dengue_tidy dataset
 dengue_tidy %>% arrange(desc(dengue_cases)) %>% head()
 dengue_tidy$dengue_cases %>% min(dengue_tidy$dengue_cases, na.rm = TRUE)
 dengue_tidy$dengue_cases %>% max(dengue_tidy$dengue_cases, na.rm = TRUE)
-# Inspecting the gapminder dataset
+dengue_tidy$country_d %>% unique()
+
+## Inspecting the gapminder dataset
 gapminder$infant_mortality %>% min(gapminder$infant_mortality, na.rm = TRUE)
 gapminder$infant_mortality %>% max(gapminder$infant_mortality, na.rm = TRUE)
 gapminder$life_expectancy %>% min(gapminder$life_expectancy, na.rm = TRUE)
 gapminder$life_expectancy %>% max(gapminder$life_expectancy, na.rm = TRUE)
 gapminder %>% select(country_g, year_g, life_expectancy) %>% arrange(desc(life_expectancy)) %>% head
 gapminder %>% select( country_g, year_g, infant_mortality) %>% arrange(desc(infant_mortality)) %>% head()
+gapminder$country_g %>% unique()
 ```
 <br>
-In DBeaver, I also inspected the data, performed some joins and exported a joined table to R. The table is called "Joined_table.csv".
+In DBeaver, I performed some joins and exported a joined table to R. The joined table is called "Joined_table.csv".
 <br>
 
 The SQL code that I used to create the joined table is as follows:
@@ -153,7 +158,7 @@ left join gapminder on year_f = year_g
 and country_f = country_g
 
 <br>
-After reading in the data from "Joined_table.csv", I removed the rows "year_d", "year_g", "country_d" and "country_g". These rows were redundant, seeing as we already have the rows "year_f" and "country_f" from the flu dataset.
+After reading in the data from "Joined_table.csv", I removed the rows "year_d", "year_g", "country_d" and "country_g". These rows were redundant, seeing as we already have the rows "year_f" and "country_f" from the flu dataset. I also changed the name of "country_f" to "country" and "year_f" to "year".
 <br>
 ```{r generating a tidy joined table, message=FALSE, warning=FALSE}
 joined_table <- read.csv(here("Data/Joined_table.csv"))
@@ -167,37 +172,39 @@ Then I performed some desriptive statistics with this dataset and made some visu
 <br>
 ```{r descriptive statistics, message=FALSE, warning=FALSE}
 joined_table %>% summary()
+joined_table %>% 
 ```
 <br>
+For the graphs from joined_table, I only selected the countries Argentina, Bolivia, Brazil and Mexico, since those are the only four countries that have data from all three datasets.
+<br>
 ```{r visualisations, message=FALSE, warning=FALSE}
-joined_table %>% group_by(country) %>%
+joined_table %>% group_by(country) %>%  filter(country == "Argentina" | country == "Bolivia" | country == "Brazil"| country == "Mexico") %>% 
   ggplot(aes(x = year, y = dengue_cases, colour = country)) +
   geom_point() +
   geom_line() +
   theme_classic() +
-  scale_x_continuous(breaks = seq(2002, 2015, 2))+
+  scale_x_continuous(breaks = seq(2002, 2015, 1))+
   labs(title = "Dengue cases in the years 2002 - 2015",
        x = "Year",
        y = "Dengue cases")
 
-joined_table %>% group_by(country) %>% filter(flu_cases >= 10000) %>%
+joined_table %>% group_by(country) %>% filter(country == "Argentina" | country == "Bolivia" | country == "Brazil"| country == "Mexico") %>%
   ggplot(aes(x = year, y = flu_cases, colour = country)) +
   geom_point() +
   geom_line() +
   theme_classic() +
-  scale_x_continuous(breaks = seq(2002, 2015, 2))+
+  scale_x_continuous(breaks = seq(2002, 2015, 1))+
   labs(title = "Flu cases in the years 2002 - 2015",
        x  = "Year", 
        y = "Flu cases")
 
-joined_table %>% group_by(country) %>% filter(infant_mortality >= 10) %>%
+joined_table %>% group_by(country) %>% filter(country == "Argentina" | country == "Bolivia" | country == "Brazil"| country == "Mexico") %>%
   ggplot(aes(x = year, y = infant_mortality, colour = country)) +
   geom_point() +
   geom_line() +
   theme_classic() +
-  scale_x_continuous(breaks = seq(2002, 2015, 2)) +
+  scale_x_continuous(breaks = seq(2002, 2015, 1)) +
   labs(title = "Infant mortality in the years 2002 - 2015",
        x = "Year",
        y = "Infant mortality")
 ```
-

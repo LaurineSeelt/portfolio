@@ -28,4 +28,3 @@ library(here)
 ```{r}
 fs::dir_tree(path = here("Daur2"), type = "directory")
 ```
-

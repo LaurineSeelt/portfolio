@@ -7,9 +7,6 @@ documentclass: book
 biblio-style: apalike
 link-citations: yes
 bibliography: portfoliolaurine.bib
-editor_options: 
-  markdown: 
-    wrap: 72
 ---
 
 # Zotero
