@@ -38,7 +38,7 @@ months <- params$month
 <br>
 I created a graph to show the COVID-19 cases per day for a specific month, and I also created a graph for the amount of COVID-19 related deaths per day for a specific month.
 <br>
-```{r visualising the covid-19 cases, message=FALSE, warning=FALSE}
+```{r visualising the covid-19 cases, message=FALSE, warning=FALSE, eval=FALSE}
 covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == params$country & year == params$year & month == params$month) %>%
   ggplot(aes(x = day, y = cases)) +
   geom_point() +
@@ -48,7 +48,7 @@ covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories =
        y = "COVID-19 cases")
 ```
 
-```{r visualising the covid-19 related deaths, message=FALSE, warning=FALSE}
+```{r visualising the covid-19 related deaths, message=FALSE, warning=FALSE, eval=FALSE}
 covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == params$country & year == params$year & month == params$month) %>%
   ggplot(aes(x = day, y = deaths)) +
   geom_point() +

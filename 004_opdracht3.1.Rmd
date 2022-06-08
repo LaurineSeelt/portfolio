@@ -10,7 +10,7 @@ link-citations: yes
 
 # CV
 
-To introduce you to who I am, I put my CV in a markdown.
+To show you who I am and what my skills and experiences are, I put my CV in a markdown.
 <br>
 <br>
 __Persoonlijke informatie__

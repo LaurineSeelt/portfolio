@@ -6,6 +6,6 @@ cv
 free-space
 zotero
 github
-dbeaver-and-sql
+sql
 package
 parameterization

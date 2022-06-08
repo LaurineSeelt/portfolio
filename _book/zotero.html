@@ -23,7 +23,7 @@
 <meta name="author" content="Laurine Seelt" />
 
 
-<meta name="date" content="2022-06-06" />
+<meta name="date" content="2022-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -76,7 +76,7 @@
 <li class="chapter" data-level="6" data-path="free-space.html"><a href="free-space.html"><i class="fa fa-check"></i><b>6</b> Free space</a></li>
 <li class="chapter" data-level="7" data-path="zotero.html"><a href="zotero.html"><i class="fa fa-check"></i><b>7</b> Zotero</a></li>
 <li class="chapter" data-level="8" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>8</b> GitHub</a></li>
-<li class="chapter" data-level="9" data-path="dbeaver-and-sql.html"><a href="dbeaver-and-sql.html"><i class="fa fa-check"></i><b>9</b> DBeaver and SQL</a></li>
+<li class="chapter" data-level="9" data-path="sql.html"><a href="sql.html"><i class="fa fa-check"></i><b>9</b> SQL</a></li>
 <li class="chapter" data-level="10" data-path="package.html"><a href="package.html"><i class="fa fa-check"></i><b>10</b> Package</a></li>
 <li class="chapter" data-level="11" data-path="parameterization.html"><a href="parameterization.html"><i class="fa fa-check"></i><b>11</b> Parameterization</a></li>
 </ul>
@@ -100,37 +100,28 @@
 <h1><span class="header-section-number">7</span> Zotero<a href="zotero.html#zotero" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>To show that I know how to use Zotero and citation in general correctly,
 I wrote an introduction to the Data Science project I did with two
-classmates and included some citations using Zotero.</p>
-<p><strong>Introduction to our project.</strong> <br> For the DSFB2 project, I am going
-to build a Shiny app together with two of my classmates. This app will
-enable zoology students to analyse tracings from a Langendorff assay
-automatically, as opposed to doing it by hand. <br> The zoology students
-are investigating the effects of different kinds of snake venom on heart
-muscle. The inspiration for this research came from an accident that
-happend to one of the Life Sciences students in a jungle in Thailand. A
-cobra spit venom into his eye, and after his recovery he started
-wondering about the effect of snake venom on muscle cells. More
-specifically, he wondered if there was any enzymatic activity in snake
-vemon and what effect possible enzymes have on muscle cells. <br> Then,
-Ronald Vlasblom started wondering about the effect of snake venom on
-<em>heart</em> muscle cells. Often, snake venom causes paralysis which means it
-has an effect on ‘normal’ muscle cells, but (probably?) not on heart
-muscle cells. <br> <br> To conduct this research, the Zoology students
-are using a Langendorff assay. This technique was developed by Oskar
-Langendorff in the nineteenth century. In the procedure, the excised
-heart has a cannula inserted into the aorta so that the heart can be
-retrogradely perfused via the coronary artery.
-<span class="citation">[@lateefLangendorffIsolatedPerfused2015]</span> The Langendorff isolated
-perfused heart has allowed many fundamental discoveries in cardiac
-physiology, pathology, and pharmacology over the past 100 years and is
-still one of the most powerful experimental designs in cardiovascular
-research and cardiovascular pharmacology.
-<span class="citation">[@motayagheniModifiedLangendorffTechnique2017]</span> <br> This technique can
-be used to study the direct effects of, for example, medication on the
-heart <em>ex vivo</em>. The two most important parameters that can be tracked
-in this assay are heart rate and contraction force. <br> We will write
-code to enable the zoology students to analyse these two parameters
-quickly and thoroughly. <br></p>
+classmates and included some citations using Zotero.
+<br>
+<strong>Introduction to our project.</strong> <br>
+For the DSFB2 project, I am going to build a Shiny app together with two of my classmates. This app will enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br> The zoology students are investigating the effects of different kinds of snake venom on heart muscle. The inspiration for this research came from an accident that happend to one of the Life Sciences students in a jungle in Thailand. A cobra spit venom into his eye, and after his recovery he started wondering about the effect of snake venom on muscle cells. More specifically, he wondered if there was any enzymatic activity in snake venom and what effect possible enzymes in this venom have on muscle cells.
+<br>
+Then, Ronald Vlasblom started wondering about the effect of snake venom on <em>heart</em> muscle cells. Often, snake venom causes paralysis, which means it has an effect on ‘normal’ muscle cells, but it isn’t really clear/known if it has an effect on heart muscle cells.
+<br>
+<br>
+To conduct this research, the Zoology students are using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery. <span class="citation">[@lateefLangendorffIsolatedPerfused2015]</span> The Langendorff isolated perfused heart has allowed many fundamental discoveries in cardiac physiology, pathology, and pharmacology over the past 100 years and is still one of the most powerful experimental designs in cardiovascular research and cardiovascular pharmacology. <span class="citation">[@motayagheniModifiedLangendorffTechnique2017]</span>
+<br>
+This technique can be used to study the direct effects of, for example, medication on the
+heart <em>ex vivo</em>. The two most important parameters that can be tracked in this assay are heart rate and contraction force.
+<br>
+<br>
+We will write code to enable the zoology students to analyse these two parameters quickly and thoroughly.
+<br>
+In our app, we will have five graphs. <br>
+The first graph will be the raw data of the Langendorff assay. <br>
+The second graph will be the amount of peaks detected, separated into three timeframes: the control period, the effect period and the repair period. <br>
+The third graph will be the amount of peaks in the effect period and repair period, normalised for the average amount of peaks in the control period. <br>
+The fourth graph will be the beats per minute, also separated into the control period, effect period and repair period. <br>
+The fifth graph will be the beats per minute in the effect period and repair period, normalised for the average beats per minute in the control period. <br></p>
 
 </div>
             </section>

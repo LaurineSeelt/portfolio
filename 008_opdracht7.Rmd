@@ -8,9 +8,9 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# DBeaver and SQL
+# SQL
 
-To show that I can work with DBeaver and SQL, I worked with three datasets that I inspected, joined and I made some figures with the joined dataset.
+To show that I can work with SQL in DBeaver, I worked with three data sets that I inspected, joined and I made some figures with the joined data set.
 <br>
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 library(tidyverse)
@@ -29,17 +29,17 @@ flu <- read_csv(here("data/data_raw/flu_data.csv"), skip = 11)
 dengue <- read_csv(here("data/data_raw/dengue_data.csv"), skip = 11)
 gapminder <- read_builtin("gapminder")
 ```
-
+<br>
 The flu and dengue data wasn't tidy yet, so I solved that by using the pivot_longer command to create the column "country" and "cases" in each of the datasets. That way, each country, date and number of cases had its own column. <br>
-The gapminder dataset was already tidy.
+The gapminder data set was already tidy.
 <br>
 ```{r making the data tidy, message=FALSE, warning=FALSE}
 dengue_tidy <- pivot_longer(data = dengue, cols = c("Argentina", "Bolivia", "Brazil", "India", "Indonesia", "Mexico", "Philippines", "Singapore", "Thailand", "Venezuela"), names_to = "country_d", values_to = "dengue_cases")
 flu_tidy <- pivot_longer(data = flu, cols = c("Argentina", "Australia", "Austria", "Belgium", "Bolivia", "Brazil", "Bulgaria", "Canada", "Chile", "France", "Germany", "Hungary", "Japan", "Mexico", "Netherlands", "New Zealand", "Norway", "Paraguay", "Peru", "Poland", "Romania", "Russia", "South Africa", "Spain", "Sweden", "Switzerland", "Ukraine", "United States", "Uruguay"), names_to = "country_f", values_to = "flu_cases")
 ```
 <br>
-Next, I changed the flu and dengue data some more. I separated the Data column into the three columns "Year", "Month" and "Day". I also added a d or f after the column name "year", so joining of the datasets in DBeaver will be possible later on.
-In the gapminder dataset, I changed the column "year" to "year_g" to also make joining more easy later on in DBeaver.
+Next, I changed the flu and dengue data some more. I separated the Data column into the three columns "Year", "Month" and "Day". I also added a 'd' or 'f' after the column name "year", so joining of the data sets in DBeaver will be possible and easy later on.
+In the gapminder data set, I changed the column "year" to "year_g" to also make joining easier later on in DBeaver.
 <br>
 ```{r some data wrangling, message=FALSE, warning=FALSE}
 flu_tidy <- separate(flu_tidy, Date, into = c("year_f", "month", "day"), sep = "-")
@@ -77,7 +77,7 @@ con <- dbConnect(RPostgres::Postgres(),
                  host = "localhost",
                  port = "5432",
                  user = "postgres",
-                 password = "SQL22")
+                 password = "")
 dbWriteTable(con, "flu_tidy", flu_tidy)
 dbWriteTable(con, "dengue_tidy", dengue_tidy)
 dbWriteTable(con, "gapminder", gapminder)
@@ -142,7 +142,7 @@ gapminder$life_expectancy %>% min(gapminder$life_expectancy, na.rm = TRUE)
 gapminder$life_expectancy %>% max(gapminder$life_expectancy, na.rm = TRUE)
 gapminder %>% select(country_g, year_g, life_expectancy) %>% arrange(desc(life_expectancy)) %>% head
 gapminder %>% select( country_g, year_g, infant_mortality) %>% arrange(desc(infant_mortality)) %>% head()
-gapminder$country_g %>% unique()
+gapminder$country_g %>% unique() %>% head()
 ```
 <br>
 In DBeaver, I performed some joins and exported a joined table to R. The joined table is called "Joined_table.csv".
@@ -168,14 +168,14 @@ joined_table <- joined_table %>% select(country_f:region, -(country_g:year_g))
 joined_table <- joined_table %>% rename(country = "country_f", year = "year_f")
 ```
 <br>
-Then I performed some desriptive statistics with this dataset and made some visualisations.
+Then I performed some descriptive statistics with this data set and made some visualizations.
 <br>
 ```{r descriptive statistics, message=FALSE, warning=FALSE}
 joined_table %>% summary()
-joined_table %>% 
+joined_table$country %>% unique()
 ```
 <br>
-For the graphs from joined_table, I only selected the countries Argentina, Bolivia, Brazil and Mexico, since those are the only four countries that have data from all three datasets.
+For the graphs from joined_table, I only selected the countries Argentina, Bolivia, Brazil and Mexico, since those are the only four countries that have data from all three data sets. This also keeps the graphs clear and readable.
 <br>
 ```{r visualisations, message=FALSE, warning=FALSE}
 joined_table %>% group_by(country) %>%  filter(country == "Argentina" | country == "Bolivia" | country == "Brazil"| country == "Mexico") %>% 

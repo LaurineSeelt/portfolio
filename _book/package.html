@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurine Seelt" />
 
-<meta name="date" content="2022-05-31" />
+<meta name="date" content="2022-06-08" />
 
 
 <meta name="description" content="This is the bookdown for my DSFB2 portfolio">
@@ -160,7 +160,7 @@ details > summary {
 <li><a href="free-space.html#free-space">Free space</a></li>
 <li><a href="zotero.html#zotero">Zotero</a></li>
 <li><a href="github.html#github">GitHub</a></li>
-<li><a href="dbeaver-and-sql.html#dbeaver-and-sql">DBeaver and SQL</a></li>
+<li><a href="sql.html#sql">SQL</a></li>
 <li><a href="package.html#package">Package</a></li>
 <li><a href="parameterization.html#parameterization">Parameterization</a></li>
 </ul>
@@ -174,37 +174,37 @@ details > summary {
 <p>Packages can be very useful when working in R. Here, I demonstrate how I’ve created the package called .. <br>
 This package can be used to ..
 <br></p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="package.html#cb191-1" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x))</span>
-<span id="cb191-2"><a href="package.html#cb191-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb191-3"><a href="package.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">colour =</span> z))<span class="sc">+</span></span>
-<span id="cb191-4"><a href="package.html#cb191-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb191-5"><a href="package.html#cb191-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
-<span id="cb191-6"><a href="package.html#cb191-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb191-7"><a href="package.html#cb191-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb191-8"><a href="package.html#cb191-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="package.html#cb192-1" aria-hidden="true" tabindex="-1"></a>hematocrit_paired <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;Data/hematocrit_paired&quot;</span>))</span>
-<span id="cb192-2"><a href="package.html#cb192-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-3"><a href="package.html#cb192-3" aria-hidden="true" tabindex="-1"></a>hematocrit_tidy <span class="ot">&lt;-</span>  <span class="fu">pivot_longer</span>(<span class="at">data =</span> hematocrit_paired, <span class="at">cols =</span> <span class="fu">c</span>(voor, na),  </span>
-<span id="cb192-4"><a href="package.html#cb192-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">names_to =</span> <span class="st">&quot;condition&quot;</span>,  <span class="at">values_to =</span> <span class="st">&quot;hematocrit&quot;</span>)</span>
-<span id="cb192-5"><a href="package.html#cb192-5" aria-hidden="true" tabindex="-1"></a>hematocrit_tidy_summary <span class="ot">&lt;-</span> hematocrit_tidy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(condition) <span class="sc">%&gt;%</span></span>
-<span id="cb192-6"><a href="package.html#cb192-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(hematocrit), <span class="at">stdev =</span> <span class="fu">sd</span>(hematocrit))</span>
-<span id="cb192-7"><a href="package.html#cb192-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-8"><a href="package.html#cb192-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(voor en na) <span class="sc">%&gt;%</span> <span class="fu">leveneTest</span>() <span class="sc">%&gt;%</span> <span class="fu">t.test</span>()</span>
-<span id="cb192-9"><a href="package.html#cb192-9" aria-hidden="true" tabindex="-1"></a>hematocrit_tidy <span class="sc">%&gt;%</span> <span class="fu">leveneTest</span>()</span>
-<span id="cb192-10"><a href="package.html#cb192-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-11"><a href="package.html#cb192-11" aria-hidden="true" tabindex="-1"></a>hematocrit_tidy_summary <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean, <span class="at">fill =</span> condition))<span class="sc">+</span></span>
-<span id="cb192-12"><a href="package.html#cb192-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
-<span id="cb192-13"><a href="package.html#cb192-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> stdev, <span class="at">ymax =</span> mean <span class="sc">+</span> stdev), <span class="at">width =</span> <span class="fl">0.2</span>)<span class="sc">+</span></span>
-<span id="cb192-14"><a href="package.html#cb192-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb192-15"><a href="package.html#cb192-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Hematocrit values before and after an altitude workout&quot;</span>,</span>
-<span id="cb192-16"><a href="package.html#cb192-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;errorbars depict 1 standard devation&quot;</span>,</span>
-<span id="cb192-17"><a href="package.html#cb192-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Condition&quot;</span>,</span>
-<span id="cb192-18"><a href="package.html#cb192-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Hematocrit (%)&quot;</span>)<span class="sc">+</span></span>
-<span id="cb192-19"><a href="package.html#cb192-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="package.html#cb199-1" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x))</span>
+<span id="cb199-2"><a href="package.html#cb199-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb199-3"><a href="package.html#cb199-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">colour =</span> z))<span class="sc">+</span></span>
+<span id="cb199-4"><a href="package.html#cb199-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb199-5"><a href="package.html#cb199-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb199-6"><a href="package.html#cb199-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb199-7"><a href="package.html#cb199-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb199-8"><a href="package.html#cb199-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="package.html#cb200-1" aria-hidden="true" tabindex="-1"></a>hematocrit_paired <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;Data/hematocrit_paired&quot;</span>))</span>
+<span id="cb200-2"><a href="package.html#cb200-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-3"><a href="package.html#cb200-3" aria-hidden="true" tabindex="-1"></a>hematocrit_tidy <span class="ot">&lt;-</span>  <span class="fu">pivot_longer</span>(<span class="at">data =</span> hematocrit_paired, <span class="at">cols =</span> <span class="fu">c</span>(voor, na),  </span>
+<span id="cb200-4"><a href="package.html#cb200-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">names_to =</span> <span class="st">&quot;condition&quot;</span>,  <span class="at">values_to =</span> <span class="st">&quot;hematocrit&quot;</span>)</span>
+<span id="cb200-5"><a href="package.html#cb200-5" aria-hidden="true" tabindex="-1"></a>hematocrit_tidy_summary <span class="ot">&lt;-</span> hematocrit_tidy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(condition) <span class="sc">%&gt;%</span></span>
+<span id="cb200-6"><a href="package.html#cb200-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(hematocrit), <span class="at">stdev =</span> <span class="fu">sd</span>(hematocrit))</span>
+<span id="cb200-7"><a href="package.html#cb200-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-8"><a href="package.html#cb200-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(voor en na) <span class="sc">%&gt;%</span> <span class="fu">leveneTest</span>() <span class="sc">%&gt;%</span> <span class="fu">t.test</span>()</span>
+<span id="cb200-9"><a href="package.html#cb200-9" aria-hidden="true" tabindex="-1"></a>hematocrit_tidy <span class="sc">%&gt;%</span> <span class="fu">leveneTest</span>()</span>
+<span id="cb200-10"><a href="package.html#cb200-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-11"><a href="package.html#cb200-11" aria-hidden="true" tabindex="-1"></a>hematocrit_tidy_summary <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean, <span class="at">fill =</span> condition))<span class="sc">+</span></span>
+<span id="cb200-12"><a href="package.html#cb200-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb200-13"><a href="package.html#cb200-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> stdev, <span class="at">ymax =</span> mean <span class="sc">+</span> stdev), <span class="at">width =</span> <span class="fl">0.2</span>)<span class="sc">+</span></span>
+<span id="cb200-14"><a href="package.html#cb200-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb200-15"><a href="package.html#cb200-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Hematocrit values before and after an altitude workout&quot;</span>,</span>
+<span id="cb200-16"><a href="package.html#cb200-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;errorbars depict 1 standard devation&quot;</span>,</span>
+<span id="cb200-17"><a href="package.html#cb200-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Condition&quot;</span>,</span>
+<span id="cb200-18"><a href="package.html#cb200-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Hematocrit (%)&quot;</span>)<span class="sc">+</span></span>
+<span id="cb200-19"><a href="package.html#cb200-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>))</span></code></pre></div>
 
 </div>
 <p style="text-align: center;">
-<a href="dbeaver-and-sql.html"><button class="btn btn-default">Previous</button></a>
+<a href="sql.html"><button class="btn btn-default">Previous</button></a>
 <a href="parameterization.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
