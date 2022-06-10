@@ -680,4 +680,76 @@ Looking at the graph, together this the results from the Kruskal-Wallis test, we
 <br>
 <br>
 To investigate continuous variables, like Average Daily Gain in our case, we cannot use SIMPER.
-You could approach the continuous variable as a correlation. In general only strong correlations, with r being greater than 0.5 or smaller than -0.5, should be reported. Here we'll use Kendall-Tau because it doesn't assume linearity or normality.
+You could approach the continuous variable as a correlation. In general only strong correlations, with r being greater than 0.5 or smaller than -0.5, should be reported. We'll use Kendall-Tau to do this because it doesn't assume linearity or normality.
+<br>
+To decrease the number of OTU's tested, we'll correlate ADG with OTU's that have at least 5% relative abundance in at least one sample.
+<br>
+```{r ADG correlation, message=FALSE, warning=FALSE}
+# Subsetting the OTU's with 5% abundance
+OTU.abund = OTU.clean[, apply(abund, MARGIN = 2, function(x) any(x > 5))]
+
+cor.kendall = cor(OTU.abund, meta$ADGKG, method = "kendall")
+cor.kendall
+```
+<br>
+There aren't any correlations greater than 0.5 or smaller than -0.5, so there aren't any significant correlations.
+<br>
+Now, we'll correlate SCFA's with OTU's that have at least 1% relative abundance in at least one sample. Obviously, we'll only use samples for which we have SCFA data.
+<br>
+```{r SCFA correlation, message=FALSE, warning=FALSE}
+# Calculating the abundances
+abund.SCFA = OTU.SCFA/rowSums(OTU.SCFA)*100
+
+# Subsetting the OTU's with the cutoff of 1% abundance
+OTU.SCFA.abund = OTU.SCFA[, apply(abund.SCFA, MARGIN = 2, function(x) any(x > 1))]
+
+# Calculating the correlation
+cor.kendall = cor(OTU.SCFA.abund, SCFA, method = "kendall")
+cor.kendall
+```
+<br>
+This table is very large, so we'll write it to a table in the project folder.
+<br>
+```{r writing a table, message=FALSE, warning=FALSE}
+write.table(cor.kendall, file = "cor_kendall.csv", sep = ",")
+cor_kendall <- read.csv("cor_kendall.csv")
+```
+<br>
+Some OTU's have a strong correlation with a SCFA. For example, OTU00021 and OTU00025 have a strong correlation with the SCFA Formate. We'll show this in a plot.
+<br>
+```{r plotting the correlation, message=FALSE, warning=FALSE}
+par(mfrow = c(1,2))
+plot(abund.SCFA$Otu00021 ~ SCFA$Formate, xlab = "Formate (mM)", ylab = "Relative abundance, %", main = "OTU21")
+plot(abund.SCFA$Otu00025 ~ SCFA$Formate, xlab = "Formate (mM)", ylab = "Relative abundance, %", main = "OTU25")
+```
+<br>
+We don't have a lot of data points, so we can't draw strong conclusions from this. However, we can further test the OTU's that correlate strongly with a SCFA. To do this, we will assume a normal distribution.
+<br>
+```{r glm for OTU21 & OTU25 with formate, message=FALSE, warning=FALSE}
+OTU21.Formate = glm(OTU.SCFA$Otu00021 ~ SCFA$Formate)
+summary(OTU21.Formate)
+OTU25.Formate = glm(OTU.SCFA$Otu00025 ~ SCFA$Formate)
+summary(OTU25.Formate)
+```
+<br>
+Turns out, both OTU's don't differ significantly with Formate concentration, eventhough they had very strong Kendall correlations. 
+<br>
+<br>
+To visualize all the phyla in our samples, we could make an additive bar chart.
+<br>
+```{r additive bar chart, message=FALSE, warning=FALSE}
+plot_bar(physeq.tree, fill = "Phylum")
+```
+<br>
+To make this graph a bit more readable, we can group it by age.
+<br>
+```{r bar chart with age, message=FALSE, warning=FALSE}
+plot_bar(physeq.tree, x = "AgeGroup", fill = "Phylum")
+```
+<br>
+To make it even clearer, we can remove the lines between the OTU's.
+<br>
+```{r another bar chart, message=FALSE, warning=FALSE}
+plot_bar(physeq.tree, x = "AgeGroup", fill = "Phylum") + geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")
+```
+
