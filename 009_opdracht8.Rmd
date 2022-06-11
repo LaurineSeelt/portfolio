@@ -14,14 +14,32 @@ Packages can be very useful when working in R. Here, I demonstrate how I've crea
 <br>
 ```{r setting up, message=FALSE, warning=FALSE, include=FALSE}
 library(tidyverse)
-# library(covergirl)
+library(dragracer)
+library(covergirl)
 ```
 This package can be used to search for some information about contestants of the show RuPaul's Drag Race.
 <br>
 With the function general_info(), you can type in the name of a contestant and you'll see the season that queen competed on, their age when they first competed on RuPaul's Drag Race and their hometown.
 <br>
 ```{r voorbeeld general_info, message=FALSE, warning=FALSE}
-# general_info("Jinkx Monsoon")
+general_info("Jinkx Monsoon")
 ```
 <br>
-With the function 
+With the function episode_name(), you can type in the number of the season and the episode, and this function will tell you the name of that particular episode.
+<br>
+```{r example of episode_name, message=FALSE, warning=FALSE}
+episode_name("S10", 5)
+```
+<br>
+With the function special_ep(), you can type in the number of the season and the episode, and it'll tell you if this was a special episode of RuPaul's Drag Race or not.
+<br>
+```{r example special_ep, message=FALSE, warning=FALSE}
+special_ep("S14", 11)
+special_ep("S13", 5)
+```
+<br>
+Lastly, with the function winner(), you can type in the number of a season and this function which queen won that particular season.
+<br>
+```{r example winner, message=FALSE, warning=FALSE}
+winner("S05")
+```
