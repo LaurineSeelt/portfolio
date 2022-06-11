@@ -669,7 +669,7 @@ head(KW.results.signif)
 We can see that there are several OTU's that differ significantly by age group. <br>
 We'll look at OTU1 as relative abundance.
 <br>
-```{r OTU1 relative, message=FALSE, warning=FALSE, eval=FALSE}
+```{r OTU1 relative, message=FALSE, warning=FALSE}
 # Abundance berekenen
 abund = OTU.clean/rowSums(OTU.clean)*100
 # Plotting the abundances

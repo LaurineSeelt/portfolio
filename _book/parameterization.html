@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurine Seelt" />
 
-<meta name="date" content="2022-06-08" />
+<meta name="date" content="2022-06-11" />
 
 
 <meta name="description" content="This is the bookdown for my DSFB2 portfolio">
@@ -175,27 +175,27 @@ details > summary {
 <p><br>
 The data used for this markdown was from the ECDC website. To start, I downloaded this data from the website and read it in in RStudio.
 <br></p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="parameterization.html#cb201-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/covid19_data.csv&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="parameterization.html#cb222-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/covid19_data.csv&quot;</span>))</span></code></pre></div>
 <p><br>
 Then, I stored the three parameters as objects so I can use them in the title of my figures.
 <br></p>
 <p><br>
 I created a graph to show the COVID-19 cases per day for a specific month, and I also created a graph for the amount of COVID-19 related deaths per day for a specific month.
 <br></p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="parameterization.html#cb202-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> params<span class="sc">$</span>country <span class="sc">&amp;</span> year <span class="sc">==</span> params<span class="sc">$</span>year <span class="sc">&amp;</span> month <span class="sc">==</span> params<span class="sc">$</span>month) <span class="sc">%&gt;%</span></span>
-<span id="cb202-2"><a href="parameterization.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> cases)) <span class="sc">+</span></span>
-<span id="cb202-3"><a href="parameterization.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb202-4"><a href="parameterization.html#cb202-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb202-5"><a href="parameterization.html#cb202-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 cases in &quot;</span>, country, <span class="st">&quot;, &quot;</span>, months, <span class="st">&quot; &quot;</span>, year),</span>
-<span id="cb202-6"><a href="parameterization.html#cb202-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span>,</span>
-<span id="cb202-7"><a href="parameterization.html#cb202-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 cases&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="parameterization.html#cb203-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> params<span class="sc">$</span>country <span class="sc">&amp;</span> year <span class="sc">==</span> params<span class="sc">$</span>year <span class="sc">&amp;</span> month <span class="sc">==</span> params<span class="sc">$</span>month) <span class="sc">%&gt;%</span></span>
-<span id="cb203-2"><a href="parameterization.html#cb203-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> deaths)) <span class="sc">+</span></span>
-<span id="cb203-3"><a href="parameterization.html#cb203-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb203-4"><a href="parameterization.html#cb203-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb203-5"><a href="parameterization.html#cb203-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 related deaths in &quot;</span>, country, <span class="st">&quot;, &quot;</span>, months, <span class="st">&quot; &quot;</span>, year),</span>
-<span id="cb203-6"><a href="parameterization.html#cb203-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span> ,</span>
-<span id="cb203-7"><a href="parameterization.html#cb203-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 related deaths&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="parameterization.html#cb223-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> params<span class="sc">$</span>country <span class="sc">&amp;</span> year <span class="sc">==</span> params<span class="sc">$</span>year <span class="sc">&amp;</span> month <span class="sc">==</span> params<span class="sc">$</span>month) <span class="sc">%&gt;%</span></span>
+<span id="cb223-2"><a href="parameterization.html#cb223-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> cases)) <span class="sc">+</span></span>
+<span id="cb223-3"><a href="parameterization.html#cb223-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb223-4"><a href="parameterization.html#cb223-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb223-5"><a href="parameterization.html#cb223-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 cases in &quot;</span>, country, <span class="st">&quot;, &quot;</span>, months, <span class="st">&quot; &quot;</span>, year),</span>
+<span id="cb223-6"><a href="parameterization.html#cb223-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span>,</span>
+<span id="cb223-7"><a href="parameterization.html#cb223-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 cases&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="parameterization.html#cb224-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> params<span class="sc">$</span>country <span class="sc">&amp;</span> year <span class="sc">==</span> params<span class="sc">$</span>year <span class="sc">&amp;</span> month <span class="sc">==</span> params<span class="sc">$</span>month) <span class="sc">%&gt;%</span></span>
+<span id="cb224-2"><a href="parameterization.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> deaths)) <span class="sc">+</span></span>
+<span id="cb224-3"><a href="parameterization.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb224-4"><a href="parameterization.html#cb224-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb224-5"><a href="parameterization.html#cb224-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 related deaths in &quot;</span>, country, <span class="st">&quot;, &quot;</span>, months, <span class="st">&quot; &quot;</span>, year),</span>
+<span id="cb224-6"><a href="parameterization.html#cb224-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span> ,</span>
+<span id="cb224-7"><a href="parameterization.html#cb224-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 related deaths&quot;</span>)</span></code></pre></div>
 
 </div>
 <p style="text-align: center;">

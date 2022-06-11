@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurine Seelt" />
 
-<meta name="date" content="2022-06-08" />
+<meta name="date" content="2022-06-11" />
 
 
 <meta name="description" content="This is the bookdown for my DSFB2 portfolio">
@@ -893,7 +893,7 @@ We’ll extract the x, y and z for the nMDS, and then plot them.
 ## 5053.8w.F   0.8843018 -2.10763164  0.478069543</code></pre>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="free-space.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">x=</span>BCxyz[,<span class="dv">1</span>], <span class="at">y=</span>BCxyz[,<span class="dv">2</span>], <span class="at">z=</span>BCxyz[,<span class="dv">3</span>], <span class="at">type =</span> <span class="st">&quot;scatter3d&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;markers&quot;</span>, <span class="at">color =</span> meta<span class="sc">$</span>AgeGroup, <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
 <div id="htmlwidget-62c7785809aa8ca168b9" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-62c7785809aa8ca168b9">{"x":{"visdat":{"2e7423a32f83":["function () ","plotlyVisDat"]},"cur_data":"2e7423a32f83","attrs":{"2e7423a32f83":{"x":[-4.78771931045918,3.18476268753522,1.0503489366724,-4.74665091020587,3.49563969661543,1.5785762791915,-4.76170206868453,3.3964194861303,3.14750317496417,-4.79200712801778,3.35076724688771,0.851676644654691,-4.84180751419167,3.65703934402551,3.12878532308213,-4.7617047247967,3.16461553839772,1.08385331368147,-4.74192629193479,1.50455144673167,1.47821890162157,-4.81608558041068,3.29254366873902,0.884301839770668],"y":[0.328785594747687,0.0569784618449109,-2.11932201408607,0.244791431449645,-1.01621363550618,-1.92688898639618,0.209613326155857,1.09611958519415,2.07012740888467,0.441538083640638,0.480921333582907,-1.63544388612034,0.487460593750542,0.262990349033227,-0.824311993082458,0.285200716116999,2.42901235588814,-2.57296922090692,0.166941287510249,3.11037881450245,-2.16474462015601,0.398882303388391,2.29778435322892,-2.10763164266522],"z":[-0.20457952327386,1.48432574336691,-1.21710078253216,-0.00192747251577329,1.00843978284518,0.465285369061843,0.209854984407134,-0.615338225488531,1.47707047625416,0.196685522708958,-1.49138223669158,0.254264412164606,-0.00431370321553942,-0.511188777772036,-0.025514352591185,0.0607565513943446,-1.21676159479184,-0.236134614700232,0.00556815486584552,-0.462668247727121,-0.450092185135792,-0.0163359845319067,0.813017160751732,0.478069543146837],"mode":"markers","color":["1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w"],"colors":["blue","green","red"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":[]},"yaxis":{"title":[]},"zaxis":{"title":[]}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-4.78771931045918,-4.74665091020587,-4.76170206868453,-4.79200712801778,-4.84180751419167,-4.7617047247967,-4.74192629193479,-4.81608558041068],"y":[0.328785594747687,0.244791431449645,0.209613326155857,0.441538083640638,0.487460593750542,0.285200716116999,0.166941287510249,0.398882303388391],"z":[-0.20457952327386,-0.00192747251577329,0.209854984407134,0.196685522708958,-0.00431370321553942,0.0607565513943446,0.00556815486584552,-0.0163359845319067],"mode":"markers","type":"scatter3d","name":"1yr","marker":{"color":"rgba(0,0,255,1)","line":{"color":"rgba(0,0,255,1)"}},"textfont":{"color":"rgba(0,0,255,1)"},"error_y":{"color":"rgba(0,0,255,1)"},"error_x":{"color":"rgba(0,0,255,1)"},"line":{"color":"rgba(0,0,255,1)"},"frame":null},{"x":[3.18476268753522,3.49563969661543,3.3964194861303,3.35076724688771,3.65703934402551,3.16461553839772,1.50455144673167,3.29254366873902],"y":[0.0569784618449109,-1.01621363550618,1.09611958519415,0.480921333582907,0.262990349033227,2.42901235588814,3.11037881450245,2.29778435322892],"z":[1.48432574336691,1.00843978284518,-0.615338225488531,-1.49138223669158,-0.511188777772036,-1.21676159479184,-0.462668247727121,0.813017160751732],"mode":"markers","type":"scatter3d","name":"2w","marker":{"color":"rgba(0,255,0,1)","line":{"color":"rgba(0,255,0,1)"}},"textfont":{"color":"rgba(0,255,0,1)"},"error_y":{"color":"rgba(0,255,0,1)"},"error_x":{"color":"rgba(0,255,0,1)"},"line":{"color":"rgba(0,255,0,1)"},"frame":null},{"x":[1.0503489366724,1.5785762791915,3.14750317496417,0.851676644654691,3.12878532308213,1.08385331368147,1.47821890162157,0.884301839770668],"y":[-2.11932201408607,-1.92688898639618,2.07012740888467,-1.63544388612034,-0.824311993082458,-2.57296922090692,-2.16474462015601,-2.10763164266522],"z":[-1.21710078253216,0.465285369061843,1.47707047625416,0.254264412164606,-0.025514352591185,-0.236134614700232,-0.450092185135792,0.478069543146837],"mode":"markers","type":"scatter3d","name":"8w","marker":{"color":"rgba(255,0,0,1)","line":{"color":"rgba(255,0,0,1)"}},"textfont":{"color":"rgba(255,0,0,1)"},"error_y":{"color":"rgba(255,0,0,1)"},"error_x":{"color":"rgba(255,0,0,1)"},"line":{"color":"rgba(255,0,0,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-62c7785809aa8ca168b9">{"x":{"visdat":{"39a04f19482f":["function () ","plotlyVisDat"]},"cur_data":"39a04f19482f","attrs":{"39a04f19482f":{"x":[-4.78771931045918,3.18476268753522,1.0503489366724,-4.74665091020587,3.49563969661543,1.5785762791915,-4.76170206868453,3.3964194861303,3.14750317496417,-4.79200712801778,3.35076724688771,0.851676644654691,-4.84180751419167,3.65703934402551,3.12878532308213,-4.7617047247967,3.16461553839772,1.08385331368147,-4.74192629193479,1.50455144673167,1.47821890162157,-4.81608558041068,3.29254366873902,0.884301839770668],"y":[0.328785594747687,0.0569784618449109,-2.11932201408607,0.244791431449645,-1.01621363550618,-1.92688898639618,0.209613326155857,1.09611958519415,2.07012740888467,0.441538083640638,0.480921333582907,-1.63544388612034,0.487460593750542,0.262990349033227,-0.824311993082458,0.285200716116999,2.42901235588814,-2.57296922090692,0.166941287510249,3.11037881450245,-2.16474462015601,0.398882303388391,2.29778435322892,-2.10763164266522],"z":[-0.20457952327386,1.48432574336691,-1.21710078253216,-0.00192747251577329,1.00843978284518,0.465285369061843,0.209854984407134,-0.615338225488531,1.47707047625416,0.196685522708958,-1.49138223669158,0.254264412164606,-0.00431370321553942,-0.511188777772036,-0.025514352591185,0.0607565513943446,-1.21676159479184,-0.236134614700232,0.00556815486584552,-0.462668247727121,-0.450092185135792,-0.0163359845319067,0.813017160751732,0.478069543146837],"mode":"markers","color":["1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w"],"colors":["blue","green","red"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":[]},"yaxis":{"title":[]},"zaxis":{"title":[]}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-4.78771931045918,-4.74665091020587,-4.76170206868453,-4.79200712801778,-4.84180751419167,-4.7617047247967,-4.74192629193479,-4.81608558041068],"y":[0.328785594747687,0.244791431449645,0.209613326155857,0.441538083640638,0.487460593750542,0.285200716116999,0.166941287510249,0.398882303388391],"z":[-0.20457952327386,-0.00192747251577329,0.209854984407134,0.196685522708958,-0.00431370321553942,0.0607565513943446,0.00556815486584552,-0.0163359845319067],"mode":"markers","type":"scatter3d","name":"1yr","marker":{"color":"rgba(0,0,255,1)","line":{"color":"rgba(0,0,255,1)"}},"textfont":{"color":"rgba(0,0,255,1)"},"error_y":{"color":"rgba(0,0,255,1)"},"error_x":{"color":"rgba(0,0,255,1)"},"line":{"color":"rgba(0,0,255,1)"},"frame":null},{"x":[3.18476268753522,3.49563969661543,3.3964194861303,3.35076724688771,3.65703934402551,3.16461553839772,1.50455144673167,3.29254366873902],"y":[0.0569784618449109,-1.01621363550618,1.09611958519415,0.480921333582907,0.262990349033227,2.42901235588814,3.11037881450245,2.29778435322892],"z":[1.48432574336691,1.00843978284518,-0.615338225488531,-1.49138223669158,-0.511188777772036,-1.21676159479184,-0.462668247727121,0.813017160751732],"mode":"markers","type":"scatter3d","name":"2w","marker":{"color":"rgba(0,255,0,1)","line":{"color":"rgba(0,255,0,1)"}},"textfont":{"color":"rgba(0,255,0,1)"},"error_y":{"color":"rgba(0,255,0,1)"},"error_x":{"color":"rgba(0,255,0,1)"},"line":{"color":"rgba(0,255,0,1)"},"frame":null},{"x":[1.0503489366724,1.5785762791915,3.14750317496417,0.851676644654691,3.12878532308213,1.08385331368147,1.47821890162157,0.884301839770668],"y":[-2.11932201408607,-1.92688898639618,2.07012740888467,-1.63544388612034,-0.824311993082458,-2.57296922090692,-2.16474462015601,-2.10763164266522],"z":[-1.21710078253216,0.465285369061843,1.47707047625416,0.254264412164606,-0.025514352591185,-0.236134614700232,-0.450092185135792,0.478069543146837],"mode":"markers","type":"scatter3d","name":"8w","marker":{"color":"rgba(255,0,0,1)","line":{"color":"rgba(255,0,0,1)"}},"textfont":{"color":"rgba(255,0,0,1)"},"error_y":{"color":"rgba(255,0,0,1)"},"error_x":{"color":"rgba(255,0,0,1)"},"line":{"color":"rgba(255,0,0,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p><br>
 3D plots are difficult to interpret in articles, so many authors choose to create two 2D plots instead.
 <br></p>
@@ -1174,7 +1174,7 @@ Then, we’ll take out the xyz values and plot them with plotly.
 ## 5053.8w.F  -0.13978837 -0.049104795 -0.12586523</code></pre>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="free-space.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">x=</span>wUFxyz[,<span class="dv">1</span>], <span class="at">y=</span>wUFxyz[,<span class="dv">2</span>], <span class="at">z=</span>wUFxyz[,<span class="dv">3</span>], <span class="at">type =</span> <span class="st">&quot;scatter3d&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;markers&quot;</span>, <span class="at">color=</span>meta<span class="sc">$</span>AgeGroup, <span class="at">colors=</span><span class="fu">c</span>(<span class="st">&quot;pink&quot;</span>, <span class="st">&quot;purple&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
 <div id="htmlwidget-08bbfcaa24223a5a3d2e" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-08bbfcaa24223a5a3d2e">{"x":{"visdat":{"2e741a8b7eb1":["function () ","plotlyVisDat"]},"cur_data":"2e741a8b7eb1","attrs":{"2e741a8b7eb1":{"x":[-0.19592858103205,0.403443797563631,-0.0674544709789275,-0.213144451318145,-0.029195251142192,0.0337036476920514,-0.224864548726631,0.13248515031895,0.390180917453704,-0.199985662213819,0.19092360734092,-0.13588108508355,-0.218037833728084,0.0518973226399105,0.142328745315163,-0.209140843377632,0.278286780267357,-0.13941944770309,-0.233344570264657,0.492358029925642,-0.169200774321509,-0.215441022562339,0.275218917623397,-0.139788373688101],"y":[0.107838852075638,0.187070009456276,0.0458112527156279,0.100936809207075,-0.163696093319003,0.054488454641568,0.0666436833094421,-0.21710679003518,0.135420605612063,0.0804823765932766,-0.256894303187102,-0.0422965588763816,0.0765095643668562,-0.120255190806781,-0.115637315704089,0.0817850238802328,-0.237773303065919,-0.00165406171854154,0.0510756855539885,0.294995884862548,-0.126231476360129,0.0779982325981863,-0.0304065472094594,-0.0491047945901905],"z":[0.079703776382978,-0.119105795157837,-0.219434218619414,0.0683061522202025,-0.0292431472330305,-0.0910541037239572,0.0559867499766846,0.0875175263883615,0.240116530104297,0.0944696143126626,0.0156127809565279,-0.025854879777142,0.0718935050607912,-0.0423130552214619,-0.0189629299429066,0.0744264359156381,0.0364236489121322,-0.186564923991024,0.0628328700475962,-0.14636091981074,-0.138219938722338,0.0800838092542755,0.175605741577039,-0.125865228909335],"mode":"markers","color":["1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w"],"colors":["pink","purple","blue"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":[]},"yaxis":{"title":[]},"zaxis":{"title":[]}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-0.19592858103205,-0.213144451318145,-0.224864548726631,-0.199985662213819,-0.218037833728084,-0.209140843377632,-0.233344570264657,-0.215441022562339],"y":[0.107838852075638,0.100936809207075,0.0666436833094421,0.0804823765932766,0.0765095643668562,0.0817850238802328,0.0510756855539885,0.0779982325981863],"z":[0.079703776382978,0.0683061522202025,0.0559867499766846,0.0944696143126626,0.0718935050607912,0.0744264359156381,0.0628328700475962,0.0800838092542755],"mode":"markers","type":"scatter3d","name":"1yr","marker":{"color":"rgba(255,192,203,1)","line":{"color":"rgba(255,192,203,1)"}},"textfont":{"color":"rgba(255,192,203,1)"},"error_y":{"color":"rgba(255,192,203,1)"},"error_x":{"color":"rgba(255,192,203,1)"},"line":{"color":"rgba(255,192,203,1)"},"frame":null},{"x":[0.403443797563631,-0.029195251142192,0.13248515031895,0.19092360734092,0.0518973226399105,0.278286780267357,0.492358029925642,0.275218917623397],"y":[0.187070009456276,-0.163696093319003,-0.21710679003518,-0.256894303187102,-0.120255190806781,-0.237773303065919,0.294995884862548,-0.0304065472094594],"z":[-0.119105795157837,-0.0292431472330305,0.0875175263883615,0.0156127809565279,-0.0423130552214619,0.0364236489121322,-0.14636091981074,0.175605741577039],"mode":"markers","type":"scatter3d","name":"2w","marker":{"color":"rgba(160,32,240,1)","line":{"color":"rgba(160,32,240,1)"}},"textfont":{"color":"rgba(160,32,240,1)"},"error_y":{"color":"rgba(160,32,240,1)"},"error_x":{"color":"rgba(160,32,240,1)"},"line":{"color":"rgba(160,32,240,1)"},"frame":null},{"x":[-0.0674544709789275,0.0337036476920514,0.390180917453704,-0.13588108508355,0.142328745315163,-0.13941944770309,-0.169200774321509,-0.139788373688101],"y":[0.0458112527156279,0.054488454641568,0.135420605612063,-0.0422965588763816,-0.115637315704089,-0.00165406171854154,-0.126231476360129,-0.0491047945901905],"z":[-0.219434218619414,-0.0910541037239572,0.240116530104297,-0.025854879777142,-0.0189629299429066,-0.186564923991024,-0.138219938722338,-0.125865228909335],"mode":"markers","type":"scatter3d","name":"8w","marker":{"color":"rgba(0,0,255,1)","line":{"color":"rgba(0,0,255,1)"}},"textfont":{"color":"rgba(0,0,255,1)"},"error_y":{"color":"rgba(0,0,255,1)"},"error_x":{"color":"rgba(0,0,255,1)"},"line":{"color":"rgba(0,0,255,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-08bbfcaa24223a5a3d2e">{"x":{"visdat":{"39a0c5a3b22":["function () ","plotlyVisDat"]},"cur_data":"39a0c5a3b22","attrs":{"39a0c5a3b22":{"x":[-0.19592858103205,0.403443797563631,-0.0674544709789275,-0.213144451318145,-0.029195251142192,0.0337036476920514,-0.224864548726631,0.13248515031895,0.390180917453704,-0.199985662213819,0.19092360734092,-0.13588108508355,-0.218037833728084,0.0518973226399105,0.142328745315163,-0.209140843377632,0.278286780267357,-0.13941944770309,-0.233344570264657,0.492358029925642,-0.169200774321509,-0.215441022562339,0.275218917623397,-0.139788373688101],"y":[0.107838852075638,0.187070009456276,0.0458112527156279,0.100936809207075,-0.163696093319003,0.054488454641568,0.0666436833094421,-0.21710679003518,0.135420605612063,0.0804823765932766,-0.256894303187102,-0.0422965588763816,0.0765095643668562,-0.120255190806781,-0.115637315704089,0.0817850238802328,-0.237773303065919,-0.00165406171854154,0.0510756855539885,0.294995884862548,-0.126231476360129,0.0779982325981863,-0.0304065472094594,-0.0491047945901905],"z":[0.079703776382978,-0.119105795157837,-0.219434218619414,0.0683061522202025,-0.0292431472330305,-0.0910541037239572,0.0559867499766846,0.0875175263883615,0.240116530104297,0.0944696143126626,0.0156127809565279,-0.025854879777142,0.0718935050607912,-0.0423130552214619,-0.0189629299429066,0.0744264359156381,0.0364236489121322,-0.186564923991024,0.0628328700475962,-0.14636091981074,-0.138219938722338,0.0800838092542755,0.175605741577039,-0.125865228909335],"mode":"markers","color":["1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w","1yr","2w","8w"],"colors":["pink","purple","blue"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":[]},"yaxis":{"title":[]},"zaxis":{"title":[]}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-0.19592858103205,-0.213144451318145,-0.224864548726631,-0.199985662213819,-0.218037833728084,-0.209140843377632,-0.233344570264657,-0.215441022562339],"y":[0.107838852075638,0.100936809207075,0.0666436833094421,0.0804823765932766,0.0765095643668562,0.0817850238802328,0.0510756855539885,0.0779982325981863],"z":[0.079703776382978,0.0683061522202025,0.0559867499766846,0.0944696143126626,0.0718935050607912,0.0744264359156381,0.0628328700475962,0.0800838092542755],"mode":"markers","type":"scatter3d","name":"1yr","marker":{"color":"rgba(255,192,203,1)","line":{"color":"rgba(255,192,203,1)"}},"textfont":{"color":"rgba(255,192,203,1)"},"error_y":{"color":"rgba(255,192,203,1)"},"error_x":{"color":"rgba(255,192,203,1)"},"line":{"color":"rgba(255,192,203,1)"},"frame":null},{"x":[0.403443797563631,-0.029195251142192,0.13248515031895,0.19092360734092,0.0518973226399105,0.278286780267357,0.492358029925642,0.275218917623397],"y":[0.187070009456276,-0.163696093319003,-0.21710679003518,-0.256894303187102,-0.120255190806781,-0.237773303065919,0.294995884862548,-0.0304065472094594],"z":[-0.119105795157837,-0.0292431472330305,0.0875175263883615,0.0156127809565279,-0.0423130552214619,0.0364236489121322,-0.14636091981074,0.175605741577039],"mode":"markers","type":"scatter3d","name":"2w","marker":{"color":"rgba(160,32,240,1)","line":{"color":"rgba(160,32,240,1)"}},"textfont":{"color":"rgba(160,32,240,1)"},"error_y":{"color":"rgba(160,32,240,1)"},"error_x":{"color":"rgba(160,32,240,1)"},"line":{"color":"rgba(160,32,240,1)"},"frame":null},{"x":[-0.0674544709789275,0.0337036476920514,0.390180917453704,-0.13588108508355,0.142328745315163,-0.13941944770309,-0.169200774321509,-0.139788373688101],"y":[0.0458112527156279,0.054488454641568,0.135420605612063,-0.0422965588763816,-0.115637315704089,-0.00165406171854154,-0.126231476360129,-0.0491047945901905],"z":[-0.219434218619414,-0.0910541037239572,0.240116530104297,-0.025854879777142,-0.0189629299429066,-0.186564923991024,-0.138219938722338,-0.125865228909335],"mode":"markers","type":"scatter3d","name":"8w","marker":{"color":"rgba(0,0,255,1)","line":{"color":"rgba(0,0,255,1)"}},"textfont":{"color":"rgba(0,0,255,1)"},"error_y":{"color":"rgba(0,0,255,1)"},"error_x":{"color":"rgba(0,0,255,1)"},"line":{"color":"rgba(0,0,255,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p><br>
 <br>
 It is harder to visualize continuous variables in the way we’ve just visualized categorical values. We can, however, fit these as vectors on the nMDS plots.
@@ -10549,12 +10549,209 @@ We’ll look at OTU1 as relative abundance.
 <span id="cb155-2"><a href="free-space.html#cb155-2" aria-hidden="true" tabindex="-1"></a>abund <span class="ot">=</span> OTU.clean<span class="sc">/</span><span class="fu">rowSums</span>(OTU.clean)<span class="sc">*</span><span class="dv">100</span></span>
 <span id="cb155-3"><a href="free-space.html#cb155-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the abundances</span></span>
 <span id="cb155-4"><a href="free-space.html#cb155-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(abund<span class="sc">$</span>Otu00001 <span class="sc">~</span> meta<span class="sc">$</span>AgeGroup, <span class="at">ylab =</span> <span class="st">&quot;% Relative abundance&quot;</span>, <span class="at">main =</span> <span class="st">&quot;OTU1&quot;</span>)</span></code></pre></div>
-<p><br>
+<p><img src="_main_files/figure-html/OTU1%20relative-1.png" width="672" />
+<br>
 Looking at the graph, together this the results from the Kruskal-Wallis test, we can say that OTU1 is significantly less abundant in 1-year-old animals than in 2- or 8-week-old animals.
 <br>
 <br>
 To investigate continuous variables, like Average Daily Gain in our case, we cannot use SIMPER.
-You could approach the continuous variable as a correlation. In general only strong correlations, with r being greater than 0.5 or smaller than -0.5, should be reported. Here we’ll use Kendall-Tau because it doesn’t assume linearity or normality.</p>
+You could approach the continuous variable as a correlation. In general only strong correlations, with r being greater than 0.5 or smaller than -0.5, should be reported. We’ll use Kendall-Tau to do this because it doesn’t assume linearity or normality.
+<br>
+To decrease the number of OTU’s tested, we’ll correlate ADG with OTU’s that have at least 5% relative abundance in at least one sample.
+<br></p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="free-space.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsetting the OTU&#39;s with 5% abundance</span></span>
+<span id="cb156-2"><a href="free-space.html#cb156-2" aria-hidden="true" tabindex="-1"></a>OTU.abund <span class="ot">=</span> OTU.clean[, <span class="fu">apply</span>(abund, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">any</span>(x <span class="sc">&gt;</span> <span class="dv">5</span>))]</span>
+<span id="cb156-3"><a href="free-space.html#cb156-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-4"><a href="free-space.html#cb156-4" aria-hidden="true" tabindex="-1"></a>cor.kendall <span class="ot">=</span> <span class="fu">cor</span>(OTU.abund, meta<span class="sc">$</span>ADGKG, <span class="at">method =</span> <span class="st">&quot;kendall&quot;</span>)</span>
+<span id="cb156-5"><a href="free-space.html#cb156-5" aria-hidden="true" tabindex="-1"></a>cor.kendall</span></code></pre></div>
+<pre><code>##                  [,1]
+## Otu00001  0.189852125
+## Otu00002  0.211764129
+## Otu00003  0.027397313
+## Otu00004  0.275867615
+## Otu00005  0.165056323
+## Otu00006 -0.114462240
+## Otu00007  0.143930930
+## Otu00008  0.211764129
+## Otu00009 -0.177517901
+## Otu00010  0.176299258
+## Otu00011  0.208334326
+## Otu00012  0.017236256
+## Otu00013  0.269669049
+## Otu00015  0.018077538
+## Otu00016 -0.257293680
+## Otu00017  0.284293111
+## Otu00019  0.172479145
+## Otu00020  0.102188122
+## Otu00022 -0.034040152
+## Otu00023  0.004106646
+## Otu00024  0.073416202
+## Otu00027  0.412640807
+## Otu00029  0.076924424
+## Otu00030 -0.077670805
+## Otu00031  0.286002668
+## Otu00038 -0.271163072
+## Otu00041  0.125193349
+## Otu00043  0.189645652
+## Otu00044  0.239065695
+## Otu00053 -0.217652255
+## Otu00055 -0.112428004
+## Otu00070 -0.037317590</code></pre>
+<p><br>
+There aren’t any correlations greater than 0.5 or smaller than -0.5, so there aren’t any significant correlations.
+<br>
+Now, we’ll correlate SCFA’s with OTU’s that have at least 1% relative abundance in at least one sample. Obviously, we’ll only use samples for which we have SCFA data.
+<br></p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="free-space.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating the abundances</span></span>
+<span id="cb158-2"><a href="free-space.html#cb158-2" aria-hidden="true" tabindex="-1"></a>abund.SCFA <span class="ot">=</span> OTU.SCFA<span class="sc">/</span><span class="fu">rowSums</span>(OTU.SCFA)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb158-3"><a href="free-space.html#cb158-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-4"><a href="free-space.html#cb158-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsetting the OTU&#39;s with the cutoff of 1% abundance</span></span>
+<span id="cb158-5"><a href="free-space.html#cb158-5" aria-hidden="true" tabindex="-1"></a>OTU.SCFA.abund <span class="ot">=</span> OTU.SCFA[, <span class="fu">apply</span>(abund.SCFA, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">any</span>(x <span class="sc">&gt;</span> <span class="dv">1</span>))]</span>
+<span id="cb158-6"><a href="free-space.html#cb158-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-7"><a href="free-space.html#cb158-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating the correlation</span></span>
+<span id="cb158-8"><a href="free-space.html#cb158-8" aria-hidden="true" tabindex="-1"></a>cor.kendall <span class="ot">=</span> <span class="fu">cor</span>(OTU.SCFA.abund, SCFA, <span class="at">method =</span> <span class="st">&quot;kendall&quot;</span>)</span>
+<span id="cb158-9"><a href="free-space.html#cb158-9" aria-hidden="true" tabindex="-1"></a>cor.kendall</span></code></pre></div>
+<pre><code>##             Formate    Acetate Propionate Isobutyrate   Butyrate   iVal.2MB
+## Otu00006  0.0000000  0.1825742  0.1825742   0.1825742  0.1825742 -0.1825742
+## Otu00014  0.1825742  0.3333333  0.3333333   0.0000000  0.3333333 -0.3333333
+## Otu00016 -0.1825742 -0.3333333 -0.3333333  -0.6666667 -0.3333333 -0.3333333
+## Otu00018 -0.1825742 -0.3333333 -0.3333333  -0.6666667 -0.3333333 -0.3333333
+## Otu00021 -0.9128709 -0.6666667 -0.6666667  -0.3333333 -0.6666667 -0.6666667
+## Otu00025  0.9128709  0.6666667  0.6666667   0.3333333  0.6666667  0.6666667
+## Otu00035 -0.5477226 -0.6666667 -0.6666667  -1.0000000 -0.6666667 -0.6666667
+## Otu00036 -0.5477226 -0.6666667 -0.6666667  -0.3333333 -0.6666667  0.0000000
+## Otu00037 -0.1825742  0.0000000  0.0000000   0.3333333  0.0000000  0.0000000
+## Otu00040 -0.5477226 -0.6666667 -0.6666667  -1.0000000 -0.6666667 -0.6666667
+## Otu00042  0.1825742  0.3333333  0.3333333   0.0000000  0.3333333 -0.3333333
+## Otu00046 -0.1825742 -0.3333333 -0.3333333  -0.6666667 -0.3333333 -0.3333333
+## Otu00049 -0.1825742 -0.3333333 -0.3333333   0.0000000 -0.3333333  0.3333333
+## Otu00051  0.5477226  0.3333333  0.3333333   0.6666667  0.3333333  1.0000000
+## Otu00052 -0.5477226 -0.6666667 -0.6666667  -1.0000000 -0.6666667 -0.6666667
+## Otu00056 -0.1825742 -0.3333333 -0.3333333  -0.6666667 -0.3333333 -0.3333333
+## Otu00064 -0.5477226 -0.3333333 -0.3333333  -0.6666667 -0.3333333 -1.0000000
+## Otu00066 -0.5477226 -0.6666667 -0.6666667  -1.0000000 -0.6666667 -0.6666667
+## Otu00067  0.1825742  0.0000000  0.0000000   0.3333333  0.0000000  0.6666667
+## Otu00069  0.5477226  0.3333333  0.3333333   0.6666667  0.3333333  1.0000000
+## Otu00074  0.5477226  0.6666667  0.6666667   0.3333333  0.6666667  0.0000000
+## Otu00077  0.1825742  0.3333333  0.3333333   0.6666667  0.3333333  0.3333333
+## Otu00088  0.1825742  0.0000000  0.0000000  -0.3333333  0.0000000  0.0000000
+## Otu00089  0.1825742  0.0000000  0.0000000  -0.3333333  0.0000000  0.0000000
+## Otu00097 -0.1825742  0.0000000  0.0000000   0.3333333  0.0000000  0.0000000
+## Otu00100 -0.1825742  0.0000000  0.0000000   0.3333333  0.0000000  0.0000000
+## Otu00113 -0.5477226 -0.6666667 -0.6666667  -0.3333333 -0.6666667  0.0000000
+## Otu00192  0.5477226  0.6666667  0.6666667   1.0000000  0.6666667  0.6666667
+## Otu00295  0.2581989  0.2357023  0.2357023   0.7071068  0.2357023  0.7071068
+##            Valerate
+## Otu00006  0.1825742
+## Otu00014  0.0000000
+## Otu00016 -0.6666667
+## Otu00018 -0.6666667
+## Otu00021 -0.3333333
+## Otu00025  0.3333333
+## Otu00035 -1.0000000
+## Otu00036 -0.3333333
+## Otu00037  0.3333333
+## Otu00040 -1.0000000
+## Otu00042  0.0000000
+## Otu00046 -0.6666667
+## Otu00049  0.0000000
+## Otu00051  0.6666667
+## Otu00052 -1.0000000
+## Otu00056 -0.6666667
+## Otu00064 -0.6666667
+## Otu00066 -1.0000000
+## Otu00067  0.3333333
+## Otu00069  0.6666667
+## Otu00074  0.3333333
+## Otu00077  0.6666667
+## Otu00088 -0.3333333
+## Otu00089 -0.3333333
+## Otu00097  0.3333333
+## Otu00100  0.3333333
+## Otu00113 -0.3333333
+## Otu00192  1.0000000
+## Otu00295  0.7071068</code></pre>
+<p><br>
+This table is very large, so we’ll write it to a table in the project folder.
+<br></p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="free-space.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(cor.kendall, <span class="at">file =</span> <span class="st">&quot;cor_kendall.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb160-2"><a href="free-space.html#cb160-2" aria-hidden="true" tabindex="-1"></a>cor_kendall <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;cor_kendall.csv&quot;</span>)</span></code></pre></div>
+<p><br>
+Some OTU’s have a strong correlation with a SCFA. For example, OTU00021 and OTU00025 have a strong correlation with the SCFA Formate. We’ll show this in a plot.
+<br></p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="free-space.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb161-2"><a href="free-space.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(abund.SCFA<span class="sc">$</span>Otu00021 <span class="sc">~</span> SCFA<span class="sc">$</span>Formate, <span class="at">xlab =</span> <span class="st">&quot;Formate (mM)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Relative abundance, %&quot;</span>, <span class="at">main =</span> <span class="st">&quot;OTU21&quot;</span>)</span>
+<span id="cb161-3"><a href="free-space.html#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(abund.SCFA<span class="sc">$</span>Otu00025 <span class="sc">~</span> SCFA<span class="sc">$</span>Formate, <span class="at">xlab =</span> <span class="st">&quot;Formate (mM)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Relative abundance, %&quot;</span>, <span class="at">main =</span> <span class="st">&quot;OTU25&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/plotting%20the%20correlation-1.png" width="672" />
+<br>
+We don’t have a lot of data points, so we can’t draw strong conclusions from this. However, we can further test the OTU’s that correlate strongly with a SCFA. To do this, we will assume a normal distribution.
+<br></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="free-space.html#cb162-1" aria-hidden="true" tabindex="-1"></a>OTU21.Formate <span class="ot">=</span> <span class="fu">glm</span>(OTU.SCFA<span class="sc">$</span>Otu00021 <span class="sc">~</span> SCFA<span class="sc">$</span>Formate)</span>
+<span id="cb162-2"><a href="free-space.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OTU21.Formate)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = OTU.SCFA$Otu00021 ~ SCFA$Formate)
+## 
+## Deviance Residuals: 
+##       1        2        3        4  
+## -56.173   96.253  -46.747    6.668  
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)    357.75      51.46   6.952   0.0201 *
+## SCFA$Formate  -540.02     201.13  -2.685   0.1152  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 7324.907)
+## 
+##     Null deviance: 67454  on 3  degrees of freedom
+## Residual deviance: 14650  on 2  degrees of freedom
+## AIC: 50.175
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="free-space.html#cb164-1" aria-hidden="true" tabindex="-1"></a>OTU25.Formate <span class="ot">=</span> <span class="fu">glm</span>(OTU.SCFA<span class="sc">$</span>Otu00025 <span class="sc">~</span> SCFA<span class="sc">$</span>Formate)</span>
+<span id="cb164-2"><a href="free-space.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OTU25.Formate)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = OTU.SCFA$Otu00025 ~ SCFA$Formate)
+## 
+## Deviance Residuals: 
+##        1         2         3         4  
+##  127.727  -118.783     6.217   -15.162  
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)    219.78      74.49   2.951   0.0982 .
+## SCFA$Formate   721.00     291.12   2.477   0.1316  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 15346.04)
+## 
+##     Null deviance: 124819  on 3  degrees of freedom
+## Residual deviance:  30692  on 2  degrees of freedom
+## AIC: 53.133
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p><br>
+Turns out, both OTU’s don’t differ significantly with Formate concentration, eventhough they had very strong Kendall correlations.
+<br>
+<br>
+To visualize all the phyla in our samples, we could make an additive bar chart.
+<br></p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="free-space.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(physeq.tree, <span class="at">fill =</span> <span class="st">&quot;Phylum&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/additive%20bar%20chart-1.png" width="672" />
+<br>
+To make this graph a bit more readable, we can group it by age.
+<br></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="free-space.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(physeq.tree, <span class="at">x =</span> <span class="st">&quot;AgeGroup&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Phylum&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/bar%20chart%20with%20age-1.png" width="672" />
+<br>
+To make it even clearer, we can remove the lines between the OTU’s.
+<br></p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="free-space.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(physeq.tree, <span class="at">x =</span> <span class="st">&quot;AgeGroup&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">color =</span> Phylum, <span class="at">fill =</span> Phylum), <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="st">&quot;stack&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/another%20bar%20chart-1.png" width="672" /></p>
 
 </div>
 <p style="text-align: center;">
