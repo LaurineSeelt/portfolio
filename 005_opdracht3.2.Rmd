@@ -548,44 +548,44 @@ For Bray-Curtis and Jaccard, we can calculate the distances and run PERMANOVA.
 <br>
 ```{r PERMANOVA Bray-Curtis, message=FALSE, warning=FALSE}
 BC.dist = vegdist(OTU.clean, distance = "bray")
-adonis(BC.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
+# adonis(BC.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
 ```
 
 ```{r PERMANOVA Jaccard, message=FALSE, warning=FALSE}
 J.dist = vegdist(OTU.clean, distance = "jaccard")
-adonis(J.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
+# adonis(J.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
 ```
 <br>
 For both Bray-Curtis and Jaccard, the interaction isn't significant. So we'll run PERMANOVA again, without the interaction component.
 <br>
 ```{r PERMANOVA Bray-Curtis 2, message=FALSE, warning=FALSE}
-adonis(BC.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
+# adonis(BC.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
 ```
 <br>
 ```{r PERMANOVA Jaccard 2, message=FALSE, warning=FALSE}
-adonis(J.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
+# adonis(J.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
 ```
 <br>
 We'll also calculate the distances for weighted and unweighted UniFrac and then run PERMANOVA.
 <br>
 ```{r PERMANOVA wUF, message=FALSE, warning=FALSE}
 wUF.dist = UniFrac(physeq.tree, weighted = TRUE, normalized = TRUE)
-adonis(wUF.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
+# adonis(wUF.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
 ```
 <br>
 ```{r PERMANOVA uwUF, message=FALSE, warning=FALSE}
 uwUF.dist = UniFrac(physeq.tree, weighted = FALSE, normalized = TRUE)
-adonis(uwUF.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
+# adonis(uwUF.dist ~ AgeGroup*ADGKG, data = meta, permutations = 1000)
 ```
 <br>
 We'll remove the non-significant interaction terms for both of these aswell.
 <br>
 ```{r PERMANOVA wUF 2, message=FALSE, warning=FALSE}
-adonis(wUF.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
+# adonis(wUF.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
 ```
 <br>
 ```{r PERMANOVA uwUF 2, message=FALSE, warning=FALSE}
-adonis(uwUF.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
+# adonis(uwUF.dist ~ AgeGroup+ADGKG, data = meta, permutations = 1000)
 ```
 <br>
 If your group sizes are very different, you can use ANOSIM instead of PERMANOVA. ANOSIM does have quite some limitations; you can only test one variable, so no interaction, and it can only be used for categorical variables. <br>
@@ -752,4 +752,217 @@ To make it even clearer, we can remove the lines between the OTU's.
 ```{r another bar chart, message=FALSE, warning=FALSE}
 plot_bar(physeq.tree, x = "AgeGroup", fill = "Phylum") + geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")
 ```
+<br>
+We can also modify the bar chart to only show the five most abundant phyla for each age group.
+<br>
+```{r top 5 bar chart, message=FALSE, warning=FALSE}
+# Sorting the phyla by abundance and picking the top 5
+top5P.names = sort(tapply(taxa_sums(physeq.tree), tax_table(physeq.tree)[, "Phylum"], sum), TRUE)[1:5]
 
+# Cutting the physeq.tree down to the top 10 Phyla
+top5P = subset_taxa(physeq.tree, Phylum %in% names(top5P.names))
+
+# Plotting the top 5 phyla
+plot_bar(top5P, x = "AgeGroup", fill = "Phylum") + geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")
+```
+<br>
+We can also plot several bar charts next to each other, separated by the phyla.
+<br>
+```{r separated bar charts, message=FALSE, warning=FALSE}
+plot_bar(top5P, x = "AgeGroup", fill = "Phylum", facet_grid = ~Phylum) + geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")
+```
+<br>
+We can also plot phylogenetic trees. For now, we'll look at the genus _Prevotella_. <br> To do this, we firtt need to make a subset with only the _Prevotella_ genus.
+<br>
+```{r subset Prevotella, message=FALSE, warning=FALSE}
+prevotella = subset_taxa(physeq.tree, Genus == "g__Prevotella")
+```
+<br>
+To see if this worked, we can compare the number of taxa in our new subset and the original physeq tree.
+<br>
+```{r comparison, message=FALSE, warning=FALSE}
+physeq.tree
+prevotella
+```
+<br>
+Next, we can plot the OTUs on a tree.
+<br>
+```{r OTU tree, message=FALSE, warning=FALSE}
+plot_tree(prevotella, plot.margin = 0.5, ladderize = TRUE)
+```
+<br>
+This tree isn't very useful or readable yet. We can add colors for the age groups, size the dots according to the OTU abundance and species level labels for the OTUs.
+<br>
+```{r better OTU tree, message=FALSE, warning=FALSE}
+plot_tree(prevotella, color = "AgeGroup", label.tips = "Species", size = "abundance", plot.margin = 0.5, ladderize = TRUE)
+```
+<br>
+We can also visualize the abundance in a heatmap. To make a heatmap a bit readable, we'll only use the 20 most abundant OTUs.
+<br>
+```{r top 20 most abundant OTUs, message=FALSE, warning=FALSE}
+# Sorting the OTUs by abundance and picking the top 20
+top20OTU.names = names(sort(taxa_sums(physeq.tree), TRUE)[1:20])
+
+# Cutting down the physeq.tree to only the top 10 Phyla
+top20OTU = prune_taxa(top20OTU.names, physeq.tree)
+
+# We can see we now only have 20 taxa
+top20OTU
+```
+<br>
+Now, we can make a heatmap.
+<br>
+```{r heatmap top 20, message=FALSE, warning=FALSE}
+plot_heatmap(top20OTU)
+```
+<br>
+We can also group it by age.
+<br>
+```{r heatmap top 20 grouped, message=FALSE, warning=FALSE}
+plot_heatmap(top20OTU, sample.label = "AgeGroup", sample.order = "AgeGroup")
+```
+<br>
+We can also label the OTU taxa.
+<br>
+```{r heatmap top 20 labelled, message=FALSE, warning=FALSE}
+plot_heatmap(top20OTU, sample.label = "AgeGroup", sample.order = "AgeGroup", taxa.label = "Genus")
+```
+<br>
+We can also group OTUs in the same Phyla.
+<br>
+```{r heatmap top 20 grouped OTUs, message=FALSE, warning=FALSE}
+plot_heatmap(top20OTU, sample.label = "AgeGroup", sample.order = "AgeGroup", taxa.label = "Genus", taxa.order = "Phylum")
+```
+<br>
+We can also change the colors.
+<br>
+```{r heatmap diff colors, message=FALSE, warning=FALSE}
+plot_heatmap(top20OTU, sample.label = "AgeGroup", sample.order = "AgeGroup", taxa.label = "Genus", taxa.order = "Phylum", low = "white", high = "purple", na.value = "grey")
+```
+<br>
+We cal also plot the Bray-Curtis dissimilarity in a heatmap.
+<br>
+```{r BC heatmap, message=FALSE, warning=FALSE}
+plot_heatmap(top20OTU, "NMDS", "bray", title = "Bray-Curtis")
+```
+<br>
+We can also use heatmaps to show the distance between samples, also known as the beta-diversity. We can use the distance matrices as input for this heatmap. We'll use a gplots command for this.
+<br>
+```{r BC beta heatmap, message=FALSE, warning=FALSE}
+heatmap.2(as.matrix(BC.dist))
+```
+<br>
+We can also use this for UniFrac.
+<br>
+```{r UniFrac heatmap, message=FALSE, warning=FALSE}
+heatmap.2(as.matrix(wUF.dist))
+```
+<br>
+We can also change the colors of the heatmap.
+<br>
+```{r rainbow BC heatmap, message=FALSE, warning=FALSE}
+rc <- rainbow(nrow(as.matrix(BC.dist)), start = 0, end = 0.9)
+heatmap.2(as.matrix(BC.dist), col = rc)
+```
+<br>
+Next, we'll make Venn diagrams of the samples 5017.2w.F, 5017.8w.F and 5017.1yr.F. <br>
+First, we'll make a list of the OTUs that occur in the three samples.
+```{r OTU list of 5017, message=FALSE, warning=FALSE}
+OTU.5017.2w = colnames(OTU.clean["5017.2w.F", apply(OTU.clean["5017.2w.F",], MARGIN = 2, function(x) any(x > 0))])
+OTU.5017.8w = colnames(OTU.clean["5017.8w.F", apply(OTU.clean["5017.8w.F",], MARGIN = 2, function(x) any(x > 0))])
+OTU.5017.1yr = colnames(OTU.clean["5017.1yr.F", apply(OTU.clean["5017.1yr.F",], MARGIN = 2, function(x) any(x > 0))])
+```
+<br>
+Now we can use these three lists to make a Venn diagram.
+<br>
+```{r Venn diagram 5017, message=FALSE, warning=FALSE}
+venn(list(OTU.5017.2w, OTU.5017.8w, OTU.5017.1yr))
+```
+<br>
+We can also make a Venn diagram for the three age groups.
+<br>
+```{r OTU list of the three age groups, message=FALSE, warning=FALSE}
+OTU.2w = colnames(OTU.clean[meta$AgeGroup == "2w", apply(OTU.clean[meta$AgeGroup == "2w",], MARGIN = 2, function(x) any(x > 0))])
+OTU.8w = colnames(OTU.clean[meta$AgeGroup == "8w", apply(OTU.clean[meta$AgeGroup == "8w",], MARGIN = 2, function(x) any(x > 0))])
+OTU.1yr = colnames(OTU.clean[meta$AgeGroup == "1yr", apply(OTU.clean[meta$AgeGroup == "1yr",], MARGIN = 2, function(x) any(x > 0))])
+```
+<br>
+```{r Venn diagram age groups, message=FALSE, warning=FALSE}
+venn(list(OTU.2w, OTU.8w, OTU.1yr))
+```
+<br>
+We can make this Venn diagram a lot prettier!
+<br>
+```{r prettier Venn diagram, message=FALSE, warning=FALSE}
+draw.triple.venn(area1 = 385+58+71+320, area2 = 801+190+320+71, area3 = 3177+190+58+71, n12 = 320+17, n23 = 190+71, n13 = 58+71, n123 = 17, category = c("2w", "8w", "1yr"), lty = "blank", fill = c("green", "red", "blue"))
+# This doesn't show the Venn diagram, I think because I can't load the venneuler package?
+```
+<br>
+With the venneuler package, we can scale the circles to be proportional to the the total number of OTUs in that group.
+<br>
+```{r scaled Venn diagram, message=FALSE, warning=FALSE, eval=FALSE}
+age.venn = venneuler(c('A' = 385+58+71+320, 'B' = 801+190+320+17, 'C' = 3177+190+58+17, 'A&B' = 320+71, 'B&C' = 190+71, 'A&C' = 58+71, 'A&B&C' = 71))
+
+age.venn$labels = c("2w", "8w", "1yr")
+
+plot(age.venn)
+```
+<br>
+We can also plot the distances between the OTUs as a network. We'll do this with the Prevotella subset to keep it readable.
+<br>
+```{r Prevotella network, message=FALSE, warning=FALSE}
+plot_net(prevotella, color = "Species", type = "taxa")
+```
+<br>
+We can also plot the beta-diversity as a network. The lines represent the distances between the samples in that case.
+<br>
+```{r beta-diversity network, message=FALSE, warning=FALSE}
+plot_net(physeq.tree, color = "AgeGroup", distance = "bray")
+```
+<br>
+<br>
+Ideally you'd export the figures you want to use for a publication as PostScript (.ps) or PDF (.pdf). <br>
+For PostScript, we'll use the following code.
+<br>
+```{r PNG, message=FALSE, warning=FALSE, eval=FALSE}
+postscript("Fig1.ps", width = 7, height = 3, horizontal = FALSE, colormodel = "rgb", family = "ArialMT")
+ 
+layout(matrix(c(1,2), 1, 2), widths=c(3,2), heights=c(1,1))
+ 
+plot(BC.nmds, type="n", main="Bray-Curtis")
+points(BC.nmds, display="sites", pch=20, col=c("blue", "green", "red")[meta$AgeGroup])
+ 
+boxplot(shannon ~ AgeGroup.ord, data=meta, main="Diversity", ylab="Shannon's diversity", col=c("green", "red", "blue"))
+ 
+dev.off()
+```
+<br>
+To export a PDF, we'll use the following code.
+<br>
+```{r PDF, message=FALSE, warning=FALSE, eval=FALSE}
+pdf("Fig1.pdf", width = 7, height = 3,  colormodel = "rgb", family = "ArialMT")
+ 
+layout(matrix(c(1,2), 1, 2), widths=c(3,2), heights=c(1,1))
+ 
+plot(BC.nmds, type="n", main="Bray-Curtis")
+points(BC.nmds, display="sites", pch=20, col=c("blue", "green", "red")[meta$AgeGroup])
+ 
+boxplot(shannon ~ AgeGroup.ord, data=meta, main="Diversity", ylab="Shannon's diversity", col=c("green", "red", "blue"))
+ 
+dev.off()
+```
+<br>
+Lastly, we can export is as a PNG with the following code.
+<br>
+```{r PNG export, message=FALSE, warning=FALSE, eval=FALSE}
+png("Fig1.png", width = 7, height = 3, units='in', res=300)
+ 
+layout(matrix(c(1,2), 1, 2), widths=c(3,2), heights=c(1,1))
+ 
+plot(BC.nmds, type="n", main="Bray-Curtis")
+points(BC.nmds, display="sites", pch=20, col=c("blue", "green", "red")[meta$AgeGroup])
+ 
+boxplot(shannon ~ AgeGroup.ord, data=meta, main="Diversity", ylab="Shannon's diversity", col=c("green", "red", "blue"))
+ 
+dev.off()
+```

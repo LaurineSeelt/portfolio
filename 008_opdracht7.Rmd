@@ -86,37 +86,37 @@ dbDisconnect(con)
 <br>
 Then I inspected the contents of the datasets in DBeaver, with the following code:
 <br>
-<mark> SQL code </mark>
-select dengue_cases, country 
-from dengue_tidy
-order by dengue_cases asc
-
-select dengue_cases, country
-from dengue_tidy
-order by dengue_cases desc
-
-select flu_cases, country
-from flu_tidy
-order by flu_cases asc
-
-select flu_cases, country
-from flu_tidy
-order by flu_cases desc
-
-select infant_mortality, country
-from gapminder
-order by infant_mortality desc 
-
-select infant_mortality, country
-from gapminder
-order by infant_mortality asc
-
-select life_expectancy, country
-from gapminder
-order by life_expectancy desc
-
-select life_expectancy, country
-from gapminder
+<br>
+select dengue_cases, country <br>
+from dengue_tidy <br>
+order by dengue_cases asc <br>
+<br>
+select dengue_cases, country <br>
+from dengue_tidy <br>
+order by dengue_cases desc <br>
+<br>
+select flu_cases, country <br>
+from flu_tidy <br>
+order by flu_cases asc <br>
+<br>
+select flu_cases, country <br>
+from flu_tidy <br>
+order by flu_cases desc <br>
+<br>
+select infant_mortality, country <br>
+from gapminder <br>
+order by infant_mortality desc <br>
+<br>
+select infant_mortality, country <br>
+from gapminder <br>
+order by infant_mortality asc <br>
+<br>
+select life_expectancy, country <br>
+from gapminder <br>
+order by life_expectancy desc <br>
+<br>
+select life_expectancy, country <br>
+from gapminder <br>
 order by life_expectancy asc
 <br>
 <br>
@@ -142,7 +142,7 @@ gapminder$life_expectancy %>% min(gapminder$life_expectancy, na.rm = TRUE)
 gapminder$life_expectancy %>% max(gapminder$life_expectancy, na.rm = TRUE)
 gapminder %>% select(country_g, year_g, life_expectancy) %>% arrange(desc(life_expectancy)) %>% head
 gapminder %>% select( country_g, year_g, infant_mortality) %>% arrange(desc(infant_mortality)) %>% head()
-gapminder$country_g %>% unique() %>% head()
+gapminder$country_g %>% unique() %>% head(20)
 ```
 <br>
 In DBeaver, I performed some joins and exported a joined table to R. The joined table is called "Joined_table.csv".
@@ -172,13 +172,12 @@ Then I performed some descriptive statistics with this data set and made some vi
 <br>
 ```{r descriptive statistics, message=FALSE, warning=FALSE}
 joined_table %>% summary()
-joined_table$country %>% unique()
 ```
 <br>
-For the graphs from joined_table, I only selected the countries Argentina, Bolivia, Brazil and Mexico, since those are the only four countries that have data from all three data sets. This also keeps the graphs clear and readable.
+For the graphs from joined_table, I only selected the countries that were relevant. So, for the dengue graph, I only selected the countries Argentina, Bolivia, Brazil, India, Indonesia, Mexico, Philippines, Singapore, Thailand and Venezuela because those were the only countries present in the original dengue data set, as we saw earlier. <br>
 <br>
-```{r visualisations, message=FALSE, warning=FALSE}
-joined_table %>% group_by(country) %>%  filter(country == "Argentina" | country == "Bolivia" | country == "Brazil"| country == "Mexico") %>% 
+```{r dengue graph, message=FALSE, warning=FALSE}
+joined_table %>% group_by(country) %>% filter(country == "Argentina" | country == "Bolivia" | country == "Brazil" | country == "India" | country == "Indonesia" | country == "Mexico" | country == "Philippines" | country == "Singapore" | country == "Thailand" | country == "Venezuela") %>%
   ggplot(aes(x = year, y = dengue_cases, colour = country)) +
   geom_point() +
   geom_line() +
@@ -187,7 +186,18 @@ joined_table %>% group_by(country) %>%  filter(country == "Argentina" | country 
   labs(title = "Dengue cases in the years 2002 - 2015",
        x = "Year",
        y = "Dengue cases")
-
+```
+<br>
+In the dengue graph, only the countries Argentina, Bolivia, Brazil and Mexico are present, eventhough I selected more countries. Maybe the other countries aren't present in our joined_table anymore. Let's take a look at the countries in joined_table.
+<br>
+```{r inspecting the countries, message=FALSE, warning=FALSE}
+joined_table$country %>% unique()
+```
+<br>
+As expected, India, Indonesia, Philippines, Singapore, Thailand and Venezuela aren't present in joined_table. <br>
+Let's see if these countries also have data about flu incidence.
+<br>
+```{r flu graph, message=FALSE, warning=FALSE}
 joined_table %>% group_by(country) %>% filter(country == "Argentina" | country == "Bolivia" | country == "Brazil"| country == "Mexico") %>%
   ggplot(aes(x = year, y = flu_cases, colour = country)) +
   geom_point() +
@@ -197,7 +207,11 @@ joined_table %>% group_by(country) %>% filter(country == "Argentina" | country =
   labs(title = "Flu cases in the years 2002 - 2015",
        x  = "Year", 
        y = "Flu cases")
-
+```
+<br>
+Lastly, let's see if these countries also have data about infant mortality, life expectancy, fertility and population.
+<br>
+```{r gapminder graphs, message=FALSE, warning=FALSE}
 joined_table %>% group_by(country) %>% filter(country == "Argentina" | country == "Bolivia" | country == "Brazil"| country == "Mexico") %>%
   ggplot(aes(x = year, y = infant_mortality, colour = country)) +
   geom_point() +
@@ -207,4 +221,34 @@ joined_table %>% group_by(country) %>% filter(country == "Argentina" | country =
   labs(title = "Infant mortality in the years 2002 - 2015",
        x = "Year",
        y = "Infant mortality")
+
+joined_table %>% group_by(country) %>% filter(country == "Argentina" | country == "Bolivia" | country == "Brazil" | country == "Mexico") %>%
+  ggplot(aes(x = year, y = life_expectancy, colour = country)) +
+  geom_point() +
+  geom_line() +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(2002, 2015, 1)) +
+  labs(title = "Life expectancy in the years 2002 - 2015",
+       x = "Year",
+       y = "Life expectancy")
+
+joined_table %>% group_by(country) %>% filter(country == "Argentina" | country == "Bolivia" | country == "Brazil" | country == "Mexico") %>%
+  ggplot(aes(x = year, y = fertility, colour = country)) +
+  geom_point() +
+  geom_line() +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(2002, 2015, 1)) +
+  labs(title = "Fertility in the years 2002 - 2015",
+       x = "Year",
+       y = "Fertility")
+
+joined_table %>% group_by(country) %>% filter(country == "Argentina" | country == "Bolivia" | country == "Brazil" | country == "Mexico") %>%
+  ggplot(aes(x = year, y = population, colour = country)) +
+  geom_point() +
+  geom_line() +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(2002, 2015, 1)) +
+  labs(title = "Population in the years 2002 - 2015",
+       x = "Year",
+       y = "Population")
 ```
