@@ -26,6 +26,8 @@ To conduct this research, the Zoology students are using a Langendorff assay. Th
 <br> 
 This technique can be used to study the direct effects of, for example, medication on the
 heart _ex vivo_. The two most important parameters that can be tracked in this assay are heart rate and contraction force.
+The perfusion of isolated heart is maintained through the use of a reservoir containing oxygenated perfusion fluid, with a pressure head that is connected via a tube to the cannula which is inserted and fixed in the ascending aorta, when the reservoir is opened, the perfusate is forced to flow into the aorta, this retrograde flow in the aorta closes
+the leaflets of aortic valve and prevents the perfusate from entering into the left ventricles, as a result, the entire perfusate solution enters the coronary arteries via the ostia at the base of aortic root. [@lateefLangendorffIsolatedPerfused2015]
 <br>
 <br>
 We will write code to enable the zoology students to analyse these two parameters quickly and thoroughly.

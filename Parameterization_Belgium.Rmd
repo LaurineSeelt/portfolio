@@ -5,17 +5,17 @@ site: bookdown::bookdown_site
 output: bookdown::gitbook
 params:
   country: 
-    value: Spain
-  year:
-    value: 2022
+    value: Belgium
+  year: 
+    value: 2021
   month: 
-    value: February
+    value: April
 documentclass: book
 biblio-style: apalike
 link-citations: yes
 ---
 
-# Parameterization
+# Parameterization_Belgium
 
 To show that I can work with parameterization in my Markdowns, I made a parameterized markdown with data about COVID-19 cases and COVID-19 related deaths.
 ```{r loading the packages, message=FALSE, warning=FALSE, include=FALSE}
@@ -32,17 +32,16 @@ covid19_data <- read_csv(here::here("Data/Data_raw/covid19_data.csv"))
 <br>
 Then, I stored the three parameters as objects so I can use them in the title of my figures. I also changed the value 'month' to a numeric variable, so it'd be easier to use later on in the graphs.
 <br>
-```{r making an object of the country, message=FALSE, warning=FALSE, eval=FALSE}
+```{r making an object of the country, message=FALSE, warning=FALSE}
 covid19_data <- covid19_data %>% mutate(month = month.name[as.numeric(month)])
 country <- params$country
 year <- params$year
 months <- params$month
-# covid19_data_filtered <- covid19_data %>% filter(year %in% params$year, month %in% params$month, countriesAndTerritories %in% params$country)
 ```
 <br>
 I created a graph to show the COVID-19 cases per day for a specific month, and I also created a graph for the amount of COVID-19 related deaths per day for a specific month.
 <br>
-```{r visualising the covid-19 cases, message=FALSE, warning=FALSE, eval=FALSE}
+```{r visualising the covid-19 cases, message=FALSE, warning=FALSE}
 covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == params$country & year == params$year & month == params$month) %>%
   ggplot(aes(x = day, y = cases)) +
   geom_point() +
@@ -52,7 +51,7 @@ covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories =
        y = "COVID-19 cases")
 ```
 
-```{r visualising the covid-19 related deaths, message=FALSE, warning=FALSE, eval=FALSE}
+```{r visualising the covid-19 related deaths, message=FALSE, warning=FALSE}
 covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == params$country & year == params$year & month == params$month) %>%
   ggplot(aes(x = day, y = deaths)) +
   geom_point() +
@@ -62,14 +61,3 @@ covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories =
        y = "COVID-19 related deaths")
 ```
 
-I made three HTML's with rmarkdown::render() in R.
-
-<div>
-
-<a> href='parameterization-Ireland.html#Parameterization_Ireland'>For a parameterized HTML on the COVID-19 cases and deaths in Ireland, August 2020, click here<a/>
-
-<a> href='parameterization-Belgium.html#Parameterization_Belgium'>For a parameterized HTML on the COVID-19 cases and deaths in Belgium, April 2021, click here<a/>
-
-<a> href="parameterization_Austria.html#Parameterization_Austria'>For a parameterized HTML on the COVID-19 cases and deaths in Austria, February 2022, click here<a/>
-
-</div>

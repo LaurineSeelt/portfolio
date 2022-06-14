@@ -378,7 +378,7 @@ physeq = phyloseq(OTU.UF, tax.UF, meta.UF)
 To add the phylogenetic component to UniFrac, we need a rooted phylogenetic tree of the OTU's. In this workshop, it had already been calculated and stored in the dataset 'NJ.tree.Rdata'. So, we'll load this data and add it to the physeq object. Then, we'll look at the tree and its components.
 <br>
 ```{r loading and adding the tree, message=FALSE, warning=FALSE}
-load("Data/NJ.tree.Rdata") # Downloaded it from GitHub and stored it in the folder "Data"
+load("Data/Data_raw/NJ.tree.Rdata") # Downloaded it from GitHub and stored it in the folder "Data_raw"
 physeq.tree = merge_phyloseq(physeq, NJ.tree)
 physeq.tree
 ```
@@ -654,11 +654,11 @@ source("R/simper_pretty.R") # deleted the last line of this script because it ke
 source("R/R_krusk.R")
 
 simper.pretty(OTU.clean, meta, c('AgeGroup'), perc_cutoff=1, low_cutoff = 'y', low_val=0.01, 'Age')
-simper.results = data.frame(read.csv("Age_clean_simper.csv"))
+simper.results = data.frame(read.csv("Data/Age_clean_simper.csv"))
 kruskal.pretty(OTU.clean, meta, simper.results, c('AgeGroup'), 'Age', tax)
 
 #Importing the K-W results
-KW.results = data.frame(read.csv("Age_krusk_simper.csv"))
+KW.results = data.frame(read.csv("Data/Age_krusk_simper.csv"))
 #Removing non-significant results
 KW.results.signif = KW.results[KW.results$fdr_krusk_p.val < 0.05,]
 #Ordering the results by OTU#

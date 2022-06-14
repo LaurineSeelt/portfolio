@@ -43,3 +43,5 @@ Lastly, with the function winner(), you can type in the number of a season and t
 ```{r example winner, message=FALSE, warning=FALSE}
 winner("S05")
 ```
+<br>
+The vignette for this package can be found 
