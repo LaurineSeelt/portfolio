@@ -66,10 +66,10 @@ I made three HTML's with rmarkdown::render() in R.
 
 <div>
 
-<a> href='parameterization-Ireland.html#Parameterization_Ireland'>For a parameterized HTML on the COVID-19 cases and deaths in Ireland, August 2020, click here<a/>
+<a> href='parameterization_ireland.html#Parameterization_Ireland'>For a parameterized HTML on the COVID-19 cases and deaths in Ireland, August 2020, click here<a/>
 
-<a> href='parameterization-Belgium.html#Parameterization_Belgium'>For a parameterized HTML on the COVID-19 cases and deaths in Belgium, April 2021, click here<a/>
+<a> href='parameterization_belgium.html#Parameterization_Belgium'>For a parameterized HTML on the COVID-19 cases and deaths in Belgium, April 2021, click here<a/>
 
-<a> href="parameterization_Austria.html#Parameterization_Austria'>For a parameterized HTML on the COVID-19 cases and deaths in Austria, February 2022, click here<a/>
+<a> href="parameterization_austria.html#Parameterization_Austria'>For a parameterized HTML on the COVID-19 cases and deaths in Austria, February 2022, click here<a/>
 
 </div>
