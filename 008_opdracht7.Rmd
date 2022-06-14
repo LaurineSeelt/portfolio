@@ -60,7 +60,7 @@ gapminder$year_g <- as.character(gapminder$year_g)
 <br>
 Then I saved the three datasets as both .csv files and .rds files.
 <br>
-```{r saving .csv and .rds files, message=FALSE, warning=FALSE}
+```{r saving .csv and .rds files, message=FALSE, warning=FALSE, eval=FALSE}
 write.csv(flu_tidy, "Data//flu_data_tidy.csv", row.names = TRUE)
 write.csv(dengue_tidy, "Data//dengue_data_tidy.csv", row.names = TRUE)
 write.csv(gapminder, "Data//gapminder.csv", row.names = TRUE)
