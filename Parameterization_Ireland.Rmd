@@ -15,7 +15,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Parameterization_Ireland
+# irelandparams
 
 To show that I can work with parameterization in my Markdowns, I made a parameterized markdown with data about COVID-19 cases and COVID-19 related deaths.
 ```{r loading the packages, message=FALSE, warning=FALSE, include=FALSE}

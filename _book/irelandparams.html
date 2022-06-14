@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 Parameterization_Austria | Parameterization_Austria.knit</title>
+  <title>1 irelandparams | parameterization_ireland.knit</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 Parameterization_Austria | Parameterization_Austria.knit" />
+  <meta property="og:title" content="1 irelandparams | parameterization_ireland.knit" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 Parameterization_Austria | Parameterization_Austria.knit" />
+  <meta name="twitter:title" content="1 irelandparams | parameterization_ireland.knit" />
   
   
   
@@ -132,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path=""><a href="#parameterization_austria"><i class="fa fa-check"></i><b>1</b> Parameterization_Austria</a></li>
+<li class="chapter" data-level="1" data-path=""><a href="#irelandparams"><i class="fa fa-check"></i><b>1</b> irelandparams</a></li>
 </ul>
 
       </nav>
@@ -152,8 +152,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <!--bookdown:title:end-->
 <!--bookdown:title:start-->
-<div id="parameterization_austria" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">1</span> Parameterization_Austria<a href="#parameterization_austria" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="irelandparams" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> irelandparams<a href="#irelandparams" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>To show that I can work with parameterization in my Markdowns, I made a parameterized markdown with data about COVID-19 cases and COVID-19 related deaths.</p>
 <p><br>
 The data used for this markdown was from the ECDC website. To start, I downloaded this data from the website and read it in in RStudio.
@@ -176,7 +176,7 @@ I created a graph to show the COVID-19 cases per day for a specific month, and I
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 cases in &quot;</span>, country, <span class="st">&quot;, &quot;</span>, months, <span class="st">&quot; &quot;</span>, year),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span>,</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 cases&quot;</span>)</span></code></pre></div>
-<p><img src="Parameterization_Austria_files/figure-html/visualising%20the%20covid-19%20cases-1.png" width="672" /></p>
+<p><img src="parameterization_ireland_files/figure-html/visualising%20the%20covid-19%20cases-1.png" width="672" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> params<span class="sc">$</span>country <span class="sc">&amp;</span> year <span class="sc">==</span> params<span class="sc">$</span>year <span class="sc">&amp;</span> month <span class="sc">==</span> params<span class="sc">$</span>month) <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> deaths)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -184,7 +184,7 @@ I created a graph to show the COVID-19 cases per day for a specific month, and I
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 related deaths in &quot;</span>, country, <span class="st">&quot;, &quot;</span>, months, <span class="st">&quot; &quot;</span>, year),</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span> ,</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 related deaths&quot;</span>)</span></code></pre></div>
-<p><img src="Parameterization_Austria_files/figure-html/visualising%20the%20covid-19%20related%20deaths-1.png" width="672" /></p>
+<p><img src="parameterization_ireland_files/figure-html/visualising%20the%20covid-19%20related%20deaths-1.png" width="672" /></p>
 </div>
             </section>
 

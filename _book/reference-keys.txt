@@ -13,3 +13,6 @@ parameterization-1
 parameterization_austria
 parameterization_belgium
 parameterization_ireland
+austriaparams
+belgiumparams
+irelandparams
