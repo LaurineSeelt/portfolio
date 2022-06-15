@@ -162,7 +162,9 @@ details > summary {
 <li><a href="github.html#github">GitHub</a></li>
 <li><a href="sql.html#sql">SQL</a></li>
 <li><a href="package.html#package">Package</a></li>
-<li><a href="parameterization.html#parameterization">Parameterization</a></li>
+<li><a href="ireland_params.html#ireland_params">ireland_params</a></li>
+<li><a href="belgium_params.html#belgium_params">belgium_params</a></li>
+<li><a href="austria_params.html#austria_params">austria_params</a></li>
 </ul>
 </div>
 </div>
@@ -281,12 +283,14 @@ I also inspected the data in R, with the code below:
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="sql.html#cb203-1" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>flu_cases <span class="sc">%&gt;%</span> <span class="fu">max</span>(flu_tidy<span class="sc">$</span>flu_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 155577</code></pre>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="sql.html#cb205-1" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>country_f <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;Argentina&quot;     &quot;Australia&quot;     &quot;Austria&quot;       &quot;Belgium&quot;       &quot;Bolivia&quot;      
-##  [6] &quot;Brazil&quot;        &quot;Bulgaria&quot;      &quot;Canada&quot;        &quot;Chile&quot;         &quot;France&quot;       
-## [11] &quot;Germany&quot;       &quot;Hungary&quot;       &quot;Japan&quot;         &quot;Mexico&quot;        &quot;Netherlands&quot;  
-## [16] &quot;New Zealand&quot;   &quot;Norway&quot;        &quot;Paraguay&quot;      &quot;Peru&quot;          &quot;Poland&quot;       
-## [21] &quot;Romania&quot;       &quot;Russia&quot;        &quot;South Africa&quot;  &quot;Spain&quot;         &quot;Sweden&quot;       
-## [26] &quot;Switzerland&quot;   &quot;Ukraine&quot;       &quot;United States&quot; &quot;Uruguay&quot;</code></pre>
+<pre><code>##  [1] &quot;Argentina&quot;     &quot;Australia&quot;     &quot;Austria&quot;       &quot;Belgium&quot;      
+##  [5] &quot;Bolivia&quot;       &quot;Brazil&quot;        &quot;Bulgaria&quot;      &quot;Canada&quot;       
+##  [9] &quot;Chile&quot;         &quot;France&quot;        &quot;Germany&quot;       &quot;Hungary&quot;      
+## [13] &quot;Japan&quot;         &quot;Mexico&quot;        &quot;Netherlands&quot;   &quot;New Zealand&quot;  
+## [17] &quot;Norway&quot;        &quot;Paraguay&quot;      &quot;Peru&quot;          &quot;Poland&quot;       
+## [21] &quot;Romania&quot;       &quot;Russia&quot;        &quot;South Africa&quot;  &quot;Spain&quot;        
+## [25] &quot;Sweden&quot;        &quot;Switzerland&quot;   &quot;Ukraine&quot;       &quot;United States&quot;
+## [29] &quot;Uruguay&quot;</code></pre>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="sql.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Inspecting the dengue_tidy dataset</span></span>
 <span id="cb207-2"><a href="sql.html#cb207-2" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(dengue_cases)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
@@ -304,8 +308,8 @@ I also inspected the data in R, with the code below:
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="sql.html#cb211-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>dengue_cases <span class="sc">%&gt;%</span> <span class="fu">max</span>(dengue_tidy<span class="sc">$</span>dengue_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 27.847</code></pre>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="sql.html#cb213-1" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>country_d <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;Argentina&quot;   &quot;Bolivia&quot;     &quot;Brazil&quot;      &quot;India&quot;       &quot;Indonesia&quot;   &quot;Mexico&quot;     
-##  [7] &quot;Philippines&quot; &quot;Singapore&quot;   &quot;Thailand&quot;    &quot;Venezuela&quot;</code></pre>
+<pre><code>##  [1] &quot;Argentina&quot;   &quot;Bolivia&quot;     &quot;Brazil&quot;      &quot;India&quot;       &quot;Indonesia&quot;  
+##  [6] &quot;Mexico&quot;      &quot;Philippines&quot; &quot;Singapore&quot;   &quot;Thailand&quot;    &quot;Venezuela&quot;</code></pre>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="sql.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Inspecting the gapminder dataset</span></span>
 <span id="cb215-2"><a href="sql.html#cb215-2" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>infant_mortality <span class="sc">%&gt;%</span> <span class="fu">min</span>(gapminder<span class="sc">$</span>infant_mortality, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 1.5</code></pre>
@@ -332,12 +336,14 @@ I also inspected the data in R, with the code below:
 ## 5     Yemen   1965            263.6
 ## 6     Yemen   1966            256.0</code></pre>
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="sql.html#cb227-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>country_g <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">20</span>)</span></code></pre></div>
-<pre><code>##  [1] Albania             Algeria             Angola              Antigua and Barbuda
-##  [5] Argentina           Armenia             Aruba               Australia          
-##  [9] Austria             Azerbaijan          Bahamas             Bahrain            
-## [13] Bangladesh          Barbados            Belarus             Belgium            
-## [17] Belize              Benin               Bhutan              Bolivia            
-## 185 Levels: Albania Algeria Angola Antigua and Barbuda Argentina Armenia Aruba ... Zimbabwe</code></pre>
+<pre><code>##  [1] Albania             Algeria             Angola             
+##  [4] Antigua and Barbuda Argentina           Armenia            
+##  [7] Aruba               Australia           Austria            
+## [10] Azerbaijan          Bahamas             Bahrain            
+## [13] Bangladesh          Barbados            Belarus            
+## [16] Belgium             Belize              Benin              
+## [19] Bhutan              Bolivia            
+## 185 Levels: Albania Algeria Angola Antigua and Barbuda Argentina ... Zimbabwe</code></pre>
 <p><br>
 In DBeaver, I performed some joins and exported a joined table to R. The joined table is called “Joined_table.csv”.
 <br></p>
@@ -360,30 +366,30 @@ After reading in the data from “Joined_table.csv”, I removed the rows “yea
 Then I performed some descriptive statistics with this data set and made some visualizations.
 <br></p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="sql.html#cb230-1" aria-hidden="true" tabindex="-1"></a>joined_table <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
-<pre><code>##    country               year        flu_cases       dengue_cases    infant_mortality
-##  Length:406         Min.   :2002   Min.   :   106   Min.   : 0.073   Min.   : 2.000  
-##  Class :character   1st Qu.:2005   1st Qu.:  3302   1st Qu.: 1.508   1st Qu.: 3.825  
-##  Mode  :character   Median :2008   Median :  9214   Median : 4.303   Median : 6.150  
-##                     Mean   :2008   Mean   : 23372   Mean   : 5.001   Mean   :10.558  
-##                     3rd Qu.:2012   3rd Qu.: 32278   3rd Qu.: 7.872   3rd Qu.:13.600  
-##                     Max.   :2015   Max.   :155577   Max.   :16.739   Max.   :54.700  
-##                                    NA&#39;s   :72       NA&#39;s   :354                      
-##  life_expectancy   fertility       population             gdp             continent        
-##  Min.   :52.50   Min.   :1.150   Min.   :  3324096   Min.   :7.214e+09   Length:406        
-##  1st Qu.:74.10   1st Qu.:1.430   1st Qu.:  8949130   1st Qu.:5.970e+10   Class :character  
-##  Median :78.30   Median :1.810   Median : 21811339   Median :2.539e+11   Mode  :character  
-##  Mean   :76.61   Mean   :1.876   Mean   : 50741686   Mean   :9.119e+11                     
-##  3rd Qu.:80.70   3rd Qu.:2.090   3rd Qu.: 52687274   3rd Qu.:6.578e+11                     
-##  Max.   :83.20   Max.   :3.980   Max.   :321773631   Max.   :1.174e+13                     
-##                                                      NA&#39;s   :117                           
-##     region         
-##  Length:406        
-##  Class :character  
-##  Mode  :character  
-##                    
-##                    
-##                    
-## </code></pre>
+<pre><code>##    country               year        flu_cases       dengue_cases   
+##  Length:406         Min.   :2002   Min.   :   106   Min.   : 0.073  
+##  Class :character   1st Qu.:2005   1st Qu.:  3302   1st Qu.: 1.508  
+##  Mode  :character   Median :2008   Median :  9214   Median : 4.303  
+##                     Mean   :2008   Mean   : 23372   Mean   : 5.001  
+##                     3rd Qu.:2012   3rd Qu.: 32278   3rd Qu.: 7.872  
+##                     Max.   :2015   Max.   :155577   Max.   :16.739  
+##                                    NA&#39;s   :72       NA&#39;s   :354     
+##  infant_mortality life_expectancy   fertility       population       
+##  Min.   : 2.000   Min.   :52.50   Min.   :1.150   Min.   :  3324096  
+##  1st Qu.: 3.825   1st Qu.:74.10   1st Qu.:1.430   1st Qu.:  8949130  
+##  Median : 6.150   Median :78.30   Median :1.810   Median : 21811339  
+##  Mean   :10.558   Mean   :76.61   Mean   :1.876   Mean   : 50741686  
+##  3rd Qu.:13.600   3rd Qu.:80.70   3rd Qu.:2.090   3rd Qu.: 52687274  
+##  Max.   :54.700   Max.   :83.20   Max.   :3.980   Max.   :321773631  
+##                                                                      
+##       gdp             continent            region         
+##  Min.   :7.214e+09   Length:406         Length:406        
+##  1st Qu.:5.970e+10   Class :character   Class :character  
+##  Median :2.539e+11   Mode  :character   Mode  :character  
+##  Mean   :9.119e+11                                        
+##  3rd Qu.:6.578e+11                                        
+##  Max.   :1.174e+13                                        
+##  NA&#39;s   :117</code></pre>
 <p><br>
 For the graphs from joined_table, I only selected the countries that were relevant. So, for the dengue graph, I only selected the countries Argentina, Bolivia, Brazil, India, Indonesia, Mexico, Philippines, Singapore, Thailand and Venezuela because those were the only countries present in the original dengue data set, as we saw earlier. <br>
 <br></p>
@@ -401,12 +407,14 @@ For the graphs from joined_table, I only selected the countries that were releva
 In the dengue graph, only the countries Argentina, Bolivia, Brazil and Mexico are present, eventhough I selected more countries. Maybe the other countries aren’t present in our joined_table anymore. Let’s take a look at the countries in joined_table.
 <br></p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="sql.html#cb233-1" aria-hidden="true" tabindex="-1"></a>joined_table<span class="sc">$</span>country <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;Argentina&quot;     &quot;Australia&quot;     &quot;Austria&quot;       &quot;Belgium&quot;       &quot;Bolivia&quot;      
-##  [6] &quot;Brazil&quot;        &quot;Bulgaria&quot;      &quot;Canada&quot;        &quot;Chile&quot;         &quot;France&quot;       
-## [11] &quot;Germany&quot;       &quot;Hungary&quot;       &quot;Japan&quot;         &quot;Mexico&quot;        &quot;Netherlands&quot;  
-## [16] &quot;New Zealand&quot;   &quot;Norway&quot;        &quot;Paraguay&quot;      &quot;Peru&quot;          &quot;Poland&quot;       
-## [21] &quot;Romania&quot;       &quot;Russia&quot;        &quot;South Africa&quot;  &quot;Spain&quot;         &quot;Sweden&quot;       
-## [26] &quot;Switzerland&quot;   &quot;Ukraine&quot;       &quot;United States&quot; &quot;Uruguay&quot;</code></pre>
+<pre><code>##  [1] &quot;Argentina&quot;     &quot;Australia&quot;     &quot;Austria&quot;       &quot;Belgium&quot;      
+##  [5] &quot;Bolivia&quot;       &quot;Brazil&quot;        &quot;Bulgaria&quot;      &quot;Canada&quot;       
+##  [9] &quot;Chile&quot;         &quot;France&quot;        &quot;Germany&quot;       &quot;Hungary&quot;      
+## [13] &quot;Japan&quot;         &quot;Mexico&quot;        &quot;Netherlands&quot;   &quot;New Zealand&quot;  
+## [17] &quot;Norway&quot;        &quot;Paraguay&quot;      &quot;Peru&quot;          &quot;Poland&quot;       
+## [21] &quot;Romania&quot;       &quot;Russia&quot;        &quot;South Africa&quot;  &quot;Spain&quot;        
+## [25] &quot;Sweden&quot;        &quot;Switzerland&quot;   &quot;Ukraine&quot;       &quot;United States&quot;
+## [29] &quot;Uruguay&quot;</code></pre>
 <p><br>
 As expected, India, Indonesia, Philippines, Singapore, Thailand and Venezuela aren’t present in joined_table. <br>
 Let’s see if these countries also have data about flu incidence.
