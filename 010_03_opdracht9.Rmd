@@ -41,13 +41,18 @@ parameters <- list()
 parameters$country <- "Austria"
 parameters$year <- 2022
 parameters$month <- "February"
-covid19_data_filtered <- covid19_data %>% filter(year %in% parameters$year, countriesAndTerritories %in% parameters$country, month %in% parameters$month)
+covid19_data_filtered <- covid19_data %>% filter(year %in% parameters$year, 
+                                                 countriesAndTerritories %in% parameters$country, 
+                                                 month %in% parameters$month)
 ```
 <br>
 I created a graph to show the COVID-19 cases per day for a specific month, and I also created a graph for the amount of COVID-19 related deaths per day for a specific month.
 <br>
 ```{r visualising the covid-19 cases3, message=FALSE, warning=FALSE}
-covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == parameters$country & year == parameters$year & month == parameters$month) %>%
+covid19_data %>% group_by(day, month, year) %>% 
+  filter(countriesAndTerritories == parameters$country & 
+         year == parameters$year & 
+         month == parameters$month) %>%
   ggplot(aes(x = day, y = cases)) +
   geom_point() +
   scale_x_continuous(breaks = seq(1, 31, 1)) +
@@ -57,7 +62,10 @@ covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories =
 ```
 
 ```{r visualising the covid-19 related deaths3, message=FALSE, warning=FALSE}
-covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories == parameters$country & year == parameters$year & month == parameters$month) %>%
+covid19_data %>% group_by(day, month, year) %>% 
+  filter(countriesAndTerritories == parameters$country & 
+         year == parameters$year & 
+         month == parameters$month) %>%
   ggplot(aes(x = day, y = deaths)) +
   geom_point() +
   scale_x_continuous(breaks = seq(1, 31, 1)) +

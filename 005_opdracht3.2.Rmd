@@ -10,9 +10,9 @@ link-citations: yes
 
 # Free space
 
-I had/have to fill 32 hours learning something new that will be useful for my internship next year and possibly my job.
+I had 32 hours to learn something new that will be useful for my internship next year and possibly my job.
 
-I decided I wanted to gain more experience in analysing microbiota data, because I'd like to work with bacteria in my job. So, I searched the internet for packages and such, and found a course about microbiota analysis that I decided to follow.
+I decided I wanted to gain more experience in analysing microbiota data, because I'd like to work with bacteria in my future job. So, I searched the internet for packages and such, and found a course about microbiota analysis that I decided to follow.
 <br>
 Link to the course: https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html
 <br>
@@ -53,10 +53,20 @@ library(phyloseq)
 
 ```{r reading in the data, message=FALSE, warning=FALSE}
 # Downloaded the data from: https://github.com/kdillmcfarland/workshops_UW_Madison/tree/master/Microbiota_analysis_R/Data
-OTU = read.table("Data/example.final.an.unique_list.0.03.norm.shared.txt", header = TRUE, sep = "\t")
-tax = read.table("Data/example.final.an.unique_list.0.03.cons.taxonomy.txt", header = TRUE, sep = "\t")
-meta = read.table("Data/example.metadata.txt", header = TRUE, row.names = 1, sep = "\t")
-SCFA = read.table("Data/example.SCFA.txt", header = TRUE, row.names = 1, sep = "\t")
+OTU = read.table("Data/example.final.an.unique_list.0.03.norm.shared.txt", 
+                 header = TRUE, 
+                 sep = "\t")
+tax = read.table("Data/example.final.an.unique_list.0.03.cons.taxonomy.txt", 
+                 header = TRUE, 
+                 sep = "\t")
+meta = read.table("Data/example.metadata.txt", 
+                  header = TRUE, 
+                  row.names = 1, 
+                  sep = "\t")
+SCFA = read.table("Data/example.SCFA.txt", 
+                  header = TRUE, 
+                  row.names = 1, 
+                  sep = "\t")
 ```
 
 ```{r data wrangling, message=FALSE, warning=FALSE}
@@ -69,7 +79,10 @@ row.names(tax) = tax$OTU
 # Removing the OTU's that aren't present in the OTU.clean dataset
 tax.clean = tax[row.names(tax) %in% colnames(OTU.clean),]
 # Separating the taxonomy table so each level has its own column
-tax.clean = separate(tax.clean, Taxonomy, into = c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species", "Strain"), sep = ";")
+tax.clean = separate(tax.clean, 
+                     Taxonomy, 
+                     into = c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species", "Strain"), 
+                     sep = ";")
 # Removing the "Size", "Strain" and "OTU" columns because these are now row names
 tax.clean = tax.clean[,-which(names(tax.clean) %in% c("Size", "Strain", "OTU"))]
 # Making sure the three datasets have samples in the same order
@@ -87,10 +100,22 @@ Alpha diversity is the diversity _within_ a sample. It looks at richness, which 
 # Creating a 2x2 plot environment so we can see all 4 metrics at once
 par(mfrow = c(2,2))
 # Plotting the four metrics
-hist(meta$shannon, main = "Shannon diversity", xlab = "", breaks = 10)
-hist(meta$simpson, main = "Simpson diversity", xlab = "", breaks = 10)
-hist(meta$chao, main = "Chao richness", xlab = "", breaks = 15)
-hist(meta$ace, main = "ACE richness", xlab = "", breaks = 15)
+hist(meta$shannon, 
+     main = "Shannon diversity", 
+     xlab = "", 
+     breaks = 10)
+hist(meta$simpson, 
+     main = "Simpson diversity", 
+     xlab = "", 
+     breaks = 10)
+hist(meta$chao, 
+     main = "Chao richness", 
+     xlab = "", 
+     breaks = 15)
+hist(meta$ace, 
+     main = "ACE richness", 
+     xlab = "", 
+     breaks = 15)
 ```
 <br>
 None of the data are normally distributed. Simpson diversity is very often skewed as seen in this histogram, so we'll calculate 1/Simpson and plot the metrics again.
@@ -99,10 +124,22 @@ None of the data are normally distributed. Simpson diversity is very often skewe
 # Creating a 2x2 environment
 par(mfrow = c(2,2))
 # Plotting the four metrics again
-hist(meta$shannon, main = "Shannon diversity", xlab = "", breaks = 10)
-hist(1/meta$simpson, main = "Inverse Simpson diversity", xlab = "", breaks = 10)
-hist(meta$chao, main = "Chao richness", xlab = "", breaks = 15)
-hist(meta$ace, main = "ACE richness", xlab = "", breaks = 15)
+hist(meta$shannon, 
+     main = "Shannon diversity", 
+     xlab = "", 
+     breaks = 10)
+hist(1/meta$simpson, 
+     main = "Inverse Simpson diversity", 
+     xlab = "", 
+     breaks = 10)
+hist(meta$chao, 
+     main = "Chao richness", 
+     xlab = "", 
+     breaks = 15)
+hist(meta$ace, 
+     main = "ACE richness", 
+     xlab = "", 
+     breaks = 15)
 ```
 <br>
 Now the Simpson diversity is distributed similarly to the other richness metrics.
@@ -139,7 +176,8 @@ meta$AgeGroup.ord = factor(meta$AgeGroup, c("2w", "8w", "1yr"))
 # Returning the plot area to 1x1
 par(mfrow = c(1,1))
 # Plotting the diversity
-boxplot(shannon ~ AgeGroup.ord, data = meta, 
+boxplot(shannon ~ AgeGroup.ord, 
+        data = meta, 
         ylab = "Shannon's diversity",
         xlab = "Age group") # Added the xlab myself because it looks better :)
 ```
@@ -302,9 +340,15 @@ par(mfrow = c(1,1))
 # Creating a blank plot for the nmds
 plot(BC.nmds, type = "n", main = "Bray-Curtis")
 # Adding the points
-points(BC.nmds, display = "sites", pch = 20, col=c("blue", "green", "red"))[meta$AgeGroup] # [Meta$AgeGroup] buiten haakjes gehaald
+points(BC.nmds, 
+       display = "sites", 
+       pch = 20, 
+       col=c("blue", "green", "red"))[meta$AgeGroup] # [Meta$AgeGroup] buiten haakjes gehaald
 # Adding a legend
-legend(-5.5, 2.5, legend = c("2w", "8w", "1yr"), col=c("green", "red", "blue"), pch = 20)
+legend(-5.5, 2.5, 
+       legend = c("2w", "8w", "1yr"), 
+       col=c("green", "red", "blue"), 
+       pch = 20)
 ```
 <br>
 We can also calculate the nMDS for the Jaccard metric. This metric only looks at the presence or absence of OTU's, so it only looks at richness.
@@ -316,9 +360,17 @@ J.nmds = metaMDS(OTU.clean, distance = "jaccard", k=2, trymax = 1000)
 With this metric, we've also reached a convergent solution after 20 iterations. The stress is also very low for this metric, 0.06. So, we'll plot this metric with 2 axis aswell.
 <br>
 ```{r plotting Jaccard nMDS, message=FALSE, warning=FALSE}
-plot(J.nmds, type = "n", main = "Jaccard")
-points(J.nmds, display = "sites", pch = 20, col=c("blue", "green", "red"))[meta$AgeGroup]
-legend(-3, 1.5, legend=c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(J.nmds, 
+     type = "n", 
+     main = "Jaccard")
+points(J.nmds, 
+       display = "sites", 
+       pch = 20, 
+       col=c("blue", "green", "red"))[meta$AgeGroup]
+legend(-3, 1.5, 
+       legend=c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 ```
 <br>
 The values in the plot are somewhat different, but the distributions are very similar. That's because Jaccard = 2xBray-Curtis/(1+Bray-Curtis).
@@ -326,14 +378,49 @@ The values in the plot are somewhat different, but the distributions are very si
 We can also plot the standard error ellipses of the nMDS data. We'll plot the 99% confidence interval of the Bray-Curtis metric.
 <br>
 ```{r plotting ellipses, message=FALSE, warning=FALSE}
-plot(BC.nmds, type = "n", main = "Bray-Curtis")
-legend(-5.5, 2.5, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(BC.nmds, 
+     type = "n", 
+     main = "Bray-Curtis")
+legend(-5.5, 2.5, 
+       legend = c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 # Ellipse for 2 weeks
-ordiellipse(BC.nmds, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "green", draw = "polygon", alpha = 200, show.groups = c("2w"), border = FALSE)
+ordiellipse(BC.nmds, 
+            groups = meta$AgeGroup, 
+            display = "sites", 
+            kind = "se", 
+            conf = 0.99, 
+            label = FALSE, 
+            col = "green", 
+            draw = "polygon", 
+            alpha = 200, 
+            show.groups = c("2w"), 
+            border = FALSE)
 # Ellipse for 8 weeks
-ordiellipse(BC.nmds, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "red", draw = "polygon", alpha = 200, show.groups = c("8w"), border = FALSE)
+ordiellipse(BC.nmds, 
+            groups = meta$AgeGroup, 
+            display = "sites", 
+            kind = "se", 
+            conf = 0.99, 
+            label = FALSE, 
+            col = "red", 
+            draw = "polygon", 
+            alpha = 200, 
+            show.groups = c("8w"), 
+            border = FALSE)
 # ELLipse for 1 year
-ordiellipse(BC.nmds, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "blue", draw = "polygon", alpha = 200, show.groups = c("1yr"), border = FALSE)
+ordiellipse(BC.nmds, 
+            groups = meta$AgeGroup, 
+            display = "sites", 
+            kind = "se", 
+            conf = 0.99, 
+            label = FALSE, 
+            col = "blue", 
+            draw = "polygon", 
+            alpha = 200, 
+            show.groups = c("1yr"), 
+            border = FALSE)
 ```
 <br>
 If the stress is high, over 0.3, it's better to increase to 3 axes.
@@ -349,7 +436,13 @@ We'll extract the x, y and z for the nMDS, and then plot them.
 ```{r BCxyz, message=FALSE, warning=FALSE}
 BCxyz = scores(BC.nmds.3D, display = "sites")
 BCxyz
-plot_ly(x=BCxyz[,1], y=BCxyz[,2], z=BCxyz[,3], type = "scatter3d", mode = "markers", color = meta$AgeGroup, colors = c("blue", "green", "red"))
+plot_ly(x=BCxyz[,1], 
+        y=BCxyz[,2], 
+        z=BCxyz[,3], 
+        type = "scatter3d", 
+        mode = "markers", 
+        color = meta$AgeGroup, 
+        colors = c("blue", "green", "red"))
 ```
 <br>
 3D plots are difficult to interpret in articles, so many authors choose to create two 2D plots instead.
@@ -357,10 +450,21 @@ plot_ly(x=BCxyz[,1], y=BCxyz[,2], z=BCxyz[,3], type = "scatter3d", mode = "marke
 ```{r two 2D plots, message=FALSE, warning=FALSE}
 par(mfrow = c(1,2))
 # Plotting axis 1 and 2, which are x and y
-plot(BCxyz[,1], BCxyz[,2], main = "Bray-Curtis 1:2", pch = 20, col = c("blue", "green", "red"))[meta$AgeGroup]
-legend(-5.4, 3, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(BCxyz[,1], 
+     BCxyz[,2], 
+     main = "Bray-Curtis 1:2", 
+     pch = 20, 
+     col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-5.4, 3, 
+       legend = c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 # Plotting axis 1 and 3, which are x and z
-plot(BCxyz[,1], BCxyz[,3], main = "Bray-Curtis 1:3", pch = 20, col = c("blue", "green", "red"))[meta$AgeGroup]
+plot(BCxyz[,1], 
+     BCxyz[,3], 
+     main = "Bray-Curtis 1:3", 
+     pch = 20, 
+     col = c("blue", "green", "red"))[meta$AgeGroup]
 ```
 <br>
 The most common type of beta-diversity metric is UniFrac. This metric takes phylogenetic relationships into account, as opposed to Bray-Curtis and Jaccard. So, with UniFrac, samples with different OTU's from the same genus will be more similar than samples with OTU's from different genera. The drawback of UniFrac is that it's sensitive to low abundance OTU's.
@@ -386,22 +490,36 @@ physeq.tree
 Next, we'll calculate the _weighted_ UniFrac and ordinate it into nMDS.
 <br>
 ```{r nMDS wUF, message=FALSE, warning=FALSE}
-wUF.ordu = ordinate(physeq.tree, method = "NMDS", distance = "unifrac", weighted = TRUE)
+wUF.ordu = ordinate(physeq.tree, 
+                    method = "NMDS", 
+                    distance = "unifrac", 
+                    weighted = TRUE)
 ```
 <br>
 Let's plot the weighted UniFrac nMDS.
 <br>
 ```{r plot wUF nMDS, message=FALSE, warning=FALSE}
 par(mfrow = c(1,1))
-plot(wUF.ordu, type = "n", main = "Weighted UniFrac")
-points(wUF.ordu, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
-legend(0.3, 0.15, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(wUF.ordu, 
+     type = "n", 
+     main = "Weighted UniFrac")
+points(wUF.ordu, 
+       pch = 20, 
+       display = "sites", 
+       col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(0.3, 0.15, 
+       legend = c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 ```
 <br>
 We can also plot it with ggplot2.
 <br>
 ```{r, message=FALSE, warning=FALSE}
-plot_ordination(physeq.tree, wUF.ordu, type = "sites", color = "AgeGroup")+
+plot_ordination(physeq.tree, 
+                wUF.ordu, 
+                type = "sites", 
+                color = "AgeGroup")+
   scale_colour_manual(values = c("2w"="green", "8w"="red", "1yr"="blue"))+
   theme_bw()+
   ggtitle("Weighted UniFrac")
@@ -410,8 +528,15 @@ plot_ordination(physeq.tree, wUF.ordu, type = "sites", color = "AgeGroup")+
 The Unweighted UniFrac can also be calculated and plotted.
 <br>
 ```{r uwUF nMDS, message=FALSE, warning=FALSE}
-uwUF.ordu = ordinate(physeq.tree, method = "NMDS", distance = "unifrac", weighted = FALSE)
-plot_ordination(physeq.tree, uwUF.ordu, type = "sites", color = "AgeGroup")+
+uwUF.ordu = ordinate(physeq.tree, 
+                     method = "NMDS", 
+                     distance = "unifrac", 
+                     weighted = FALSE)
+
+plot_ordination(physeq.tree, 
+                uwUF.ordu, 
+                type = "sites", 
+                color = "AgeGroup")+
   scale_colour_manual(values = c("2w" = "green", "8w" = "red", "1yr" = "blue"))+
   theme_bw()+
   ggtitle("Unweighted UniFrac")
@@ -420,21 +545,59 @@ plot_ordination(physeq.tree, uwUF.ordu, type = "sites", color = "AgeGroup")+
 We can also plot the ellipses of the Weighted UniFrac distances.
 <br>
 ```{r, message=FALSE, warning=FALSE}
-plot(wUF.ordu, type = "n", main = "Weighted UniFrac")
-legend(0.3, 0.15, legend = c("2w","8w","1yr"), col = c("pink", "purple", "blue"), pch = 20)
+plot(wUF.ordu, 
+     type = "n", 
+     main = "Weighted UniFrac")
+legend(0.3, 0.15, 
+       legend = c("2w","8w","1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 # Ellipse for 2 weeks
-ordiellipse(wUF.ordu, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "pink", draw = "polygon", alpha = 200, show.groups = c("2w"), border = FALSE)
+ordiellipse(wUF.ordu, 
+            groups = meta$AgeGroup, 
+            display = "sites", 
+            kind = "se", 
+            conf = 0.99, 
+            label = FALSE, 
+            col = "green", 
+            draw = "polygon", 
+            alpha = 200, 
+            show.groups = c("2w"), 
+            border = FALSE)
 # Ellipse for 8 weeks
-ordiellipse(wUF.ordu, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "purple", draw = "polygon", alpha = 200, show.groups = c("8w"), border = FALSE)
+ordiellipse(wUF.ordu, 
+            groups = meta$AgeGroup, 
+            display = "sites", 
+            kind = "se", 
+            conf = 0.99, 
+            label = FALSE, 
+            col = "red", 
+            draw = "polygon", 
+            alpha = 200, 
+            show.groups = c("8w"), 
+            border = FALSE)
 # Ellipse for 1 year
-ordiellipse(wUF.ordu, groups = meta$AgeGroup, display = "sites", kind = "se", conf = 0.99, label = FALSE, col = "blue", draw = "polygon", alpha = 200, show.groups = c("1yr"), border = FALSE)
+ordiellipse(wUF.ordu, 
+            groups = meta$AgeGroup, 
+            display = "sites", 
+            kind = "se", 
+            conf = 0.99, 
+            label = FALSE, 
+            col = "blue", 
+            draw = "polygon", 
+            alpha = 200, 
+            show.groups = c("1yr"), 
+            border = FALSE)
 ```
 <br>
 Ellipses can also be plotted with ggplot2, although they look a bit different.
 <br>
 ```{r, message=FALSE, warning=FALSE}
-plot_ordination(physeq.tree, wUF.ordu, type = "sites", color = "AgeGroup")+
-  scale_colour_manual(values = c("2w" = "pink", "8w" = "purple", "1yr" = "blue"))+
+plot_ordination(physeq.tree, 
+                wUF.ordu, 
+                type = "sites", 
+                color = "AgeGroup")+
+  scale_colour_manual(values = c("2w" = "green", "8w" = "red", "1yr" = "blue"))+
   theme_bw()+
   stat_ellipse()+
   ggtitle("Weighted UniFrac")
@@ -452,7 +615,13 @@ Then, we'll take out the xyz values and plot them with plotly.
 ```{r wUFxyz, message=FALSE, warning=FALSE}
 wUFxyz = scores(wUF.nmds.3D, display = "sites")
 wUFxyz
-plot_ly(x=wUFxyz[,1], y=wUFxyz[,2], z=wUFxyz[,3], type = "scatter3d", mode = "markers", color=meta$AgeGroup, colors=c("pink", "purple", "blue"))
+plot_ly(x=wUFxyz[,1], 
+        y=wUFxyz[,2], 
+        z=wUFxyz[,3], 
+        type = "scatter3d", 
+        mode = "markers", 
+        color=meta$AgeGroup, 
+        colors=c("pink", "purple", "blue"))
 ```
 <br>
 <br>
@@ -483,27 +652,51 @@ fit.wUF
 We can plot the 2D nMDS with an arrow for the ADG, eventho the ADG isn't a significant variable. Thus, you wouldn't use this figure in a publication or such. We'll do this with the Bray-Curtis dissimilarity.
 <br>
 ```{r plotting the fitted BC, message=FALSE, warning=FALSE}
-plot(BC.nmds, type = "n", main = "Bray-Curtis")
-points(BC.nmds, pch = 20, display = "sites", col = c("pink", "purple", "blue"))[meta$AgeGroup]
-legend(-6, 2, legend = c("2w", "8w", "1yr"), col = c("purple", "blue", "pink"), pch = 20)
+plot(BC.nmds, 
+     type = "n", 
+     main = "Bray-Curtis")
+points(BC.nmds, 
+       pch = 20, 
+       display = "sites", 
+       col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-6, 2, 
+       legend = c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 plot(fit.BC, col = "black") # Adding the fitted variables
 ```
 <br>
 We can also only plot variables with p < 0.05. That'd mean we'd only see the centroids.
 <br>
 ```{r plotting the significant BC, message=FALSE, warning=FALSE}
-plot(BC.nmds, type = "n", main = "Bray-Curtis")
-points(BC.nmds, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
-legend(-6, 2, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(BC.nmds, 
+     type = "n", 
+     main = "Bray-Curtis")
+points(BC.nmds, 
+       pch = 20, 
+       display = "sites", 
+       col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-6, 2, 
+       legend = c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 plot(fit.BC, col = "black", p.max = 0.05)
 ```
 <br>
 We can also plot the weighted UniFrac.
 <br>
 ```{r plotting wUF, message=FALSE, warning=FALSE}
-plot(wUF.ordu, type = "n", main = "Weighted UniFrac")
-points(wUF.ordu, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
-legend(.3, .15, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(wUF.ordu, 
+     type = "n", 
+     main = "Weighted UniFrac")
+points(wUF.ordu, 
+       pch = 20, 
+       display = "sites", 
+       col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(.3, .15, 
+       legend = c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 plot(fit.wUF, col = "black")
 ```
 <br>
@@ -516,9 +709,17 @@ Then, we'll only plot the significant arrows.
 ```{r fitting OTUs, message=FALSE, warning=FALSE}
 fit.BC.OTU = envfit(BC.nmds, OTU.clean[,1:10])
 fit.BC.OTU
-plot(BC.nmds, type = "n", main = "Bray-Curtis")
-points(BC.nmds, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
-legend(-6, -1.1, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(BC.nmds, 
+     type = "n", 
+     main = "Bray-Curtis")
+points(BC.nmds, 
+       pch = 20, 
+       display = "sites", 
+       col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-6, -1.1, 
+       legend = c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 plot(fit.BC.OTU, col = "black", p.max = 0.05)
 ```
 <br>
@@ -533,9 +734,17 @@ OTU.rumino$Rumino.sum = rowSums(OTU.rumino)
 fit.BC.rumino = envfit(BC.nmds, OTU.rumino$Rumino.sum)
 fit.BC.rumino
 # Plotting it
-plot(BC.nmds, type = "n", main = "Bray-Curtis")
-points(BC.nmds, pch = 20, display = "sites", col = c("blue", "green", "red"))[meta$AgeGroup]
-legend(-6, -1.1, legend = c("2w", "8w", "1yr"), col = c("green", "red", "blue"), pch = 20)
+plot(BC.nmds, 
+     type = "n", 
+     main = "Bray-Curtis")
+points(BC.nmds, 
+       pch = 20, 
+       display = "sites", 
+       col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-6, -1.1, 
+       legend = c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
 # Adding the fitted variables
 plot(fit.BC.rumino, col = "black", labels = c("Ruminococcus"))
 ```
@@ -719,8 +928,14 @@ Some OTU's have a strong correlation with a SCFA. For example, OTU00021 and OTU0
 <br>
 ```{r plotting the correlation, message=FALSE, warning=FALSE}
 par(mfrow = c(1,2))
-plot(abund.SCFA$Otu00021 ~ SCFA$Formate, xlab = "Formate (mM)", ylab = "Relative abundance, %", main = "OTU21")
-plot(abund.SCFA$Otu00025 ~ SCFA$Formate, xlab = "Formate (mM)", ylab = "Relative abundance, %", main = "OTU25")
+plot(abund.SCFA$Otu00021 ~ SCFA$Formate, 
+     xlab = "Formate (mM)", 
+     ylab = "Relative abundance, %", 
+     main = "OTU21")
+plot(abund.SCFA$Otu00025 ~ SCFA$Formate, 
+     xlab = "Formate (mM)", 
+     ylab = "Relative abundance, %", 
+     main = "OTU25")
 ```
 <br>
 We don't have a lot of data points, so we can't draw strong conclusions from this. However, we can further test the OTU's that correlate strongly with a SCFA. To do this, we will assume a normal distribution.
@@ -750,7 +965,8 @@ plot_bar(physeq.tree, x = "AgeGroup", fill = "Phylum")
 To make it even clearer, we can remove the lines between the OTU's.
 <br>
 ```{r another bar chart, message=FALSE, warning=FALSE}
-plot_bar(physeq.tree, x = "AgeGroup", fill = "Phylum") + geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")
+plot_bar(physeq.tree, x = "AgeGroup", fill = "Phylum") + 
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")
 ```
 <br>
 We can also modify the bar chart to only show the five most abundant phyla for each age group.
@@ -763,7 +979,8 @@ top5P.names = sort(tapply(taxa_sums(physeq.tree), tax_table(physeq.tree)[, "Phyl
 top5P = subset_taxa(physeq.tree, Phylum %in% names(top5P.names))
 
 # Plotting the top 5 phyla
-plot_bar(top5P, x = "AgeGroup", fill = "Phylum") + geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")
+plot_bar(top5P, x = "AgeGroup", fill = "Phylum") + 
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack")
 ```
 <br>
 We can also plot several bar charts next to each other, separated by the phyla.
@@ -825,19 +1042,33 @@ plot_heatmap(top20OTU, sample.label = "AgeGroup", sample.order = "AgeGroup")
 We can also label the OTU taxa.
 <br>
 ```{r heatmap top 20 labelled, message=FALSE, warning=FALSE}
-plot_heatmap(top20OTU, sample.label = "AgeGroup", sample.order = "AgeGroup", taxa.label = "Genus")
+plot_heatmap(top20OTU, 
+             sample.label = "AgeGroup", 
+             sample.order = "AgeGroup", 
+             taxa.label = "Genus")
 ```
 <br>
 We can also group OTUs in the same Phyla.
 <br>
 ```{r heatmap top 20 grouped OTUs, message=FALSE, warning=FALSE}
-plot_heatmap(top20OTU, sample.label = "AgeGroup", sample.order = "AgeGroup", taxa.label = "Genus", taxa.order = "Phylum")
+plot_heatmap(top20OTU, 
+             sample.label = "AgeGroup", 
+             sample.order = "AgeGroup", 
+             taxa.label = "Genus", 
+             taxa.order = "Phylum")
 ```
 <br>
 We can also change the colors.
 <br>
 ```{r heatmap diff colors, message=FALSE, warning=FALSE}
-plot_heatmap(top20OTU, sample.label = "AgeGroup", sample.order = "AgeGroup", taxa.label = "Genus", taxa.order = "Phylum", low = "white", high = "purple", na.value = "grey")
+plot_heatmap(top20OTU, 
+             sample.label = "AgeGroup", 
+             sample.order = "AgeGroup", 
+             taxa.label = "Genus", 
+             taxa.order = "Phylum", 
+             low = "white", 
+             high = "purple", 
+             na.value = "grey")
 ```
 <br>
 We cal also plot the Bray-Curtis dissimilarity in a heatmap.
@@ -894,14 +1125,30 @@ venn(list(OTU.2w, OTU.8w, OTU.1yr))
 We can make this Venn diagram a lot prettier!
 <br>
 ```{r prettier Venn diagram, message=FALSE, warning=FALSE}
-draw.triple.venn(area1 = 385+58+71+320, area2 = 801+190+320+71, area3 = 3177+190+58+71, n12 = 320+17, n23 = 190+71, n13 = 58+71, n123 = 17, category = c("2w", "8w", "1yr"), lty = "blank", fill = c("green", "red", "blue"))
+draw.triple.venn(area1 = 385+58+71+320, 
+                 area2 = 801+190+320+71, 
+                 area3 = 3177+190+58+71, 
+                 n12 = 320+17, 
+                 n23 = 190+71, 
+                 n13 = 58+71, 
+                 n123 = 17, 
+                 category = c("2w", "8w", "1yr"), 
+                 lty = "blank", 
+                 fill = c("green", "red", "blue"))
 # This doesn't show the Venn diagram, I think because I can't load the venneuler package?
 ```
 <br>
 With the venneuler package, we can scale the circles to be proportional to the the total number of OTUs in that group.
 <br>
 ```{r scaled Venn diagram, message=FALSE, warning=FALSE, eval=FALSE}
-age.venn = venneuler(c('A' = 385+58+71+320, 'B' = 801+190+320+17, 'C' = 3177+190+58+17, 'A&B' = 320+71, 'B&C' = 190+71, 'A&C' = 58+71, 'A&B&C' = 71))
+age.venn = venneuler(c(
+  'A' = 385+58+71+320, 
+  'B' = 801+190+320+17, 
+  'C' = 3177+190+58+17, 
+  'A&B' = 320+71, 
+  'B&C' = 190+71, 
+  'A&C' = 58+71, 
+  'A&B&C' = 71))
 
 age.venn$labels = c("2w", "8w", "1yr")
 
@@ -929,10 +1176,19 @@ postscript("Fig1.ps", width = 7, height = 3, horizontal = FALSE, colormodel = "r
  
 layout(matrix(c(1,2), 1, 2), widths=c(3,2), heights=c(1,1))
  
-plot(BC.nmds, type="n", main="Bray-Curtis")
-points(BC.nmds, display="sites", pch=20, col=c("blue", "green", "red")[meta$AgeGroup])
+plot(BC.nmds, 
+     type="n", 
+     main="Bray-Curtis")
+points(BC.nmds, 
+       display="sites", 
+       pch=20, 
+       col=c("blue", "green", "red")[meta$AgeGroup])
  
-boxplot(shannon ~ AgeGroup.ord, data=meta, main="Diversity", ylab="Shannon's diversity", col=c("green", "red", "blue"))
+boxplot(shannon ~ AgeGroup.ord, 
+        data=meta, 
+        main="Diversity", 
+        ylab="Shannon's diversity", 
+        col=c("green", "red", "blue"))
  
 dev.off()
 ```
@@ -940,14 +1196,25 @@ dev.off()
 To export a PDF, we'll use the following code.
 <br>
 ```{r PDF, message=FALSE, warning=FALSE, eval=FALSE}
-pdf("Fig1.pdf", width = 7, height = 3,  colormodel = "rgb", family = "ArialMT")
+pdf("Fig1.pdf", 
+    width = 7, 
+    height = 3,  
+    colormodel = "rgb", 
+    family = "ArialMT")
  
 layout(matrix(c(1,2), 1, 2), widths=c(3,2), heights=c(1,1))
  
-plot(BC.nmds, type="n", main="Bray-Curtis")
-points(BC.nmds, display="sites", pch=20, col=c("blue", "green", "red")[meta$AgeGroup])
+plot(BC.nmds, 
+     type="n", 
+     main="Bray-Curtis")
+points(BC.nmds, 
+       display="sites", 
+       pch=20, col=c("blue", "green", "red")[meta$AgeGroup])
  
-boxplot(shannon ~ AgeGroup.ord, data=meta, main="Diversity", ylab="Shannon's diversity", col=c("green", "red", "blue"))
+boxplot(shannon ~ AgeGroup.ord, 
+        data=meta, main="Diversity", 
+        ylab="Shannon's diversity", 
+        col=c("green", "red", "blue"))
  
 dev.off()
 ```
@@ -955,14 +1222,143 @@ dev.off()
 Lastly, we can export is as a PNG with the following code.
 <br>
 ```{r PNG export, message=FALSE, warning=FALSE, eval=FALSE}
-png("Fig1.png", width = 7, height = 3, units='in', res=300)
+png("Fig1.png", 
+    width = 7, 
+    height = 3, 
+    units='in', 
+    res=300)
  
 layout(matrix(c(1,2), 1, 2), widths=c(3,2), heights=c(1,1))
  
-plot(BC.nmds, type="n", main="Bray-Curtis")
-points(BC.nmds, display="sites", pch=20, col=c("blue", "green", "red")[meta$AgeGroup])
+plot(BC.nmds, 
+     type="n", 
+     main="Bray-Curtis")
+points(BC.nmds, 
+       display="sites", 
+       pch=20, 
+       col=c("blue", "green", "red")[meta$AgeGroup])
  
-boxplot(shannon ~ AgeGroup.ord, data=meta, main="Diversity", ylab="Shannon's diversity", col=c("green", "red", "blue"))
+boxplot(shannon ~ AgeGroup.ord, 
+        data=meta, 
+        main="Diversity", 
+        ylab="Shannon's diversity", c
+        ol=c("green", "red", "blue"))
  
 dev.off()
 ```
+
+__End of tutorial__
+
+Now, to show you what I've learned, I have written a bit of my own code aswell.
+<br>
+In the tutorial, we tested if the interaction between age and ADG significantly impacted Shannon's diversity, which it didn't. I will test if the interaction between age and ADG significantly impacts ACE richness.
+<br>
+```{r glm ace, message=FALSE, warning=FALSE}
+qp.ace = glm(ace ~ AgeGroup*ADGKG, data = meta, family = "quasipoisson")
+summary(qp.ace)
+```
+<br>
+The interactions aren't significant, so we'll remove these and run glm again.
+<br>
+```{r glm ace 2, message=FALSE, warning=FALSE}
+qp.ace2 = glm(ace ~ AgeGroup+ADGKG, data = meta, family = "quasipoisson")
+summary(qp.ace2)
+```
+<br>
+We can see that now, both age groups have become significant. That means that for both age groups, the difference with 1 year is significant when it comes to ACE richness.
+<br>
+<br>
+In the tutorial, we plotted the genus _Reminococcus_ in a plot with the Bray-Curtis dissimilarity for the three age groups. I will plot the genus _Clostridium_ and _Akkermansia_ in a similar plot.
+<br>
+```{r Clostridium & Akkermansia, message=FALSE, warning=FALSE}
+OTU.clostridium = OTU.clean[,tax.clean$Genus == "g__Clostridium"]
+OTU.akkermansia = OTU.clean[,tax.clean$Genus == "g__Akkermansia"]
+
+# Summing the abundance of both groups into one variable for each group
+OTU.clostridium$clostridium.sum = rowSums(OTU.clostridium)
+OTU.akkermansia$akkermansia.sum = rowSums(OTU.akkermansia)
+
+# Then, we'll fit both groups
+fit.BC.Clostridium = envfit(BC.nmds, OTU.clostridium$clostridium.sum)
+fit.BC.Akkermansia = envfit(BC.nmds, OTU.akkermansia$akkermansia.sum)
+
+# Lastly, we'll plot both groups
+plot(BC.nmds, 
+     type = "n", 
+     main = "Bray-Curtis")
+points(BC.nmds, 
+       pch = 20, 
+       display = "sites", 
+       col = c("blue", "green", "red"))[meta$AgeGroup]
+legend(-6, -1.1, 
+       legend = c("2w", "8w", "1yr"), 
+       col = c("green", "red", "blue"), 
+       pch = 20)
+plot(fit.BC.Clostridium, 
+     col = "black", 
+     labels= c("Clos"))
+plot(fit.BC.Akkermansia, 
+     col = "black", 
+     labels = c("Akk"))
+```
+<br>
+In the tutorial, we calculated the dispersion/variance for the Bray-Curtis dissimilarity and then plotted it. Here, I did this for the Jaccard index.
+<br>
+So, I first calculated the dispersion/variances for each group.
+<br>
+```{r variance Jaccard, message=FALSE, warning=FALSE}
+disp.j.age = betadisper(J.dist, meta$AgeGroup)
+```
+<br>
+Then, I performed an ANOVA-like test to see if the variances differ by group.
+```{r ANOVA-like Jaccard, message=FALSE, warning=FALSE}
+permutest(disp.j.age, pairwise = TRUE, permutations = 1000)
+```
+<br>
+Then, I plotted the Jaccard index for the three age groups.
+<br>
+```{r Jaccard plot, message=FALSE, warning=FALSE}
+plot(J.nmds, 
+     type="n", 
+     main="Jaccard index",
+     ylim = c(-3, 3))
+legend(4, 1, 
+       legend=c("2w","8w","1yr"), 
+       col=c("green","red","blue"), 
+       pch=20)
+ordiellipse(BC.nmds, 
+            groups=meta$AgeGroup, 
+            display="sites", 
+            kind="se", 
+            conf=0.99, 
+            label=FALSE, 
+            col="green", 
+            draw="polygon", 
+            alpha=200, 
+            show.groups = c("2w"), 
+            border=FALSE)
+ordiellipse(BC.nmds, 
+            groups=meta$AgeGroup, 
+            display="sites", 
+            kind="se", 
+            conf=0.99, 
+            label=FALSE, 
+            col="red", 
+            draw="polygon", 
+            alpha=200, 
+            show.groups = c("8w"), 
+            border=FALSE)
+ordiellipse(BC.nmds, 
+            groups=meta$AgeGroup, 
+            display="sites", 
+            kind="se", 
+            conf=0.99, 
+            label=FALSE, 
+            col="blue", 
+            draw="polygon", 
+            alpha=200, 
+            show.groups = c("1yr"), 
+            border=FALSE)
+```
+<br>
+We can see that the Jaccard index for 2 and 8 weeks is quite similair, and that there's a big difference with the Jaccard index for 1 year. This is all similar to the Bray-Curtis dissimilarity that we saw in the tutorial.

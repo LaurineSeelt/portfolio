@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurine Seelt" />
 
-<meta name="date" content="2022-06-15" />
+<meta name="date" content="2022-06-18" />
 
 
 <meta name="description" content="This is the bookdown for my DSFB2 portfolio">
@@ -152,19 +152,19 @@ details > summary {
 <div class="col-sm-12">
 <div id="TOC">
 <ul>
-<li><a href="index.html#introduction">Introduction</a></li>
-<li><a href="data-wrangling.html#data-wrangling">Data wrangling</a></li>
-<li><a href="reproducing-code.html#reproducing-code">Reproducing code</a></li>
-<li><a href="cleaning-up.html#cleaning-up">Cleaning up</a></li>
-<li><a href="cv.html#cv">CV</a></li>
-<li><a href="free-space.html#free-space">Free space</a></li>
-<li><a href="zotero.html#zotero">Zotero</a></li>
-<li><a href="github.html#github">GitHub</a></li>
-<li><a href="sql.html#sql">SQL</a></li>
-<li><a href="package.html#package">Package</a></li>
-<li><a href="ireland_params.html#ireland_params">ireland_params</a></li>
-<li><a href="belgium_params.html#belgium_params">belgium_params</a></li>
-<li><a href="austria_params.html#austria_params">austria_params</a></li>
+<li><a href="index.html#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="data-wrangling.html#data-wrangling" id="toc-data-wrangling">Data wrangling</a></li>
+<li><a href="reproducing-code.html#reproducing-code" id="toc-reproducing-code">Reproducing code</a></li>
+<li><a href="cleaning-up.html#cleaning-up" id="toc-cleaning-up">Cleaning up</a></li>
+<li><a href="cv.html#cv" id="toc-cv">CV</a></li>
+<li><a href="free-space.html#free-space" id="toc-free-space">Free space</a></li>
+<li><a href="zotero.html#zotero" id="toc-zotero">Zotero</a></li>
+<li><a href="github.html#github" id="toc-github">GitHub</a></li>
+<li><a href="sql.html#sql" id="toc-sql">SQL</a></li>
+<li><a href="package.html#package" id="toc-package">Package</a></li>
+<li><a href="ireland_params.html#ireland_params" id="toc-ireland_params">ireland_params</a></li>
+<li><a href="belgium_params.html#belgium_params" id="toc-belgium_params">belgium_params</a></li>
+<li><a href="austria_params.html#austria_params" id="toc-austria_params">austria_params</a></li>
 </ul>
 </div>
 </div>
@@ -177,28 +177,31 @@ details > summary {
 <br></p>
 <p>This package can be used to search for some information about contestants of the show RuPaul’s Drag Race.
 <br>
+The package can be installed by running devtools::install_github(“laurineseelt/covergirl”, build_vignettes = TRUE). The vignette can be found by running vignette(“covergirl”) or browseVignettes(“covergirl”).
+<br>
+<br>
 With the function general_info(), you can type in the name of a contestant and you’ll see the season that queen competed on, their age when they first competed on RuPaul’s Drag Race and their hometown.
 <br></p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="package.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">general_info</span>(<span class="st">&quot;Jinkx Monsoon&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="package.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">general_info</span>(<span class="st">&quot;Jinkx Monsoon&quot;</span>)</span></code></pre></div>
 <pre><code>##                season                   age              hometown 
 ##                 &quot;S05&quot;                  &quot;24&quot; &quot;Seattle, Washington&quot;</code></pre>
 <p><br>
 With the function episode_name(), you can type in the number of the season and the episode, and this function will tell you the name of that particular episode.
 <br></p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="package.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">episode_name</span>(<span class="st">&quot;S10&quot;</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="package.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">episode_name</span>(<span class="st">&quot;S10&quot;</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##               nickname 
 ## &quot;The Bossy Rossy Show&quot;</code></pre>
 <p><br>
 With the function special_ep(), you can type in the number of the season and the episode, and it’ll tell you if this was a special episode of RuPaul’s Drag Race or not.
 <br></p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="package.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">special_ep</span>(<span class="st">&quot;S14&quot;</span>, <span class="dv">11</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="package.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">special_ep</span>(<span class="st">&quot;S14&quot;</span>, <span class="dv">11</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;It&#39;s a special episode hunty!&quot;</code></pre>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="package.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">special_ep</span>(<span class="st">&quot;S13&quot;</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="package.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">special_ep</span>(<span class="st">&quot;S13&quot;</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;It&#39;s not a special episode&quot;</code></pre>
 <p><br>
 Lastly, with the function winner(), you can type in the number of a season and this function which queen won that particular season.
 <br></p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="package.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">winner</span>(<span class="st">&quot;S05&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="package.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">winner</span>(<span class="st">&quot;S05&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;The queen who won this season was Jinkx Monsoon, the GOAT&quot;</code></pre>
 <p><br>
 The vignette for this package can be found</p>

@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurine Seelt" />
 
-<meta name="date" content="2022-06-15" />
+<meta name="date" content="2022-06-18" />
 
 
 <meta name="description" content="This is the bookdown for my DSFB2 portfolio">
@@ -152,19 +152,19 @@ details > summary {
 <div class="col-sm-12">
 <div id="TOC">
 <ul>
-<li><a href="index.html#introduction">Introduction</a></li>
-<li><a href="data-wrangling.html#data-wrangling">Data wrangling</a></li>
-<li><a href="reproducing-code.html#reproducing-code">Reproducing code</a></li>
-<li><a href="cleaning-up.html#cleaning-up">Cleaning up</a></li>
-<li><a href="cv.html#cv">CV</a></li>
-<li><a href="free-space.html#free-space">Free space</a></li>
-<li><a href="zotero.html#zotero">Zotero</a></li>
-<li><a href="github.html#github">GitHub</a></li>
-<li><a href="sql.html#sql">SQL</a></li>
-<li><a href="package.html#package">Package</a></li>
-<li><a href="ireland_params.html#ireland_params">ireland_params</a></li>
-<li><a href="belgium_params.html#belgium_params">belgium_params</a></li>
-<li><a href="austria_params.html#austria_params">austria_params</a></li>
+<li><a href="index.html#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="data-wrangling.html#data-wrangling" id="toc-data-wrangling">Data wrangling</a></li>
+<li><a href="reproducing-code.html#reproducing-code" id="toc-reproducing-code">Reproducing code</a></li>
+<li><a href="cleaning-up.html#cleaning-up" id="toc-cleaning-up">Cleaning up</a></li>
+<li><a href="cv.html#cv" id="toc-cv">CV</a></li>
+<li><a href="free-space.html#free-space" id="toc-free-space">Free space</a></li>
+<li><a href="zotero.html#zotero" id="toc-zotero">Zotero</a></li>
+<li><a href="github.html#github" id="toc-github">GitHub</a></li>
+<li><a href="sql.html#sql" id="toc-sql">SQL</a></li>
+<li><a href="package.html#package" id="toc-package">Package</a></li>
+<li><a href="ireland_params.html#ireland_params" id="toc-ireland_params">ireland_params</a></li>
+<li><a href="belgium_params.html#belgium_params" id="toc-belgium_params">belgium_params</a></li>
+<li><a href="austria_params.html#austria_params" id="toc-austria_params">austria_params</a></li>
 </ul>
 </div>
 </div>
@@ -177,37 +177,45 @@ details > summary {
 <p><br>
 The data used for this markdown was from the ECDC website. To start, I downloaded this data from the website and read it in in RStudio.
 <br></p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="austria_params.html#cb258-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/covid19_data.csv&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="austria_params.html#cb269-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;Data/Data_raw/covid19_data.csv&quot;</span>))</span></code></pre></div>
 <p><br>
 Then, I stored the three parameters as objects so I can use them in the title of my figures. I also changed the value ‘month’ to a numeric variable, so it’d be easier to use later on in the graphs.
 <br></p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="austria_params.html#cb259-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="ot">&lt;-</span> covid19_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">month =</span> month.name[<span class="fu">as.numeric</span>(month)])</span>
-<span id="cb259-2"><a href="austria_params.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="co">#country &lt;- params$country</span></span>
-<span id="cb259-3"><a href="austria_params.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="co">#year &lt;- params$year</span></span>
-<span id="cb259-4"><a href="austria_params.html#cb259-4" aria-hidden="true" tabindex="-1"></a><span class="co">#months &lt;- params$month</span></span>
-<span id="cb259-5"><a href="austria_params.html#cb259-5" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb259-6"><a href="austria_params.html#cb259-6" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="st">&quot;Austria&quot;</span></span>
-<span id="cb259-7"><a href="austria_params.html#cb259-7" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="dv">2022</span></span>
-<span id="cb259-8"><a href="austria_params.html#cb259-8" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="st">&quot;February&quot;</span></span>
-<span id="cb259-9"><a href="austria_params.html#cb259-9" aria-hidden="true" tabindex="-1"></a>covid19_data_filtered <span class="ot">&lt;-</span> covid19_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">%in%</span> parameters<span class="sc">$</span>year, countriesAndTerritories <span class="sc">%in%</span> parameters<span class="sc">$</span>country, month <span class="sc">%in%</span> parameters<span class="sc">$</span>month)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="austria_params.html#cb270-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="ot">&lt;-</span> covid19_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">month =</span> month.name[<span class="fu">as.numeric</span>(month)])</span>
+<span id="cb270-2"><a href="austria_params.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="co">#country &lt;- params$country</span></span>
+<span id="cb270-3"><a href="austria_params.html#cb270-3" aria-hidden="true" tabindex="-1"></a><span class="co">#year &lt;- params$year</span></span>
+<span id="cb270-4"><a href="austria_params.html#cb270-4" aria-hidden="true" tabindex="-1"></a><span class="co">#months &lt;- params$month</span></span>
+<span id="cb270-5"><a href="austria_params.html#cb270-5" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb270-6"><a href="austria_params.html#cb270-6" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="st">&quot;Austria&quot;</span></span>
+<span id="cb270-7"><a href="austria_params.html#cb270-7" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="dv">2022</span></span>
+<span id="cb270-8"><a href="austria_params.html#cb270-8" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="st">&quot;February&quot;</span></span>
+<span id="cb270-9"><a href="austria_params.html#cb270-9" aria-hidden="true" tabindex="-1"></a>covid19_data_filtered <span class="ot">&lt;-</span> covid19_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">%in%</span> parameters<span class="sc">$</span>year, </span>
+<span id="cb270-10"><a href="austria_params.html#cb270-10" aria-hidden="true" tabindex="-1"></a>                                                 countriesAndTerritories <span class="sc">%in%</span> parameters<span class="sc">$</span>country, </span>
+<span id="cb270-11"><a href="austria_params.html#cb270-11" aria-hidden="true" tabindex="-1"></a>                                                 month <span class="sc">%in%</span> parameters<span class="sc">$</span>month)</span></code></pre></div>
 <p><br>
 I created a graph to show the COVID-19 cases per day for a specific month, and I also created a graph for the amount of COVID-19 related deaths per day for a specific month.
 <br></p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="austria_params.html#cb260-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> parameters<span class="sc">$</span>country <span class="sc">&amp;</span> year <span class="sc">==</span> parameters<span class="sc">$</span>year <span class="sc">&amp;</span> month <span class="sc">==</span> parameters<span class="sc">$</span>month) <span class="sc">%&gt;%</span></span>
-<span id="cb260-2"><a href="austria_params.html#cb260-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> cases)) <span class="sc">+</span></span>
-<span id="cb260-3"><a href="austria_params.html#cb260-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb260-4"><a href="austria_params.html#cb260-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb260-5"><a href="austria_params.html#cb260-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 cases in &quot;</span>, parameters<span class="sc">$</span>country, <span class="st">&quot;, &quot;</span>, parameters<span class="sc">$</span>month, <span class="st">&quot; &quot;</span>, parameters<span class="sc">$</span>year),</span>
-<span id="cb260-6"><a href="austria_params.html#cb260-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span>,</span>
-<span id="cb260-7"><a href="austria_params.html#cb260-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 cases&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="austria_params.html#cb271-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> </span>
+<span id="cb271-2"><a href="austria_params.html#cb271-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> parameters<span class="sc">$</span>country <span class="sc">&amp;</span> </span>
+<span id="cb271-3"><a href="austria_params.html#cb271-3" aria-hidden="true" tabindex="-1"></a>         year <span class="sc">==</span> parameters<span class="sc">$</span>year <span class="sc">&amp;</span> </span>
+<span id="cb271-4"><a href="austria_params.html#cb271-4" aria-hidden="true" tabindex="-1"></a>         month <span class="sc">==</span> parameters<span class="sc">$</span>month) <span class="sc">%&gt;%</span></span>
+<span id="cb271-5"><a href="austria_params.html#cb271-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> cases)) <span class="sc">+</span></span>
+<span id="cb271-6"><a href="austria_params.html#cb271-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb271-7"><a href="austria_params.html#cb271-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb271-8"><a href="austria_params.html#cb271-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 cases in &quot;</span>, parameters<span class="sc">$</span>country, <span class="st">&quot;, &quot;</span>, parameters<span class="sc">$</span>month, <span class="st">&quot; &quot;</span>, parameters<span class="sc">$</span>year),</span>
+<span id="cb271-9"><a href="austria_params.html#cb271-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span>,</span>
+<span id="cb271-10"><a href="austria_params.html#cb271-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 cases&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/visualising%20the%20covid-19%20cases3-1.png" width="672" /></p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="austria_params.html#cb261-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> parameters<span class="sc">$</span>country <span class="sc">&amp;</span> year <span class="sc">==</span> parameters<span class="sc">$</span>year <span class="sc">&amp;</span> month <span class="sc">==</span> parameters<span class="sc">$</span>month) <span class="sc">%&gt;%</span></span>
-<span id="cb261-2"><a href="austria_params.html#cb261-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> deaths)) <span class="sc">+</span></span>
-<span id="cb261-3"><a href="austria_params.html#cb261-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb261-4"><a href="austria_params.html#cb261-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb261-5"><a href="austria_params.html#cb261-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 related deaths in &quot;</span>, parameters<span class="sc">$</span>country, <span class="st">&quot;, &quot;</span>, parameters<span class="sc">$</span>month, <span class="st">&quot; &quot;</span>, parameters<span class="sc">$</span>year),</span>
-<span id="cb261-6"><a href="austria_params.html#cb261-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span> ,</span>
-<span id="cb261-7"><a href="austria_params.html#cb261-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 related deaths&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="austria_params.html#cb272-1" aria-hidden="true" tabindex="-1"></a>covid19_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day, month, year) <span class="sc">%&gt;%</span> </span>
+<span id="cb272-2"><a href="austria_params.html#cb272-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(countriesAndTerritories <span class="sc">==</span> parameters<span class="sc">$</span>country <span class="sc">&amp;</span> </span>
+<span id="cb272-3"><a href="austria_params.html#cb272-3" aria-hidden="true" tabindex="-1"></a>         year <span class="sc">==</span> parameters<span class="sc">$</span>year <span class="sc">&amp;</span> </span>
+<span id="cb272-4"><a href="austria_params.html#cb272-4" aria-hidden="true" tabindex="-1"></a>         month <span class="sc">==</span> parameters<span class="sc">$</span>month) <span class="sc">%&gt;%</span></span>
+<span id="cb272-5"><a href="austria_params.html#cb272-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> deaths)) <span class="sc">+</span></span>
+<span id="cb272-6"><a href="austria_params.html#cb272-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb272-7"><a href="austria_params.html#cb272-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb272-8"><a href="austria_params.html#cb272-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;COVID-19 related deaths in &quot;</span>, parameters<span class="sc">$</span>country, <span class="st">&quot;, &quot;</span>, parameters<span class="sc">$</span>month, <span class="st">&quot; &quot;</span>, parameters<span class="sc">$</span>year),</span>
+<span id="cb272-9"><a href="austria_params.html#cb272-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Day&quot;</span> ,</span>
+<span id="cb272-10"><a href="austria_params.html#cb272-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;COVID-19 related deaths&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/visualising%20the%20covid-19%20related%20deaths3-1.png" width="672" /></p>
 <div>
 <p><a href='ireland_params.html#ireland_params'>For a parameterized HTML on the COVID-19 cases and deaths in Ireland, August 2020, click here<a/></p>

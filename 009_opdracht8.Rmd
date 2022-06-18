@@ -19,6 +19,9 @@ library(covergirl)
 ```
 This package can be used to search for some information about contestants of the show RuPaul's Drag Race.
 <br>
+The package can be installed by running devtools::install_github("laurineseelt/covergirl", build_vignettes = TRUE). The vignette can be found by running vignette("covergirl") or browseVignettes("covergirl").
+<br>
+<br>
 With the function general_info(), you can type in the name of a contestant and you'll see the season that queen competed on, their age when they first competed on RuPaul's Drag Race and their hometown.
 <br>
 ```{r voorbeeld general_info, message=FALSE, warning=FALSE}
