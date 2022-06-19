@@ -8,15 +8,15 @@
 <meta property="og:title" content="Zotero | Portfolio Laurine Seelt" />
 <meta property="og:type" content="book" />
 
-<meta property="og:description" content="This is the bookdown for my DSFB2 portfolio" />
+
 
 
 <meta name="author" content="Laurine Seelt" />
 
-<meta name="date" content="2022-06-18" />
+<meta name="date" content="2022-06-19" />
 
 
-<meta name="description" content="This is the bookdown for my DSFB2 portfolio">
+<meta name="description" content="Zotero | Portfolio Laurine Seelt">
 
 <title>Zotero | Portfolio Laurine Seelt</title>
 
@@ -118,6 +118,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 
 <style type = "text/css">
@@ -165,6 +187,7 @@ details > summary {
 <li><a href="ireland_params.html#ireland_params" id="toc-ireland_params">ireland_params</a></li>
 <li><a href="belgium_params.html#belgium_params" id="toc-belgium_params">belgium_params</a></li>
 <li><a href="austria_params.html#austria_params" id="toc-austria_params">austria_params</a></li>
+<li><a href="bibliography.html#bibliography" id="toc-bibliography">Bibliography</a></li>
 </ul>
 </div>
 </div>
@@ -180,17 +203,19 @@ classmates and included some citations using Zotero.
 <br>
 <strong>Introduction to our project.</strong> <br>
 For the DSFB2 project, I am going to build a Shiny app together with two of my classmates. This app will enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br> The zoology students are investigating the effects of different kinds of snake venom on heart muscle. The inspiration for this research came from an accident that happend to one of the Life Sciences students in a jungle in Thailand. A cobra spit venom into his eye, and after his recovery he started wondering about the effect of snake venom on muscle cells. More specifically, he wondered if there was any enzymatic activity in snake venom and what effect possible enzymes in this venom have on muscle cells.
-Snake venoms consist of variable mixtures of proteinaceous components causing potent hemotoxic, neurotoxic and/or cytotoxic pathologies in both prey and potential adversaries, including humans. <span class="citation">[@kazandjianConvergentEvolutionPaininducing2021]</span>
+Snake venoms consist of variable mixtures of proteinaceous components causing potent hemotoxic, neurotoxic and/or cytotoxic pathologies in both prey and potential adversaries, including humans <span class="citation">(<a href="#ref-kazandjianConvergentEvolutionPaininducing2021" role="doc-biblioref">Kazandjian et al. 2021</a>)</span> .
 <br>
 Then, Ronald Vlasblom started wondering about the effect of snake venom on <em>heart</em> muscle cells. Often, snake venom causes paralysis, which means it has an effect on ‘normal’ muscle cells, but it isn’t really clear/known if it has an effect on heart muscle cells.
 <br>
 <br>
-To conduct this research, the Zoology students are using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery. <span class="citation">[@lateefLangendorffIsolatedPerfused2015]</span> The Langendorff isolated perfused heart has allowed many fundamental discoveries in cardiac physiology, pathology, and pharmacology over the past 100 years and is still one of the most powerful experimental designs in cardiovascular research and cardiovascular pharmacology. <span class="citation">[@motayagheniModifiedLangendorffTechnique2017]</span>
+To conduct this research, the Zoology students are using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery <span class="citation">(<a href="#ref-lateefLangendorffIsolatedPerfused2015" role="doc-biblioref">Lateef, Al-Masri, and Alyahya 2015</a>)</span> .
+<br>
+The Langendorff isolated perfused heart has allowed many fundamental discoveries in cardiac physiology, pathology, and pharmacology over the past 100 years and is still one of the most powerful experimental designs in cardiovascular research and cardiovascular pharmacology <span class="citation">(<a href="#ref-motayagheniModifiedLangendorffTechnique2017" role="doc-biblioref">Motayagheni 2017</a>)</span> .
 <br>
 This technique can be used to study the direct effects of, for example, medication on the
 heart <em>ex vivo</em>. The two most important parameters that can be tracked in this assay are heart rate and contraction force.
 The perfusion of isolated heart is maintained through the use of a reservoir containing oxygenated perfusion fluid, with a pressure head that is connected via a tube to the cannula which is inserted and fixed in the ascending aorta, when the reservoir is opened, the perfusate is forced to flow into the aorta, this retrograde flow in the aorta closes
-the leaflets of aortic valve and prevents the perfusate from entering into the left ventricles, as a result, the entire perfusate solution enters the coronary arteries via the ostia at the base of aortic root. <span class="citation">[@lateefLangendorffIsolatedPerfused2015]</span>
+the leaflets of aortic valve and prevents the perfusate from entering into the left ventricles, as a result, the entire perfusate solution enters the coronary arteries via the ostia at the base of aortic root <span class="citation">(<a href="#ref-lateefLangendorffIsolatedPerfused2015" role="doc-biblioref">Lateef, Al-Masri, and Alyahya 2015</a>)</span> .
 <br>
 <br>
 We will write code to enable the zoology students to analyse these two parameters quickly and thoroughly.
@@ -202,6 +227,18 @@ The third graph will be the amount of peaks in the effect period and repair peri
 The fourth graph will be the beats per minute, also separated into the control period, effect period and repair period. <br>
 The fifth graph will be the beats per minute in the effect period and repair period, normalized for the average beats per minute in the control period. <br></p>
 
+</div>
+<h3>Bibliography</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-kazandjianConvergentEvolutionPaininducing2021" class="csl-entry">
+Kazandjian, T. D., D. Petras, S. D. Robinson, J. van Thiel, H. W. Greene, K. Arbuckle, A. Barlow, et al. 2021. <span>“Convergent Evolution of Pain-Inducing Defensive Venom Components in Spitting Cobras.”</span> <em>Science</em> 371 (6527): 386–90. <a href="https://doi.org/10.1126/science.abb9303">https://doi.org/10.1126/science.abb9303</a>.
+</div>
+<div id="ref-lateefLangendorffIsolatedPerfused2015" class="csl-entry">
+Lateef, Rahmath Unnisa, Abeer A Al-Masri, and Asma Mohammed Alyahya. 2015. <span>“Langendorff’s Isolated Perfused Rat Heart Technique: A Review,”</span> 9.
+</div>
+<div id="ref-motayagheniModifiedLangendorffTechnique2017" class="csl-entry">
+Motayagheni, Negar. 2017. <span>“Modified <span>Langendorff</span> Technique for Mouse Heart Cannulation: <span>Improved</span> Heart Quality and Decreased Risk of Ischemia.”</span> <em>MethodsX</em> 4: 508–12. <a href="https://doi.org/10.1016/j.mex.2017.11.004">https://doi.org/10.1016/j.mex.2017.11.004</a>.
+</div>
 </div>
 <p style="text-align: center;">
 <a href="free-space.html"><button class="btn btn-default">Previous</button></a>

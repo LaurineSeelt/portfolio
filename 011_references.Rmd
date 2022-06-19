@@ -1,0 +1,22 @@
+---
+author: "Laurine Seelt"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+params:
+  country: 
+    value: Austria
+  year: 
+    value: 2022
+  month: 
+    value: February
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+---
+
+# Bibliography
+
+This is the bibliography of all the articles I've used for my portfolio.
+
+<div id="refs"></div>

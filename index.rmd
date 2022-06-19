@@ -11,7 +11,7 @@ documentclass: book
 biblio-style: apalike
 link-citations: yes
 new_session: yes
-description: "This is the bookdown for my DSFB2 portfolio"
+bibliography: portfoliolaurine.bib
 ---
 
 # Introduction
