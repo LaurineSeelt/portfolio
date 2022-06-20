@@ -15,7 +15,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# austria_params
+# Austria Parameters
 
 To show that I can work with parameterization in my Markdowns, I made a parameterized markdown with data about COVID-19 cases and COVID-19 related deaths.
 ```{r loading the packages3, message=FALSE, warning=FALSE, include=FALSE}
@@ -46,7 +46,7 @@ covid19_data_filtered <- covid19_data %>% filter(year %in% parameters$year,
                                                  month %in% parameters$month)
 ```
 <br>
-I created a graph to show the COVID-19 cases per day for a specific month, and I also created a graph for the amount of COVID-19 related deaths per day for a specific month.
+I created a graph to show the COVID-19 cases per day for a specific month, and I also created a graph for the amount of COVID-19 related deaths per day for a specific month. In this markdown, I did this for Austria.
 <br>
 ```{r visualising the covid-19 cases3, message=FALSE, warning=FALSE}
 covid19_data %>% group_by(day, month, year) %>% 
@@ -75,8 +75,8 @@ covid19_data %>% group_by(day, month, year) %>%
 ```
 
 <div>
-<a href='ireland_params.html#ireland_params'>For a parameterized HTML on the COVID-19 cases and deaths in Ireland, August 2020, click here<a/>
+<a href='ireland-parameters.html#Ireland Parameters'>For a parameterized HTML on the COVID-19 cases and deaths in Ireland, August 2020, click here<a/>
 
-<a href='belgium_params.html#belgium_params'>For a parameterized HTML on the COVID-19 cases and deaths in Belgium, April 2021, click here<a/>
+<a href='spain-parameters.html#Spain Parameters'>For a parameterized HTML on the COVID-19 cases and deaths in Spain, April 2021, click here<a/>
 
 </div>

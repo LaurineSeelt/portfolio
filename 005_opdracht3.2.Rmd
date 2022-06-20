@@ -14,7 +14,7 @@ I had 32 hours to learn something new that will be useful for my internship next
 
 I decided I wanted to gain more experience in analysing microbiota data, because I'd like to work with bacteria in my future job. So, I searched the internet for packages and such, and found a course about microbiota analysis that I decided to follow.
 <br>
-Link to the course: https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html
+[Link to the course](https://rstudio-pubs-static.s3.amazonaws.com/268156_d3ea37937f4f4469839ab6fa2c483842.html)
 <br>
 <br>
 
@@ -94,6 +94,7 @@ set.seed(8765)
 ```
 
 __Looking at the alpha diversity__
+<br>
 <br>
 Alpha diversity is the diversity _within_ a sample. It looks at richness, which is the _amount_ of OTU's in each sample, and at evenness, which is how evenly the different OTU's are distributed within the sample. <br>
 ```{r looking at the alpha diversity, message=FALSE, warning=FALSE}
@@ -323,6 +324,7 @@ In conclusion on the alpha diversity: The diversity and richness of the fecal mi
 
 __Looking at the beta diversity__
 <br>
+<br>
 Beta diversity looks at the dissimilarity _between_ samples, instead of within a sample, like the alpha diversity.
 <br>
 First, we'll calculate the non-metric multidimensional scaling using the Bray-Curtis metric. This metric takes into account the presence or absence of OTU's and the abundance of the OTU's that are present in the samples. So, this metric looks at richness and diversity.
@@ -436,13 +438,13 @@ We'll extract the x, y and z for the nMDS, and then plot them.
 ```{r BCxyz, message=FALSE, warning=FALSE}
 BCxyz = scores(BC.nmds.3D, display = "sites")
 BCxyz
-plot_ly(x=BCxyz[,1], 
-        y=BCxyz[,2], 
-        z=BCxyz[,3], 
-        type = "scatter3d", 
-        mode = "markers", 
-        color = meta$AgeGroup, 
-        colors = c("blue", "green", "red"))
+#plot_ly(x=BCxyz[,1], 
+#        y=BCxyz[,2], 
+#        z=BCxyz[,3], 
+#        type = "scatter3d", 
+#        mode = "markers", 
+#        color = meta$AgeGroup, 
+#        colors = c("blue", "green", "red")) # Deze uitgezet omdat 3D plots niet werken
 ```
 <br>
 3D plots are difficult to interpret in articles, so many authors choose to create two 2D plots instead.
@@ -615,13 +617,13 @@ Then, we'll take out the xyz values and plot them with plotly.
 ```{r wUFxyz, message=FALSE, warning=FALSE}
 wUFxyz = scores(wUF.nmds.3D, display = "sites")
 wUFxyz
-plot_ly(x=wUFxyz[,1], 
-        y=wUFxyz[,2], 
-        z=wUFxyz[,3], 
-        type = "scatter3d", 
-        mode = "markers", 
-        color=meta$AgeGroup, 
-        colors=c("pink", "purple", "blue"))
+#plot_ly(x=wUFxyz[,1], 
+#       y=wUFxyz[,2], 
+#       z=wUFxyz[,3], 
+#       type = "scatter3d", 
+#       mode = "markers", 
+#       color=meta$AgeGroup, 
+#       colors=c("pink", "purple", "blue")) # Ook deze uitgezet omdat 3D plots niet werken
 ```
 <br>
 <br>
@@ -1246,9 +1248,10 @@ boxplot(shannon ~ AgeGroup.ord,
  
 dev.off()
 ```
-
+<br>
 __End of tutorial__
-
+<br>
+<br>
 Now, to show you what I've learned, I have written a bit of my own code aswell.
 <br>
 In the tutorial, we tested if the interaction between age and ADG significantly impacted Shannon's diversity, which it didn't. I will test if the interaction between age and ADG significantly impacts ACE richness.
@@ -1362,3 +1365,15 @@ ordiellipse(BC.nmds,
 ```
 <br>
 We can see that the Jaccard index for 2 and 8 weeks is quite similair, and that there's a big difference with the Jaccard index for 1 year. This is all similar to the Bray-Curtis dissimilarity that we saw in the tutorial.
+<br>
+In the tutorial, we looked at the abundance of OTU00001 in the three age groups. I will look at the abundance of OTU00003. <br>
+In the tutorial, we saw that most of the P-values of OTU00003 in KW.results.signif were lower than 0.05, so there was a significant difference.
+<br>
+```{r abund otu00003, message=FALSE, warning=FALSE}
+abund = OTU.clean/rowSums(OTU.clean)*100
+boxplot(abund$Otu00003 ~ meta$AgeGroup,
+        ylab = "Relative abundance (%)",
+        main = "OTU3")
+```
+<br>
+Looking at the boxplot and the P-values, we can say that OTU00003 is significantly more abundant in 2 week old calves than in 8 week old calves or 1 year old heifers.

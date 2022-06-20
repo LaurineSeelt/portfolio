@@ -1,0 +1,14 @@
+introduction
+data-wrangling
+reproducing-code
+cleaning-up
+cv
+free-space
+zotero
+github
+sql
+package
+spain-parameters
+austria-parameters
+ireland-parameters
+bibliography

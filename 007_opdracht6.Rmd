@@ -11,4 +11,4 @@ link-citations: yes
 # GitHub
 
 To show that I can make a website using Github and CSS, I rendered all of the markdowns from my portfolio into a website. <br>
-The result can be found on https://laurineseelt.github.io/ .
+The result can be found [here](https://laurineseelt.github.io/).

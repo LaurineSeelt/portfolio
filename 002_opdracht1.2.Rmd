@@ -20,9 +20,8 @@ library(here)
 library(readxl)
 ```
 
-__Study 1__
-
-Link to the study: https://pubmed.ncbi.nlm.nih.gov/29324233/
+__Study 1__ <br>
+[Link to the study](https://pubmed.ncbi.nlm.nih.gov/29324233/)
 <br>
 <br>
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -44,10 +43,10 @@ The researchers also showed that the cytokine response to unrelated pathogens wa
 Next, this study looked at the difference in immune response to the Yellow Fever Vaccine between people who had had the BCG vaccination, and people who hadn't. People who had had the vaccine had a significantly lower viremia compared to people who had had the placebo vaccine. It was seen that mainly increased IL1-B and IL-10 production predicted a lower viremia in subjects who had had the BCG vaccine.
 <br>
 
-__Study 2__
-
-Link to the study: https://osf.io/aqycd/ 
-
+__Study 2__ <br>
+[Link to the study](https://osf.io/aqycd/)
+<br>
+<br>
 The code was very readable, and I recreated one of the figures from the study.
 
 __Recreating figure 1A__

@@ -17,15 +17,14 @@ classmates and included some citations using Zotero.
 <br>
 <br>
 __Introduction to our project.__ <br> 
-For the DSFB2 project, I am going to build a Shiny app together with two of my classmates. This app will enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br> The zoology students are investigating the effects of different kinds of snake venom on heart muscle. The inspiration for this research came from an accident that happend to one of the Life Sciences students in a jungle in Thailand. A cobra spit venom into his eye, and after his recovery he started wondering about the effect of snake venom on muscle cells. More specifically, he wondered if there was any enzymatic activity in snake venom and what effect possible enzymes in this venom have on muscle cells.
+For the DSFB2 project, I am going to build a Shiny app together with two of my classmates. This app will enable zoology students to analyse tracings from a Langendorff assay automatically, as opposed to doing it by hand. <br> 
+The zoology students are investigating the effects of different kinds of snake venom on heart muscle. The inspiration for this research came from an accident that happend to one of the Life Sciences students in a jungle in Thailand. A cobra spit venom into his eye, and after his recovery he started wondering about the effect of snake venom on muscle cells. More specifically, he wondered if there was any enzymatic activity in snake venom and what effect possible enzymes in this venom have on muscle cells.
 Snake venoms consist of variable mixtures of proteinaceous components causing potent hemotoxic, neurotoxic and/or cytotoxic pathologies in both prey and potential adversaries, including humans [@kazandjianConvergentEvolutionPaininducing2021] .
 <br> 
 Then, Ronald Vlasblom started wondering about the effect of snake venom on _heart_ muscle cells. Often, snake venom causes paralysis, which means it has an effect on 'normal' muscle cells, but it isn't really clear/known if it has an effect on heart muscle cells.
 <br> 
 <br> 
-To conduct this research, the Zoology students are using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery [@lateefLangendorffIsolatedPerfused2015] .
-<br>
-The Langendorff isolated perfused heart has allowed many fundamental discoveries in cardiac physiology, pathology, and pharmacology over the past 100 years and is still one of the most powerful experimental designs in cardiovascular research and cardiovascular pharmacology [@motayagheniModifiedLangendorffTechnique2017] .
+To conduct this research, the Zoology students are using a Langendorff assay. This technique was developed by Oskar Langendorff in the nineteenth century. In the procedure, the excised heart has a cannula inserted into the aorta so that the heart can be retrogradely perfused via the coronary artery [@lateefLangendorffIsolatedPerfused2015] . The Langendorff isolated perfused heart has allowed many fundamental discoveries in cardiac physiology, pathology, and pharmacology over the past 100 years and is still one of the most powerful experimental designs in cardiovascular research and cardiovascular pharmacology [@motayagheniModifiedLangendorffTechnique2017] .
 <br> 
 This technique can be used to study the direct effects of, for example, medication on the
 heart _ex vivo_. The two most important parameters that can be tracked in this assay are heart rate and contraction force.

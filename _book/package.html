@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurine Seelt" />
 
-<meta name="date" content="2022-06-19" />
+<meta name="date" content="2022-06-20" />
 
 
 <meta name="description" content="Package | Portfolio Laurine Seelt">
@@ -36,13 +36,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -184,9 +177,9 @@ details > summary {
 <li><a href="github.html#github" id="toc-github">GitHub</a></li>
 <li><a href="sql.html#sql" id="toc-sql">SQL</a></li>
 <li><a href="package.html#package" id="toc-package">Package</a></li>
-<li><a href="ireland_params.html#ireland_params" id="toc-ireland_params">ireland_params</a></li>
-<li><a href="belgium_params.html#belgium_params" id="toc-belgium_params">belgium_params</a></li>
-<li><a href="austria_params.html#austria_params" id="toc-austria_params">austria_params</a></li>
+<li><a href="spain_parameters.html#spain_parameters" id="toc-spain_parameters">spain_parameters</a></li>
+<li><a href="austria_parameters.html#austria_parameters" id="toc-austria_parameters">austria_parameters</a></li>
+<li><a href="ireland_parameters.html#ireland_parameters" id="toc-ireland_parameters">ireland_parameters</a></li>
 <li><a href="bibliography.html#bibliography" id="toc-bibliography">Bibliography</a></li>
 </ul>
 </div>
@@ -205,34 +198,32 @@ The package can be installed by running devtools::install_github(“laurineseelt
 <br>
 With the function general_info(), you can type in the name of a contestant and you’ll see the season that queen competed on, their age when they first competed on RuPaul’s Drag Race and their hometown.
 <br></p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="package.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">general_info</span>(<span class="st">&quot;Jinkx Monsoon&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="package.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">general_info</span>(<span class="st">&quot;Jinkx Monsoon&quot;</span>)</span></code></pre></div>
 <pre><code>##                season                   age              hometown 
 ##                 &quot;S05&quot;                  &quot;24&quot; &quot;Seattle, Washington&quot;</code></pre>
 <p><br>
 With the function episode_name(), you can type in the number of the season and the episode, and this function will tell you the name of that particular episode.
 <br></p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="package.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">episode_name</span>(<span class="st">&quot;S10&quot;</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="package.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">episode_name</span>(<span class="st">&quot;S10&quot;</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##               nickname 
 ## &quot;The Bossy Rossy Show&quot;</code></pre>
 <p><br>
 With the function special_ep(), you can type in the number of the season and the episode, and it’ll tell you if this was a special episode of RuPaul’s Drag Race or not.
 <br></p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="package.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">special_ep</span>(<span class="st">&quot;S14&quot;</span>, <span class="dv">11</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="package.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">special_ep</span>(<span class="st">&quot;S14&quot;</span>, <span class="dv">11</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;It&#39;s a special episode hunty!&quot;</code></pre>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="package.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">special_ep</span>(<span class="st">&quot;S13&quot;</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="package.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">special_ep</span>(<span class="st">&quot;S13&quot;</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;It&#39;s not a special episode&quot;</code></pre>
 <p><br>
 Lastly, with the function winner(), you can type in the number of a season and this function which queen won that particular season.
 <br></p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="package.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">winner</span>(<span class="st">&quot;S05&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="package.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">winner</span>(<span class="st">&quot;S05&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;The queen who won this season was Jinkx Monsoon, the GOAT&quot;</code></pre>
-<p><br>
-The vignette for this package can be found</p>
 
 </div>
 <p style="text-align: center;">
 <a href="sql.html"><button class="btn btn-default">Previous</button></a>
-<a href="ireland_params.html"><button class="btn btn-default">Next</button></a>
+<a href="spain_parameters.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>

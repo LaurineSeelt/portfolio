@@ -47,4 +47,5 @@ Lastly, with the function winner(), you can type in the number of a season and t
 winner("S05")
 ```
 <br>
-The vignette for this package can be found 
+<br>
+The repo for this package can be found [here](https://github.com/LaurineSeelt/covergirl).

@@ -63,12 +63,3 @@ covid19_data %>% group_by(day, month, year) %>% filter(countriesAndTerritories =
 ```
 
 I made three HTML's with rmarkdown::render() in R.
-
-<div>
-<a href='irelandparams.html#irelandparams'>For a parameterized HTML on the COVID-19 cases and deaths in Ireland, August 2020, click here<a/>
-
-<a href='belgiumparams.html#belgiumparams'>For a parameterized HTML on the COVID-19 cases and deaths in Belgium, April 2021, click here<a/>
-
-<a href='austriaparams.html#austriaparams'>For a parameterized HTML on the COVID-19 cases and deaths in Austria, February 2022, click here<a/>
-
-</div>
